@@ -1,0 +1,291 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+enum Role {
+  GOD
+  ADMIN
+  MEMBER
+}
+
+enum MembershipLevel {
+  FREE
+  BASIC
+  PREMIUM
+  VIP
+}
+
+model User {
+  id                  String                   @id @default(cuid())
+  email               String                   @unique
+  name                String?
+  role                Role                     @default(MEMBER)
+  membershipLevel     MembershipLevel          @default(BASIC)
+  image               String?
+  hashedPassword      String?
+  emailVerified       DateTime?
+  resetToken          String?
+  resetTokenExpiry    DateTime?
+  createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt
+  accounts            Account[]
+  sessions            Session[]
+  videos              Video[]
+  dashboardItems      DashboardItem[]
+  liveStreams         LiveStream[]
+  permissionOverrides UserPermissionOverride[]
+  innerCircleApps     InnerCircleApplication[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Category {
+  id                String          @id @default(cuid())
+  name              String          @unique
+  slug              String          @unique
+  description       String?         @db.Text
+  sortOrder         Int             @default(0)
+  membershipLevel   MembershipLevel @default(FREE)
+  thumbnailUrl      String?
+  seoTitle          String?
+  seoDescription    String?         @db.Text
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt @default(now())
+  videos            Video[]
+  permissionSets    PermissionSet[]
+
+  @@index([slug])
+}
+
+enum FileType {
+  VIDEO
+  IMAGE
+  OTHER
+}
+
+model Video {
+  id              String           @id @default(cuid())
+  title           String
+  description     String?          @db.Text
+  category        String
+  categoryId      String?
+  categoryRef     Category?        @relation(fields: [categoryId], references: [id])
+  muxAssetId      String?
+  muxPlaybackId   String?
+  thumbnailUrl    String?
+  duration        Float?
+  seoTitle        String?
+  seoDescription  String?          @db.Text
+  keywords        String?
+  isPublished     Boolean          @default(false)
+  membershipLevel MembershipLevel  @default(FREE)
+  uploaderId      String
+  uploader        User             @relation(fields: [uploaderId], references: [id], onDelete: Cascade)
+  
+  // UploadThing integration
+  fileKey         String?          // UploadThing file key
+  fileUrl         String?          // Full UploadThing URL
+  fileType        FileType         @default(VIDEO)
+  fileSize        Int?             // File size in bytes
+  mimeType        String?          // MIME type
+  originalName    String?          // Original filename
+  
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  snippets        MarketingSnippet[]
+
+  @@index([category])
+  @@index([categoryId])
+  @@index([uploaderId])
+  @@index([isPublished])
+  @@index([fileType])
+}
+
+model LiveStream {
+  id         String    @id @default(cuid())
+  streamId   String    @unique
+  streamKey  String
+  playbackId String
+  title      String
+  status     String    @default("idle") // idle, active, ended
+  startedAt  DateTime?
+  endedAt    DateTime?
+  hostId     String
+  host       User      @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([status])
+  @@index([hostId])
+}
+
+model MarketingSnippet {
+  id           String   @id @default(cuid())
+  videoId      String
+  video        Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?  @db.Text
+  thumbnailUrl String?
+  isLocked     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  @@index([videoId])
+}
+
+model DashboardItem {
+  id        String   @id @default(cuid())
+  type      String
+  title     String
+  content   Json?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model PermissionSet {
+  id              String          @id @default(cuid())
+  name            String          @unique
+  description     String?         @db.Text
+  membershipLevel MembershipLevel
+  categories      Category[]
+  users           UserPermissionOverride[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([membershipLevel])
+}
+
+model UserPermissionOverride {
+  id              String        @id @default(cuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  permissionSetId String
+  permissionSet   PermissionSet @relation(fields: [permissionSetId], references: [id], onDelete: Cascade)
+  hasAccess       Boolean       @default(true)
+  createdAt       DateTime      @default(now())
+
+  @@unique([userId, permissionSetId])
+  @@index([userId])
+}
+
+model QuizLead {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  quizTitle   String
+  answers     Json
+  results     Json
+  status      String   @default("new")  // new, called, not_interested
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([quizTitle])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String?
+  location  String?
+  rating    Int      @default(5) // 1-5 crystals
+  review    String   @db.Text
+  source    String   @default("gypsy-tours") // gypsy-tours, partners, etc.
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([source])
+  @@index([rating])
+  @@index([createdAt])
+}
+
+model PartnerClick {
+  id           String   @id @default(cuid())
+  partnerSite  String   // e.g. softcircle.ai, moneywords.org
+  firstName    String
+  lastName     String?
+  email        String
+  phone        String?
+  leadSentToCRM Boolean @default(false)
+  createdAt    DateTime @default(now())
+
+  @@index([partnerSite])
+  @@index([email])
+  @@index([createdAt])
+}
+
+model InnerCircleApplication {
+  id                 String   @id @default(cuid())
+  circle             String   // womens, mens, both-coed
+  fullName           String
+  email              String
+  phone              String?
+  location           String?
+  profession         String
+  currentSeason      String?  @db.Text
+  misaligned         String?  @db.Text
+  strongVsStretched  String?  @db.Text
+  previousInvestment String?  @db.Text
+  whyNow             String?  @db.Text
+  coachableScale     Int?
+  commitSixMonths    String?
+  investmentReady    String?
+  oneYearVision      String?  @db.Text
+  whyCircle          String?  @db.Text
+  agreement          Boolean  @default(false)
+  status             String   @default("pending") // pending, accepted, declined
+  userId             String?  // linked after account creation
+  user               User?    @relation(fields: [userId], references: [id])
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([email])
+  @@index([circle])
+  @@index([status])
+  @@index([createdAt])
+}

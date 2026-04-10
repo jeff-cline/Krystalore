@@ -1,0 +1,22 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Emotional Intelligence Quiz',
+  description: 'Take the Emotional Intelligence self-assessment quiz. Discover your strengths and growth areas with Krystalore Crews executive coaching platform.',
+  openGraph: {
+    title: "Emotional Intelligence Quiz",
+    description: "Take the Emotional Intelligence self-assessment quiz. Discover your strengths and growth areas with Krystalore Crews executive coaching platform.",
+    url: "https://krystalore.com/quizzes/emotional-intelligence",
+    siteName: "Krystalore Crews",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Emotional Intelligence Quiz",
+    description: "Take the Emotional Intelligence self-assessment quiz. Discover your strengths and growth areas with Krystalore Crews executive coaching platform.",
+  },
+}
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>
+}

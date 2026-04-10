@@ -1,0 +1,67 @@
+[
+  {
+    "id": "vault-1770730103500-6bh43t",
+    "driveId": "video-1",
+    "title": "Leadership Masterclass Part 1",
+    "filename": "Leadership Masterclass Part 1.mp4",
+    "mimeType": "video/mp4",
+    "size": "245MB",
+    "importedAt": "2026-02-10T13:28:23.500Z",
+    "source": "google-drive",
+    "status": "imported",
+    "category": "Uncategorized",
+    "tags": []
+  },
+  {
+    "id": "vault-1770730103500-2berle",
+    "driveId": "video-2",
+    "title": "Emotional Intelligence Workshop",
+    "filename": "Emotional Intelligence Workshop.mp4",
+    "mimeType": "video/mp4",
+    "size": "180MB",
+    "importedAt": "2026-02-10T13:28:23.500Z",
+    "source": "google-drive",
+    "status": "imported",
+    "category": "Uncategorized",
+    "tags": []
+  },
+  {
+    "id": "vault-1770730103500-bdgqt7",
+    "driveId": "video-3",
+    "title": "Monday Motivator Week 47",
+    "filename": "Monday Motivator Week 47.mp4",
+    "mimeType": "video/mp4",
+    "size": "95MB",
+    "importedAt": "2026-02-10T13:28:23.500Z",
+    "source": "google-drive",
+    "status": "imported",
+    "category": "Uncategorized",
+    "tags": []
+  },
+  {
+    "id": "vault-1770730103500-7m5omx",
+    "driveId": "video-4",
+    "title": "Couples Communication Basics",
+    "filename": "Couples Communication Basics.mp4",
+    "mimeType": "video/mp4",
+    "size": "320MB",
+    "importedAt": "2026-02-10T13:28:23.500Z",
+    "source": "google-drive",
+    "status": "imported",
+    "category": "Uncategorized",
+    "tags": []
+  },
+  {
+    "id": "vault-1770730103500-9gwqcg",
+    "driveId": "video-5",
+    "title": "Veteran Transition Guide",
+    "filename": "Veteran Transition Guide.mp4",
+    "mimeType": "video/mp4",
+    "size": "210MB",
+    "importedAt": "2026-02-10T13:28:23.500Z",
+    "source": "google-drive",
+    "status": "imported",
+    "category": "Uncategorized",
+    "tags": []
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "email": "krystalore@thecrewscoach.com",
+  "name": "Krystalore Crews",
+  "assessments": [
+    {
+      "date": "2026-02-10T13:25:03.630Z",
+      "quizType": "Life Alignment Assessment",
+      "scores": {
+        "Self-Awareness": 89,
+        "Emotional Control": 81,
+        "Motivation": 87,
+        "Empathy": 90,
+        "Social Skills": 92
+      },
+      "overallScore": 88,
+      "level": "Elite"
+    }
+  ]
+}

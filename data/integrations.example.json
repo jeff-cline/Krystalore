@@ -1,0 +1,23 @@
+{
+  "gohighlevel": {
+    "apiKey": "",
+    "locationId": ""
+  },
+  "mux": {
+    "tokenId": "",
+    "tokenSecret": "",
+    "webhookSecret": ""
+  },
+  "stripe": {
+    "publishableKey": "",
+    "secretKey": ""
+  },
+  "googleDrive": {
+    "clientId": "",
+    "clientSecret": ""
+  },
+  "cloudflareStream": {
+    "accountId": "",
+    "apiToken": ""
+  }
+}
