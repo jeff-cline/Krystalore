@@ -2,29 +2,56 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getMuxClient } from '@/lib/mux'
 import prisma from '@/lib/db'
 import { getSession } from '@/lib/auth'
+import { getLiveStreams } from '@/lib/feedflix'
 
-// GET - get current active stream info
+// GET - get current active stream info (checks local DB then FeedFlix)
 export async function GET() {
   try {
+    // Check local DB first
     const activeStream = await prisma.liveStream.findFirst({
       where: { status: { in: ['idle', 'active'] } },
       orderBy: { createdAt: 'desc' },
     })
 
-    if (!activeStream) {
-      return NextResponse.json({ active: false })
+    if (activeStream) {
+      return NextResponse.json({
+        active: activeStream.status === 'active',
+        stream: {
+          streamId: activeStream.streamId,
+          playbackId: activeStream.playbackId,
+          status: activeStream.status,
+          title: activeStream.title,
+          startedAt: activeStream.startedAt?.toISOString() || null,
+        },
+      })
     }
 
-    return NextResponse.json({
-      active: activeStream.status === 'active',
-      stream: {
-        streamId: activeStream.streamId,
-        playbackId: activeStream.playbackId,
-        status: activeStream.status,
-        title: activeStream.title,
-        startedAt: activeStream.startedAt?.toISOString() || null,
-      },
-    })
+    // Fall back to FeedFlix — only return streams started within the last hour
+    try {
+      const feedflixStreams = await getLiveStreams()
+      const oneHourAgo = Date.now() - 60 * 60 * 1000
+      const recent = feedflixStreams.filter(s =>
+        s.started_at && new Date(s.started_at).getTime() > oneHourAgo
+      )
+      if (recent.length > 0) {
+        const latest = recent[0]
+        return NextResponse.json({
+          active: true,
+          source: 'feedflix',
+          stream: {
+            streamId: latest.id,
+            playbackId: latest.mux_playback_id || latest.playback_id,
+            status: 'active',
+            title: latest.title || 'Live Stream',
+            startedAt: latest.started_at || null,
+          },
+        })
+      }
+    } catch {
+      // FeedFlix unavailable — fall through
+    }
+
+    return NextResponse.json({ active: false })
   } catch (error) {
     console.error('Stream status error:', error)
     return NextResponse.json({ active: false })

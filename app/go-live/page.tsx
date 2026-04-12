@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import MainLayout from '@/components/layout/MainLayout'
-import { Play, Square, Copy, Check, Radio, Users, Clock, Bell, MessageCircle, Eye, EyeOff, Upload } from 'lucide-react'
+import { Play, Square, Copy, Check, Radio, Users, Clock, Bell, MessageCircle, Eye, EyeOff, Upload, Monitor, Video } from 'lucide-react'
 
 interface StreamInfo {
   active: boolean
@@ -22,6 +22,13 @@ interface AdminStreamInfo {
   streamKey: string
   playbackId: string
   rtmpUrl: string
+}
+
+interface FeedFlixStream {
+  id: string
+  stream_key: string
+  playback_id: string
+  rtmp_url: string
 }
 
 interface CategoryOption {
@@ -64,6 +71,16 @@ export default function GoLivePage() {
   const [showKey, setShowKey] = useState(false)
   const [title, setTitle] = useState('Live with Krystal')
   const [error, setError] = useState<string | null>(null)
+  const [streamMode, setStreamMode] = useState<'obs' | 'browser'>('obs')
+
+  // Browser streaming state
+  const [browserStreaming, setBrowserStreaming] = useState(false)
+  const [feedflixStream, setFeedflixStream] = useState<FeedFlixStream | null>(null)
+  const [streamDebug, setStreamDebug] = useState<string[]>([])
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const wsRef = useRef<WebSocket | null>(null)
+  const recorderRef = useRef<MediaRecorder | null>(null)
+  const mediaStreamRef = useRef<MediaStream | null>(null)
 
   // Post-stream upload form state
   const [showUploadForm, setShowUploadForm] = useState(false)
@@ -97,6 +114,20 @@ export default function GoLivePage() {
     return () => clearInterval(interval)
   }, [fetchStreamStatus])
 
+  // Attach media stream to video element when browser streaming starts
+  useEffect(() => {
+    if (browserStreaming && videoRef.current && mediaStreamRef.current) {
+      videoRef.current.srcObject = mediaStreamRef.current
+    }
+  }, [browserStreaming])
+
+  // Cleanup browser stream on unmount
+  useEffect(() => {
+    return () => {
+      stopBrowserStream()
+    }
+  }, [])
+
   const startStream = async () => {
     setLoading(true)
     setError(null)
@@ -117,13 +148,147 @@ export default function GoLivePage() {
     }
   }
 
+  const addDebug = (msg: string) => {
+    setStreamDebug(prev => [...prev.slice(-19), `${new Date().toLocaleTimeString()}: ${msg}`])
+  }
+
+  const startBrowserStream = async () => {
+    setLoading(true)
+    setError(null)
+    setStreamDebug([])
+    try {
+      addDebug('Requesting camera/mic...')
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: { width: 1280, height: 720, frameRate: 30 },
+        audio: true,
+      })
+      mediaStreamRef.current = mediaStream
+      addDebug(`Got media: ${mediaStream.getTracks().map(t => t.kind + ':' + t.readyState).join(', ')}`)
+
+      addDebug('Creating FeedFlix stream...')
+      const res = await fetch('/api/feedflix/streams', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title }),
+      })
+      const data = await res.json()
+      if (data.error) {
+        mediaStream.getTracks().forEach(t => t.stop())
+        mediaStreamRef.current = null
+        throw new Error(data.error)
+      }
+      const stream: FeedFlixStream = data.stream
+      addDebug(`Stream created: id=${stream.id}, key=${stream.stream_key ? 'yes' : 'NO'}`)
+      if (!stream.stream_key) {
+        mediaStream.getTracks().forEach(t => t.stop())
+        mediaStreamRef.current = null
+        throw new Error('No stream key returned from FeedFlix')
+      }
+      setFeedflixStream(stream)
+
+      const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')
+        ? 'video/webm;codecs=vp8,opus'
+        : MediaRecorder.isTypeSupported('video/mp4')
+          ? 'video/mp4'
+          : 'video/webm'
+      addDebug(`MIME: ${mimeType}`)
+
+      const relayUrl = `wss://relay.feedflix.com?key=${encodeURIComponent(stream.stream_key)}&mime=${encodeURIComponent(mimeType)}`
+      addDebug(`Connecting to relay...`)
+
+      let chunkCount = 0
+
+      await new Promise<void>((resolve, reject) => {
+        const ws = new WebSocket(relayUrl)
+        wsRef.current = ws
+
+        ws.onopen = () => {
+          addDebug('WebSocket OPEN')
+          const recorder = new MediaRecorder(mediaStream, { mimeType })
+          recorderRef.current = recorder
+
+          recorder.ondataavailable = (e) => {
+            if (e.data.size > 0 && ws.readyState === WebSocket.OPEN) {
+              ws.send(e.data)
+              chunkCount++
+              if (chunkCount <= 5 || chunkCount % 10 === 0) {
+                addDebug(`Sent chunk #${chunkCount}: ${e.data.size} bytes`)
+              }
+            }
+          }
+
+          recorder.onerror = (e) => {
+            addDebug(`Recorder error: ${(e as any).error?.message || 'unknown'}`)
+          }
+
+          recorder.start(1000)
+          addDebug(`MediaRecorder started (state: ${recorder.state})`)
+          setBrowserStreaming(true)
+          resolve()
+        }
+
+        ws.onerror = (e) => {
+          addDebug(`WebSocket ERROR`)
+          reject(new Error('Connection to streaming relay failed'))
+        }
+
+        ws.onclose = (e) => {
+          addDebug(`WebSocket CLOSED code=${e.code} reason=${e.reason}`)
+          if (recorderRef.current) {
+            stopBrowserStream()
+          }
+        }
+      })
+
+      await fetchStreamStatus()
+    } catch (err: any) {
+      addDebug(`ERROR: ${err.message}`)
+      setError(err.message || 'Failed to start browser stream')
+      stopBrowserStream()
+      setFeedflixStream(null)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const stopBrowserStream = () => {
+    recorderRef.current?.stop()
+    recorderRef.current = null
+
+    wsRef.current?.close()
+    wsRef.current = null
+
+    mediaStreamRef.current?.getTracks().forEach(t => t.stop())
+    mediaStreamRef.current = null
+
+    if (videoRef.current) {
+      videoRef.current.srcObject = null
+    }
+
+    setBrowserStreaming(false)
+  }
+
   const stopStream = async () => {
-    const streamId = streamInfo?.stream?.streamId || adminStream?.streamId
-    if (!streamId) return
     setLoading(true)
     setError(null)
     try {
-      await fetch(`/api/mux/live/${streamId}`, { method: 'DELETE' })
+      // End FeedFlix stream if active
+      if (feedflixStream) {
+        await fetch(`/api/feedflix/streams/${feedflixStream.id}`, { method: 'POST' }).catch(() => {})
+        setFeedflixStream(null)
+      }
+
+      // Stop browser stream if active
+      if (browserStreaming) {
+        stopBrowserStream()
+      }
+
+      // End Mux stream if we have one
+      const streamId = streamInfo?.stream?.streamId || adminStream?.streamId
+      if (streamId) {
+        await fetch(`/api/mux/live/${streamId}`, { method: 'DELETE' }).catch(() => {})
+      }
+
       setAdminStream(null)
       setShowUploadForm(true)
       setUploadData(prev => ({ ...prev, title: streamInfo?.stream?.title || title }))
@@ -160,7 +325,7 @@ export default function GoLivePage() {
     setTimeout(() => setCopied(null), 2000)
   }
 
-  const isLive = streamInfo?.active || (adminStream?.streamId && streamInfo?.stream?.status === 'active')
+  const isLive = streamInfo?.active || (adminStream?.streamId && streamInfo?.stream?.status === 'active') || browserStreaming
 
   if (status === 'loading') return <MainLayout><div className="p-12 text-center">Loading...</div></MainLayout>
   if (!session) return null
@@ -246,7 +411,7 @@ export default function GoLivePage() {
                 <Radio className="h-5 w-5 text-teal" /> Stream Controls
               </h2>
 
-              {!adminStream && !streamInfo?.stream ? (
+              {!adminStream && !streamInfo?.stream && !browserStreaming ? (
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Stream Title</label>
@@ -254,11 +419,50 @@ export default function GoLivePage() {
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all text-gray-900"
                       placeholder="Enter stream title..." />
                   </div>
-                  <button onClick={startStream} disabled={loading}
-                    className="bg-[#34c5c5] hover:bg-[#37a6a6] disabled:opacity-50 text-white font-bold py-3 px-8 rounded-xl transition-colors shadow-lg shadow-teal-200 flex items-center gap-2 text-lg">
+
+                  {/* Stream Mode Selector */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Stream Method</label>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setStreamMode('browser')}
+                        className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 transition-all text-sm font-medium ${
+                          streamMode === 'browser'
+                            ? 'border-teal bg-teal/5 text-teal'
+                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                        }`}
+                      >
+                        <Monitor className="h-5 w-5" />
+                        Browser (No Software Needed)
+                      </button>
+                      <button
+                        onClick={() => setStreamMode('obs')}
+                        className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 transition-all text-sm font-medium ${
+                          streamMode === 'obs'
+                            ? 'border-teal bg-teal/5 text-teal'
+                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                        }`}
+                      >
+                        <Video className="h-5 w-5" />
+                        OBS / Streaming Software
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={streamMode === 'browser' ? startBrowserStream : startStream}
+                    disabled={loading}
+                    className="bg-[#34c5c5] hover:bg-[#37a6a6] disabled:opacity-50 text-white font-bold py-3 px-8 rounded-xl transition-colors shadow-lg shadow-teal-200 flex items-center gap-2 text-lg"
+                  >
                     {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Play className="h-5 w-5" />}
-                    {loading ? 'Creating Stream...' : 'Start Live Stream'}
+                    {loading ? 'Creating Stream...' : streamMode === 'browser' ? 'Go Live from Browser' : 'Start Live Stream'}
                   </button>
+
+                  {streamMode === 'browser' && (
+                    <p className="text-xs text-gray-400">
+                      Streams from your browser via FeedFlix relay. Your camera and microphone will be used.
+                    </p>
+                  )}
                 </div>
               ) : (
                 <div className="space-y-6">
@@ -267,10 +471,30 @@ export default function GoLivePage() {
                       <div className={`w-2.5 h-2.5 rounded-full ${isLive ? 'bg-red-500 animate-pulse' : 'bg-yellow-500'}`} />
                       {isLive ? 'LIVE' : 'Waiting for stream input...'}
                     </div>
+                    {browserStreaming && (
+                      <span className="flex items-center gap-1 text-xs font-medium text-teal bg-teal/10 px-2 py-1 rounded-full">
+                        <Monitor className="h-3 w-3" /> Browser
+                      </span>
+                    )}
                     {streamInfo?.stream?.title && <span className="text-gray-600 font-medium">{streamInfo.stream.title}</span>}
                   </div>
 
-                  {adminStream && (
+                  {/* Browser stream preview */}
+                  {browserStreaming && (
+                    <div className="rounded-xl overflow-hidden border border-gray-200 bg-black">
+                      <video
+                        ref={videoRef}
+                        autoPlay
+                        muted
+                        playsInline
+                        className="w-full"
+                        style={{ aspectRatio: '16/9' }}
+                      />
+                    </div>
+                  )}
+
+                  {/* OBS stream info */}
+                  {adminStream && !browserStreaming && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="bg-gray-50 rounded-xl p-4">
                         <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">RTMP URL</label>
@@ -296,7 +520,8 @@ export default function GoLivePage() {
                     </div>
                   )}
 
-                  {isLive && (adminStream?.playbackId || streamInfo?.stream?.playbackId) && (
+                  {/* Mux player for viewers (OBS mode only, when live) */}
+                  {!browserStreaming && isLive && (adminStream?.playbackId || streamInfo?.stream?.playbackId) && (
                     <div className="rounded-xl overflow-hidden border border-gray-200">
                       <MuxPlayerEmbed playbackId={(adminStream?.playbackId || streamInfo?.stream?.playbackId)!} />
                     </div>
@@ -308,16 +533,25 @@ export default function GoLivePage() {
                     {loading ? 'Stopping...' : 'End Stream'}
                   </button>
 
-                  <div className="bg-teal/5 border border-teal/20 rounded-xl p-4 text-sm text-gray-600">
-                    <p className="font-medium text-teal mb-2">How to go live:</p>
-                    <ol className="list-decimal list-inside space-y-1">
-                      <li>Open OBS Studio (or your streaming software)</li>
-                      <li>Go to Settings → Stream → Service: Custom</li>
-                      <li>Paste the RTMP URL as the Server</li>
-                      <li>Paste the Stream Key</li>
-                      <li>Click &quot;Start Streaming&quot; in OBS</li>
-                    </ol>
-                  </div>
+                  {/* Debug Panel */}
+                  {streamDebug.length > 0 && (
+                    <div className="bg-gray-900 rounded-xl p-4 text-xs font-mono text-green-400 max-h-48 overflow-y-auto">
+                      {streamDebug.map((msg, i) => <div key={i}>{msg}</div>)}
+                    </div>
+                  )}
+
+                  {!browserStreaming && (
+                    <div className="bg-teal/5 border border-teal/20 rounded-xl p-4 text-sm text-gray-600">
+                      <p className="font-medium text-teal mb-2">How to go live:</p>
+                      <ol className="list-decimal list-inside space-y-1">
+                        <li>Open OBS Studio (or your streaming software)</li>
+                        <li>Go to Settings → Stream → Service: Custom</li>
+                        <li>Paste the RTMP URL as the Server</li>
+                        <li>Paste the Stream Key</li>
+                        <li>Click &quot;Start Streaming&quot; in OBS</li>
+                      </ol>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

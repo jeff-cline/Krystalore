@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { 
-  Home, 
+import {
+  Home,
   Settings,
   Users,
   FileText,
@@ -15,7 +15,10 @@ import {
   Shield,
   Database,
   Plug,
-  UserPlus
+  UserPlus,
+  Radio,
+  TrendingUp,
+  Coins
 } from 'lucide-react'
 
 export default function AdminSidebar() {
@@ -31,6 +34,12 @@ export default function AdminSidebar() {
     { href: '/admin/permissions', icon: Shield, label: 'Permissions' },
     { href: '/admin/integrations', icon: Plug, label: 'Integrations' },
     { href: '/admin/settings', icon: Settings, label: 'Settings' },
+  ]
+
+  const feedflixItems = [
+    { href: '/admin/feedflix/streams', icon: Radio, label: 'Live Streams' },
+    { href: '/admin/feedflix/analytics', icon: TrendingUp, label: 'Analytics' },
+    { href: '/admin/feedflix/billing', icon: Coins, label: 'Billing & Usage' },
   ]
 
   const quickActions = [
@@ -72,6 +81,34 @@ export default function AdminSidebar() {
             )
           })}
         </nav>
+
+        {/* FeedFlix */}
+        <div className="border-t border-gray-200 pt-6 mb-8">
+          <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+            FeedFlix
+          </h3>
+          <nav className="space-y-2">
+            {feedflixItems.map((item) => {
+              const Icon = item.icon
+              const isActive = pathname === item.href
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center px-3 py-2 rounded-lg text-sm transition-colors ${
+                    isActive
+                      ? 'bg-teal text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  <Icon className="h-5 w-5 mr-3" />
+                  {item.label}
+                </Link>
+              )
+            })}
+          </nav>
+        </div>
 
         {/* Quick Actions */}
         <div className="border-t border-gray-200 pt-6">
