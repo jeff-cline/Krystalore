@@ -66,7 +66,7 @@ const Navigation = () => {
               <Link href="/dashboard" className={`nav-link ${isActive('/dashboard') ? 'active' : ''}`}>
                 Dashboard
               </Link>
-              <Link href="/vault" className={`nav-link ${isActive('/vault') ? 'active' : ''}`}>
+              <Link href="/dashboard/fitness/vault" className={`nav-link ${isActive('/vault') || isActive('/dashboard/fitness/vault') ? 'active' : ''}`}>
                 Video Vault
               </Link>
               <Link href="/go-live" className={`nav-link ${isActive('/go-live') ? 'active' : ''}`}>
@@ -111,13 +111,21 @@ const Navigation = () => {
                   Admin
                 </Link>
               )}
-              
-              <Link href="/auth/login" className="btn-secondary text-sm">
-                Login
-              </Link>
-              <Link href="/auth/signup" className="btn-primary text-sm">
-                Sign Up
-              </Link>
+
+              {session ? (
+                <Link href="/dashboard" className="btn-primary text-sm">
+                  Dashboard
+                </Link>
+              ) : (
+                <>
+                  <Link href="/auth/login" className="btn-secondary text-sm">
+                    Login
+                  </Link>
+                  <Link href="/auth/signup" className="btn-primary text-sm">
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile menu button */}
@@ -157,7 +165,7 @@ const Navigation = () => {
             </p>
             {[
               { name: 'Dashboard', href: '/dashboard' },
-              { name: 'Video Vault', href: '/vault' },
+              { name: 'Video Vault', href: '/dashboard/fitness/vault' },
               { name: 'Go Live', href: '/go-live' },
               { name: 'Courses', href: '/courses' },
               { name: 'Quizzes', href: '/quizzes' },
@@ -174,12 +182,20 @@ const Navigation = () => {
             
             <div className="border-t border-gray-100 my-2" />
             <div className="flex space-x-3 px-3 py-2">
-              <Link href="/auth/login" className="btn-secondary text-sm flex-1 text-center" onClick={() => setIsMenuOpen(false)}>
-                Login
-              </Link>
-              <Link href="/auth/signup" className="btn-primary text-sm flex-1 text-center" onClick={() => setIsMenuOpen(false)}>
-                Sign Up
-              </Link>
+              {session ? (
+                <Link href="/dashboard" className="btn-primary text-sm flex-1 text-center" onClick={() => setIsMenuOpen(false)}>
+                  Dashboard
+                </Link>
+              ) : (
+                <>
+                  <Link href="/auth/login" className="btn-secondary text-sm flex-1 text-center" onClick={() => setIsMenuOpen(false)}>
+                    Login
+                  </Link>
+                  <Link href="/auth/signup" className="btn-primary text-sm flex-1 text-center" onClick={() => setIsMenuOpen(false)}>
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

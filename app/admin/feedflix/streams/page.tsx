@@ -95,7 +95,7 @@ export default function FeedFlixStreamsPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Live Streams</h1>
-          <p className="text-gray-500 mt-1 text-sm sm:text-base">Manage FeedFlix live and scheduled streams</p>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Manage live and scheduled streams</p>
         </div>
         <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
           <button

@@ -183,7 +183,7 @@ export default function GoLivePage() {
       if (!stream.stream_key) {
         mediaStream.getTracks().forEach(t => t.stop())
         mediaStreamRef.current = null
-        throw new Error('No stream key returned from FeedFlix')
+        throw new Error('No stream key returned. Please try again.')
       }
       setFeedflixStream(stream)
 

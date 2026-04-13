@@ -95,7 +95,7 @@ export async function GET(request: Request) {
         return normalizeFeedFlixVideo(ffv, localCat, hasAccess)
       })
     } else if (feedflixResult === null) {
-      warning = 'FeedFlix videos temporarily unavailable'
+      warning = 'Some streaming videos temporarily unavailable'
     }
 
     // Merge and deduplicate

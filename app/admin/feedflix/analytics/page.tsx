@@ -61,7 +61,7 @@ export default function FeedFlixAnalyticsPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Streaming Analytics</h1>
-          <p className="text-gray-500 mt-1 text-sm sm:text-base">FeedFlix viewership and engagement metrics</p>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Viewership and engagement metrics</p>
         </div>
             <select
               value={days}

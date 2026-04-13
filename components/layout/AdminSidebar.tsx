@@ -99,10 +99,10 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      {/* FeedFlix */}
+      {/* Streaming */}
       <div className="border-t border-gray-200 pt-4 mb-6">
         <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-          FeedFlix
+          Streaming
         </h3>
         <nav className="space-y-1">
           {feedflixItems.map((item) => {

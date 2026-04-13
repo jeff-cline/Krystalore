@@ -81,7 +81,7 @@ export default function VideoManagementPage() {
   // Upload state
   const [importing, setImporting] = useState(false)
 
-  // FeedFlix sync state
+  // Streaming sync state
   const [syncData, setSyncData] = useState<any>(null)
   const [syncLoading, setSyncLoading] = useState(false)
   const [syncing, setSyncing] = useState(false)
@@ -372,7 +372,7 @@ export default function VideoManagementPage() {
         </button>
         <button onClick={() => { setActiveTab('feedflix-sync'); if (!syncData) { setSyncLoading(true); fetch('/api/admin/category-mapping').then(r => r.json()).then(setSyncData).finally(() => setSyncLoading(false)) } }}
           className={`px-6 py-2 rounded-lg font-medium transition-colors ${activeTab === 'feedflix-sync' ? 'bg-[#34c5c5] text-white' : 'bg-dark-700 text-gray-300 hover:bg-dark-600'}`}>
-          <FolderOpen className="h-4 w-4 inline mr-2" />FeedFlix Sync
+          <FolderOpen className="h-4 w-4 inline mr-2" />Stream Sync
         </button>
       </div>
 
@@ -667,13 +667,13 @@ export default function VideoManagementPage() {
           </div>
         </div>
       ) : (
-        /* FeedFlix Sync Tab */
+        /* Streaming Sync Tab */
         <div className="space-y-6">
           <div className="card">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-semibold text-white">FeedFlix Category Mapping</h2>
-                <p className="text-gray-400 text-sm mt-1">Map FeedFlix categories to local categories so membership gating applies to streamed videos</p>
+                <h2 className="text-xl font-semibold text-white">Stream Category Mapping</h2>
+                <p className="text-gray-400 text-sm mt-1">Map streaming categories to site categories so membership gating applies to streamed videos</p>
               </div>
               <button
                 onClick={async () => {
@@ -699,7 +699,7 @@ export default function VideoManagementPage() {
                   <table className="w-full">
                     <thead>
                       <tr className="text-left text-xs font-medium text-gray-400 uppercase tracking-wider border-b border-gray-700">
-                        <th className="pb-3 pr-4">FeedFlix Category</th>
+                        <th className="pb-3 pr-4">Streaming Category</th>
                         <th className="pb-3 pr-4">Mapped to Local Category</th>
                         <th className="pb-3">Actions</th>
                       </tr>
@@ -755,7 +755,7 @@ export default function VideoManagementPage() {
                     </tbody>
                   </table>
                 ) : (
-                  <p className="text-gray-400 text-center py-8">No FeedFlix categories found. Make sure your FeedFlix API key is configured.</p>
+                  <p className="text-gray-400 text-center py-8">No Streaming categories found. Make sure your Streaming API key is configured.</p>
                 )}
               </div>
             ) : null}

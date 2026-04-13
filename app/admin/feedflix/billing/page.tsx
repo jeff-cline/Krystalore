@@ -50,7 +50,7 @@ export default function FeedFlixBillingPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Billing & Usage</h1>
-          <p className="text-gray-500 mt-1 text-sm sm:text-base">FeedFlix token balance and consumption</p>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Streaming token balance and consumption</p>
         </div>
             <select
               value={days}
