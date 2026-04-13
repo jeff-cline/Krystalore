@@ -73,3 +73,80 @@ export async function sendPasswordResetEmail(to: string, resetToken: string) {
 
   await sgMail.send(msg)
 }
+
+export async function sendNotificationEmail(to: string, subject: string, message: string, recipientName?: string) {
+  const greeting = recipientName ? `Hi ${recipientName},` : 'Hi there,'
+  const msg = {
+    to,
+    from: { email: FROM_EMAIL, name: FROM_NAME },
+    subject: `${subject} – Krystalore`,
+    html: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background-color:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f5f5f5;padding:40px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+          <tr>
+            <td style="background: linear-gradient(135deg, #E8A849, #34c5c5);padding:32px 40px;text-align:center;">
+              <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;letter-spacing:0.5px;">Krystalore</h1>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:40px;">
+              <p style="margin:0 0 8px;color:#555;font-size:16px;">${greeting}</p>
+              <h2 style="margin:0 0 16px;color:#1a1a1a;font-size:22px;font-weight:600;">${subject}</h2>
+              <div style="margin:0 0 32px;color:#555;font-size:16px;line-height:1.6;white-space:pre-line;">${message}</div>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="padding:8px 0;">
+                    <a href="https://executive.krystalore.com/dashboard" style="display:inline-block;background-color:#34c5c5;color:#ffffff;text-decoration:none;font-size:16px;font-weight:600;padding:14px 40px;border-radius:8px;">
+                      Visit Dashboard
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#f9f9f9;padding:24px 40px;text-align:center;border-top:1px solid #eee;">
+              <p style="margin:0;color:#aaa;font-size:12px;">
+                © ${new Date().getFullYear()} Krystalore. All rights reserved.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`,
+  }
+  await sgMail.send(msg)
+}
+
+export async function sendBulkNotification(
+  recipients: { email: string; name?: string | null }[],
+  subject: string,
+  message: string
+): Promise<number> {
+  let sent = 0
+  // SendGrid supports up to 1000 personalizations per request
+  // Batch in groups of 500 to be safe
+  const batchSize = 500
+  for (let i = 0; i < recipients.length; i += batchSize) {
+    const batch = recipients.slice(i, i + batchSize)
+    const promises = batch.map(r =>
+      sendNotificationEmail(r.email, subject, message, r.name || undefined)
+        .then(() => { sent++ })
+        .catch(err => console.error(`Failed to send to ${r.email}:`, err.message))
+    )
+    await Promise.all(promises)
+  }
+  return sent
+}

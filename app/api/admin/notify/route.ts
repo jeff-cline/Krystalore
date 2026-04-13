@@ -1,20 +1,16 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { getSession } from '@/lib/auth'
+import { sendBulkNotification } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
   try {
     const session = await getSession()
-    if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
+    if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     const role = (session.user as any).role
-    if (!['GOD', 'ADMIN'].includes(role)) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-    }
+    if (!['GOD', 'ADMIN'].includes(role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
     const body = await request.json()
     const { to, subject, message } = body
@@ -23,70 +19,55 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // Determine target users based on the 'to' parameter
-    let targetUsers = []
+    // Determine target users
     let targetQuery: any = {}
 
     if (to === 'all') {
-      // All users
       targetQuery = {}
     } else if (to.startsWith('category:')) {
-      // Users with access to specific category
       const categorySlug = to.replace('category:', '')
       const category = await prisma.category.findUnique({
         where: { slug: categorySlug },
-        select: { membershipLevel: true }
+        select: { membershipLevel: true },
       })
-      
-      if (!category) {
-        return NextResponse.json({ error: 'Category not found' }, { status: 404 })
-      }
-      
-      // Users with membership level that grants access to this category
+      if (!category) return NextResponse.json({ error: 'Category not found' }, { status: 404 })
       const levels = ['FREE', 'BASIC', 'PREMIUM', 'VIP']
       const accessLevels = levels.slice(levels.indexOf(category.membershipLevel))
-      targetQuery = {
-        membershipLevel: { in: accessLevels }
-      }
+      targetQuery = { membershipLevel: { in: accessLevels } }
     } else if (to.startsWith('level:')) {
-      // Users with specific membership level
       const level = to.replace('level:', '')
-      targetQuery = {
-        membershipLevel: level
-      }
+      targetQuery = { membershipLevel: level }
     } else {
       return NextResponse.json({ error: 'Invalid target format' }, { status: 400 })
     }
 
-    // Get target users
     const users = await prisma.user.findMany({
       where: targetQuery,
-      select: { id: true, email: true, name: true, membershipLevel: true }
+      select: { email: true, name: true },
     })
 
-    // For now, just log the notification details
-    // In the future, this can integrate with SendGrid for actual email sending
-    console.log('Notification sent:', {
-      from: session.user.email,
-      to: to,
-      subject: subject,
-      message: message,
-      targetUsers: users.length,
-      timestamp: new Date().toISOString()
+    // Send emails via SendGrid
+    const sentCount = await sendBulkNotification(users, subject, message)
+
+    // Store notification record
+    await prisma.notification.create({
+      data: {
+        subject,
+        message,
+        target: to,
+        sentCount,
+        sentById: (session.user as any).id,
+      },
     })
 
-    // Create a notification record in the database (you could add a Notification model)
-    // For now, we'll just return success
-    
     return NextResponse.json({
       success: true,
-      message: `Notification queued for ${users.length} users`,
+      message: `Notification sent to ${sentCount} of ${users.length} users`,
+      sentCount,
       targetCount: users.length,
-      targets: users.map(u => ({ email: u.email, name: u.name }))
     })
-
-  } catch (error) {
+  } catch (error: any) {
     console.error('Notification error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 })
   }
 }
