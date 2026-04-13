@@ -35,8 +35,8 @@ export default function HealthMasteryPage() {
     "description": "A high-level group coaching experience for entrepreneurs and leaders ready to reclaim their energy, rebuild consistency, and lead their life from the inside out.",
     "brand": { "@type": "Brand", "name": "Krystalore Crews" },
     "offers": [
-      { "@type": "Offer", "name": "Monthly Plan", "price": "497", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://krystalorecrews.com/healthmasterycheckout" },
-      { "@type": "Offer", "name": "Annual Plan", "price": "5500", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://krystalorecrews.com/healthmasterycheckout" },
+      { "@type": "Offer", "name": "Monthly Plan", "price": "497", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "/health-mastery/checkout" },
+      { "@type": "Offer", "name": "Annual Plan", "price": "5500", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "/health-mastery/checkout" },
     ],
     "review": testimonials.map(t => ({ "@type": "Review", "reviewBody": t.quote, "author": { "@type": "Person", "name": t.name }, "reviewRating": { "@type": "Rating", "ratingValue": "5" } })),
     "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "3" },
@@ -46,9 +46,9 @@ export default function HealthMasteryPage() {
     <MainLayout>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-2xl mb-12 sm:mb-16">
-        <div className="relative h-[500px] sm:h-[600px]">
+      {/* Hero Image */}
+      <section className="rounded-2xl overflow-hidden mb-8 sm:mb-10">
+        <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
           <Image
             src="/images/health-mastery/hero.webp"
             alt="Krystalore Crews — Health Mastery Group Coaching for entrepreneurs and leaders"
@@ -57,30 +57,29 @@ export default function HealthMasteryPage() {
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
-          <div className="absolute inset-0 flex items-center">
-            <div className="max-w-2xl px-6 sm:px-12">
-              <p className="text-teal font-semibold text-sm sm:text-base uppercase tracking-wider mb-3">Beyond Limits</p>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-                You&apos;ve Built Success...<br />
-                <span className="text-teal">Now It&apos;s Time to Feel Like It</span>
-              </h1>
-              <p className="text-gray-200 text-base sm:text-lg mb-8 max-w-lg">
-                Health Mastery is a high-level group coaching experience for entrepreneurs and leaders ready to reclaim their energy, rebuild consistency, and lead their life from the inside out.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href="https://krystalorecrews.com/healthmasterycheckout"
-                  className="bg-teal hover:bg-[#37a6a6] text-white font-bold py-4 px-8 rounded-xl transition-colors text-center text-lg shadow-lg shadow-teal/30"
-                >
-                  Join Health Mastery
-                </a>
-                <Link href="/contact" className="bg-white/10 hover:bg-white/20 text-white font-medium py-4 px-8 rounded-xl transition-colors text-center backdrop-blur-sm border border-white/20">
-                  Book a Discovery Call
-                </Link>
-              </div>
-            </div>
-          </div>
+        </div>
+      </section>
+
+      {/* Hero Text (below image) */}
+      <section className="mb-12 sm:mb-16 text-center max-w-3xl mx-auto px-4">
+        <p className="text-teal font-semibold text-sm sm:text-base uppercase tracking-wider mb-3">Beyond Limits</p>
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+          You&apos;ve Built Success...<br />
+          <span className="text-teal">Now It&apos;s Time to Feel Like It</span>
+        </h1>
+        <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-lg mx-auto">
+          Health Mastery is a high-level group coaching experience for entrepreneurs and leaders ready to reclaim their energy, rebuild consistency, and lead their life from the inside out.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Link
+            href="/health-mastery/checkout"
+            className="bg-teal hover:bg-[#37a6a6] text-white font-bold py-4 px-8 rounded-xl transition-colors text-center text-lg shadow-lg shadow-teal/30"
+          >
+            Join Health Mastery
+          </Link>
+          <Link href="/contact" className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-4 px-8 rounded-xl transition-colors text-center">
+            Book a Discovery Call
+          </Link>
         </div>
       </section>
 
@@ -175,12 +174,12 @@ export default function HealthMasteryPage() {
               <p className="text-gray-500 text-sm mb-4">(3 month minimum)</p>
               <p className="text-4xl font-bold text-gray-900 mb-1">$497<span className="text-lg font-normal text-gray-500">/mo</span></p>
               <p className="text-xs text-gray-400 mb-6">Billed monthly</p>
-              <a
-                href="https://krystalorecrews.com/healthmasterycheckout"
+              <Link
+                href="/health-mastery/checkout"
                 className="block w-full bg-teal hover:bg-[#37a6a6] text-white font-bold py-3 rounded-xl transition-colors"
               >
                 Select Plan
-              </a>
+              </Link>
             </div>
             {/* Annual */}
             <div className="bg-white rounded-2xl p-8 text-center hover:shadow-xl transition-shadow relative border-2 border-teal">
@@ -189,12 +188,12 @@ export default function HealthMasteryPage() {
               <p className="text-gray-500 text-sm mb-4">(get one month free)</p>
               <p className="text-4xl font-bold text-gray-900 mb-1">$5,500</p>
               <p className="text-xs text-gray-400 mb-6">Billed annually — save $464</p>
-              <a
-                href="https://krystalorecrews.com/healthmasterycheckout"
+              <Link
+                href="/health-mastery/checkout"
                 className="block w-full bg-teal hover:bg-[#37a6a6] text-white font-bold py-3 rounded-xl transition-colors"
               >
                 Select Plan
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -205,12 +204,12 @@ export default function HealthMasteryPage() {
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Ready to Lead Your Life from the Inside Out?</h2>
         <p className="text-gray-600 mb-8">Stop waiting for the &ldquo;right time.&rdquo; The right time is when you decide you&apos;re worth it.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://krystalorecrews.com/healthmasterycheckout"
+          <Link
+            href="/health-mastery/checkout"
             className="bg-teal hover:bg-[#37a6a6] text-white font-bold py-4 px-10 rounded-xl transition-colors text-lg shadow-lg shadow-teal/30 flex items-center justify-center gap-2"
           >
             Join Health Mastery <ArrowRight className="h-5 w-5" />
-          </a>
+          </Link>
           <Link href="/contact" className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-4 px-10 rounded-xl transition-colors text-lg">
             Have Questions? Let&apos;s Talk
           </Link>
