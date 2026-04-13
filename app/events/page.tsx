@@ -65,8 +65,8 @@ export default function EventsPage() {
         <div className="grid md:grid-cols-2 gap-6">
           {events.map((e) => (
             <div key={e.title} className="rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow group">
-              <div className="relative h-48 sm:h-56">
-                <Image src={e.image} alt={e.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 50vw" />
+              <div className="relative h-56 sm:h-64">
+                <Image src={e.image} alt={e.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 50vw" />
                 <div className={`absolute inset-0 bg-gradient-to-t ${e.color} opacity-70`} />
                 <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
                   <div className="flex items-center gap-2 mb-1">
@@ -90,8 +90,8 @@ export default function EventsPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {retreats.map((r) => (
             <Link key={r.href} href={r.href} className="group block rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg hover:border-teal/30 transition-all">
-              <div className="relative h-40 sm:h-48">
-                <Image src={r.image} alt={r.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <div className="relative h-48 sm:h-56">
+                <Image src={r.image} alt={r.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
               </div>
               <div className="p-4">
@@ -109,8 +109,8 @@ export default function EventsPage() {
       <section className="mb-12">
         <div className="bg-gradient-to-r from-[#006767] to-teal rounded-2xl overflow-hidden">
           <div className="grid md:grid-cols-2 gap-0">
-            <div className="relative h-64 md:h-auto">
-              <Image src="/images/go9/portrait.jpg" alt="Krystalore Crews" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+            <div className="relative h-72 md:h-auto min-h-[300px]">
+              <Image src="/images/go9/portrait.jpg" alt="Krystalore Crews" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <div className="p-8 sm:p-12 flex flex-col justify-center text-white">
               <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Join the Next Event?</h2>

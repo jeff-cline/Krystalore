@@ -383,7 +383,7 @@ export default function VaultPage() {
                           <div className="relative h-40 sm:h-44 bg-gradient-to-br from-teal/10 to-primary/10 flex items-center justify-center overflow-hidden">
                             {(() => {
                               const thumb = video.thumbnailUrl || THUMBNAIL_MAP[video.category?.toLowerCase().replace(/\s+/g, '-')] || DEFAULT_THUMBNAIL
-                              return <img src={thumb} alt={video.title} className="w-full h-full object-cover" />
+                              return <img src={thumb} alt={video.title} className="w-full h-full object-cover object-top" />
                             })()}
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                               <div className="w-12 h-12 rounded-full bg-white/0 group-hover:bg-white/80 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
@@ -448,7 +448,7 @@ export default function VaultPage() {
                             </div>
                             <div className="relative mb-4">
                               <div className="bg-gray-100 rounded-lg h-40 sm:h-48 relative overflow-hidden">
-                                <Image src={THUMBNAIL_MAP[cat.slug] || DEFAULT_THUMBNAIL} alt={cat.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                                <Image src={THUMBNAIL_MAP[cat.slug] || DEFAULT_THUMBNAIL} alt={cat.name} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
                                 <div className="absolute inset-0 bg-black/30 rounded-lg flex items-center justify-center">
                                   <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
                                     <Play className="h-7 w-7 text-white ml-1" />
@@ -496,7 +496,7 @@ export default function VaultPage() {
                           )}
                           <div className="relative mb-3">
                             <div className="bg-gray-100 rounded-lg h-28 sm:h-32 relative overflow-hidden">
-                              <Image src={THUMBNAIL_MAP[cat.slug] || DEFAULT_THUMBNAIL} alt={cat.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+                              <Image src={THUMBNAIL_MAP[cat.slug] || DEFAULT_THUMBNAIL} alt={cat.name} fill className="object-cover object-top" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
                               <div className="absolute inset-0 bg-black/25 rounded-lg flex items-center justify-center">
                                 <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
                                   <Play className="h-5 w-5 text-white ml-0.5" />

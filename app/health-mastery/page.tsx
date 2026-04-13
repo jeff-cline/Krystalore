@@ -53,7 +53,7 @@ export default function HealthMasteryPage() {
             src="/images/health-mastery/hero.webp"
             alt="Krystalore Crews — Health Mastery Group Coaching for entrepreneurs and leaders"
             fill
-            className="object-cover"
+            className="object-cover object-top"
             priority
             sizes="100vw"
           />
