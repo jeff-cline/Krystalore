@@ -56,9 +56,8 @@ export default function BlogPostPage() {
           <p className="text-gray-500 text-sm mb-8">By <span className="font-medium text-gray-700">{post.author.name}</span></p>
         )}
 
-        <div className="prose prose-gray max-w-none mb-12 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
-          {post.content}
-        </div>
+        <div className="prose prose-gray max-w-none mb-12 text-gray-700 leading-relaxed prose-headings:text-gray-900 prose-a:text-teal prose-strong:text-gray-900"
+          dangerouslySetInnerHTML={{ __html: post.content }} />
 
         <div className="border-t border-gray-200 pt-8 mb-8">
           <h3 className="text-lg font-bold text-gray-900 mb-4">Keep Reading</h3>
