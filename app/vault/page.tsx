@@ -73,17 +73,47 @@ const THUMBNAIL_MAP: Record<string, string> = {
 }
 const DEFAULT_THUMBNAIL = '/images/go9/retreat-costa-rica.jpg'
 
-function MuxPlayerEmbed({ playbackId, streamType = 'on-demand' }: { playbackId: string; streamType?: string }) {
+function VideoPlayer({ video, streamType = 'on-demand' }: { video: { muxPlaybackId?: string | null; fileUrl?: string | null }; streamType?: string }) {
   const [MuxPlayer, setMuxPlayer] = useState<any>(null)
-  const [loadError, setLoadError] = useState(false)
   useEffect(() => {
-    import('@mux/mux-player-react').then((mod) => setMuxPlayer(() => mod.default)).catch(() => setLoadError(true))
-  }, [])
-  if (loadError) return (
-    <div className="relative w-full bg-black rounded-xl" style={{ paddingTop: '56.25%' }}>
-      <div className="absolute inset-0 flex items-center justify-center text-white/50 text-sm">Unable to load player</div>
+    if (video.muxPlaybackId) {
+      import('@mux/mux-player-react').then((mod) => setMuxPlayer(() => mod.default)).catch(() => {})
+    }
+  }, [video.muxPlaybackId])
+
+  // File URL player (majority of videos)
+  if (video.fileUrl && !video.muxPlaybackId) {
+    return (
+      <video
+        src={video.fileUrl}
+        controls
+        autoPlay
+        className="w-full rounded-xl bg-black"
+        style={{ aspectRatio: '16/9' }}
+      />
+    )
+  }
+
+  // Mux player
+  if (video.muxPlaybackId && MuxPlayer) {
+    return <MuxPlayer playbackId={video.muxPlaybackId} streamType={streamType} style={{ width: '100%', aspectRatio: '16/9', borderRadius: '12px' }} />
+  }
+
+  // Loading
+  return (
+    <div className="relative w-full bg-gray-900 rounded-xl" style={{ paddingTop: '56.25%' }}>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-teal/30 border-t-teal rounded-full animate-spin" />
+      </div>
     </div>
   )
+}
+
+function LivePlayer({ playbackId }: { playbackId: string }) {
+  const [MuxPlayer, setMuxPlayer] = useState<any>(null)
+  useEffect(() => {
+    import('@mux/mux-player-react').then((mod) => setMuxPlayer(() => mod.default)).catch(() => {})
+  }, [])
   if (!MuxPlayer) return (
     <div className="relative w-full bg-gray-900 rounded-xl" style={{ paddingTop: '56.25%' }}>
       <div className="absolute inset-0 flex items-center justify-center">
@@ -91,7 +121,7 @@ function MuxPlayerEmbed({ playbackId, streamType = 'on-demand' }: { playbackId: 
       </div>
     </div>
   )
-  return <MuxPlayer playbackId={playbackId} streamType={streamType} style={{ width: '100%', aspectRatio: '16/9', borderRadius: '12px' }} />
+  return <MuxPlayer playbackId={playbackId} streamType="live" autoPlay="muted" style={{ width: '100%', aspectRatio: '16/9', borderRadius: '12px' }} />
 }
 
 export default function VaultPage() {
@@ -176,7 +206,7 @@ export default function VaultPage() {
       return
     }
     if (video.hasAccess === false && !checkAccess(userLevel, video.membershipLevel)) return
-    if (video.muxPlaybackId) setActiveVideo(video)
+    if (video.muxPlaybackId || video.fileUrl) setActiveVideo(video)
   }
 
   const formatDuration = (seconds: number | null) => {
@@ -199,7 +229,7 @@ export default function VaultPage() {
                 <span className="text-white font-semibold text-lg">{liveStream.stream.title}</span>
               </div>
               {isLoggedIn ? (
-                <MuxPlayerEmbed playbackId={liveStream.stream.playbackId} streamType="live" />
+                <LivePlayer playbackId={liveStream.stream.playbackId} />
               ) : (
                 <div className="bg-black/30 rounded-xl p-8 sm:p-12 text-center">
                   <Radio className="h-12 w-12 text-white/80 mx-auto mb-4" />
@@ -220,7 +250,7 @@ export default function VaultPage() {
               <ArrowLeft className="h-4 w-4" /> Back to {selectedCategory || 'Vault'}
             </button>
             <div className="rounded-2xl overflow-hidden shadow-lg">
-              <MuxPlayerEmbed playbackId={activeVideo.muxPlaybackId!} />
+              <VideoPlayer video={activeVideo} />
             </div>
             <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
               <div className="flex items-center gap-2 mb-2">
@@ -350,12 +380,11 @@ export default function VaultPage() {
                               </div>
                             </div>
                           )}
-                          <div className="relative h-40 sm:h-44 bg-gradient-to-br from-teal/10 to-primary/10 flex items-center justify-center">
-                            {video.thumbnailUrl ? (
-                              <img src={video.thumbnailUrl} alt={video.title} className="w-full h-full object-cover" />
-                            ) : (
-                              <Play className="h-10 w-10 text-teal/30" />
-                            )}
+                          <div className="relative h-40 sm:h-44 bg-gradient-to-br from-teal/10 to-primary/10 flex items-center justify-center overflow-hidden">
+                            {(() => {
+                              const thumb = video.thumbnailUrl || THUMBNAIL_MAP[video.category?.toLowerCase().replace(/\s+/g, '-')] || DEFAULT_THUMBNAIL
+                              return <img src={thumb} alt={video.title} className="w-full h-full object-cover" />
+                            })()}
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                               <div className="w-12 h-12 rounded-full bg-white/0 group-hover:bg-white/80 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
                                 <Play className="h-6 w-6 text-gray-900 ml-0.5" />
