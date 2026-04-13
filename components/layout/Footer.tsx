@@ -58,6 +58,8 @@ export default function Footer() {
               <li><Link href="/veteran-coaching" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Veteran Coaching</Link></li>
               <li><Link href="/leadership-training" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Leadership Training</Link></li>
               <li><Link href="/health-mastery" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Health Mastery</Link></li>
+              <li><Link href="/just-breathe" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Just Breathe</Link></li>
+              <li><Link href="/just-breathe" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Meditations</Link></li>
               <li><Link href="/bootcamp" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Bootcamp</Link></li>
               <li><Link href="/pricing-demo" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Pricing</Link></li>
               <li><Link href="/contact" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Contact</Link></li>
