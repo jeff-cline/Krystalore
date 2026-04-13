@@ -39,7 +39,7 @@ export default function HealthMasteryCheckoutPage() {
         </div>
 
         {/* GoHighLevel Checkout Form */}
-        <div className="relative rounded-2xl border border-gray-200 overflow-hidden bg-white shadow-sm mb-8">
+        <div className="relative overflow-hidden bg-white mb-8 -mx-4 sm:mx-0 sm:rounded-2xl sm:border sm:border-gray-200 sm:shadow-sm">
           {!iframeLoaded && (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
               <div className="w-10 h-10 border-3 border-teal/30 border-t-teal rounded-full animate-spin mb-4" />
@@ -50,7 +50,7 @@ export default function HealthMasteryCheckoutPage() {
             src="https://krystalorecrews.com/healthmasterycheckout"
             title="Health Mastery Checkout — Krystalore Crews"
             className="w-full border-0"
-            style={{ height: '1400px' }}
+            style={{ height: '1960px' }}
             allow="payment *"
             onLoad={() => setIframeLoaded(true)}
           />
