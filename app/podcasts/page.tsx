@@ -4,7 +4,7 @@ import { useState } from 'react'
 import MainLayout from '@/components/layout/MainLayout'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Headphones, Play, ExternalLink, Mic, ChevronDown, ChevronUp, Radio, Users, Heart, Star } from 'lucide-react'
+import { Headphones, Play, ExternalLink, Mic, ChevronDown, ChevronUp, Radio, Users, Heart, Star, Wind, Moon, Flame, Sun, ArrowRight } from 'lucide-react'
 
 const podcasts = [
   {
@@ -182,9 +182,9 @@ export default function PodcastsPage() {
       <section className="mb-16">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
-            { icon: Mic, label: '3 Shows', desc: 'Active podcasts' },
-            { icon: Headphones, label: '5+ Episodes', desc: 'And growing' },
-            { icon: Heart, label: 'Self-Help', desc: 'Leadership & Growth' },
+            { icon: Mic, label: '4 Shows', desc: 'Podcasts & meditations' },
+            { icon: Headphones, label: '20+ Episodes', desc: 'And growing weekly' },
+            { icon: Wind, label: '15 Meditations', desc: 'Just Breathe library' },
             { icon: Star, label: '5-Star', desc: 'Listener reviews' },
           ].map((stat, i) => (
             <div key={i} className="bg-white rounded-xl border border-gray-200 p-5 text-center">
@@ -193,6 +193,88 @@ export default function PodcastsPage() {
               <p className="text-gray-500 text-xs">{stat.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Just Breathe Meditation Section */}
+      <section className="mb-16">
+        <div className="bg-gradient-to-br from-[#1a1a2e] to-[#16213e] rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+            {/* Cover Art + Intro */}
+            <div className="p-8 sm:p-10 flex flex-col justify-center">
+              <div className="flex items-center gap-3 mb-4">
+                <Wind className="h-6 w-6 text-teal" />
+                <span className="text-teal font-semibold text-sm uppercase tracking-wider">Meditation Library</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Just Breathe</h2>
+              <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+                15 guided meditations for grounding, clarity, confidence, and healing. Short 3-minute sessions designed for busy leaders.
+              </p>
+              <div className="relative w-40 h-40 rounded-xl overflow-hidden shadow-xl shadow-purple-500/20 mb-6">
+                <Image src="/images/just-breathe/cover.jpg" alt="Just Breathe Meditation Library" fill className="object-cover" sizes="160px" />
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <a href="https://open.spotify.com/show/6acctiaNwQqFy8HVuiXlN7" target="_blank" rel="noopener noreferrer"
+                  className="bg-[#1DB954] hover:bg-[#1ed760] text-white font-bold py-2.5 px-5 rounded-lg transition-colors flex items-center gap-2 text-sm">
+                  <Play className="h-4 w-4" /> Listen Free
+                </a>
+                <Link href="/just-breathe" className="bg-white/10 hover:bg-white/20 text-white font-medium py-2.5 px-5 rounded-lg transition-colors text-sm border border-white/20 flex items-center gap-2">
+                  All Episodes <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            {/* 3 Series Cards */}
+            <div className="lg:col-span-2 p-6 sm:p-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                {
+                  name: 'Awakening',
+                  icon: Sun,
+                  color: 'from-teal to-[#006767]',
+                  episodes: '5 Episodes',
+                  desc: 'Ground yourself. Find clarity, stillness, and reconnect with your authentic truth.',
+                  highlights: ['Morning Clarity', 'Grounding Into Stillness', 'Breathing Through the Messy Middle'],
+                },
+                {
+                  name: 'Activation',
+                  icon: Flame,
+                  color: 'from-[#E8A849] to-orange-600',
+                  episodes: '5 Episodes',
+                  desc: 'Ignite your power. Movement, discipline, and mindset meditations for high achievers.',
+                  highlights: ['Post-Workout Rewire', 'Discipline Download', 'Stronger Than You Think'],
+                },
+                {
+                  name: 'Rebirth',
+                  icon: Moon,
+                  color: 'from-purple-600 to-indigo-700',
+                  episodes: '5 Episodes',
+                  desc: 'Release the old, welcome the new. Healing, identity shifts, and new beginnings.',
+                  highlights: ['Healing the High Performer', 'The Identity Shift', 'Rise Beyond Loss'],
+                },
+              ].map((s, i) => (
+                <Link key={i} href="/just-breathe" className="group block rounded-xl overflow-hidden hover:shadow-lg transition-all">
+                  <div className={`bg-gradient-to-br ${s.color} p-5 text-white`}>
+                    <s.icon className="h-6 w-6 mb-2 opacity-80" />
+                    <h3 className="font-bold text-lg mb-0.5">{s.name}</h3>
+                    <p className="text-white/70 text-xs">{s.episodes}</p>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-sm p-4">
+                    <p className="text-gray-300 text-xs leading-relaxed mb-3">{s.desc}</p>
+                    <ul className="space-y-1.5">
+                      {s.highlights.map((h, j) => (
+                        <li key={j} className="flex items-center gap-2 text-xs text-gray-400">
+                          <Play className="h-3 w-3 text-teal flex-shrink-0" /> {h}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-teal text-xs font-medium mt-3 flex items-center gap-1 group-hover:underline">
+                      Explore Series <ArrowRight className="h-3 w-3" />
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -241,10 +323,10 @@ export default function PodcastsPage() {
               className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-xl transition-colors flex items-center justify-center gap-2">
               <Users className="h-5 w-5" /> Join THRIVE Network
             </a>
-            <a href="https://uk.pinterest.com/krystalorecrews/_created/" target="_blank" rel="noopener noreferrer"
-              className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl transition-colors flex items-center justify-center gap-2">
-              Follow on Pinterest
-            </a>
+            <Link href="/just-breathe"
+              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-xl transition-colors flex items-center justify-center gap-2">
+              <Wind className="h-5 w-5" /> Just Breathe Meditations
+            </Link>
           </div>
         </div>
       </section>
