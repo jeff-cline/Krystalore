@@ -18,6 +18,7 @@ interface Category {
 
 interface VideoItem {
   id: string
+  source?: 'local' | 'feedflix'
   title: string
   description: string | null
   category: string
@@ -27,7 +28,10 @@ interface VideoItem {
   membershipLevel: string
   isPublished: boolean
   createdAt: string
-  uploader: { name: string | null }
+  hasAccess?: boolean
+  viewCount?: number
+  fileUrl?: string | null
+  uploader?: { name: string | null }
 }
 
 const LEVEL_ORDER = ['FREE', 'BASIC', 'PREMIUM', 'VIP']
@@ -78,7 +82,7 @@ export default function FitnessVaultPage() {
     if (selectedCategory !== 'All') params.set('category', selectedCategory)
     if (searchQuery) params.set('search', searchQuery)
     params.set('limit', '50')
-    fetch(`/api/videos?${params}`).then(r => r.json()).then(data => {
+    fetch(`/api/unified-videos?${params}`).then(r => r.json()).then(data => {
       setVideos(data.videos || [])
       setLoading(false)
     }).catch(() => setLoading(false))
@@ -131,7 +135,7 @@ export default function FitnessVaultPage() {
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
               />
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2 scrollbar-hide">
               <button
                 onClick={() => setSelectedCategory('All')}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedCategory === 'All' ? 'bg-[#34c5c5] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
@@ -192,7 +196,7 @@ export default function FitnessVaultPage() {
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {videos.map((video) => {
-                  const locked = !hasAccess(userLevel, video.membershipLevel)
+                  const locked = video.hasAccess === false || !hasAccess(userLevel, video.membershipLevel)
                   return (
                     <div key={video.id} className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow group relative">
                       {locked && (
@@ -215,18 +219,23 @@ export default function FitnessVaultPage() {
                             {Math.floor(video.duration / 60)}:{String(Math.floor(video.duration % 60)).padStart(2, '0')}
                           </div>
                         )}
+                        {video.source === 'feedflix' && (
+                          <div className="absolute top-2 left-2 bg-red-500/90 text-white px-2 py-1 rounded text-xs font-medium">
+                            Live Replay
+                          </div>
+                        )}
                       </div>
                       <div className="p-4">
-                        <span className="inline-block px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded mb-2">{video.category}</span>
+                        <span className="inline-block px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded mb-2 whitespace-nowrap">{video.category}</span>
                         <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors">{video.title}</h3>
                         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{video.description}</p>
                         <button
-                          onClick={() => !locked && video.muxPlaybackId && setActiveVideo(video)}
-                          disabled={locked || !video.muxPlaybackId}
+                          onClick={() => !locked && (video.muxPlaybackId || video.fileUrl) && setActiveVideo(video)}
+                          disabled={locked || (!video.muxPlaybackId && !video.fileUrl)}
                           className="w-full bg-[#34c5c5] text-white py-2 rounded-lg font-medium hover:bg-[#37a6a6] transition-colors flex items-center justify-center disabled:opacity-50"
                         >
                           <Play className="h-4 w-4 mr-2" />
-                          {video.muxPlaybackId ? 'Start Workout' : 'Coming Soon'}
+                          {(video.muxPlaybackId || video.fileUrl) ? 'Start Workout' : 'Coming Soon'}
                         </button>
                       </div>
                     </div>

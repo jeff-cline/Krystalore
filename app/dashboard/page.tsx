@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import DashboardLayout from '@/components/layout/dashboard-layout'
-import { BookOpen, Play, Users, TrendingUp, Calendar, Target } from 'lucide-react'
+import { BookOpen, Play, Users, TrendingUp, Calendar, Target, Radio } from 'lucide-react'
 import Link from 'next/link'
 
 interface Category {
@@ -29,6 +29,8 @@ export default function DashboardPage() {
   const { data: session, status } = useSession()
   const [categories, setCategories] = useState<Category[]>([])
   const [recentVideos, setRecentVideos] = useState<Video[]>([])
+  const [isLive, setIsLive] = useState(false)
+  const [liveTitle, setLiveTitle] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -39,9 +41,10 @@ export default function DashboardPage() {
     const fetchData = async () => {
       try {
         setLoading(true)
-        const [categoriesRes, videosRes] = await Promise.all([
+        const [categoriesRes, videosRes, liveRes] = await Promise.all([
           fetch('/api/categories'),
-          fetch('/api/videos?limit=5&orderBy=createdAt&order=desc')
+          fetch('/api/unified-videos?limit=5'),
+          fetch('/api/mux/live'),
         ])
 
         if (!categoriesRes.ok || !videosRes.ok) {
@@ -50,9 +53,14 @@ export default function DashboardPage() {
 
         const categoriesData = await categoriesRes.json()
         const videosData = await videosRes.json()
+        const liveData = liveRes.ok ? await liveRes.json() : { active: false }
 
-        setCategories(categoriesData.categories || [])
+        setCategories(Array.isArray(categoriesData) ? categoriesData : categoriesData.categories || [])
         setRecentVideos(videosData.videos || [])
+        if (liveData.active && liveData.stream) {
+          setIsLive(true)
+          setLiveTitle(liveData.stream.title || 'Live Stream')
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')
       } finally {
@@ -118,6 +126,25 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="space-y-6">
+        {/* Live Banner */}
+        {isLive && (
+          <Link href="/live" className="block bg-gradient-to-r from-red-500 to-red-600 rounded-xl p-4 text-white hover:from-red-600 hover:to-red-700 transition-all shadow-lg">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-white animate-pulse" />
+                  <Radio className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-bold text-sm sm:text-base">Krystalore is LIVE!</p>
+                  <p className="text-red-100 text-xs sm:text-sm">{liveTitle}</p>
+                </div>
+              </div>
+              <span className="bg-white/20 px-4 py-2 rounded-lg text-sm font-medium">Watch Now</span>
+            </div>
+          </Link>
+        )}
+
         {/* Welcome Header */}
         <div className="bg-gradient-to-r from-[#FF8900] to-[#34c5c5] rounded-lg p-6 text-white">
           <h1 className="text-3xl font-bold mb-2">Welcome back, {userName}!</h1>

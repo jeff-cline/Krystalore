@@ -42,7 +42,7 @@ interface Category {
 export default function VideoManagementPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState<'videos' | 'categories' | 'upload'>('categories')
+  const [activeTab, setActiveTab] = useState<'videos' | 'categories' | 'upload' | 'feedflix-sync'>('categories')
 
   // Video state
   const [videos, setVideos] = useState<VideoItem[]>([])
@@ -80,6 +80,11 @@ export default function VideoManagementPage() {
 
   // Upload state
   const [importing, setImporting] = useState(false)
+
+  // FeedFlix sync state
+  const [syncData, setSyncData] = useState<any>(null)
+  const [syncLoading, setSyncLoading] = useState(false)
+  const [syncing, setSyncing] = useState(false)
 
   useEffect(() => {
     if (status === 'unauthenticated') router.push('/auth/login')
@@ -365,6 +370,10 @@ export default function VideoManagementPage() {
           className={`px-6 py-2 rounded-lg font-medium transition-colors ${activeTab === 'upload' ? 'bg-[#34c5c5] text-white' : 'bg-dark-700 text-gray-300 hover:bg-dark-600'}`}>
           <Upload className="h-4 w-4 inline mr-2" />Upload & Import
         </button>
+        <button onClick={() => { setActiveTab('feedflix-sync'); if (!syncData) { setSyncLoading(true); fetch('/api/admin/category-mapping').then(r => r.json()).then(setSyncData).finally(() => setSyncLoading(false)) } }}
+          className={`px-6 py-2 rounded-lg font-medium transition-colors ${activeTab === 'feedflix-sync' ? 'bg-[#34c5c5] text-white' : 'bg-dark-700 text-gray-300 hover:bg-dark-600'}`}>
+          <FolderOpen className="h-4 w-4 inline mr-2" />FeedFlix Sync
+        </button>
       </div>
 
       {activeTab === 'videos' ? (
@@ -605,7 +614,7 @@ export default function VideoManagementPage() {
             </table>
           </div>
         </div>
-      ) : (
+      ) : activeTab === 'upload' ? (
         /* Upload Tab */
         <div className="space-y-6">
           <div className="card">
@@ -655,6 +664,101 @@ export default function VideoManagementPage() {
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+      ) : (
+        /* FeedFlix Sync Tab */
+        <div className="space-y-6">
+          <div className="card">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-xl font-semibold text-white">FeedFlix Category Mapping</h2>
+                <p className="text-gray-400 text-sm mt-1">Map FeedFlix categories to local categories so membership gating applies to streamed videos</p>
+              </div>
+              <button
+                onClick={async () => {
+                  setSyncing(true)
+                  try {
+                    await fetch('/api/admin/category-mapping', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'auto-sync' }) })
+                    const res = await fetch('/api/admin/category-mapping')
+                    setSyncData(await res.json())
+                  } finally { setSyncing(false) }
+                }}
+                disabled={syncing}
+                className="btn-primary flex items-center disabled:opacity-50 text-sm"
+              >
+                {syncing ? 'Syncing...' : 'Auto-Sync'}
+              </button>
+            </div>
+
+            {syncLoading ? (
+              <div className="text-center py-8 text-gray-400">Loading mappings...</div>
+            ) : syncData ? (
+              <div className="space-y-4">
+                {syncData.feedflixCategories?.length > 0 ? (
+                  <table className="w-full">
+                    <thead>
+                      <tr className="text-left text-xs font-medium text-gray-400 uppercase tracking-wider border-b border-gray-700">
+                        <th className="pb-3 pr-4">FeedFlix Category</th>
+                        <th className="pb-3 pr-4">Mapped to Local Category</th>
+                        <th className="pb-3">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {syncData.feedflixCategories.map((ff: any) => {
+                        const mapping = syncData.mappings?.find((m: any) => m.feedflixCategoryId === ff.id)
+                        return (
+                          <tr key={ff.id} className="border-b border-gray-700/50">
+                            <td className="py-3 pr-4">
+                              <span className="text-white font-medium">{ff.name}</span>
+                              <span className="text-gray-500 text-xs ml-2">({ff.id.slice(0, 8)}...)</span>
+                            </td>
+                            <td className="py-3 pr-4">
+                              <select
+                                value={mapping?.localCategoryId || ''}
+                                onChange={async (e) => {
+                                  const localCatId = e.target.value
+                                  if (localCatId) {
+                                    await fetch('/api/admin/category-mapping', {
+                                      method: 'POST',
+                                      headers: { 'Content-Type': 'application/json' },
+                                      body: JSON.stringify({ localCategoryId: localCatId, feedflixCategoryId: ff.id, feedflixCategoryName: ff.name }),
+                                    })
+                                  } else if (mapping) {
+                                    await fetch('/api/admin/category-mapping', {
+                                      method: 'DELETE',
+                                      headers: { 'Content-Type': 'application/json' },
+                                      body: JSON.stringify({ id: mapping.id }),
+                                    })
+                                  }
+                                  const res = await fetch('/api/admin/category-mapping')
+                                  setSyncData(await res.json())
+                                }}
+                                className="w-full bg-dark-700 border border-gray-600 rounded px-3 py-1.5 text-white text-sm"
+                              >
+                                <option value="">-- Not Mapped --</option>
+                                {syncData.localCategories?.map((lc: any) => (
+                                  <option key={lc.id} value={lc.id}>{lc.name} ({lc.membershipLevel})</option>
+                                ))}
+                              </select>
+                            </td>
+                            <td className="py-3">
+                              {mapping ? (
+                                <span className="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">Mapped</span>
+                              ) : (
+                                <span className="text-xs text-yellow-400 bg-yellow-400/10 px-2 py-1 rounded">Unmapped</span>
+                              )}
+                            </td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                ) : (
+                  <p className="text-gray-400 text-center py-8">No FeedFlix categories found. Make sure your FeedFlix API key is configured.</p>
+                )}
+              </div>
+            ) : null}
           </div>
         </div>
       )}
