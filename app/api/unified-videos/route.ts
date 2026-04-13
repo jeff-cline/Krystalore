@@ -19,8 +19,8 @@ export async function GET(request: Request) {
     const userId = (session?.user as any)?.id
     const userLevel = (session?.user as any)?.membershipLevel || 'FREE'
 
-    // Build local DB query
-    const where: any = { isPublished: true }
+    // Build local DB query — only published videos (not images)
+    const where: any = { isPublished: true, fileType: { not: 'IMAGE' } }
     if (category && category !== 'All') {
       where.OR = [
         { category },
