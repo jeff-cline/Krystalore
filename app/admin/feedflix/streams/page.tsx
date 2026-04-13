@@ -13,6 +13,12 @@ interface Stream {
   ended_at?: string
   scheduled_at?: string
   playback_id?: string
+  category_id?: string
+  category?: {
+    id: string
+    name: string
+    sort_order?: number
+  }
 }
 
 export default function FeedFlixStreamsPage() {
@@ -177,23 +183,31 @@ export default function FeedFlixStreamsPage() {
                 {liveStreams.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {liveStreams.map(stream => (
-                      <div key={stream.id} className="bg-white rounded-2xl border border-red-200 p-6">
-                        <div className="flex items-center justify-between mb-3">
-                          <h3 className="font-semibold text-gray-900">{stream.title || 'Untitled Stream'}</h3>
+                      <div key={stream.id} className="bg-white rounded-2xl border border-red-200 p-4 sm:p-6">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{stream.title || 'Untitled Stream'}</h3>
                           <span className="flex items-center gap-1 text-xs font-medium text-red-600 bg-red-50 px-2 py-1 rounded-full">
                             <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> LIVE
                           </span>
                         </div>
+                        {stream.category && (
+                          <a
+                            href={`/dashboard/fitness/vault?category=${encodeURIComponent(stream.category.name || '')}`}
+                            className="inline-block text-xs font-medium bg-teal/10 text-teal px-2 py-1 rounded mb-2 hover:bg-teal/20 transition-colors"
+                          >
+                            {stream.category.name || 'Uncategorized'}
+                          </a>
+                        )}
                         {stream.started_at && (
-                          <p className="text-sm text-gray-500 flex items-center gap-1">
+                          <p className="text-xs sm:text-sm text-gray-500 flex items-center gap-1 mb-4">
                             <Clock className="h-3.5 w-3.5" />
                             Started {new Date(stream.started_at).toLocaleString()}
                           </p>
                         )}
-                        <div className="flex items-center gap-4 mt-4">
+                        <div className="flex gap-2">
                           <button
                             onClick={() => fetch(`/api/feedflix/streams/${stream.id}`, { method: 'POST' }).then(fetchStreams)}
-                            className="text-sm text-red-600 hover:text-red-700 font-medium"
+                            className="flex-1 py-2 px-3 bg-red-50 text-red-600 hover:bg-red-100 rounded-xl text-sm font-medium transition-colors text-center"
                           >
                             End Stream
                           </button>
@@ -204,9 +218,9 @@ export default function FeedFlixStreamsPage() {
                                   .then(() => fetchStreams())
                               }
                             }}
-                            className="text-sm text-gray-400 hover:text-red-500 flex items-center gap-1"
+                            className="py-2 px-3 bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 rounded-xl text-sm font-medium transition-colors flex items-center gap-1"
                           >
-                            <Trash2 className="h-3.5 w-3.5" /> Delete
+                            <Trash2 className="h-4 w-4" /> Delete
                           </button>
                         </div>
                       </div>

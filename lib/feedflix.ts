@@ -65,6 +65,16 @@ export interface FeedFlixStream {
   user_id?: string
   category_id?: string
   site_id?: string
+  category?: {
+    id: string
+    name: string
+    sort_order?: number
+  }
+  user?: {
+    id: string
+    name: string
+    avatar_url?: string | null
+  }
 }
 
 export async function createStream(data: { title: string; user_id: string; category_id: string }) {

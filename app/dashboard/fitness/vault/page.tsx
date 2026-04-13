@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import DashboardLayout from '@/components/layout/dashboard-layout'
 import { ArrowLeft, Play, Clock, Filter, Search, Lock, Video, Zap } from 'lucide-react'
 import Link from 'next/link'
@@ -58,9 +58,10 @@ function MuxPlayerEmbed({ playbackId, streamType = 'on-demand' }: { playbackId: 
 export default function FitnessVaultPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [categories, setCategories] = useState<Category[]>([])
   const [videos, setVideos] = useState<VideoItem[]>([])
-  const [selectedCategory, setSelectedCategory] = useState<string>('All')
+  const [selectedCategory, setSelectedCategory] = useState<string>(searchParams.get('category') || 'All')
   const [searchQuery, setSearchQuery] = useState('')
   const [loading, setLoading] = useState(true)
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null)
