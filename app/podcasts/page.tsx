@@ -1,358 +1,261 @@
+'use client'
+
+import { useState } from 'react'
 import MainLayout from '@/components/layout/MainLayout'
-import Link from 'next/link'
 import Image from 'next/image'
-import { Headphones, Play, Calendar, Clock, Download, Rss, Star, Users } from 'lucide-react'
+import Link from 'next/link'
+import { Headphones, Play, ExternalLink, Mic, ChevronDown, ChevronUp, Radio, Users, Heart, Star } from 'lucide-react'
+
+const podcasts = [
+  {
+    name: 'The Krystal Clear Life Podcast',
+    tagline: 'Where clarity, confidence, and connection lead the way.',
+    description: 'Engaging conversations, motivational insights, and practical advice to help you break through limits and live a fulfilling life amidst the chaos. Every episode inspires you to embrace a positive mindset and connect deeply with a community that understands growth and resilience.',
+    image: '/images/podcast/krystal-clear-life.png',
+    color: 'from-[#34c5c5] to-[#006767]',
+    episodes: [
+      { title: 'EP 1: Unveiling the Journey', duration: '22 min' },
+      { title: 'EP 2: The Freedom Formula', duration: '33 min' },
+      { title: 'EP 3: From Chaos to Clarity', duration: '34 min' },
+      { title: 'EP 4: Health and Wealth', duration: '39 min' },
+      { title: 'Igniting Passion: A Journey Within', duration: '30 min' },
+    ],
+    platforms: [
+      { name: 'Spotify', url: 'https://open.spotify.com/show/6hmHDwwCz92RugLTZ50bXi', color: 'bg-[#1DB954]' },
+      { name: 'Apple Podcasts', url: 'https://podcasts.apple.com/us/podcast/the-krystal-clear-life-podcast', color: 'bg-purple-600' },
+    ],
+    featured: true,
+  },
+  {
+    name: 'Your Next Mission',
+    tagline: 'From Service to Success — interviewing female Veterans on their transition story.',
+    description: 'Powerful conversations with women who served in the military and are now building extraordinary lives in the civilian world. Each episode features a veteran sharing her story of transition, resilience, and the mission after the mission.',
+    image: '/images/podcast/your-next-mission.png',
+    color: 'from-gray-800 to-gray-900',
+    episodes: [],
+    platforms: [
+      { name: 'Megaphone', url: 'https://cms.megaphone.fm/channel/servicetosuccessyournextmissionafterthemilitary', color: 'bg-blue-600' },
+    ],
+    featured: false,
+  },
+  {
+    name: 'Monday Motivation LIVE',
+    tagline: 'Start your week off right! Join Krystalore LIVE on all socials.',
+    description: 'Every Monday, Krystalore goes live to kick-start your week with energy, accountability, and intention. Mindset activation, goal setting, and community connection — all in one powerful session. Join the THRIVE Network for access.',
+    image: '/images/podcast/monday-motivation.png',
+    color: 'from-[#E8A849] to-orange-600',
+    episodes: [],
+    platforms: [
+      { name: 'Facebook Group', url: 'https://www.facebook.com/groups/crewsbeyondlimits', color: 'bg-blue-700' },
+    ],
+    featured: false,
+  },
+]
+
+const faqs = [
+  { q: 'Where can I listen to The Krystal Clear Life Podcast?', a: 'The Krystal Clear Life Podcast is available on Spotify, Apple Podcasts, and most major podcast platforms. Click "Listen on Spotify" above to start listening.' },
+  { q: 'How often are new episodes released?', a: 'New episodes drop regularly. Follow the podcast on your preferred platform and turn on notifications to never miss an episode.' },
+  { q: 'Can I be a guest on the podcast?', a: 'Yes! If you have a story of resilience, leadership, or transformation to share, reach out to krystalore@thecrewscoach.com with your story and topic idea.' },
+  { q: 'What is Monday Motivation LIVE?', a: 'Every Monday, Krystalore goes live on Facebook and social media to help you start the week with energy and intention. Join the Crews Beyond Limits Facebook group to participate.' },
+  { q: 'What is Your Next Mission about?', a: 'Your Next Mission interviews female veterans about their transition from military service to civilian success. It celebrates the strength and stories of women who served.' },
+  { q: 'Is there a community I can join?', a: 'Yes! Join the THRIVE Network — our free community on Facebook at facebook.com/groups/crewsbeyondlimits for weekly motivation, support, and connection.' },
+]
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="border-b border-gray-200 last:border-0">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-4 text-left">
+        <span className="font-medium text-gray-900 text-sm sm:text-base pr-4">{q}</span>
+        {open ? <ChevronUp className="h-5 w-5 text-gray-400 flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-gray-400 flex-shrink-0" />}
+      </button>
+      {open && <p className="text-gray-600 text-sm pb-4 leading-relaxed">{a}</p>}
+    </div>
+  )
+}
 
 export default function PodcastsPage() {
-  const podcasts = [
-    {
-      title: 'Krystal Clear Life Podcast',
-      description: 'Weekly deep-dive conversations about leadership, personal development, and life transformation with inspiring guests and practical insights.',
-      slug: 'krystal-clear-life',
-      featured: true,
-      episodes: 156,
-      frequency: 'Weekly',
-      category: 'Leadership & Life',
-      rating: 4.9,
-      subscribers: 45000,
-      latestEpisode: {
-        title: 'Breaking Through Your Comfort Zone: Why Discomfort Is Your Friend',
-        date: '2024-02-05',
-        duration: '42 min'
-      },
-      platforms: ['Apple Podcasts', 'Spotify', 'Google Podcasts', 'Amazon Music']
-    },
-    {
-      title: 'Your Next Mission Podcast: From Service to Success',
-      description: 'Specifically designed for veterans transitioning from military service to civilian leadership roles and entrepreneurial success.',
-      slug: 'your-next-mission',
-      featured: true,
-      episodes: 89,
-      frequency: 'Bi-weekly',
-      category: 'Veterans & Transition',
-      rating: 4.8,
-      subscribers: 23000,
-      latestEpisode: {
-        title: 'Translating Military Leadership Skills in Corporate America',
-        date: '2024-02-01',
-        duration: '38 min'
-      },
-      platforms: ['Apple Podcasts', 'Spotify', 'Google Podcasts', 'Stitcher']
-    },
-    {
-      title: 'Monday Motivation LIVE',
-      description: 'Start your week with high-energy motivation, actionable tips, and the mindset shifts you need to crush your goals.',
-      slug: 'monday-motivation-live',
-      featured: false,
-      episodes: 124,
-      frequency: 'Weekly',
-      category: 'Motivation & Mindset',
-      rating: 4.7,
-      subscribers: 31000,
-      latestEpisode: {
-        title: 'The Power of Small Wins: How to Build Unstoppable Momentum',
-        date: '2024-02-05',
-        duration: '15 min'
-      },
-      platforms: ['Apple Podcasts', 'Spotify', 'YouTube', 'Instagram Live']
-    },
-    {
-      title: 'Freedom Friday',
-      description: 'End your week by breaking free from limiting beliefs, negative patterns, and anything holding you back from your potential.',
-      slug: 'freedom-friday',
-      featured: false,
-      episodes: 78,
-      frequency: 'Weekly',
-      category: 'Personal Freedom',
-      rating: 4.8,
-      subscribers: 19000,
-      latestEpisode: {
-        title: 'Releasing the Need for Perfectionism',
-        date: '2024-02-02',
-        duration: '28 min'
-      },
-      platforms: ['Apple Podcasts', 'Spotify', 'Google Podcasts']
-    },
-    {
-      title: 'Just Breathe - Meditation Series',
-      description: 'Guided meditations, breathwork sessions, and mindfulness practices to help you find calm in the chaos of leadership.',
-      slug: 'just-breathe',
-      featured: false,
-      episodes: 67,
-      frequency: 'Weekly',
-      category: 'Meditation & Wellness',
-      rating: 4.9,
-      subscribers: 28000,
-      latestEpisode: {
-        title: '10-Minute Morning Clarity Meditation',
-        date: '2024-02-04',
-        duration: '12 min'
-      },
-      platforms: ['Apple Podcasts', 'Spotify', 'Insight Timer', 'Calm']
-    }
-  ]
-
-  const totalSubscribers = podcasts.reduce((sum, podcast) => sum + podcast.subscribers, 0)
-  const totalEpisodes = podcasts.reduce((sum, podcast) => sum + podcast.episodes, 0)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "PodcastSeries",
+    "name": "The Krystal Clear Life Podcast",
+    "description": "Engaging conversations, motivational insights, and practical advice to help you break through limits.",
+    "url": "https://krystalore.com/podcasts",
+    "author": { "@type": "Person", "name": "Krystalore Crews" },
+    "webFeed": "https://open.spotify.com/show/6hmHDwwCz92RugLTZ50bXi",
+    "image": "https://krystalore.com/images/podcast/krystal-clear-life.png",
+  }
 
   return (
     <MainLayout>
-      <div className="space-y-8">
-        {/* Header */}
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">
-            Krystal's <span className="text-primary">Podcast Channels</span>
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Transform your commute, workout, or downtime into powerful learning sessions. 
-            Access five unique podcast channels covering leadership, motivation, wellness, and personal growth.
-          </p>
-        </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-        {/* Hero Image */}
-        <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl mb-8">
-          <Image src="/images/go9/speaking-headshot.jpg" alt="Krystalore Crews speaking at a leadership event" fill className="object-cover object-top" sizes="100vw" />
-        </div>
-
-        {/* Podcast Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="card text-center">
-            <Headphones className="h-12 w-12 text-primary mx-auto mb-4" />
-            <h3 className="text-3xl font-bold text-white mb-2">{totalSubscribers.toLocaleString()}</h3>
-            <p className="text-gray-400">Total Subscribers</p>
-          </div>
-          
-          <div className="card text-center">
-            <Play className="h-12 w-12 text-primary mx-auto mb-4" />
-            <h3 className="text-3xl font-bold text-white mb-2">{totalEpisodes}</h3>
-            <p className="text-gray-400">Total Episodes</p>
-          </div>
-          
-          <div className="card text-center">
-            <Star className="h-12 w-12 text-primary mx-auto mb-4" />
-            <h3 className="text-3xl font-bold text-white mb-2">4.8</h3>
-            <p className="text-gray-400">Average Rating</p>
-          </div>
-        </div>
-
-        {/* Featured Podcasts */}
-        <section>
-          <h2 className="text-2xl font-semibold text-white mb-6">Featured Shows</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {podcasts.filter(podcast => podcast.featured).map((podcast, index) => (
-              <div key={index} className="card bg-gradient-to-r from-primary/20 to-primary/5 border border-primary/30">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <span className="bg-[#34c5c5] text-white px-3 py-1 rounded-full text-sm font-semibold mb-3 inline-block">
-                      Featured
-                    </span>
-                    <h3 className="text-2xl font-semibold text-white mb-2">{podcast.title}</h3>
-                    <p className="text-gray-300 mb-4">{podcast.description}</p>
-                  </div>
-                  <Headphones className="h-8 w-8 text-primary ml-4" />
-                </div>
-
-                {/* Podcast Stats */}
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="text-center p-3 bg-secondary-700 rounded">
-                    <div className="text-lg font-bold text-white">{podcast.episodes}</div>
-                    <div className="text-xs text-gray-400">Episodes</div>
-                  </div>
-                  <div className="text-center p-3 bg-secondary-700 rounded">
-                    <div className="text-lg font-bold text-white">{podcast.subscribers.toLocaleString()}</div>
-                    <div className="text-xs text-gray-400">Subscribers</div>
-                  </div>
-                </div>
-
-                {/* Latest Episode */}
-                <div className="bg-secondary-700 rounded-lg p-4 mb-4">
-                  <h4 className="text-sm font-semibold text-gray-400 mb-2">Latest Episode:</h4>
-                  <h5 className="text-white font-semibold mb-1">{podcast.latestEpisode.title}</h5>
-                  <div className="flex items-center text-sm text-gray-400">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    {podcast.latestEpisode.date}
-                    <Clock className="h-4 w-4 ml-4 mr-2" />
-                    {podcast.latestEpisode.duration}
-                  </div>
-                </div>
-
-                <Link 
-                  href={`/podcasts/${podcast.slug}`}
-                  className="btn-primary w-full"
-                >
-                  Listen Now
-                </Link>
+      {/* Hero */}
+      <section className="relative rounded-2xl overflow-hidden mb-12">
+        <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-[#006767] p-8 sm:p-12 lg:p-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Headphones className="h-6 w-6 text-[#E8A849]" />
+                <span className="text-[#E8A849] font-semibold text-sm uppercase tracking-wider">Podcasts</span>
               </div>
-            ))}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
+                Listen to <span className="text-teal">Krystalore</span>
+              </h1>
+              <p className="text-gray-300 text-base sm:text-lg mb-8 max-w-lg">
+                Every episode inspires you to break past limitations, embrace a positive mindset, and connect deeply with a community that understands growth and resilience.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a href="https://open.spotify.com/show/6hmHDwwCz92RugLTZ50bXi" target="_blank" rel="noopener noreferrer"
+                  className="bg-[#1DB954] hover:bg-[#1ed760] text-white font-bold py-3 px-6 rounded-xl transition-colors flex items-center gap-2">
+                  <Play className="h-5 w-5" /> Listen on Spotify
+                </a>
+                <a href="https://www.facebook.com/groups/crewsbeyondlimits" target="_blank" rel="noopener noreferrer"
+                  className="bg-white/10 hover:bg-white/20 text-white font-medium py-3 px-6 rounded-xl transition-colors flex items-center gap-2 backdrop-blur-sm border border-white/20">
+                  <Users className="h-5 w-5" /> Join THRIVE Network
+                </a>
+              </div>
+            </div>
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-2xl overflow-hidden shadow-2xl shadow-teal/20 rotate-3 hover:rotate-0 transition-transform duration-500">
+                <Image src="/images/podcast/krystal-clear-life.png" alt="The Krystal Clear Life Podcast by Krystalore Crews" fill className="object-cover" sizes="320px" priority />
+              </div>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* All Podcasts */}
-        <section>
-          <h2 className="text-2xl font-semibold text-white mb-6">All Podcast Channels</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {podcasts.map((podcast, index) => (
-              <div key={index} className="card hover:bg-secondary-700 transition-colors">
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <Headphones className="h-6 w-6 text-primary" />
-                    <span className="text-xs text-primary bg-primary/20 px-2 py-1 rounded">
-                      {podcast.category}
-                    </span>
+      {/* All Shows */}
+      <section className="mb-16">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">All Shows</h2>
+        <div className="space-y-8">
+          {podcasts.map((podcast) => (
+            <div key={podcast.name} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+                {/* Artwork */}
+                <div className={`relative bg-gradient-to-br ${podcast.color} p-6 flex items-center justify-center min-h-[250px] md:min-h-0`}>
+                  <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-xl overflow-hidden shadow-xl">
+                    <Image src={podcast.image} alt={podcast.name} fill className="object-cover" sizes="250px" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{podcast.title}</h3>
-                  <p className="text-gray-400 text-sm mb-3">{podcast.description}</p>
-                  
-                  <div className="space-y-1 text-xs text-gray-500 mb-3">
-                    <div className="flex justify-between">
-                      <span>Episodes:</span>
-                      <span>{podcast.episodes}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Frequency:</span>
-                      <span>{podcast.frequency}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Rating:</span>
-                      <div className="flex items-center">
-                        <Star className="h-3 w-3 text-yellow-400 fill-current mr-1" />
-                        <span>{podcast.rating}</span>
+                </div>
+                {/* Details */}
+                <div className="md:col-span-2 p-6 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{podcast.name}</h3>
+                  <p className="text-teal font-medium text-sm mb-3">{podcast.tagline}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-5">{podcast.description}</p>
+
+                  {/* Episodes preview */}
+                  {podcast.episodes.length > 0 && (
+                    <div className="mb-5">
+                      <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Latest Episodes</h4>
+                      <div className="space-y-2">
+                        {podcast.episodes.map((ep, i) => (
+                          <div key={i} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg text-sm">
+                            <div className="flex items-center gap-3">
+                              <Play className="h-4 w-4 text-teal flex-shrink-0" />
+                              <span className="text-gray-900 font-medium">{ep.title}</span>
+                            </div>
+                            <span className="text-gray-400 text-xs whitespace-nowrap">{ep.duration}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Latest Episode Preview */}
-                  <div className="bg-secondary-700 rounded p-3 mb-3">
-                    <h5 className="text-white text-sm font-semibold mb-1">{podcast.latestEpisode.title}</h5>
-                    <div className="text-xs text-gray-400">
-                      {podcast.latestEpisode.date} • {podcast.latestEpisode.duration}
-                    </div>
+                  {/* Platform buttons */}
+                  <div className="flex flex-wrap gap-2">
+                    {podcast.platforms.map((platform) => (
+                      <a key={platform.name} href={platform.url} target="_blank" rel="noopener noreferrer"
+                        className={`${platform.color} text-white font-medium py-2 px-5 rounded-lg text-sm flex items-center gap-2 hover:opacity-90 transition-opacity`}>
+                        <ExternalLink className="h-3.5 w-3.5" /> {platform.name}
+                      </a>
+                    ))}
                   </div>
                 </div>
-                
-                <Link 
-                  href={`/podcasts/${podcast.slug}`}
-                  className="btn-secondary w-full text-sm"
-                >
-                  View Podcast
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="mb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {[
+            { icon: Mic, label: '3 Shows', desc: 'Active podcasts' },
+            { icon: Headphones, label: '5+ Episodes', desc: 'And growing' },
+            { icon: Heart, label: 'Self-Help', desc: 'Leadership & Growth' },
+            { icon: Star, label: '5-Star', desc: 'Listener reviews' },
+          ].map((stat, i) => (
+            <div key={i} className="bg-white rounded-xl border border-gray-200 p-5 text-center">
+              <stat.icon className="h-7 w-7 text-teal mx-auto mb-2" />
+              <p className="font-bold text-gray-900">{stat.label}</p>
+              <p className="text-gray-500 text-xs">{stat.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* About the Host */}
+      <section className="mb-16">
+        <div className="bg-gradient-to-r from-[#E8A849] to-orange-600 rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div className="relative h-72 md:h-auto min-h-[300px]">
+              <Image src="/images/go9/portrait.jpg" alt="Krystalore Crews — podcast host" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
+            </div>
+            <div className="p-8 sm:p-12 flex flex-col justify-center text-white">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">About Your Host</h2>
+              <p className="text-white/90 mb-4 leading-relaxed">
+                Krystalore Crews is a leadership coach, fitness expert, keynote speaker, and author. With decades of experience empowering entrepreneurs, veterans, and leaders, she brings raw authenticity and actionable wisdom to every conversation.
+              </p>
+              <p className="text-white/80 mb-6 text-sm leading-relaxed">
+                Whether she&apos;s interviewing veterans on Your Next Mission, breaking down the Freedom Formula on The Krystal Clear Life, or firing up the community on Monday Motivation — Krystalore meets you where you are and pushes you to where you&apos;re meant to be.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/about" className="bg-white text-[#E8A849] font-bold py-3 px-6 rounded-xl hover:bg-gray-100 transition-colors text-sm">
+                  Read Full Bio
+                </Link>
+                <Link href="/contact" className="border-2 border-white/50 text-white font-bold py-3 px-6 rounded-xl hover:bg-white/10 transition-colors text-sm">
+                  Book Krystalore
                 </Link>
               </div>
-            ))}
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Listening Options */}
-        <div className="card">
-          <h2 className="text-2xl font-semibold text-white mb-6">Listen Anywhere</h2>
-          <p className="text-gray-300 mb-6">
-            All podcasts are available on your favorite platforms. Choose your preferred way to listen and never miss an episode.
+      {/* Community CTA */}
+      <section className="mb-16 text-center">
+        <div className="bg-gray-50 rounded-2xl p-8 sm:p-12 border border-gray-200">
+          <Radio className="h-10 w-10 text-teal mx-auto mb-4" />
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Never Miss an Episode</h2>
+          <p className="text-gray-600 max-w-xl mx-auto mb-6">
+            Follow on Spotify, join the THRIVE Network on Facebook, and subscribe to get notified when new episodes drop.
           </p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="text-center p-4 bg-secondary-700 rounded-lg hover:bg-secondary-600 transition-colors">
-              <div className="h-8 w-8 bg-primary rounded mx-auto mb-2"></div>
-              <span className="text-white text-sm">Apple Podcasts</span>
-            </div>
-            <div className="text-center p-4 bg-secondary-700 rounded-lg hover:bg-secondary-600 transition-colors">
-              <div className="h-8 w-8 bg-green-500 rounded mx-auto mb-2"></div>
-              <span className="text-white text-sm">Spotify</span>
-            </div>
-            <div className="text-center p-4 bg-secondary-700 rounded-lg hover:bg-secondary-600 transition-colors">
-              <div className="h-8 w-8 bg-blue-500 rounded mx-auto mb-2"></div>
-              <span className="text-white text-sm">Google Podcasts</span>
-            </div>
-            <div className="text-center p-4 bg-secondary-700 rounded-lg hover:bg-secondary-600 transition-colors">
-              <div className="h-8 w-8 bg-[#34c5c5] rounded mx-auto mb-2"></div>
-              <span className="text-white text-sm">More Platforms</span>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="https://open.spotify.com/show/6hmHDwwCz92RugLTZ50bXi" target="_blank" rel="noopener noreferrer"
+              className="bg-[#1DB954] hover:bg-[#1ed760] text-white font-bold py-3 px-8 rounded-xl transition-colors flex items-center justify-center gap-2">
+              <Play className="h-5 w-5" /> Follow on Spotify
+            </a>
+            <a href="https://www.facebook.com/groups/crewsbeyondlimits" target="_blank" rel="noopener noreferrer"
+              className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-xl transition-colors flex items-center justify-center gap-2">
+              <Users className="h-5 w-5" /> Join THRIVE Network
+            </a>
+            <a href="https://uk.pinterest.com/krystalorecrews/_created/" target="_blank" rel="noopener noreferrer"
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl transition-colors flex items-center justify-center gap-2">
+              Follow on Pinterest
+            </a>
           </div>
         </div>
+      </section>
 
-        {/* Podcast Benefits */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="card">
-            <h3 className="text-xl font-semibold text-white mb-4">Why Subscribe?</h3>
-            <ul className="space-y-3 text-gray-300">
-              <li className="flex items-start">
-                <Play className="h-5 w-5 text-primary mr-3 mt-0.5" />
-                <span>Weekly fresh content across 5 different channels</span>
-              </li>
-              <li className="flex items-start">
-                <Download className="h-5 w-5 text-primary mr-3 mt-0.5" />
-                <span>Download episodes for offline listening</span>
-              </li>
-              <li className="flex items-start">
-                <Users className="h-5 w-5 text-primary mr-3 mt-0.5" />
-                <span>Access to exclusive subscriber-only content</span>
-              </li>
-              <li className="flex items-start">
-                <Rss className="h-5 w-5 text-primary mr-3 mt-0.5" />
-                <span>Automatic notifications for new episodes</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="card">
-            <h3 className="text-xl font-semibold text-white mb-4">Perfect For</h3>
-            <ul className="space-y-3 text-gray-300">
-              <li>• Commuting and daily travel</li>
-              <li>• Workout sessions and runs</li>
-              <li>• Morning routines and preparation</li>
-              <li>• Quiet time and reflection</li>
-              <li>• Learning during multitasking</li>
-              <li>• Team listening and discussion</li>
-            </ul>
-          </div>
+      {/* FAQ */}
+      <section className="mb-12 max-w-3xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">Frequently Asked Questions</h2>
+        <div className="bg-white rounded-xl border border-gray-200 px-6">
+          {faqs.map((faq, i) => <FAQItem key={i} q={faq.q} a={faq.a} />)}
         </div>
-
-        {/* Guest Appearances */}
-        <div className="card">
-          <h2 className="text-2xl font-semibold text-white mb-6">Notable Guest Episodes</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-secondary-700 rounded-lg p-6">
-              <h4 className="text-lg font-semibold text-white mb-2">
-                "From Navy SEAL to CEO: Leadership Under Pressure"
-              </h4>
-              <p className="text-gray-400 text-sm mb-3">
-                Krystal Clear Life Podcast • Episode 142
-              </p>
-              <p className="text-gray-300">
-                An incredible conversation with former Navy SEAL turned Fortune 500 CEO about leadership principles that work in both combat and boardrooms.
-              </p>
-            </div>
-
-            <div className="bg-secondary-700 rounded-lg p-6">
-              <h4 className="text-lg font-semibold text-white mb-2">
-                "Breaking the Glass Ceiling: Women in Executive Leadership"
-              </h4>
-              <p className="text-gray-400 text-sm mb-3">
-                Your Next Mission Podcast • Episode 76
-              </p>
-              <p className="text-gray-300">
-                A powerful panel discussion with three female executives who share their journey from military service to C-suite success.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Start <span className="text-primary">Listening</span> Today
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Transform your daily routine with powerful insights and motivation delivered straight to your ears.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/podcasts/krystal-clear-life" className="btn-primary">
-              Start with Main Podcast
-            </Link>
-            <button className="btn-secondary">
-              Subscribe to All Channels
-            </button>
-          </div>
-        </div>
-      </div>
+      </section>
     </MainLayout>
   )
 }
