@@ -35,10 +35,10 @@ const retreats = [
 ]
 
 const favorites = [
-  { name: 'EPN Nutrition Preworkout & Supplements', image: '/images/shop/epn-nutrition.webp', url: 'https://ep-nutrition.com?aff=2295', desc: 'Clean energy and recovery supplements — Krystalore\'s daily go-to.' },
-  { name: 'Fighter Friday Gloves', image: '/images/shop/fighter-gloves.webp', url: 'https://amzn.to/3OgYFVq', desc: 'The boxing gloves used every Fighter Friday. Built for durability.' },
-  { name: 'Savvi Workout Gear', image: '/images/shop/savvi-gear.webp', url: 'https://savvi.com/KCREWS', desc: 'Premium activewear for high-performance training.' },
-  { name: 'Teeth Whitening Kit', image: '/images/shop/teeth-whitening.webp', url: 'https://amzn.to/45jZXVR', desc: 'Confidence starts with your smile. At-home professional whitening.' },
+  { name: 'EPN Ballistic Pre-Workout', image: '/images/shop/epn-nutrition.jpg', url: 'https://ep-nutrition.com?aff=2295', desc: 'Clean energy pre-workout supplements. Use Krystalore\'s link for exclusive pricing.' },
+  { name: 'Krystalore\'s Beauty & Wellness Picks', image: '/images/shop/fighter-gloves.webp', url: 'https://amzn.to/3OgYFVq', desc: 'Curated beauty and wellness essentials hand-picked by Krystalore on Amazon.' },
+  { name: 'CBL Activewear Collection', image: '/images/shop/savvi-gear.webp', url: 'https://www.krystalorecrews.com/products-list', desc: 'The official Crews Beyond Limits workout gear — tanks, hoodies, and tees.' },
+  { name: 'Opalescence Teeth Whitening', image: '/images/shop/teeth-whitening.webp', url: 'https://amzn.to/3pJc0LU', desc: 'Professional-grade at-home whitening. The brand Krystalore trusts for her smile.' },
 ]
 
 const faqs = [
@@ -116,6 +116,7 @@ export default function ShopPage() {
         {[
           { icon: Dumbbell, label: 'Apparel', href: '#apparel' },
           { icon: Gift, label: 'Gifts & Gear', href: '#gifts' },
+          { icon: BookOpen, label: 'Books', href: '#books' },
           { icon: Sparkles, label: 'Programs', href: '#programs' },
           { icon: Mountain, label: 'Retreats', href: '#retreats' },
           { icon: Heart, label: 'Favorites', href: '#favorites' },
@@ -186,6 +187,31 @@ export default function ShopPage() {
                 </div>
               </div>
             </a>
+          ))}
+        </div>
+      </section>
+
+      {/* BOOKS & JOURNALS */}
+      <section id="books" className="mb-14 scroll-mt-20">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Books & Journals</h2>
+        <p className="text-gray-600 mb-6">Stories of strength, resilience, and transformation by Krystalore Crews.</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+          {[
+            { name: 'The Road to Resilience', price: 'Available Now', image: '/images/books/road-to-resilience-book-cover.png', url: '/books', desc: 'A powerful story of overcoming adversity and finding strength through every challenge.' },
+            { name: 'Leave No MilSpouse Behind', price: 'Available Now', image: '/images/books/leave-no-milspouse-behind-book-cover.png', url: '/books', desc: 'Empowering military spouses to build thriving lives beyond the uniform.' },
+            { name: 'Is Manifesting Bullsh*t?', price: 'Available Now', image: '/images/books/is-manifesting-bullshit-book-cover.png', url: '/books', desc: 'A no-BS look at manifestation, mindset, and making things happen.' },
+            { name: 'Krystal Clear Life Planner', price: 'Available Now', image: '/images/books/krystal-clear-life-planner.png', url: '/books', desc: 'The ultimate planning tool for designing your life with clarity and intention.' },
+          ].map(item => (
+            <Link key={item.name} href={item.url} className="group block bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-teal/30 transition-all">
+              <div className="relative aspect-[3/4] bg-gray-50">
+                <Image src={item.image} alt={item.name} fill className="object-contain p-3 group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 50vw, 25vw" />
+              </div>
+              <div className="p-3 sm:p-4">
+                <h3 className="font-semibold text-gray-900 text-sm mb-1">{item.name}</h3>
+                <p className="text-gray-500 text-xs mb-2 line-clamp-2">{item.desc}</p>
+                <span className="text-teal font-medium text-xs">Learn More</span>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
