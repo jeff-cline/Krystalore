@@ -2,223 +2,300 @@
 
 import { useState } from 'react'
 import MainLayout from '@/components/layout/MainLayout'
-import GrowScaleCTA from '@/components/GrowScaleCTA'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Lock, Play, Users, Clock, Star, BookOpen, Target, Heart, Zap } from 'lucide-react'
+import { BookOpen, Clock, Star, ChevronDown, ChevronUp, ArrowRight, Play, Users, Heart, Zap, Target, Dumbbell, Brain, Wind, Flame } from 'lucide-react'
 
 const courses = [
-  { title: 'Bombshell Bootcamp', description: 'Transform your confidence and leadership presence with this intensive confidence-building program.', slug: 'bombshell-bootcamp', icon: Zap, difficulty: 'Intermediate', duration: '6 weeks', lessons: 24, featured: true, price: 'Premium', category: 'Leadership', audiences: ['Entrepreneurs', 'Corporate Executives'] },
-  { title: 'Relationship Remodel', description: 'Rebuild and strengthen your personal and professional relationships with proven strategies.', slug: 'relationship-remodel', icon: Heart, difficulty: 'Beginner', duration: '4 weeks', lessons: 16, featured: false, price: 'Premium', category: 'Relationships', audiences: ['Couples', 'Men'] },
-  { title: 'Vision Board Workshop', description: 'Create powerful visual representations of your goals and manifest your ideal future.', slug: 'vision-board-workshop', icon: Target, difficulty: 'Beginner', duration: '2 weeks', lessons: 8, featured: false, price: 'Premium', category: 'Goal Setting', audiences: ['Entrepreneurs'] },
-  { title: 'Confidence on Camera', description: 'Master the art of presenting yourself confidently on video and in virtual meetings.', slug: 'confidence-on-camera', icon: Play, difficulty: 'Intermediate', duration: '3 weeks', lessons: 12, featured: false, price: 'Premium', category: 'Communication', audiences: ['Entrepreneurs', 'Corporate Executives'] },
-  { title: 'Monday Motivation', description: 'Weekly motivation sessions to kickstart your week with purpose and energy.', slug: 'monday-motivation', icon: Star, difficulty: 'Beginner', duration: 'Ongoing', lessons: 52, featured: false, price: 'Premium', category: 'Motivation', audiences: ['Entrepreneurs', 'Veterans', 'Men'] },
-  { title: 'Just Breathe Meditation Series', description: 'Learn mindfulness and meditation techniques to manage stress and increase focus.', slug: 'just-breathe', icon: Heart, difficulty: 'Beginner', duration: '4 weeks', lessons: 20, featured: false, price: 'Premium', category: 'Wellness', audiences: ['Veterans', 'Corporate Executives'] },
-  { title: 'Million Dollar Body Academy', description: 'Complete fitness and nutrition program designed for busy executives and leaders.', slug: 'million-dollar-body', icon: Target, difficulty: 'Advanced', duration: '12 weeks', lessons: 48, featured: true, price: 'Premium', category: 'Fitness', audiences: ['Entrepreneurs', 'Men', 'Veterans'] },
-  { title: 'Boundaries for Leaders', description: 'Learn to set healthy boundaries while maintaining strong leadership relationships.', slug: 'boundaries-for-leaders', icon: BookOpen, difficulty: 'Intermediate', duration: '5 weeks', lessons: 20, featured: false, price: 'Premium', category: 'Leadership', audiences: ['Corporate Executives', 'Corporate Teams'] },
-  { title: '6 Week Shred', description: 'Intensive fitness program designed to transform your body in just 6 weeks.', slug: '6-week-shred', icon: Zap, difficulty: 'Advanced', duration: '6 weeks', lessons: 36, featured: false, price: 'Premium', category: 'Fitness', audiences: ['Men', 'Veterans'] },
-  { title: 'Healthy Habits', description: 'Build sustainable healthy habits that stick and transform your daily routines.', slug: 'healthy-habits', icon: Heart, difficulty: 'Beginner', duration: '8 weeks', lessons: 32, featured: false, price: 'Premium', category: 'Wellness', audiences: ['Entrepreneurs', 'Couples'] },
-  { title: 'Identity Does Not Have to Be a Crisis', description: 'Navigate identity transitions and career changes with confidence and clarity.', slug: 'identity-crisis', icon: Users, difficulty: 'Intermediate', duration: '6 weeks', lessons: 18, featured: false, price: 'Premium', category: 'Personal Growth', audiences: ['Veterans', 'Men'] },
-  { title: 'Rise Beyond Grief and Loss', description: 'Healing and growth strategies for overcoming grief, loss, and life transitions.', slug: 'rise-beyond-grief', icon: Heart, difficulty: 'Advanced', duration: '8 weeks', lessons: 24, featured: false, price: 'Premium', category: 'Healing', audiences: ['Veterans', 'Couples'] },
-  { title: 'Freedom Friday', description: 'Weekly sessions focused on breaking free from limiting beliefs and patterns.', slug: 'freedom-friday', icon: Star, difficulty: 'Intermediate', duration: 'Ongoing', lessons: 52, featured: false, price: 'Premium', category: 'Personal Growth', audiences: ['Entrepreneurs', 'Men'] },
-  { title: 'Business Bootcamp', description: 'Comprehensive business building course for entrepreneurs and aspiring business owners.', slug: 'business-bootcamp', icon: Target, difficulty: 'Advanced', duration: '10 weeks', lessons: 40, featured: true, price: 'Premium', category: 'Business', audiences: ['Entrepreneurs'] },
+  {
+    title: 'Health Mastery Group Coaching',
+    description: 'A high-level group coaching experience for entrepreneurs and leaders ready to reclaim their energy, rebuild consistency, and lead from the inside out.',
+    href: '/health-mastery',
+    image: '/images/health-mastery/hero.webp',
+    category: 'Coaching',
+    duration: 'Ongoing',
+    icon: Heart,
+    featured: true,
+    price: '$497/mo',
+  },
+  {
+    title: 'Bombshell Bootcamp',
+    description: 'Transform your confidence and body with this signature bootcamp program. No equipment needed — workouts you can do anywhere.',
+    href: '/bombshell-bootcamp',
+    image: '/images/go9/fitness.jpg',
+    category: 'Fitness',
+    duration: '4 Weeks',
+    icon: Zap,
+    featured: true,
+    price: 'FREE',
+  },
+  {
+    title: '6 Week Shred Challenge',
+    description: '6 weeks of structured training to transform your body and build lasting fitness habits. Designed for those ready to commit.',
+    href: '/six-week-shred',
+    image: '/images/go9/fitness-alt.jpg',
+    category: 'Fitness',
+    duration: '6 Weeks',
+    icon: Flame,
+    featured: true,
+    price: '$96',
+  },
+  {
+    title: 'Million Dollar Body Academy',
+    description: 'Complete fitness and nutrition program designed for busy executives and leaders who want peak physical performance.',
+    href: '/courses/million-dollar-body',
+    image: '/images/go9/fitness-balcony.jpg',
+    category: 'Fitness',
+    duration: '12 Weeks',
+    icon: Target,
+    featured: false,
+    price: 'Premium',
+  },
+  {
+    title: 'Beyond Limits Bootcamp',
+    description: 'The signature Beyond Limits program — structured workouts, accountability, and coaching to push past every plateau.',
+    href: '/bootcamp',
+    image: '/images/go9/group.jpg',
+    category: 'Fitness',
+    duration: 'Ongoing',
+    icon: Dumbbell,
+    featured: false,
+    price: '$69',
+  },
+  {
+    title: 'Just Breathe Meditation Series',
+    description: '15 guided meditations for grounding, clarity, confidence, and healing. 3-minute sessions designed for busy leaders.',
+    href: '/just-breathe',
+    image: '/images/just-breathe/cover.jpg',
+    category: 'Wellness',
+    duration: '15 Episodes',
+    icon: Wind,
+    featured: false,
+    price: 'FREE',
+  },
+  {
+    title: 'Monday Motivation LIVE',
+    description: 'Weekly live sessions to kickstart your week with energy, accountability, intention, and community connection.',
+    href: '/monday-motivation',
+    image: '/images/go9/keynote.jpg',
+    category: 'Motivation',
+    duration: 'Weekly',
+    icon: Star,
+    featured: false,
+    price: 'FREE',
+  },
+  {
+    title: 'Vision Board Workshop',
+    description: 'Create powerful visual representations of your goals and manifest your ideal future with guided intention-setting.',
+    href: '/vision-board',
+    image: '/images/go9/planner.jpg',
+    category: 'Goal Setting',
+    duration: 'Workshop',
+    icon: Target,
+    featured: false,
+    price: 'Premium',
+  },
+  {
+    title: 'Somatic Healing & Embodiment',
+    description: 'Release stored trauma through somatic practices. Reconnect body and mind through breathwork, movement, and guided healing.',
+    href: '/courses/somatic-healing',
+    image: '/images/go9/meditation.webp',
+    category: 'Healing',
+    duration: '8 Weeks',
+    icon: Heart,
+    featured: false,
+    price: 'Premium',
+  },
+  {
+    title: 'Identity & Transition Coaching',
+    description: 'Navigate identity transitions and career changes with confidence. For veterans, career changers, and anyone in reinvention.',
+    href: '/courses/identity-transition',
+    image: '/images/go9/coaching.jpg',
+    category: 'Personal Growth',
+    duration: '6 Weeks',
+    icon: Brain,
+    featured: false,
+    price: 'Premium',
+  },
 ]
 
-const categories = ['All', 'Leadership', 'Fitness', 'Wellness', 'Personal Growth', 'Business', 'Communication']
-const audienceOptions = ['Entrepreneurs', 'Veterans', 'Men', 'Couples', 'Corporate Executives', 'Corporate Teams']
+const categories = ['All', 'Coaching', 'Fitness', 'Wellness', 'Healing', 'Motivation', 'Personal Growth', 'Goal Setting']
+
+const faqs = [
+  { q: 'How do I access courses?', a: 'Most courses are available through the Krystalore platform. Some are free (Bombshell Bootcamp, Just Breathe), while premium courses require a membership or one-time purchase.' },
+  { q: 'Are the fitness programs suitable for beginners?', a: 'Yes! Bombshell Bootcamp is specifically designed for all levels. The 6 Week Shred and Million Dollar Body Academy are more advanced but include modifications for every fitness level.' },
+  { q: 'What is Health Mastery Group Coaching?', a: 'Health Mastery is Krystalore\'s flagship group coaching program — weekly Zoom calls, fitness systems, accountability, bootcamp access, and a private community. It\'s the full transformation experience.' },
+  { q: 'What is somatic healing?', a: 'Somatic healing works with the body to release stored trauma and tension. Through breathwork, movement, and guided practices, you reconnect mind and body for deep transformation.' },
+  { q: 'Can I do multiple programs at once?', a: 'Absolutely. Many members pair a fitness program (like 6 Week Shred) with the Just Breathe meditation series and Monday Motivation for a complete mind-body-spirit approach.' },
+  { q: 'Is there a community?', a: 'Yes! All programs include access to the Crews Beyond Limits community. Health Mastery members get a private community with weekly engagement.' },
+]
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="border-b border-gray-200 last:border-0">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-4 text-left">
+        <span className="font-medium text-gray-900 text-sm sm:text-base pr-4">{q}</span>
+        {open ? <ChevronUp className="h-5 w-5 text-gray-400 flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-gray-400 flex-shrink-0" />}
+      </button>
+      {open && <p className="text-gray-600 text-sm pb-4 leading-relaxed">{a}</p>}
+    </div>
+  )
+}
 
 export default function CoursesPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [selectedAudience, setSelectedAudience] = useState<string | null>(null)
 
-  const filteredCourses = courses.filter(c => {
-    const catMatch = selectedCategory === 'All' || c.category === selectedCategory
-    const audMatch = !selectedAudience || c.audiences.includes(selectedAudience)
-    return catMatch && audMatch
-  })
+  const filtered = courses.filter(c => selectedCategory === 'All' || c.category === selectedCategory)
+  const featured = courses.filter(c => c.featured)
 
   return (
     <MainLayout>
-      {/* Hero Image */}
-      <div className="relative h-64 md:h-80 w-full overflow-hidden">
-        <Image src="/images/go9/planner.jpg" alt="Krystalore Crews courses and educational content" fill className="object-cover object-top" sizes="100vw" />
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Back to Dashboard */}
-        <Link href="/dashboard" className="inline-flex items-center text-[#34c5c5] hover:underline mb-6">
-          ← Back to Dashboard
-        </Link>
-
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Premium <span className="text-[#34c5c5]">Courses</span>
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Self-paced video courses designed for busy leaders who want to transform their mindset, 
-            body, and leadership skills. Access exclusive content and community support.
-          </p>
+      {/* Hero */}
+      <section className="relative rounded-2xl overflow-hidden mb-12">
+        <div className="relative h-72 sm:h-96">
+          <Image src="/images/go9/coaching.jpg" alt="Krystalore Crews courses and programs" fill className="object-cover object-top" sizes="100vw" priority />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
+            <BookOpen className="w-8 h-8 text-[#E8A849] mb-2" />
+            <h1 className="text-3xl sm:text-5xl font-bold text-white mb-2">Courses & Programs</h1>
+            <p className="text-white/80 text-sm sm:text-lg max-w-xl">
+              Fitness, coaching, meditation, and personal growth programs by Krystalore Crews. Transform your mind, body, and leadership.
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* Membership Notice */}
-        <div className="bg-[#34c5c5]/10 border border-[#34c5c5]/30 rounded-lg p-6 mb-8">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center">
-              <Lock className="h-6 w-6 text-[#34c5c5] mr-3" />
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Premium Membership Required</h3>
-                <p className="text-gray-600">Get unlimited access to all courses and exclusive content</p>
+      {/* Featured */}
+      <section className="mb-12">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Featured Programs</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {featured.map(course => (
+            <Link key={course.title} href={course.href} className="group block bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-teal/30 transition-all">
+              <div className="relative h-48 sm:h-56">
+                <Image src={course.image} alt={course.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 100vw, 33vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                {course.price === 'FREE' && <span className="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">FREE</span>}
+                {course.price !== 'FREE' && course.price !== 'Premium' && <span className="absolute top-3 left-3 bg-teal text-white text-xs font-bold px-3 py-1 rounded-full">{course.price}</span>}
+                <span className="absolute top-3 right-3 bg-[#E8A849] text-white text-xs font-bold px-2 py-1 rounded-full">Featured</span>
+                <div className="absolute bottom-3 left-3 right-3">
+                  <h3 className="text-white font-bold text-lg">{course.title}</h3>
+                </div>
+              </div>
+              <div className="p-4 sm:p-5">
+                <p className="text-gray-600 text-sm mb-3 line-clamp-2">{course.description}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-500 flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {course.duration}</span>
+                  <span className="text-teal font-medium text-sm flex items-center gap-1">Learn More <ArrowRight className="h-3.5 w-3.5" /></span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Category Filter */}
+      <div className="flex gap-2 overflow-x-auto pb-4 mb-8 scrollbar-hide">
+        {categories.map(cat => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+              selectedCategory === cat ? 'bg-[#34c5c5] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* All Courses Grid */}
+      <section className="mb-16">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+          {selectedCategory === 'All' ? 'All Courses & Programs' : selectedCategory}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {filtered.map(course => {
+            const Icon = course.icon
+            return (
+              <Link key={course.title} href={course.href} className="group block bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-teal/30 transition-all">
+                <div className="relative h-40 sm:h-44">
+                  <Image src={course.image} alt={course.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  {course.price === 'FREE' && <span className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">FREE</span>}
+                  <span className="absolute bottom-2 left-2 bg-white/90 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">{course.category}</span>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-gray-900 text-sm mb-1 group-hover:text-teal transition-colors">{course.title}</h3>
+                  <p className="text-gray-500 text-xs mb-3 line-clamp-2">{course.description}</p>
+                  <div className="flex items-center justify-between text-xs text-gray-400">
+                    <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {course.duration}</span>
+                    <span className="text-teal font-medium">View</span>
+                  </div>
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* Quizzes CTA */}
+      <section className="mb-16">
+        <div className="bg-gradient-to-r from-[#006767] to-teal rounded-2xl p-6 sm:p-10 text-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3">Not Sure Where to Start?</h2>
+              <p className="text-white/80 mb-6">Take one of our free assessments to discover which program is right for you.</p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/quizzes" className="bg-white text-[#006767] font-bold py-3 px-6 rounded-xl hover:bg-gray-100 transition-colors text-sm">
+                  Browse All Quizzes
+                </Link>
+                <Link href="/quizzes/self-awareness" className="bg-white/10 hover:bg-white/20 text-white font-medium py-3 px-6 rounded-xl transition-colors text-sm border border-white/20">
+                  Self-Awareness Quiz
+                </Link>
               </div>
             </div>
-            <Link href="/auth/signup" className="bg-[#34c5c5] text-white px-6 py-2 rounded-lg hover:bg-[#84d7d7] transition-colors font-medium">
-              Join Now
-            </Link>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { name: 'Entrepreneur Readiness', href: '/quizzes/entrepreneur-readiness' },
+                { name: 'Emotional Intelligence', href: '/quizzes/emotional-intelligence' },
+                { name: 'Life Alignment', href: '/quizzes/life-alignment' },
+                { name: 'Relationship Check', href: '/quizzes/improve-marriage' },
+              ].map(quiz => (
+                <Link key={quiz.name} href={quiz.href} className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-lg p-3 text-sm text-white/90 text-center transition-colors">
+                  {quiz.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Featured Courses */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Featured Courses</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {courses.filter(c => c.featured).map((course, i) => {
-              const Icon = course.icon
-              return (
-                <div key={i} className="bg-gradient-to-br from-[#34c5c5]/10 to-[#34c5c5]/5 border border-[#34c5c5]/30 rounded-lg p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <Icon className="h-8 w-8 text-[#34c5c5]" />
-                    <span className="bg-[#34c5c5] text-white px-2 py-1 rounded text-xs font-semibold">Featured</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{course.title}</h3>
-                  <p className="text-gray-600 mb-4">{course.description}</p>
-                  <div className="space-y-1 text-sm text-gray-500 mb-4">
-                    <div className="flex items-center"><Clock className="h-4 w-4 mr-2" />{course.duration} • {course.lessons} lessons</div>
-                    <div className="flex items-center"><BookOpen className="h-4 w-4 mr-2" />{course.difficulty} level</div>
-                  </div>
-                  <Link href={`/courses/${course.slug}`} className="block w-full text-center bg-[#34c5c5] text-white py-2 rounded-lg hover:bg-[#84d7d7] transition-colors font-medium">
-                    View Course
-                  </Link>
-                </div>
-              )
-            })}
-          </div>
-        </section>
-
-        {/* All Courses */}
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">All Courses</h2>
-          
-          {/* Category Filter */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {categories.map((cat) => (
-              <button key={cat} onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  selectedCategory === cat ? 'bg-[#34c5c5] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >{cat}</button>
-            ))}
-          </div>
-
-          {/* Audience Filter */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {audienceOptions.map((aud) => (
-              <button key={aud} onClick={() => setSelectedAudience(selectedAudience === aud ? null : aud)}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  selectedAudience === aud ? 'bg-[#34c5c5] text-white' : 'bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100'
-                }`}
-              >{aud}</button>
-            ))}
-          </div>
-
-          {/* Course Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCourses.map((course, i) => {
-              const Icon = course.icon
-              return (
-                <div key={i} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                  <div className="flex items-center justify-between mb-3">
-                    <Icon className="h-6 w-6 text-[#34c5c5]" />
-                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">{course.category}</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{course.title}</h3>
-                  <p className="text-gray-600 text-sm mb-3">{course.description}</p>
-                  <div className="space-y-1 text-xs text-gray-500 mb-4">
-                    <div className="flex justify-between"><span>Duration:</span><span>{course.duration}</span></div>
-                    <div className="flex justify-between"><span>Lessons:</span><span>{course.lessons}</span></div>
-                    <div className="flex justify-between"><span>Level:</span><span>{course.difficulty}</span></div>
-                  </div>
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {course.audiences.map(a => (
-                      <span key={a} className="text-[10px] px-1.5 py-0.5 bg-[#34c5c5]/10 text-[#34c5c5] rounded">{a}</span>
-                    ))}
-                  </div>
-                  <Link href={`/courses/${course.slug}`} className="block w-full text-center border border-[#34c5c5] text-[#34c5c5] py-2 rounded-lg hover:bg-[#34c5c5] hover:text-white transition-colors text-sm font-medium">
-                    Preview Course
-                  </Link>
-                </div>
-              )
-            })}
-          </div>
-
-          {filteredCourses.length === 0 && (
-            <div className="text-center py-12 text-gray-500">No courses match your current filters.</div>
-          )}
-        </section>
-
-        {/* Learning Path */}
-        <div className="mt-16 bg-gray-50 rounded-lg p-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Recommended Learning Path</h2>
-          <div className="space-y-4">
-            {[
-              { n: '1', t: 'Start with Self-Assessment', d: 'Take our quizzes to understand your current state', link: '/quizzes' },
-              { n: '2', t: 'Foundation Courses', d: 'Build core skills with Vision Board Workshop and Healthy Habits' },
-              { n: '3', t: 'Leadership Development', d: 'Advance with Bombshell Bootcamp and Boundaries for Leaders' },
-              { n: '4', t: 'Specialization', d: 'Choose courses that align with your specific goals and challenges' },
-            ].map(step => (
-              <div key={step.n} className="flex items-center">
-                <div className="bg-[#34c5c5] rounded-full w-8 h-8 flex items-center justify-center mr-4">
-                  <span className="text-white text-sm font-bold">{step.n}</span>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-gray-900 font-semibold">{step.t}</h3>
-                  <p className="text-gray-600">{step.d}</p>
-                </div>
-                {step.link && <Link href={step.link} className="text-[#34c5c5] hover:underline">Take Quizzes →</Link>}
-              </div>
-            ))}
+      {/* Health Mastery CTA */}
+      <section className="mb-16">
+        <div className="bg-gradient-to-r from-[#E8A849] to-orange-600 rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div className="relative h-64 md:h-auto min-h-[280px]">
+              <Image src="/images/go9/portrait.jpg" alt="Krystalore Crews" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
+            </div>
+            <div className="p-8 sm:p-12 flex flex-col justify-center text-white">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3">Want the Full Experience?</h2>
+              <p className="text-white/90 mb-6">Health Mastery Group Coaching combines weekly calls, fitness, meditation, accountability, and community into one transformational program.</p>
+              <Link href="/health-mastery" className="bg-white text-[#E8A849] font-bold py-3 px-8 rounded-xl hover:bg-gray-100 transition-colors text-center sm:w-fit">
+                Learn About Health Mastery
+              </Link>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Benefits */}
-        <div className="mt-8 bg-[#34c5c5]/5 border border-[#34c5c5]/20 rounded-lg p-8">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">What&apos;s Included with Membership</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ul className="space-y-2 text-gray-600">
-              <li className="flex items-center"><Play className="h-4 w-4 text-[#34c5c5] mr-3" />Unlimited access to all video content</li>
-              <li className="flex items-center"><BookOpen className="h-4 w-4 text-[#34c5c5] mr-3" />Downloadable resources and workbooks</li>
-              <li className="flex items-center"><Users className="h-4 w-4 text-[#34c5c5] mr-3" />Access to private community forums</li>
-            </ul>
-            <ul className="space-y-2 text-gray-600">
-              <li className="flex items-center"><Star className="h-4 w-4 text-[#34c5c5] mr-3" />Monthly live Q&A sessions with Krystal</li>
-              <li className="flex items-center"><Target className="h-4 w-4 text-[#34c5c5] mr-3" />Progress tracking and completion certificates</li>
-              <li className="flex items-center"><Clock className="h-4 w-4 text-[#34c5c5] mr-3" />Learn at your own pace, lifetime access</li>
-            </ul>
-          </div>
+      {/* FAQ */}
+      <section className="mb-12 max-w-3xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">Frequently Asked Questions</h2>
+        <div className="bg-white rounded-xl border border-gray-200 px-6">
+          {faqs.map((faq, i) => <FAQItem key={i} q={faq.q} a={faq.a} />)}
         </div>
-
-        {/* CTA */}
-        <div className="mt-16 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Ready to <span className="text-[#34c5c5]">Transform</span> Your Leadership?
-          </h2>
-          <p className="text-xl text-gray-600 mb-8">Join thousands of leaders who have accelerated their growth with our proven courses.</p>
-          <Link href="/auth/signup" className="bg-[#34c5c5] text-white text-lg px-8 py-4 rounded-lg hover:bg-[#84d7d7] transition-colors font-medium">
-            Start Your Membership Today
-          </Link>
-        </div>
-      </div>
-
-      <GrowScaleCTA />
+      </section>
     </MainLayout>
   )
 }
