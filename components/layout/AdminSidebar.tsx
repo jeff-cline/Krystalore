@@ -153,7 +153,7 @@ export default function AdminSidebar() {
       {/* Mobile toggle button */}
       <button
         onClick={() => setOpen(true)}
-        className="lg:hidden fixed top-20 left-4 z-40 bg-white border border-gray-200 shadow-md rounded-lg p-2 text-gray-600"
+        className="lg:hidden fixed top-[62px] left-4 z-40 bg-white border border-gray-200 shadow-md rounded-lg p-2 text-gray-600"
         aria-label="Open admin menu"
       >
         <Menu className="h-5 w-5" />
@@ -167,7 +167,7 @@ export default function AdminSidebar() {
       {/* Sidebar — mobile: slide-over, desktop: fixed */}
       <div
         className={`
-          fixed top-16 h-[calc(100vh-64px)] w-64 bg-white border-r border-gray-200 overflow-y-auto z-50
+          fixed top-14 h-[calc(100vh-56px)] w-64 bg-white border-r border-gray-200 overflow-y-auto z-50
           transition-transform duration-200 ease-in-out
           lg:translate-x-0 lg:z-auto
           ${open ? 'translate-x-0' : '-translate-x-full'}
