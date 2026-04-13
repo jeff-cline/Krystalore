@@ -4,58 +4,26 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import MainLayout from '@/components/layout/MainLayout'
-import { Play, Square, Copy, Check, Radio, Users, Clock, Bell, MessageCircle, Eye, EyeOff, Upload, Monitor, Video } from 'lucide-react'
+import { Play, Square, Copy, Check, Radio, Clock, Eye, EyeOff, Monitor, Video } from 'lucide-react'
+
+export const metadata = {
+  title: 'Go Live — Krystalore',
+  description: 'Broadcast live to your community. Stream directly from your browser or connect OBS.',
+}
 
 interface StreamInfo {
   active: boolean
-  stream?: {
-    streamId: string
-    playbackId: string
-    status: string
-    title: string
-    startedAt: string | null
-  }
+  stream?: { streamId: string; playbackId: string; status: string; title: string; startedAt: string | null }
 }
-
-interface AdminStreamInfo {
-  streamId: string
-  streamKey: string
-  playbackId: string
-  rtmpUrl: string
-}
-
-interface FeedFlixStream {
-  id: string
-  stream_key: string
-  playback_id: string
-  rtmp_url: string
-}
-
-interface CategoryOption {
-  id: string
-  name: string
-  slug: string
-}
+interface AdminStreamInfo { streamId: string; streamKey: string; playbackId: string; rtmpUrl: string }
+interface FeedFlixStream { id: string; stream_key: string }
+interface CategoryOption { id: string; name: string; slug: string }
 
 function MuxPlayerEmbed({ playbackId }: { playbackId: string }) {
   const [MuxPlayer, setMuxPlayer] = useState<any>(null)
-  const [loadError, setLoadError] = useState(false)
-  useEffect(() => {
-    import('@mux/mux-player-react').then((mod) => setMuxPlayer(() => mod.default)).catch(() => setLoadError(true))
-  }, [])
-  if (loadError) return (
-    <div className="relative w-full bg-black" style={{ paddingTop: '56.25%' }}>
-      <video className="absolute inset-0 w-full h-full" src={`https://stream.mux.com/${playbackId}.m3u8`} autoPlay muted controls />
-    </div>
-  )
-  if (!MuxPlayer) return (
-    <div className="relative w-full bg-gray-900" style={{ paddingTop: '56.25%' }}>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-teal/30 border-t-teal rounded-full animate-spin" />
-      </div>
-    </div>
-  )
-  return <MuxPlayer playbackId={playbackId} streamType="live" autoPlay="muted" style={{ width: '100%', aspectRatio: '16/9' }} />
+  useEffect(() => { import('@mux/mux-player-react').then(m => setMuxPlayer(() => m.default)).catch(() => {}) }, [])
+  if (!MuxPlayer) return <div className="w-full bg-gray-900 rounded-xl" style={{ aspectRatio: '16/9' }} />
+  return <MuxPlayer playbackId={playbackId} streamType="live" autoPlay="muted" style={{ width: '100%', aspectRatio: '16/9', borderRadius: '12px' }} />
 }
 
 export default function GoLivePage() {
@@ -64,574 +32,321 @@ export default function GoLivePage() {
   const role = (session?.user as any)?.role || 'MEMBER'
   const isAdmin = ['GOD', 'ADMIN'].includes(role)
 
+  // Stream state
   const [streamInfo, setStreamInfo] = useState<StreamInfo | null>(null)
   const [adminStream, setAdminStream] = useState<AdminStreamInfo | null>(null)
+  const [feedflixStream, setFeedflixStream] = useState<FeedFlixStream | null>(null)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [copied, setCopied] = useState<string | null>(null)
   const [showKey, setShowKey] = useState(false)
-  const [title, setTitle] = useState('Live with Krystal')
-  const [error, setError] = useState<string | null>(null)
-  const [streamMode, setStreamMode] = useState<'obs' | 'browser'>('obs')
 
-  // Browser streaming state
+  // Pre-stream setup (set BEFORE going live)
+  const [title, setTitle] = useState('')
+  const [categoryId, setCategoryId] = useState('')
+  const [membershipLevel, setMembershipLevel] = useState('FREE')
+  const [streamMode, setStreamMode] = useState<'obs' | 'browser'>('browser')
+  const [categories, setCategories] = useState<CategoryOption[]>([])
+
+  // Browser streaming
   const [browserStreaming, setBrowserStreaming] = useState(false)
-  const [feedflixStream, setFeedflixStream] = useState<FeedFlixStream | null>(null)
-  const [streamDebug, setStreamDebug] = useState<string[]>([])
   const videoRef = useRef<HTMLVideoElement>(null)
   const wsRef = useRef<WebSocket | null>(null)
   const recorderRef = useRef<MediaRecorder | null>(null)
   const mediaStreamRef = useRef<MediaStream | null>(null)
 
-  // Post-stream upload form state
-  const [showUploadForm, setShowUploadForm] = useState(false)
-  const [categories, setCategories] = useState<CategoryOption[]>([])
-  const [uploadData, setUploadData] = useState({
-    title: '', description: '', keywords: '', categoryId: '', membershipLevel: 'FREE'
-  })
-  const [uploading, setUploading] = useState(false)
-  const [showDiscardConfirm, setShowDiscardConfirm] = useState(false)
-
-  useEffect(() => {
-    if (status === 'unauthenticated') router.push('/auth/login')
-  }, [status, router])
+  useEffect(() => { if (status === 'unauthenticated') router.push('/auth/login') }, [status, router])
 
   useEffect(() => {
     fetch('/api/categories').then(r => r.json()).then(data => {
-      if (Array.isArray(data)) setCategories(data)
+      const cats = (Array.isArray(data) ? data : []).filter((c: any) => c.videoCount > 0 || c.name === 'Uncategorized')
+      setCategories(cats)
     }).catch(() => {})
   }, [])
 
   const fetchStreamStatus = useCallback(async () => {
-    try {
-      const res = await fetch('/api/mux/live')
-      const data = await res.json()
-      setStreamInfo(data)
-    } catch {}
+    try { const r = await fetch('/api/mux/live'); setStreamInfo(await r.json()) } catch {}
   }, [])
 
   useEffect(() => {
     fetchStreamStatus()
-    const interval = setInterval(fetchStreamStatus, 5000)
-    return () => clearInterval(interval)
+    const i = setInterval(fetchStreamStatus, 5000)
+    return () => clearInterval(i)
   }, [fetchStreamStatus])
 
-  // Attach media stream to video element when browser streaming starts
   useEffect(() => {
     if (browserStreaming && videoRef.current && mediaStreamRef.current) {
       videoRef.current.srcObject = mediaStreamRef.current
     }
   }, [browserStreaming])
 
-  // Cleanup browser stream on unmount
-  useEffect(() => {
-    return () => {
-      stopBrowserStream()
-    }
-  }, [])
+  useEffect(() => { return () => { stopBrowserStream() } }, [])
+
+  // --- Stream actions ---
 
   const startStream = async () => {
-    setLoading(true)
-    setError(null)
+    if (!title.trim()) { setError('Please enter a stream title'); return }
+    setLoading(true); setError(null)
     try {
-      const res = await fetch('/api/mux/live', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title }),
-      })
+      const res = await fetch('/api/mux/live', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title }) })
       const data = await res.json()
       if (data.error) throw new Error(data.error)
       setAdminStream(data.stream)
       await fetchStreamStatus()
-    } catch (err: any) {
-      setError(err.message || 'Failed to start stream')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const addDebug = (msg: string) => {
-    setStreamDebug(prev => [...prev.slice(-19), `${new Date().toLocaleTimeString()}: ${msg}`])
+    } catch (err: any) { setError(err.message) } finally { setLoading(false) }
   }
 
   const startBrowserStream = async () => {
-    setLoading(true)
-    setError(null)
-    setStreamDebug([])
+    if (!title.trim()) { setError('Please enter a stream title'); return }
+    setLoading(true); setError(null)
     try {
-      addDebug('Requesting camera/mic...')
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { width: 1280, height: 720, frameRate: 30 },
-        audio: true,
-      })
+      const mediaStream = await navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720, frameRate: 30 }, audio: true })
       mediaStreamRef.current = mediaStream
-      addDebug(`Got media: ${mediaStream.getTracks().map(t => t.kind + ':' + t.readyState).join(', ')}`)
 
-      addDebug('Creating FeedFlix stream...')
-      const res = await fetch('/api/feedflix/streams', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title }),
-      })
+      const res = await fetch('/api/feedflix/streams', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title }) })
       const data = await res.json()
-      if (data.error) {
-        mediaStream.getTracks().forEach(t => t.stop())
-        mediaStreamRef.current = null
-        throw new Error(data.error)
-      }
-      const stream: FeedFlixStream = data.stream
-      addDebug(`Stream created: id=${stream.id}, key=${stream.stream_key ? 'yes' : 'NO'}`)
-      if (!stream.stream_key) {
-        mediaStream.getTracks().forEach(t => t.stop())
-        mediaStreamRef.current = null
-        throw new Error('No stream key returned. Please try again.')
-      }
-      setFeedflixStream(stream)
+      if (data.error) { mediaStream.getTracks().forEach(t => t.stop()); mediaStreamRef.current = null; throw new Error(data.error) }
+      if (!data.stream?.stream_key) { mediaStream.getTracks().forEach(t => t.stop()); mediaStreamRef.current = null; throw new Error('No stream key returned. Please try again.') }
+      setFeedflixStream(data.stream)
 
-      const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')
-        ? 'video/webm;codecs=vp8,opus'
-        : MediaRecorder.isTypeSupported('video/mp4')
-          ? 'video/mp4'
-          : 'video/webm'
-      addDebug(`MIME: ${mimeType}`)
-
-      const relayUrl = `wss://relay.feedflix.com?key=${encodeURIComponent(stream.stream_key)}&mime=${encodeURIComponent(mimeType)}`
-      addDebug(`Connecting to relay...`)
-
-      let chunkCount = 0
+      const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus') ? 'video/webm;codecs=vp8,opus' : MediaRecorder.isTypeSupported('video/mp4') ? 'video/mp4' : 'video/webm'
+      const relayUrl = `wss://relay.feedflix.com?key=${encodeURIComponent(data.stream.stream_key)}&mime=${encodeURIComponent(mimeType)}`
 
       await new Promise<void>((resolve, reject) => {
         const ws = new WebSocket(relayUrl)
         wsRef.current = ws
-
         ws.onopen = () => {
-          addDebug('WebSocket OPEN')
           const recorder = new MediaRecorder(mediaStream, { mimeType })
           recorderRef.current = recorder
-
-          recorder.ondataavailable = (e) => {
-            if (e.data.size > 0 && ws.readyState === WebSocket.OPEN) {
-              ws.send(e.data)
-              chunkCount++
-              if (chunkCount <= 5 || chunkCount % 10 === 0) {
-                addDebug(`Sent chunk #${chunkCount}: ${e.data.size} bytes`)
-              }
-            }
-          }
-
-          recorder.onerror = (e) => {
-            addDebug(`Recorder error: ${(e as any).error?.message || 'unknown'}`)
-          }
-
+          recorder.ondataavailable = (e) => { if (e.data.size > 0 && ws.readyState === WebSocket.OPEN) ws.send(e.data) }
           recorder.start(1000)
-          addDebug(`MediaRecorder started (state: ${recorder.state})`)
           setBrowserStreaming(true)
           resolve()
         }
-
-        ws.onerror = (e) => {
-          addDebug(`WebSocket ERROR`)
-          reject(new Error('Connection to streaming relay failed'))
-        }
-
-        ws.onclose = (e) => {
-          addDebug(`WebSocket CLOSED code=${e.code} reason=${e.reason}`)
-          if (recorderRef.current) {
-            stopBrowserStream()
-          }
-        }
+        ws.onerror = () => reject(new Error('Connection to streaming relay failed'))
+        ws.onclose = () => { if (recorderRef.current) stopBrowserStream() }
       })
-
       await fetchStreamStatus()
-    } catch (err: any) {
-      addDebug(`ERROR: ${err.message}`)
-      setError(err.message || 'Failed to start browser stream')
-      stopBrowserStream()
-      setFeedflixStream(null)
-    } finally {
-      setLoading(false)
-    }
+    } catch (err: any) { setError(err.message); stopBrowserStream(); setFeedflixStream(null) } finally { setLoading(false) }
   }
 
   const stopBrowserStream = () => {
-    recorderRef.current?.stop()
-    recorderRef.current = null
-
-    wsRef.current?.close()
-    wsRef.current = null
-
-    mediaStreamRef.current?.getTracks().forEach(t => t.stop())
-    mediaStreamRef.current = null
-
-    if (videoRef.current) {
-      videoRef.current.srcObject = null
-    }
-
+    recorderRef.current?.stop(); recorderRef.current = null
+    wsRef.current?.close(); wsRef.current = null
+    mediaStreamRef.current?.getTracks().forEach(t => t.stop()); mediaStreamRef.current = null
+    if (videoRef.current) videoRef.current.srcObject = null
     setBrowserStreaming(false)
   }
 
-  const stopStream = async () => {
-    setLoading(true)
-    setError(null)
+  const endStream = async () => {
+    setLoading(true); setError(null)
     try {
-      // End FeedFlix stream if active
-      if (feedflixStream) {
-        await fetch(`/api/feedflix/streams/${feedflixStream.id}`, { method: 'POST' }).catch(() => {})
-        setFeedflixStream(null)
-      }
-
-      // Stop browser stream if active
-      if (browserStreaming) {
-        stopBrowserStream()
-      }
-
-      // End Mux stream if we have one
+      if (feedflixStream) { await fetch(`/api/feedflix/streams/${feedflixStream.id}`, { method: 'POST' }).catch(() => {}); setFeedflixStream(null) }
+      if (browserStreaming) stopBrowserStream()
       const streamId = streamInfo?.stream?.streamId || adminStream?.streamId
-      if (streamId) {
-        await fetch(`/api/mux/live/${streamId}`, { method: 'DELETE' }).catch(() => {})
+      if (streamId) await fetch(`/api/mux/live/${streamId}`, { method: 'DELETE' }).catch(() => {})
+
+      // Auto-save recording to vault with pre-set category and title
+      if (title.trim()) {
+        await fetch('/api/videos/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: title.trim(), categoryId: categoryId || undefined, membershipLevel, keywords: '' }),
+        }).catch(() => {})
       }
 
       setAdminStream(null)
-      setShowUploadForm(true)
-      setUploadData(prev => ({ ...prev, title: streamInfo?.stream?.title || title }))
       await fetchStreamStatus()
-    } catch (err: any) {
-      setError(err.message || 'Failed to stop stream')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleUploadSubmit = async () => {
-    setUploading(true)
-    try {
-      const res = await fetch('/api/videos/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(uploadData),
-      })
-      const data = await res.json()
-      if (data.error) throw new Error(data.error)
-      setShowUploadForm(false)
-      setUploadData({ title: '', description: '', keywords: '', categoryId: '', membershipLevel: 'FREE' })
-    } catch (err: any) {
-      setError(err.message || 'Failed to save video')
-    } finally {
-      setUploading(false)
-    }
+      // Show success briefly then reset
+      setError(null)
+      setTitle(''); setCategoryId(''); setMembershipLevel('FREE')
+    } catch (err: any) { setError(err.message) } finally { setLoading(false) }
   }
 
   const copyToClipboard = (text: string, label: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(label)
-    setTimeout(() => setCopied(null), 2000)
+    navigator.clipboard.writeText(text); setCopied(label); setTimeout(() => setCopied(null), 2000)
   }
 
   const isLive = streamInfo?.active || (adminStream?.streamId && streamInfo?.stream?.status === 'active') || browserStreaming
+  const isStreaming = !!adminStream || !!feedflixStream || browserStreaming
 
   if (status === 'loading') return <MainLayout><div className="p-12 text-center">Loading...</div></MainLayout>
   if (!session) return null
 
+  // Members see the viewer page
+  if (!isAdmin) {
+    return (
+      <MainLayout>
+        <div className="space-y-8 text-center">
+          <h1 className="text-3xl font-bold text-gray-900">Live with <span className="text-teal">Krystal</span></h1>
+          {isLive && streamInfo?.stream?.playbackId ? (
+            <div className="space-y-4">
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
+                <span className="text-red-600 font-semibold">LIVE NOW — {streamInfo.stream.title}</span>
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-lg max-w-4xl mx-auto">
+                <MuxPlayerEmbed playbackId={streamInfo.stream.playbackId} />
+              </div>
+            </div>
+          ) : (
+            <div className="bg-white rounded-2xl border border-gray-200 p-12 max-w-lg mx-auto">
+              <Radio className="h-12 w-12 text-teal mx-auto mb-4" />
+              <h2 className="text-xl font-bold text-gray-900 mb-2">No live stream right now</h2>
+              <p className="text-gray-500">Check back soon or visit the <a href="/vault" className="text-teal hover:underline">Video Vault</a>.</p>
+            </div>
+          )}
+        </div>
+      </MainLayout>
+    )
+  }
+
+  // Admin view
   return (
     <MainLayout>
-      <div className="space-y-8">
-        {/* Header */}
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">
-            Go Live with <span className="text-teal">Krystal</span>
-          </h1>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            {isAdmin
-              ? 'Manage your live stream. Start broadcasting to your community.'
-              : 'Watch live sessions, interact in real-time, and grow together.'}
-          </p>
+      <div className="max-w-3xl mx-auto space-y-6">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Go Live</h1>
+          <p className="text-gray-500 mt-1">Set up your stream details, then go live. The recording will auto-save to the vault when you end.</p>
         </div>
 
-        {error && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">{error}</div>
-        )}
+        {error && <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">{error}</div>}
 
-        {/* Post-stream upload form */}
-        {showUploadForm && isAdmin && (
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
-              <Upload className="h-5 w-5 text-teal" /> Prepare Stream Recording
+        {!isStreaming ? (
+          /* --- PRE-STREAM SETUP --- */
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-5">
+            <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+              <Radio className="h-5 w-5 text-teal" /> Stream Setup
             </h2>
-            <div className="space-y-4">
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Stream Title <span className="text-red-400">*</span></label>
+              <input
+                type="text" value={title} onChange={e => setTitle(e.target.value)}
+                placeholder="e.g. Monday Motivator — Full Body Burn"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none text-gray-900"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                <input type="text" value={uploadData.title} onChange={e => setUploadData(p => ({ ...p, title: e.target.value }))}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none text-gray-900" />
+                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <select
+                  value={categoryId} onChange={e => setCategoryId(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none text-gray-900"
+                >
+                  <option value="">Select category...</option>
+                  {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                <textarea value={uploadData.description} onChange={e => setUploadData(p => ({ ...p, description: e.target.value }))}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none text-gray-900" rows={3} />
+                <label className="block text-sm font-medium text-gray-700 mb-1">Membership Level</label>
+                <select
+                  value={membershipLevel} onChange={e => setMembershipLevel(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none text-gray-900"
+                >
+                  <option value="FREE">FREE — Everyone</option>
+                  <option value="BASIC">BASIC</option>
+                  <option value="PREMIUM">PREMIUM</option>
+                  <option value="VIP">VIP</option>
+                </select>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Keywords (comma separated)</label>
-                <input type="text" value={uploadData.keywords} onChange={e => setUploadData(p => ({ ...p, keywords: e.target.value }))}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none text-gray-900" />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                  <select value={uploadData.categoryId} onChange={e => setUploadData(p => ({ ...p, categoryId: e.target.value }))}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none text-gray-900">
-                    <option value="">Select category...</option>
-                    {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Membership Level</label>
-                  <select value={uploadData.membershipLevel} onChange={e => setUploadData(p => ({ ...p, membershipLevel: e.target.value }))}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none text-gray-900">
-                    <option value="FREE">FREE</option>
-                    <option value="BASIC">BASIC</option>
-                    <option value="PREMIUM">PREMIUM</option>
-                    <option value="VIP">VIP</option>
-                  </select>
-                </div>
-              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Stream Method</label>
               <div className="flex gap-3">
-                <button onClick={handleUploadSubmit} disabled={uploading || !uploadData.title}
-                  className="bg-[#34c5c5] hover:bg-[#37a6a6] disabled:opacity-50 text-white font-bold py-3 px-8 rounded-xl transition-colors">
-                  {uploading ? 'Saving...' : 'Save & Publish'}
+                <button onClick={() => setStreamMode('browser')}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 transition-all text-sm font-medium ${streamMode === 'browser' ? 'border-teal bg-teal/5 text-teal' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
+                  <Monitor className="h-5 w-5" /> Browser
                 </button>
-                <button onClick={() => setShowDiscardConfirm(true)} className="text-red-500 hover:text-red-700 font-medium py-3 px-6 transition-colors">
-                  Do Not Save
+                <button onClick={() => setStreamMode('obs')}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 transition-all text-sm font-medium ${streamMode === 'obs' ? 'border-teal bg-teal/5 text-teal' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
+                  <Video className="h-5 w-5" /> OBS / Software
                 </button>
               </div>
-
-              {/* Discard confirmation */}
-              {showDiscardConfirm && (
-                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-                  <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8">
-                    <h3 className="text-lg font-bold text-gray-900 mb-3">Discard Recording?</h3>
-                    <p className="text-gray-600 mb-6">
-                      Are you sure you do not want to save this stream to the vault? This cannot be undone.
-                    </p>
-                    <div className="flex gap-3 justify-end">
-                      <button
-                        onClick={() => setShowDiscardConfirm(false)}
-                        className="px-6 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
-                      >
-                        Go Back
-                      </button>
-                      <button
-                        onClick={() => {
-                          setShowDiscardConfirm(false)
-                          setShowUploadForm(false)
-                          setUploadData({ title: '', description: '', keywords: '', categoryId: '', membershipLevel: 'FREE' })
-                        }}
-                        className="px-6 py-2.5 rounded-xl text-sm font-medium bg-red-500 hover:bg-red-600 text-white transition-colors"
-                      >
-                        Discard
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
-          </div>
-        )}
 
-        {isAdmin ? (
-          <div className="space-y-6">
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
-                <Radio className="h-5 w-5 text-teal" /> Stream Controls
-              </h2>
-
-              {!adminStream && !streamInfo?.stream && !browserStreaming ? (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Stream Title</label>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all text-gray-900"
-                      placeholder="Enter stream title..." />
-                  </div>
-
-                  {/* Stream Mode Selector */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Stream Method</label>
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => setStreamMode('browser')}
-                        className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 transition-all text-sm font-medium ${
-                          streamMode === 'browser'
-                            ? 'border-teal bg-teal/5 text-teal'
-                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
-                        }`}
-                      >
-                        <Monitor className="h-5 w-5" />
-                        Browser (No Software Needed)
-                      </button>
-                      <button
-                        onClick={() => setStreamMode('obs')}
-                        className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 transition-all text-sm font-medium ${
-                          streamMode === 'obs'
-                            ? 'border-teal bg-teal/5 text-teal'
-                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
-                        }`}
-                      >
-                        <Video className="h-5 w-5" />
-                        OBS / Streaming Software
-                      </button>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={streamMode === 'browser' ? startBrowserStream : startStream}
-                    disabled={loading}
-                    className="bg-[#34c5c5] hover:bg-[#37a6a6] disabled:opacity-50 text-white font-bold py-3 px-8 rounded-xl transition-colors shadow-lg shadow-teal-200 flex items-center gap-2 text-lg"
-                  >
-                    {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Play className="h-5 w-5" />}
-                    {loading ? 'Creating Stream...' : streamMode === 'browser' ? 'Go Live from Browser' : 'Start Live Stream'}
-                  </button>
-
-                  {streamMode === 'browser' && (
-                    <p className="text-xs text-gray-400">
-                      Streams from your browser via FeedFlix relay. Your camera and microphone will be used.
-                    </p>
-                  )}
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${isLive ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-yellow-50 text-yellow-700 border border-yellow-200'}`}>
-                      <div className={`w-2.5 h-2.5 rounded-full ${isLive ? 'bg-red-500 animate-pulse' : 'bg-yellow-500'}`} />
-                      {isLive ? 'LIVE' : 'Waiting for stream input...'}
-                    </div>
-                    {browserStreaming && (
-                      <span className="flex items-center gap-1 text-xs font-medium text-teal bg-teal/10 px-2 py-1 rounded-full">
-                        <Monitor className="h-3 w-3" /> Browser
-                      </span>
-                    )}
-                    {streamInfo?.stream?.title && <span className="text-gray-600 font-medium">{streamInfo.stream.title}</span>}
-                  </div>
-
-                  {/* Browser stream preview */}
-                  {browserStreaming && (
-                    <div className="rounded-xl overflow-hidden border border-gray-200 bg-black">
-                      <video
-                        ref={videoRef}
-                        autoPlay
-                        muted
-                        playsInline
-                        className="w-full"
-                        style={{ aspectRatio: '16/9' }}
-                      />
-                    </div>
-                  )}
-
-                  {/* OBS stream info */}
-                  {adminStream && !browserStreaming && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="bg-gray-50 rounded-xl p-4">
-                        <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">RTMP URL</label>
-                        <div className="flex items-center gap-2">
-                          <code className="text-sm text-gray-800 flex-1 truncate">{adminStream.rtmpUrl}</code>
-                          <button onClick={() => copyToClipboard(adminStream.rtmpUrl, 'rtmp')} className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
-                            {copied === 'rtmp' ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4 text-gray-400" />}
-                          </button>
-                        </div>
-                      </div>
-                      <div className="bg-gray-50 rounded-xl p-4">
-                        <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Stream Key</label>
-                        <div className="flex items-center gap-2">
-                          <code className="text-sm text-gray-800 flex-1 truncate">{showKey ? adminStream.streamKey : '••••••••••••••••'}</code>
-                          <button onClick={() => setShowKey(!showKey)} className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
-                            {showKey ? <EyeOff className="h-4 w-4 text-gray-400" /> : <Eye className="h-4 w-4 text-gray-400" />}
-                          </button>
-                          <button onClick={() => copyToClipboard(adminStream.streamKey, 'key')} className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
-                            {copied === 'key' ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4 text-gray-400" />}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Mux player for viewers (OBS mode only, when live) */}
-                  {!browserStreaming && isLive && (adminStream?.playbackId || streamInfo?.stream?.playbackId) && (
-                    <div className="rounded-xl overflow-hidden border border-gray-200">
-                      <MuxPlayerEmbed playbackId={(adminStream?.playbackId || streamInfo?.stream?.playbackId)!} />
-                    </div>
-                  )}
-
-                  <button onClick={stopStream} disabled={loading}
-                    className="bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white font-bold py-3 px-8 rounded-xl transition-colors flex items-center gap-2">
-                    {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Square className="h-5 w-5" />}
-                    {loading ? 'Stopping...' : 'End Stream'}
-                  </button>
-
-                  {/* Debug Panel */}
-                  {streamDebug.length > 0 && (
-                    <div className="bg-gray-900 rounded-xl p-4 text-xs font-mono text-green-400 max-h-48 overflow-y-auto">
-                      {streamDebug.map((msg, i) => <div key={i}>{msg}</div>)}
-                    </div>
-                  )}
-
-                  {!browserStreaming && (
-                    <div className="bg-teal/5 border border-teal/20 rounded-xl p-4 text-sm text-gray-600">
-                      <p className="font-medium text-teal mb-2">How to go live:</p>
-                      <ol className="list-decimal list-inside space-y-1">
-                        <li>Open OBS Studio (or your streaming software)</li>
-                        <li>Go to Settings → Stream → Service: Custom</li>
-                        <li>Paste the RTMP URL as the Server</li>
-                        <li>Paste the Stream Key</li>
-                        <li>Click &quot;Start Streaming&quot; in OBS</li>
-                      </ol>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+            <button
+              onClick={streamMode === 'browser' ? startBrowserStream : startStream}
+              disabled={loading || !title.trim()}
+              className="w-full bg-[#34c5c5] hover:bg-[#37a6a6] disabled:opacity-50 text-white font-bold py-4 rounded-xl transition-colors shadow-lg shadow-teal-200 flex items-center justify-center gap-2 text-lg"
+            >
+              {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Play className="h-5 w-5" />}
+              {loading ? 'Starting...' : 'Go Live'}
+            </button>
           </div>
         ) : (
-          <div className="space-y-6">
-            {isLive && streamInfo?.stream?.playbackId ? (
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 text-red-600 border border-red-200 text-sm font-semibold">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" /> LIVE NOW
-                  </div>
-                  <span className="text-gray-900 font-semibold text-lg">{streamInfo.stream.title}</span>
+          /* --- LIVE / STREAMING --- */
+          <div className="space-y-4">
+            {/* Status bar */}
+            <div className="bg-white rounded-2xl border border-gray-200 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium ${isLive ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-yellow-50 text-yellow-700 border border-yellow-200'}`}>
+                  <div className={`w-2.5 h-2.5 rounded-full ${isLive ? 'bg-red-500 animate-pulse' : 'bg-yellow-500'}`} />
+                  {isLive ? 'LIVE' : 'Connecting...'}
                 </div>
-                <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
-                  <MuxPlayerEmbed playbackId={streamInfo.stream.playbackId} />
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-200 p-6">
-                    <h3 className="font-semibold text-gray-900 text-lg mb-2">{streamInfo.stream.title}</h3>
-                    <div className="flex items-center gap-4 text-sm text-gray-500">
-                      {streamInfo.stream.startedAt && (
-                        <span className="flex items-center gap-1"><Clock className="h-4 w-4" />Started {new Date(streamInfo.stream.startedAt).toLocaleTimeString()}</span>
-                      )}
-                      <span className="flex items-center gap-1"><Users className="h-4 w-4" />Watching now</span>
-                    </div>
-                  </div>
-                  <div className="bg-white rounded-2xl border border-gray-200 p-6">
-                    <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                      <MessageCircle className="h-5 w-5 text-teal" /> Live Chat
-                    </h3>
-                    <div className="h-48 flex items-center justify-center text-gray-400 text-sm border border-dashed border-gray-200 rounded-xl">Chat coming soon</div>
-                  </div>
-                </div>
+                <span className="text-gray-900 font-medium text-sm">{title}</span>
+                {browserStreaming && <span className="text-xs text-teal bg-teal/10 px-2 py-0.5 rounded-full">Browser</span>}
               </div>
-            ) : (
-              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-12 text-center">
-                <div className="w-20 h-20 bg-teal/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Radio className="h-10 w-10 text-teal" />
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-3">No live stream right now</h2>
-                <p className="text-gray-500 mb-8 max-w-md mx-auto">
-                  Krystal isn&apos;t streaming at the moment. Sign up to get notified when the next session starts!
-                </p>
-                <button className="bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold py-3 px-8 rounded-xl transition-colors shadow-lg shadow-teal-200 flex items-center gap-2 mx-auto">
-                  <Bell className="h-5 w-5" /> Notify Me When Live
-                </button>
+              <div className="flex items-center gap-2 text-xs text-gray-400">
+                {streamInfo?.stream?.startedAt && (
+                  <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> Started {new Date(streamInfo.stream.startedAt).toLocaleTimeString()}</span>
+                )}
+              </div>
+            </div>
+
+            {/* Browser preview */}
+            {browserStreaming && (
+              <div className="rounded-xl overflow-hidden border border-gray-200 bg-black">
+                <video ref={videoRef} autoPlay muted playsInline className="w-full" style={{ aspectRatio: '16/9' }} />
               </div>
             )}
+
+            {/* OBS credentials */}
+            {adminStream && !browserStreaming && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="bg-gray-50 rounded-xl p-4">
+                  <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">RTMP URL</label>
+                  <div className="flex items-center gap-2">
+                    <code className="text-sm text-gray-800 flex-1 truncate">{adminStream.rtmpUrl}</code>
+                    <button onClick={() => copyToClipboard(adminStream.rtmpUrl, 'rtmp')} className="p-1.5 hover:bg-gray-200 rounded-lg">
+                      {copied === 'rtmp' ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4 text-gray-400" />}
+                    </button>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-4">
+                  <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Stream Key</label>
+                  <div className="flex items-center gap-2">
+                    <code className="text-sm text-gray-800 flex-1 truncate">{showKey ? adminStream.streamKey : '••••••••••••'}</code>
+                    <button onClick={() => setShowKey(!showKey)} className="p-1.5 hover:bg-gray-200 rounded-lg">
+                      {showKey ? <EyeOff className="h-4 w-4 text-gray-400" /> : <Eye className="h-4 w-4 text-gray-400" />}
+                    </button>
+                    <button onClick={() => copyToClipboard(adminStream.streamKey, 'key')} className="p-1.5 hover:bg-gray-200 rounded-lg">
+                      {copied === 'key' ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4 text-gray-400" />}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Mux player (OBS mode when live) */}
+            {!browserStreaming && isLive && (adminStream?.playbackId || streamInfo?.stream?.playbackId) && (
+              <div className="rounded-xl overflow-hidden border border-gray-200">
+                <MuxPlayerEmbed playbackId={(adminStream?.playbackId || streamInfo?.stream?.playbackId)!} />
+              </div>
+            )}
+
+            {/* End Stream */}
+            <button onClick={endStream} disabled={loading}
+              className="w-full bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center gap-2 text-lg">
+              {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Square className="h-5 w-5" />}
+              {loading ? 'Ending Stream...' : 'End Live Stream'}
+            </button>
+
+            <p className="text-xs text-gray-400 text-center">
+              When you end the stream, the recording will be saved to <strong>{categories.find(c => c.id === categoryId)?.name || 'Uncategorized'}</strong> in the vault.
+            </p>
           </div>
         )}
       </div>
