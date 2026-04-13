@@ -48,7 +48,7 @@ const Navigation = () => {
                 <Link href="/dashboard" className={`nav-link text-sm ${isActive('/dashboard') && !isActive('/dashboard/fitness') && !isActive('/dashboard/community') ? 'active' : ''}`}>
                   Dashboard
                 </Link>
-                <Link href="/dashboard/fitness/vault" className={`nav-link text-sm ${isActive('/dashboard/fitness/vault') || isActive('/vault') ? 'active' : ''}`}>
+                <Link href="/vault" className={`nav-link text-sm ${isActive('/vault') || isActive('/vault') ? 'active' : ''}`}>
                   Video Vault
                 </Link>
                 <Link href="/courses" className={`nav-link text-sm ${isActive('/courses') ? 'active' : ''}`}>
@@ -158,7 +158,7 @@ const Navigation = () => {
                 <Link href="/dashboard" className={`block px-3 py-2 text-sm rounded ${isActive('/dashboard') && !isActive('/dashboard/fitness') && !isActive('/dashboard/community') ? 'text-[#34c5c5] font-medium' : 'text-gray-700'}`} onClick={() => setIsMenuOpen(false)}>
                   Dashboard
                 </Link>
-                <Link href="/dashboard/fitness/vault" className={`block px-3 py-2 text-sm rounded ${isActive('/dashboard/fitness/vault') ? 'text-[#34c5c5] font-medium' : 'text-gray-700'}`} onClick={() => setIsMenuOpen(false)}>
+                <Link href="/vault" className={`block px-3 py-2 text-sm rounded ${isActive('/vault') ? 'text-[#34c5c5] font-medium' : 'text-gray-700'}`} onClick={() => setIsMenuOpen(false)}>
                   Video Vault
                 </Link>
                 <Link href="/courses" className={`block px-3 py-2 text-sm rounded ${isActive('/courses') ? 'text-[#34c5c5] font-medium' : 'text-gray-700'}`} onClick={() => setIsMenuOpen(false)}>
