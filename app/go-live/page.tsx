@@ -89,6 +89,7 @@ export default function GoLivePage() {
     title: '', description: '', keywords: '', categoryId: '', membershipLevel: 'FREE'
   })
   const [uploading, setUploading] = useState(false)
+  const [showDiscardConfirm, setShowDiscardConfirm] = useState(false)
 
   useEffect(() => {
     if (status === 'unauthenticated') router.push('/auth/login')
@@ -396,10 +397,40 @@ export default function GoLivePage() {
                   className="bg-[#34c5c5] hover:bg-[#37a6a6] disabled:opacity-50 text-white font-bold py-3 px-8 rounded-xl transition-colors">
                   {uploading ? 'Saving...' : 'Save & Publish'}
                 </button>
-                <button onClick={() => setShowUploadForm(false)} className="text-gray-600 hover:text-gray-900 py-3 px-6">
-                  Skip
+                <button onClick={() => setShowDiscardConfirm(true)} className="text-red-500 hover:text-red-700 font-medium py-3 px-6 transition-colors">
+                  Do Not Save
                 </button>
               </div>
+
+              {/* Discard confirmation */}
+              {showDiscardConfirm && (
+                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+                  <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8">
+                    <h3 className="text-lg font-bold text-gray-900 mb-3">Discard Recording?</h3>
+                    <p className="text-gray-600 mb-6">
+                      Are you sure you do not want to save this stream to the vault? This cannot be undone.
+                    </p>
+                    <div className="flex gap-3 justify-end">
+                      <button
+                        onClick={() => setShowDiscardConfirm(false)}
+                        className="px-6 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                      >
+                        Go Back
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowDiscardConfirm(false)
+                          setShowUploadForm(false)
+                          setUploadData({ title: '', description: '', keywords: '', categoryId: '', membershipLevel: 'FREE' })
+                        }}
+                        className="px-6 py-2.5 rounded-xl text-sm font-medium bg-red-500 hover:bg-red-600 text-white transition-colors"
+                      >
+                        Discard
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
