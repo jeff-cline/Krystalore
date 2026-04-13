@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import Header from '@/components/layout/header'
+import MainLayout from '@/components/layout/MainLayout'
 import Link from 'next/link'
 import Image from 'next/image'
 import { BookOpen, Headphones, Download, Users, Star, ExternalLink, Mic } from 'lucide-react'
@@ -113,7 +113,7 @@ export default function BooksPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <BooksJsonLd />
-      <Header />
+      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero */}

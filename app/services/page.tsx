@@ -1,7 +1,6 @@
 'use client'
 
-import Header from '@/components/layout/header'
-import Footer from '@/components/layout/Footer'
+import MainLayout from '@/components/layout/MainLayout'
 import Link from 'next/link'
 import Image from 'next/image'
 import FAQSection from '@/components/FAQSection'
@@ -30,9 +29,9 @@ function ServicesJsonLd() {
 
 export default function ServicesPage() {
   return (
-    <>
+    <MainLayout>
       <ServicesJsonLd />
-      <Header />
+      
       <main className="min-h-screen bg-white">
 
         {/* Hero */}
@@ -468,8 +467,8 @@ export default function ServicesPage() {
         </section>
 
       </main>
-      <Footer />
+      
       <div className="text-center pb-2"><a href="https://jeff-cline.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '6px', opacity: 0.08, color: '#666' }}>JC</a></div>
-    </>
+    </MainLayout>
   )
 }

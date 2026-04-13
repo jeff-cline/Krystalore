@@ -1,15 +1,14 @@
 'use client'
 
-import Header from '@/components/layout/header'
-import Footer from '@/components/layout/Footer'
+import MainLayout from '@/components/layout/MainLayout'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronRight, ShoppingBag, BookOpen, GraduationCap, Mail, ArrowRight } from 'lucide-react'
 
 export default function ShopPage() {
   return (
-    <>
-      <Header />
+    <MainLayout>
+      
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="flex text-sm text-gray-500">
@@ -74,7 +73,7 @@ export default function ShopPage() {
           </div>
         </section>
       </main>
-      <Footer />
-    </>
+      
+    </MainLayout>
   )
 }

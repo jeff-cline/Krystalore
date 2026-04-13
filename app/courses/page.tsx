@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Header from '@/components/layout/header'
+import MainLayout from '@/components/layout/MainLayout'
 import GrowScaleCTA from '@/components/GrowScaleCTA'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -39,7 +39,7 @@ export default function CoursesPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      
       
       {/* Hero Image */}
       <div className="relative h-64 md:h-80 w-full overflow-hidden">

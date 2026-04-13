@@ -1,7 +1,6 @@
 'use client'
 
-import Header from '@/components/layout/header'
-import Footer from '@/components/layout/Footer'
+import MainLayout from '@/components/layout/MainLayout'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronRight, Clock, Tag, ArrowRight } from 'lucide-react'
@@ -101,8 +100,8 @@ const blogPosts = [
 
 export default function NewsPage() {
   return (
-    <>
-      <Header />
+    <MainLayout>
+      
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="flex text-sm text-gray-500">
@@ -217,7 +216,7 @@ export default function NewsPage() {
           </div>
         </section>
       </main>
-      <Footer />
-    </>
+      
+    </MainLayout>
   )
 }
