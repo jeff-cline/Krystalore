@@ -154,7 +154,10 @@ export default function VaultPage() {
 
   useEffect(() => { fetchVideos() }, [fetchVideos])
 
-  const featured = categories.filter(c =>
+  // Only show categories with videos
+  const visibleCategories = categories.filter(c => c.videoCount > 0)
+
+  const featured = visibleCategories.filter(c =>
     ['monday-motivator', 'fighter-friday', 'course-content'].includes(c.slug)
   )
 
@@ -283,7 +286,7 @@ export default function VaultPage() {
                     onClick={() => { setSelectedCategory(null); setSearch('') }}
                     className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${!selectedCategory && !search ? 'bg-[#34c5c5] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                   >All Categories</button>
-                  {categories.map((cat) => (
+                  {visibleCategories.map((cat) => (
                     <button
                       key={cat.id}
                       onClick={() => { setSelectedCategory(cat.name); setSearch('') }}
@@ -300,12 +303,12 @@ export default function VaultPage() {
             <div className="grid grid-cols-2 gap-4 sm:gap-6">
               <div className="card text-center">
                 <Play className="h-7 w-7 text-teal mx-auto mb-2" />
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-950">{categories.reduce((s, c) => s + c.videoCount, 0) || '—'}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-950">{visibleCategories.reduce((s, c) => s + c.videoCount, 0) || '—'}</h3>
                 <p className="text-gray-600 text-sm">Total Videos</p>
               </div>
               <div className="card text-center">
                 <Video className="h-7 w-7 text-primary mx-auto mb-2" />
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-950">{categories.length}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-950">{visibleCategories.length}</h3>
                 <p className="text-gray-600 text-sm">Categories</p>
               </div>
             </div>
@@ -445,7 +448,7 @@ export default function VaultPage() {
                     All Video <span className="text-teal">Categories</span>
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                    {categories.map((cat) => {
+                    {visibleCategories.map((cat) => {
                       const locked = isLoggedIn && !checkAccess(userLevel, cat.membershipLevel)
                       return (
                         <div

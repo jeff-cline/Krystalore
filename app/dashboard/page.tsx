@@ -3,83 +3,48 @@
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import DashboardLayout from '@/components/layout/dashboard-layout'
-import { BookOpen, Play, Users, TrendingUp, Calendar, Target, Radio } from 'lucide-react'
+import { BookOpen, Play, Users, TrendingUp, Calendar, Radio, MessageCircle, Trophy } from 'lucide-react'
 import Link from 'next/link'
-
-interface Category {
-  id: string
-  name: string
-  description?: string
-  hasAccess: boolean
-  videoCount: number
-}
-
-interface Video {
-  id: string
-  title: string
-  description?: string
-  uploadthingUrl?: string
-  category?: {
-    name: string
-  }
-  createdAt: string
-}
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
-  const [categories, setCategories] = useState<Category[]>([])
-  const [recentVideos, setRecentVideos] = useState<Video[]>([])
+  const [stats, setStats] = useState({ categories: 0, videos: 0 })
   const [isLive, setIsLive] = useState(false)
   const [liveTitle, setLiveTitle] = useState('')
+  const [recentPosts, setRecentPosts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (status === 'loading') return
-    if (!session) return
+    if (status === 'loading' || !session) return
 
-    const fetchData = async () => {
-      try {
-        setLoading(true)
-        const [categoriesRes, videosRes, liveRes] = await Promise.all([
-          fetch('/api/categories'),
-          fetch('/api/unified-videos?limit=5'),
-          fetch('/api/mux/live'),
-        ])
-
-        if (!categoriesRes.ok || !videosRes.ok) {
-          throw new Error('Failed to fetch data')
-        }
-
-        const categoriesData = await categoriesRes.json()
-        const videosData = await videosRes.json()
-        const liveData = liveRes.ok ? await liveRes.json() : { active: false }
-
-        setCategories(Array.isArray(categoriesData) ? categoriesData : categoriesData.categories || [])
-        setRecentVideos(videosData.videos || [])
-        if (liveData.active && liveData.stream) {
-          setIsLive(true)
-          setLiveTitle(liveData.stream.title || 'Live Stream')
-        }
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
-      } finally {
-        setLoading(false)
+    Promise.all([
+      fetch('/api/categories').then(r => r.json()),
+      fetch('/api/mux/live').then(r => r.json()),
+      fetch('/api/community/posts?limit=3').then(r => r.json()).catch(() => ({ posts: [] })),
+    ]).then(([cats, live, community]) => {
+      const catList = Array.isArray(cats) ? cats : []
+      setStats({
+        categories: catList.filter((c: any) => c.videoCount > 0).length,
+        videos: catList.reduce((s: number, c: any) => s + (c.videoCount || 0), 0),
+      })
+      if (live.active && live.stream) {
+        setIsLive(true)
+        setLiveTitle(live.stream.title || 'Live Stream')
       }
-    }
-
-    fetchData()
+      setRecentPosts(community.posts || [])
+    }).finally(() => setLoading(false))
   }, [session, status])
 
   if (status === 'loading' || loading) {
     return (
       <DashboardLayout>
         <div className="space-y-6 animate-pulse">
-          <div className="bg-gray-200 rounded-lg h-32"></div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gray-200 rounded-lg h-24"></div>
-            <div className="bg-gray-200 rounded-lg h-24"></div>
-            <div className="bg-gray-200 rounded-lg h-24"></div>
+          <div className="bg-gray-200 rounded-xl h-32" />
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="bg-gray-200 rounded-xl h-24" />
+            <div className="bg-gray-200 rounded-xl h-24" />
+            <div className="bg-gray-200 rounded-xl h-24" />
+            <div className="bg-gray-200 rounded-xl h-24" />
           </div>
         </div>
       </DashboardLayout>
@@ -91,50 +56,28 @@ export default function DashboardPage() {
       <DashboardLayout>
         <div className="text-center py-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Please sign in</h2>
-          <p className="text-gray-600 mb-6">You need to be signed in to view your dashboard.</p>
-          <Link href="/auth/login" className="btn-primary">
-            Sign In
-          </Link>
-        </div>
-      </DashboardLayout>
-    )
-  }
-
-  if (error) {
-    return (
-      <DashboardLayout>
-        <div className="text-center py-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Error</h2>
-          <p className="text-red-600 mb-6">{error}</p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="btn-primary"
-          >
-            Try Again
-          </button>
+          <Link href="/auth/login" className="btn-primary">Sign In</Link>
         </div>
       </DashboardLayout>
     )
   }
 
   const user = session.user as any
-  const userName = user?.name || 'User'
-  const userRole = user?.role || 'USER'
-  const accessibleCategories = categories.filter(cat => cat.hasAccess)
-  const totalAccessibleVideos = accessibleCategories.reduce((sum, cat) => sum + cat.videoCount, 0)
+  const userName = user?.name || 'Member'
+  const userRole = user?.role || 'MEMBER'
+  const userLevel = user?.membershipLevel || 'FREE'
+  const isAdmin = ['GOD', 'ADMIN'].includes(userRole)
 
   return (
     <DashboardLayout>
       <div className="space-y-6">
         {/* Live Banner */}
         {isLive && (
-          <Link href="/live" className="block bg-gradient-to-r from-red-500 to-red-600 rounded-xl p-4 text-white hover:from-red-600 hover:to-red-700 transition-all shadow-lg">
+          <Link href="/vault" className="block bg-gradient-to-r from-red-500 to-red-600 rounded-xl p-4 text-white hover:from-red-600 hover:to-red-700 transition-all shadow-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-white animate-pulse" />
-                  <Radio className="h-5 w-5" />
-                </div>
+                <div className="w-3 h-3 rounded-full bg-white animate-pulse" />
+                <Radio className="h-5 w-5" />
                 <div>
                   <p className="font-bold text-sm sm:text-base">Krystalore is LIVE!</p>
                   <p className="text-red-100 text-xs sm:text-sm">{liveTitle}</p>
@@ -146,119 +89,81 @@ export default function DashboardPage() {
         )}
 
         {/* Welcome Header */}
-        <div className="bg-gradient-to-r from-[#FF8900] to-[#34c5c5] rounded-lg p-6 text-white">
-          <h1 className="text-3xl font-bold mb-2">Welcome back, {userName}!</h1>
-          <p className="text-white/90 mb-4">
-            Ready to continue your executive development journey? 
-            {accessibleCategories.length > 0 && ` You have access to ${accessibleCategories.length} categories with ${totalAccessibleVideos} videos.`}
+        <div className="bg-gradient-to-r from-[#FF8900] to-[#34c5c5] rounded-xl p-6 text-white">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Welcome back, {userName}!</h1>
+          <p className="text-white/90 text-sm sm:text-base mb-3">
+            Your membership: <span className="font-semibold">{userLevel}</span>
+            {isAdmin && <span className="ml-3 bg-white/20 px-2 py-0.5 rounded text-xs font-medium">ADMIN</span>}
           </p>
-          <div className="flex flex-wrap gap-4">
-            <div className="flex items-center">
-              <Users className="h-5 w-5 mr-2" />
-              <span className="font-medium">Role: {userRole}</span>
-            </div>
-            <div className="flex items-center">
-              <BookOpen className="h-5 w-5 mr-2" />
-              <span className="font-medium">{accessibleCategories.length} Categories</span>
-            </div>
-            <div className="flex items-center">
-              <Play className="h-5 w-5 mr-2" />
-              <span className="font-medium">{totalAccessibleVideos} Videos</span>
-            </div>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <span className="flex items-center gap-1"><BookOpen className="h-4 w-4" /> {stats.categories} Categories</span>
+            <span className="flex items-center gap-1"><Play className="h-4 w-4" /> {stats.videos} Videos</span>
           </div>
         </div>
-
-        {/* Categories Grid */}
-        {accessibleCategories.length > 0 ? (
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Content Categories</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {accessibleCategories.map((category) => (
-                <Link 
-                  key={category.id}
-                  href={`/dashboard/fitness?category=${category.id}`}
-                  className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow border border-gray-200 hover:border-[#FF8900]"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <BookOpen className="h-8 w-8 text-[#FF8900]" />
-                    <span className="text-sm font-medium text-gray-600">
-                      {category.videoCount} videos
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{category.name}</h3>
-                  {category.description && (
-                    <p className="text-sm text-gray-600 line-clamp-2">{category.description}</p>
-                  )}
-                </Link>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-            <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No Content Access</h3>
-            <p className="text-gray-600">
-              You don't have access to any content categories yet. Contact your administrator to get started.
-            </p>
-          </div>
-        )}
-
-        {/* Recent Videos */}
-        {recentVideos.length > 0 && (
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Recently Added Videos</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {recentVideos.map((video) => (
-                <Link
-                  key={video.id}
-                  href={`/dashboard/fitness#video-${video.id}`}
-                  className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow border border-gray-200 hover:border-[#34c5c5]"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <Play className="h-8 w-8 text-[#34c5c5]" />
-                    {video.category && (
-                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                        {video.category.name}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                    {video.title}
-                  </h3>
-                  {video.description && (
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-2">{video.description}</p>
-                  )}
-                  <p className="text-xs text-gray-500">
-                    {new Date(video.createdAt).toLocaleDateString()}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Quick Actions */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Link href="/dashboard/fitness" className="p-4 text-center rounded-lg border border-gray-200 hover:border-[#FF8900] transition-colors group">
-              <Play className="h-8 w-8 mx-auto mb-2 text-gray-600 group-hover:text-[#FF8900]" />
-              <span className="text-sm font-medium">Video Vault</span>
-            </Link>
-            <Link href="/dashboard/courses" className="p-4 text-center rounded-lg border border-gray-200 hover:border-[#FF8900] transition-colors group">
-              <BookOpen className="h-8 w-8 mx-auto mb-2 text-gray-600 group-hover:text-[#FF8900]" />
-              <span className="text-sm font-medium">Courses</span>
-            </Link>
-            <Link href="/dashboard/progress" className="p-4 text-center rounded-lg border border-gray-200 hover:border-[#FF8900] transition-colors group">
-              <TrendingUp className="h-8 w-8 mx-auto mb-2 text-gray-600 group-hover:text-[#FF8900]" />
-              <span className="text-sm font-medium">Progress</span>
-            </Link>
-            <Link href="/dashboard/events" className="p-4 text-center rounded-lg border border-gray-200 hover:border-[#FF8900] transition-colors group">
-              <Calendar className="h-8 w-8 mx-auto mb-2 text-gray-600 group-hover:text-[#FF8900]" />
-              <span className="text-sm font-medium">Events</span>
-            </Link>
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          <Link href="/vault" className="bg-white rounded-xl border border-gray-200 p-4 text-center hover:border-teal hover:shadow-md transition-all group">
+            <Play className="h-7 w-7 mx-auto mb-2 text-teal group-hover:scale-110 transition-transform" />
+            <span className="text-sm font-medium text-gray-900">Video Vault</span>
+          </Link>
+          <Link href="/dashboard/courses" className="bg-white rounded-xl border border-gray-200 p-4 text-center hover:border-teal hover:shadow-md transition-all group">
+            <BookOpen className="h-7 w-7 mx-auto mb-2 text-[#FF8900] group-hover:scale-110 transition-transform" />
+            <span className="text-sm font-medium text-gray-900">Courses</span>
+          </Link>
+          <Link href="/dashboard/community" className="bg-white rounded-xl border border-gray-200 p-4 text-center hover:border-teal hover:shadow-md transition-all group">
+            <MessageCircle className="h-7 w-7 mx-auto mb-2 text-teal group-hover:scale-110 transition-transform" />
+            <span className="text-sm font-medium text-gray-900">Community</span>
+          </Link>
+          <Link href="/dashboard/progress" className="bg-white rounded-xl border border-gray-200 p-4 text-center hover:border-teal hover:shadow-md transition-all group">
+            <Trophy className="h-7 w-7 mx-auto mb-2 text-[#FF8900] group-hover:scale-110 transition-transform" />
+            <span className="text-sm font-medium text-gray-900">Progress</span>
+          </Link>
         </div>
+
+        {/* Admin Quick Access */}
+        {isAdmin && (
+          <div className="bg-gray-50 rounded-xl border border-gray-200 p-4">
+            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Admin</h3>
+            <div className="flex flex-wrap gap-2">
+              <Link href="/go-live" className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg text-sm font-medium hover:bg-red-100 transition-colors">
+                <Radio className="h-4 w-4" /> Go Live
+              </Link>
+              <Link href="/admin/videos" className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+                Manage Videos
+              </Link>
+              <Link href="/admin/clients" className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+                <Users className="h-4 w-4" /> Members
+              </Link>
+              <Link href="/admin" className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+                Admin Panel
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* Community Preview */}
+        {recentPosts.length > 0 && (
+          <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-900">Community</h2>
+              <Link href="/dashboard/community" className="text-sm text-teal hover:underline">View All</Link>
+            </div>
+            <div className="space-y-3">
+              {recentPosts.map((post: any) => (
+                <div key={post.id} className="flex gap-3 py-2 border-b border-gray-100 last:border-0">
+                  <div className="w-8 h-8 rounded-full bg-teal/10 flex items-center justify-center text-teal font-bold text-xs flex-shrink-0">
+                    {post.author?.name?.[0]?.toUpperCase() || '?'}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-gray-900 line-clamp-2">{post.content}</p>
+                    <p className="text-xs text-gray-400 mt-1">{post.author?.name} &middot; {post.commentCount || 0} comments</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </DashboardLayout>
   )

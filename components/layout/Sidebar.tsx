@@ -26,11 +26,10 @@ export default function Sidebar({ isAdmin = false }: SidebarProps) {
   
   const dashboardItems = [
     { href: '/dashboard', icon: Home, label: 'Dashboard' },
-    { href: '/dashboard/progress', icon: Trophy, label: 'Progress & Success' },
     { href: '/vault', icon: BookOpen, label: 'Video Vault' },
     { href: '/dashboard/courses', icon: BookOpen, label: 'Courses' },
     { href: '/dashboard/community', icon: Users, label: 'Community' },
-    { href: '/go-live', icon: Mic, label: 'Go Live' },
+    { href: '/dashboard/progress', icon: Trophy, label: 'Progress & Success' },
   ]
   
   const adminItems = [
