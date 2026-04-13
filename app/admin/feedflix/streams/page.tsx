@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import AdminSidebar from '@/components/layout/AdminSidebar'
-import MainLayout from '@/components/layout/MainLayout'
-import { Radio, Calendar, Clock, Plus, Video } from 'lucide-react'
+import { Radio, Calendar, Clock, Plus, Video, Trash2 } from 'lucide-react'
 
 interface Stream {
   id: string
@@ -87,30 +85,27 @@ export default function FeedFlixStreamsPage() {
   if (status === 'loading') return null
 
   return (
-    <MainLayout>
-      <div className="flex">
-        <AdminSidebar />
-        <div className="ml-64 flex-1 p-8">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Live Streams</h1>
-              <p className="text-gray-500 mt-1">Manage FeedFlix live and scheduled streams</p>
-            </div>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowScheduleForm(!showScheduleForm)}
-                className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                <Calendar className="h-4 w-4" /> Schedule Stream
-              </button>
-              <button
-                onClick={() => router.push('/go-live')}
-                className="flex items-center gap-2 px-4 py-2 bg-[#34c5c5] text-white rounded-xl text-sm font-medium hover:bg-[#37a6a6] transition-colors"
-              >
-                <Radio className="h-4 w-4" /> Go Live
-              </button>
-            </div>
-          </div>
+    <div>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Live Streams</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Manage FeedFlix live and scheduled streams</p>
+        </div>
+        <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
+          <button
+            onClick={() => setShowScheduleForm(!showScheduleForm)}
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            <Calendar className="h-4 w-4" /> <span className="hidden sm:inline">Schedule</span> <span className="sm:hidden">Schedule</span>
+          </button>
+          <button
+            onClick={() => router.push('/go-live')}
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-[#34c5c5] text-white rounded-xl text-sm font-medium hover:bg-[#37a6a6] transition-colors"
+          >
+            <Radio className="h-4 w-4" /> Go Live
+          </button>
+        </div>
+      </div>
 
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm mb-6">{error}</div>
@@ -195,12 +190,25 @@ export default function FeedFlixStreamsPage() {
                             Started {new Date(stream.started_at).toLocaleString()}
                           </p>
                         )}
-                        <button
-                          onClick={() => fetch(`/api/feedflix/streams/${stream.id}`, { method: 'POST' }).then(fetchStreams)}
-                          className="mt-4 text-sm text-red-600 hover:text-red-700 font-medium"
-                        >
-                          End Stream
-                        </button>
+                        <div className="flex items-center gap-4 mt-4">
+                          <button
+                            onClick={() => fetch(`/api/feedflix/streams/${stream.id}`, { method: 'POST' }).then(fetchStreams)}
+                            className="text-sm text-red-600 hover:text-red-700 font-medium"
+                          >
+                            End Stream
+                          </button>
+                          <button
+                            onClick={() => {
+                              if (confirm('Delete this stream? This cannot be undone.')) {
+                                fetch(`/api/feedflix/streams/${stream.id}`, { method: 'POST' })
+                                  .then(() => fetchStreams())
+                              }
+                            }}
+                            className="text-sm text-gray-400 hover:text-red-500 flex items-center gap-1"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" /> Delete
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -238,8 +246,6 @@ export default function FeedFlixStreamsPage() {
               </div>
             </div>
           )}
-        </div>
-      </div>
-    </MainLayout>
+    </div>
   )
 }

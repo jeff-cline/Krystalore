@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import AdminSidebar from '@/components/layout/AdminSidebar'
-import MainLayout from '@/components/layout/MainLayout'
 import { TrendingUp, Eye, Users, MessageCircle, Video, Clock, Trophy } from 'lucide-react'
 
 interface Analytics {
@@ -59,15 +57,12 @@ export default function FeedFlixAnalyticsPage() {
     : 0
 
   return (
-    <MainLayout>
-      <div className="flex">
-        <AdminSidebar />
-        <div className="ml-64 flex-1 p-8">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Streaming Analytics</h1>
-              <p className="text-gray-500 mt-1">FeedFlix viewership and engagement metrics</p>
-            </div>
+    <div>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Streaming Analytics</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">FeedFlix viewership and engagement metrics</p>
+        </div>
             <select
               value={days}
               onChange={e => setDays(Number(e.target.value))}
@@ -189,9 +184,7 @@ export default function FeedFlixAnalyticsPage() {
               )}
             </div>
           ) : null}
-        </div>
-      </div>
-    </MainLayout>
+    </div>
   )
 }
 

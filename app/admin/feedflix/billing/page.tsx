@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import AdminSidebar from '@/components/layout/AdminSidebar'
-import MainLayout from '@/components/layout/MainLayout'
 import { Coins, TrendingDown, Infinity, Calendar } from 'lucide-react'
 
 interface BillingData {
@@ -48,15 +46,12 @@ export default function FeedFlixBillingPage() {
   if (status === 'loading') return null
 
   return (
-    <MainLayout>
-      <div className="flex">
-        <AdminSidebar />
-        <div className="ml-64 flex-1 p-8">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Billing & Usage</h1>
-              <p className="text-gray-500 mt-1">FeedFlix token balance and consumption</p>
-            </div>
+    <div>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Billing & Usage</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">FeedFlix token balance and consumption</p>
+        </div>
             <select
               value={days}
               onChange={e => setDays(Number(e.target.value))}
@@ -145,8 +140,6 @@ export default function FeedFlixBillingPage() {
               )}
             </div>
           ) : null}
-        </div>
-      </div>
-    </MainLayout>
+    </div>
   )
 }
