@@ -49,6 +49,7 @@ export default function AdminSidebar() {
     { href: '/admin/videos', icon: Video, label: 'Video Management' },
     { href: '/admin/permissions', icon: Shield, label: 'Permissions' },
     { href: '/admin/integrations', icon: Plug, label: 'Integrations' },
+    { href: '/admin/blog', icon: FileText, label: 'Blog' },
     { href: '/admin/settings', icon: Settings, label: 'Settings' },
   ]
 
