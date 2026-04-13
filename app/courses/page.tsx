@@ -38,9 +38,7 @@ export default function CoursesPage() {
   })
 
   return (
-    <div className="min-h-screen bg-white">
-      
-      
+    <MainLayout>
       {/* Hero Image */}
       <div className="relative h-64 md:h-80 w-full overflow-hidden">
         <Image src="/images/go9/planner.jpg" alt="Krystalore Crews courses and educational content" fill className="object-cover object-top" sizes="100vw" />
@@ -221,6 +219,6 @@ export default function CoursesPage() {
       </div>
 
       <GrowScaleCTA />
-    </div>
+    </MainLayout>
   )
 }

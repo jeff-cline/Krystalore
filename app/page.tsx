@@ -223,9 +223,7 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
-      
-      
+    <MainLayout>
       <style jsx global>{`
         @keyframes scroll {
           0% { transform: translateX(0); }
@@ -989,6 +987,6 @@ export default function HomePage() {
       <div className="text-center py-2">
         <a href="https://jeff-cline.com" className="text-[6px] opacity-[0.08] hover:opacity-20 transition-opacity">JC</a>
       </div>
-    </div>
+    </MainLayout>
   )
 }

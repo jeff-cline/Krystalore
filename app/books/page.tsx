@@ -111,11 +111,10 @@ export default function BooksPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <MainLayout>
       <BooksJsonLd />
-      
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto py-4">
         {/* Hero */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -283,6 +282,6 @@ export default function BooksPage() {
           </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   )
 }
