@@ -76,6 +76,7 @@ export default function VideoManagementPage() {
   const [editingVideo, setEditingVideo] = useState<VideoItem | null>(null)
   const [editForm, setEditForm] = useState({ title: '', description: '', category: '', categoryId: '', seoTitle: '', seoDescription: '', keywords: '', membershipLevel: '', thumbnailUrl: '' })
   const [savingVideo, setSavingVideo] = useState(false)
+  const [deletingVideoId, setDeletingVideoId] = useState<string | null>(null)
 
   // Upload state
   const [importing, setImporting] = useState(false)
@@ -250,6 +251,24 @@ export default function VideoManagementPage() {
     setShowNewCat(false)
     setNewCat({ name: '', slug: '', description: '', membershipLevel: 'FREE', sortOrder: 0 })
     fetchCategories()
+  }
+
+  const handleDeleteVideo = async (id: string) => {
+    try {
+      const res = await fetch('/api/videos', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      })
+      const data = await res.json()
+      if (data.error) throw new Error(data.error)
+      setVideos(prev => prev.filter(v => v.id !== id))
+      setTotalVideos(prev => prev - 1)
+      setDeletingVideoId(null)
+    } catch (err: any) {
+      alert(err.message || 'Failed to delete video')
+      setDeletingVideoId(null)
+    }
   }
 
   const openEditVideo = (video: VideoItem) => {
@@ -475,6 +494,7 @@ export default function VideoManagementPage() {
                         <div className="flex items-center space-x-2">
                           <button onClick={() => setPlayingVideo(video)} className="p-1 text-gray-400 hover:text-primary" title="Play video"><Play className="h-4 w-4" /></button>
                           <button onClick={() => openEditVideo(video)} className="p-1 text-gray-400 hover:text-white" title="Edit video"><Edit className="h-4 w-4" /></button>
+                          <button onClick={() => setDeletingVideoId(video.id)} className="p-1 text-gray-400 hover:text-red-500" title="Delete video"><Trash2 className="h-4 w-4" /></button>
                         </div>
                       </td>
                     </tr>
@@ -962,6 +982,32 @@ export default function VideoManagementPage() {
                 className="btn-primary disabled:opacity-50"
               >
                 {sendingNotification ? 'Sending...' : 'Send'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Delete Confirmation Modal */}
+      {deletingVideoId && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8">
+            <h3 className="text-lg font-bold text-gray-900 mb-3">Delete Video?</h3>
+            <p className="text-gray-600 mb-2">
+              Are you sure you want to delete this video? This action cannot be undone.
+            </p>
+            <p className="text-sm text-gray-400 mb-6 font-mono">{videos.find(v => v.id === deletingVideoId)?.title}</p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setDeletingVideoId(null)}
+                className="px-6 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleDeleteVideo(deletingVideoId)}
+                className="px-6 py-2.5 rounded-xl text-sm font-medium bg-red-500 hover:bg-red-600 text-white transition-colors"
+              >
+                Delete
               </button>
             </div>
           </div>

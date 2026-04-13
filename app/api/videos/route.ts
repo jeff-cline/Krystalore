@@ -140,3 +140,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const session = await getSession()
+    if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const role = (session.user as any).role
+    if (!['GOD', 'ADMIN'].includes(role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+
+    const { id } = await request.json()
+    if (!id) return NextResponse.json({ error: 'Video ID required' }, { status: 400 })
+
+    // Delete associated marketing snippets first
+    await prisma.marketingSnippet.deleteMany({ where: { videoId: id } })
+    await prisma.video.delete({ where: { id } })
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Video delete error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
