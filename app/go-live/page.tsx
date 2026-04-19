@@ -6,11 +6,6 @@ import { useRouter } from 'next/navigation'
 import MainLayout from '@/components/layout/MainLayout'
 import { Play, Square, Copy, Check, Radio, Clock, Eye, EyeOff, Monitor, Video } from 'lucide-react'
 
-export const metadata = {
-  title: 'Go Live — Krystalore',
-  description: 'Broadcast live to your community. Stream directly from your browser or connect OBS.',
-}
-
 interface StreamInfo {
   active: boolean
   stream?: { streamId: string; playbackId: string; status: string; title: string; startedAt: string | null }
