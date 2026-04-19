@@ -391,3 +391,34 @@ model ContentCalendarItem {
   @@index([scheduledFor])
   @@index([status])
 }
+
+model CmsPage {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String   @db.Text
+  seoTitle    String?
+  seoDescription String? @db.Text
+  coverImage  String?
+  isPublished Boolean  @default(true)
+  isTemplate  Boolean  @default(false)
+  authorId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([isPublished])
+}
+
+model MediaItem {
+  id        String   @id @default(cuid())
+  url       String
+  name      String
+  type      String   @default("image") // image, video
+  folder    String   @default("general")
+  size      Int?
+  createdAt DateTime @default(now())
+
+  @@index([folder])
+  @@index([type])
+}
