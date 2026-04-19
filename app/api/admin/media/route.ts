@@ -9,15 +9,22 @@ export async function GET(req: NextRequest) {
 
     const folder = req.nextUrl.searchParams.get('folder')
     const type = req.nextUrl.searchParams.get('type')
+    const search = req.nextUrl.searchParams.get('search')
 
     const where: any = {}
     if (folder) where.folder = folder
     if (type) where.type = type
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: 'insensitive' } },
+        { folder: { contains: search, mode: 'insensitive' } },
+      ]
+    }
 
     const items = await prisma.mediaItem.findMany({
       where,
       orderBy: { createdAt: 'desc' },
-      take: 200,
+      take: 500,
     })
 
     return NextResponse.json(items)
@@ -32,19 +39,17 @@ export async function POST(req: NextRequest) {
     if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     const role = (session.user as any).role
-    if (!['GOD', 'ADMIN'].includes(role)) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-    }
+    if (!['GOD', 'ADMIN'].includes(role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
     const body = await req.json().catch(() => ({}))
     const url = (body?.url || '').trim()
-    const name = (body?.name || '').trim()
+    const name = (body?.name || url.split('/').pop() || 'untitled').trim()
     const type = body?.type === 'video' ? 'video' : 'image'
     const folder = (body?.folder || 'general').trim() || 'general'
     const size = Number(body?.size || 0)
 
-    if (!url || !name) {
-      return NextResponse.json({ error: 'url and name are required' }, { status: 400 })
+    if (!url) {
+      return NextResponse.json({ error: 'url is required' }, { status: 400 })
     }
 
     const item = await prisma.mediaItem.create({
