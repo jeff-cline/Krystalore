@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import MainLayout from '@/components/layout/MainLayout'
 import { BookOpen } from 'lucide-react'
 import Link from 'next/link'
 
@@ -22,23 +21,17 @@ export default function CmsPageView() {
       .finally(() => setLoading(false))
   }, [params.slug])
 
-  if (loading) return <MainLayout><div className="text-center py-12 text-gray-400">Loading...</div></MainLayout>
+  if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-2 border-teal/30 border-t-teal rounded-full animate-spin" /></div>
   if (!page) return (
-    <MainLayout>
-      <div className="text-center py-12">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
         <BookOpen className="h-12 w-12 text-gray-300 mx-auto mb-3" />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Page Not Found</h1>
         <Link href="/" className="text-teal hover:underline">Go Home</Link>
       </div>
-    </MainLayout>
+    </div>
   )
 
-  return (
-    <MainLayout>
-      <article className="max-w-4xl mx-auto">
-        <div className="prose prose-gray max-w-none prose-headings:text-gray-900 prose-a:text-teal prose-strong:text-gray-900 prose-img:rounded-xl"
-          dangerouslySetInnerHTML={{ __html: page.content }} />
-      </article>
-    </MainLayout>
-  )
+  // Render the full HTML content — this preserves all Tailwind classes and layout from the scraped template
+  return <div dangerouslySetInnerHTML={{ __html: page.content }} />
 }
