@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: "Community | KRYSTALORE",
   description: "Connect with fellow members in the Krystalore community — share wins, ask questions, and grow together.",
   openGraph: {
@@ -16,6 +17,11 @@ export const metadata: Metadata = {
     description: "Connect and grow with the Krystalore community.",
   },
 };
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/dashboard/community', defaults);
+}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

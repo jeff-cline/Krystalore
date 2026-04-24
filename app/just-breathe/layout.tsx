@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: "Just Breathe — Guided Meditations by Krystalore Crews | Beyond Limits Meditation Library",
   description: "A guided meditation library by Krystalore Crews offering grounding, clarity, confidence, healing, and next-level transformation. Short, powerful sessions for beginners and experienced meditators.",
   keywords: "guided meditation, krystalore crews meditation, just breathe meditation, beyond limits meditation, mindfulness, healing meditation, confidence meditation, rebirth series, activation series, awakening series, veteran meditation",
@@ -20,6 +21,11 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: "https://krystalore.com/just-breathe" },
 };
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/just-breathe', defaults);
+}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

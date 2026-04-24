@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: "Health Mastery Group Coaching — Krystalore Crews | Executive Wellness & Leadership",
   description: "A high-level group coaching experience for entrepreneurs and leaders ready to reclaim their energy, rebuild consistency, and lead their life from the inside out. Weekly coaching calls, fitness systems, accountability, and community.",
   keywords: "health mastery, executive coaching, group coaching, fitness coaching, leadership development, wellness program, krystalore crews, entrepreneur health, energy optimization, accountability coaching",
@@ -29,6 +30,11 @@ export const metadata: Metadata = {
     canonical: "https://krystalore.com/health-mastery",
   },
 };
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/health-mastery', defaults);
+}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

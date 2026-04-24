@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: 'Corporate Retreat Planning Services | Krystalore Crews | Destination Retreats & Team Building',
   description: 'Expert corporate retreat planning by Krystalore Crews. Destination retreats, team building experiences, EQ workshops, and leadership development events. Caribbean, domestic, and international retreat locations.',
   keywords: ['corporate retreat planning', 'corporate retreat planner', 'team building retreat', 'destination corporate retreat', 'executive retreat planning', 'corporate team retreat', 'leadership retreat', 'EQ workshop retreat', 'Krystalore Crews retreats'],
@@ -16,6 +17,11 @@ export const metadata: Metadata = {
     title: 'Corporate Retreat Planning | Krystalore Crews',
     description: 'Destination retreats, team building, and leadership development events planned by an expert.',
   },
+}
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/corporate-retreat-planning', defaults);
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

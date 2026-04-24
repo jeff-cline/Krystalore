@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: "Rewrite in Real Time — Live Masterclass with Krystalore Crews | May 20, 2026",
   description: "Mastering the Messy Middle of Your Transformation. A 90-minute live masterclass on staying consistent, confident, and in motion while everything in your life is changing. With Krystalore Crews.",
   keywords: "rewrite masterclass, krystalore crews, messy middle, transformation, consistency, confidence, freedom formula, 34 minute reset, leadership, wellness, live masterclass, personal development",
@@ -20,6 +21,11 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: "https://krystalore.com/rewrite" },
 };
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/rewrite', defaults);
+}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

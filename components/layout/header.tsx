@@ -12,6 +12,7 @@ export default function Header() {
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
     { href: '/courses', label: 'Courses' },
+    { href: '/quizzes', label: 'Quizzes' },
     { href: '/events', label: 'Events' },
     { href: '/books', label: 'Books' },
     { href: '/podcasts', label: 'Podcast' },
