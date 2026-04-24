@@ -1,4 +1,5 @@
-import MainLayout from '@/components/layout/MainLayout'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/Footer'
 import {
   Check,
   Star,
@@ -73,8 +74,10 @@ export default function HealthMasteryPage() {
   }
 
   return (
-    <MainLayout>
+    <>
+      <Header />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
 
       <section className="rounded-2xl overflow-hidden mb-8 sm:mb-10">
         <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
@@ -297,6 +300,9 @@ export default function HealthMasteryPage() {
           </Link>
         </div>
       </section>
-    </MainLayout>
+      </div>
+      <Footer />
+      <div className="text-center pb-2"><a href="https://jeff-cline.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '6px', opacity: 0.08, color: '#666' }}>JC</a></div>
+    </>
   )
 }
