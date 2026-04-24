@@ -3,7 +3,9 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Save, Plus, Trash2, Image as ImageIcon, Type } from 'lucide-react'
+import { ArrowLeft, Save, Plus, Trash2, Image as ImageIcon, Type, Check } from 'lucide-react'
+import ImagePicker from '@/components/admin/ImagePicker'
+import CrystalSpinner from '@/components/admin/CrystalSpinner'
 
 interface Block {
   id: string
@@ -47,7 +49,10 @@ export default function PageBlocksEditor() {
   const [blocks, setBlocks] = useState<Record<string, Block>>({})
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [savedAt, setSavedAt] = useState<number | null>(null)
+  const [saveError, setSaveError] = useState<string | null>(null)
   const [newKey, setNewKey] = useState('')
+  const [pickerFor, setPickerFor] = useState<string | null>(null)
 
   useEffect(() => {
     fetch(`/api/admin/pages/by-slug/${slug}`)
@@ -89,6 +94,7 @@ export default function PageBlocksEditor() {
   const handleSave = async () => {
     if (!page) return
     setSaving(true)
+    setSaveError(null)
     try {
       const payload: Record<string, Block> = {}
       Object.entries(blocks).forEach(([k, v]) => {
@@ -101,16 +107,25 @@ export default function PageBlocksEditor() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Save failed')
-      alert('Saved.')
+      setSavedAt(Date.now())
+      setTimeout(() => setSavedAt(null), 2200)
     } catch (err: any) {
-      alert('Save failed: ' + err.message)
+      setSaveError(err.message)
     } finally {
       setSaving(false)
     }
   }
 
-  if (loading) return <div className="p-6 text-gray-500">Loading…</div>
+  if (loading) {
+    return (
+      <div className="p-6 text-gray-500 inline-flex items-center gap-2">
+        <CrystalSpinner size={18} /> Loading…
+      </div>
+    )
+  }
   if (!page) return <div className="p-6 text-red-600">Page not found.</div>
+
+  const justSaved = savedAt !== null
 
   return (
     <div>
@@ -120,15 +135,34 @@ export default function PageBlocksEditor() {
             <ArrowLeft className="h-3 w-3" /> Back to Pages
           </Link>
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">Edit Content: {page.title}</h1>
-          <p className="text-xs text-gray-400 mt-1">Live path: <code>{livePath}</code> &middot; slug: <code>{page.slug}</code></p>
+          <p className="text-xs text-gray-400 mt-1">
+            Live path: <code>{livePath}</code> &middot; slug: <code>{page.slug}</code>
+          </p>
         </div>
         <div className="flex items-center gap-2">
-          <a href={livePath} target="_blank" className="text-xs px-3 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-200">Open live</a>
-          <button onClick={handleSave} disabled={saving} className="bg-teal hover:bg-[#37a6a6] text-white text-sm font-bold py-2 px-4 rounded-xl disabled:opacity-50 inline-flex items-center gap-2">
-            <Save className="h-4 w-4" /> {saving ? 'Saving…' : 'Save Overrides'}
-          </button>
+          <a href={livePath} target="_blank" className="text-xs px-3 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-200">
+            Open live
+          </a>
+          {justSaved ? (
+            <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm font-bold py-2 px-4 rounded-xl inline-flex items-center gap-2">
+              <Check className="h-4 w-4" /> Saved
+            </div>
+          ) : (
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className="bg-teal hover:bg-[#37a6a6] text-white text-sm font-bold py-2 px-4 rounded-xl disabled:opacity-70 inline-flex items-center gap-2 min-w-[140px] justify-center"
+            >
+              {saving ? <CrystalSpinner size={18} /> : <Save className="h-4 w-4" />}
+              {saving ? 'Saving…' : 'Save Overrides'}
+            </button>
+          )}
         </div>
       </div>
+
+      {saveError && (
+        <div className="mb-3 p-2 text-xs bg-red-50 border border-red-200 text-red-700 rounded-lg">{saveError}</div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden" style={{ height: '70vh' }}>
@@ -144,8 +178,7 @@ export default function PageBlocksEditor() {
             Override text or image for any block on this page. Block IDs come from the page&apos;s
             <code className="mx-1 px-1 bg-gray-100 rounded">data-cms-block</code> attributes (set by
             <code className="mx-1 px-1 bg-gray-100 rounded">&lt;EditableText&gt;</code> /
-            <code className="mx-1 px-1 bg-gray-100 rounded">&lt;EditableImage&gt;</code> components).
-            Inspect the live page to find IDs.
+            <code className="mx-1 px-1 bg-gray-100 rounded">&lt;EditableImage&gt;</code> components). Inspect the live page to find IDs.
           </p>
 
           <div className="flex gap-2 mb-4">
@@ -156,7 +189,10 @@ export default function PageBlocksEditor() {
               onChange={(e) => setNewKey(e.target.value)}
               className="flex-1 px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-900 focus:border-teal outline-none"
             />
-            <button onClick={addBlock} className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm inline-flex items-center gap-1">
+            <button
+              onClick={addBlock}
+              className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm inline-flex items-center gap-1"
+            >
               <Plus className="h-4 w-4" /> Add
             </button>
           </div>
@@ -175,21 +211,42 @@ export default function PageBlocksEditor() {
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
                 </div>
-                <label className="block text-[10px] uppercase tracking-wide text-gray-400 mt-2 mb-1 inline-flex items-center gap-1"><Type className="h-3 w-3" /> Text</label>
+
+                <label className="block text-[10px] uppercase tracking-wide text-gray-400 mt-2 mb-1 inline-flex items-center gap-1">
+                  <Type className="h-3 w-3" /> Text
+                </label>
                 <textarea
                   rows={2}
                   value={block.text || ''}
                   onChange={(e) => updateBlock(id, { text: e.target.value })}
                   className="w-full px-2 py-1.5 rounded border border-gray-200 text-sm text-gray-900 focus:border-teal outline-none"
                 />
-                <label className="block text-[10px] uppercase tracking-wide text-gray-400 mt-2 mb-1 inline-flex items-center gap-1"><ImageIcon className="h-3 w-3" /> Image src</label>
-                <input
-                  type="text"
-                  value={block.src || ''}
-                  onChange={(e) => updateBlock(id, { src: e.target.value })}
-                  placeholder="/images/..."
-                  className="w-full px-2 py-1.5 rounded border border-gray-200 text-sm text-gray-900 focus:border-teal outline-none"
-                />
+
+                <label className="block text-[10px] uppercase tracking-wide text-gray-400 mt-2 mb-1 inline-flex items-center gap-1">
+                  <ImageIcon className="h-3 w-3" /> Image
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={block.src || ''}
+                    onChange={(e) => updateBlock(id, { src: e.target.value })}
+                    placeholder="/images/... or upload"
+                    className="flex-1 px-2 py-1.5 rounded border border-gray-200 text-sm text-gray-900 focus:border-teal outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setPickerFor(id)}
+                    className="bg-white hover:bg-gray-100 text-gray-700 border border-gray-200 px-2.5 py-1.5 rounded text-xs inline-flex items-center gap-1"
+                  >
+                    <ImageIcon className="h-3.5 w-3.5" /> Browse
+                  </button>
+                </div>
+                {block.src && (
+                  <div className="mt-2 border border-gray-200 rounded bg-white p-1 inline-block">
+                    <img src={block.src} alt="" className="h-16 w-auto object-contain" />
+                  </div>
+                )}
+
                 <label className="block text-[10px] uppercase tracking-wide text-gray-400 mt-2 mb-1">Alt / Link href</label>
                 <div className="grid grid-cols-2 gap-2">
                   <input
@@ -212,6 +269,14 @@ export default function PageBlocksEditor() {
           </div>
         </div>
       </div>
+
+      <ImagePicker
+        open={pickerFor !== null}
+        onClose={() => setPickerFor(null)}
+        onPick={(url) => {
+          if (pickerFor) updateBlock(pickerFor, { src: url })
+        }}
+      />
     </div>
   )
 }
