@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: 'Million Dollar Body Academy | Executive Fitness & Confidence Program',
   description: 'Transform your body and mindset in 3 months. The Million Dollar Body Academy is designed for powerful professional women ready to level up their fitness, confidence, and energy.',
   keywords: 'fitness program, women executives, body transformation, confidence building, million dollar body, health coaching, professional women fitness, Krystalore Crews',
@@ -61,6 +62,11 @@ function MillionDollarBodyJsonLd() {
     ]
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+}
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/courses/million-dollar-body', defaults);
 }
 
 export default function MillionDollarBodyLayout({ children }: { children: React.ReactNode }) {

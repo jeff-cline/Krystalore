@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: 'Veteran Retreats | Military Wellness Retreats with Krystalore Crews',
   description: 'Transformative veteran retreats led by military spouse Krystalore Crews. Weekend recharge, 5-day mission reset, and VIP command experiences. Peer connection, mindset reset, career workshops, and family integration. Military discounts available.',
   keywords: ['veteran retreat', 'military retreat', 'veteran wellness retreat', 'military wellness retreat', 'veteran retreat program', 'military family retreat', 'veteran transition retreat', 'Krystalore Crews'],
@@ -17,6 +18,11 @@ export const metadata: Metadata = {
     description: 'Immersive retreats for veterans and military families. Honor your service, invest in your future.',
     images: ['https://executive-krystalore.vercel.app/images/krystalore-crews-logo.png'],
   },
+}
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/veteran-retreats', defaults);
 }
 
 export default function VeteranRetreatsLayout({ children }: { children: React.ReactNode }) {

@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
-import { FileText, Plus, Edit, Trash2, Eye, Copy, Image as ImageIcon, Code, Save, X, Search, Globe, Film } from 'lucide-react'
+import { FileText, Plus, Edit, Trash2, Eye, Copy, Image as ImageIcon, Code, Save, X, Search, Globe, Film, RefreshCw, Layers } from 'lucide-react'
+import Link from 'next/link'
 
 interface CmsPage {
   id: string; title: string; slug: string; content: string; seoTitle: string | null
@@ -170,8 +171,25 @@ export default function AdminPagesPage() {
   const [mediaSearch, setMediaSearch] = useState('')
   const [pageSearch, setPageSearch] = useState('')
   const [useVisualEditor, setUseVisualEditor] = useState(true)
+  const [syncing, setSyncing] = useState(false)
 
   const refresh = () => fetch('/api/admin/pages').then(r => r.json()).then(p => setPages(Array.isArray(p) ? p : []))
+
+  const handleSync = async () => {
+    if (syncing) return
+    setSyncing(true)
+    try {
+      const res = await fetch('/api/admin/pages/sync', { method: 'POST' })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Sync failed')
+      await refresh()
+      alert(`Synced ${data.discovered} site pages (${data.created} new, ${data.updated} updated).`)
+    } catch (err: any) {
+      alert('Sync failed: ' + err.message)
+    } finally {
+      setSyncing(false)
+    }
+  }
 
   useEffect(() => {
     Promise.all([
@@ -228,7 +246,10 @@ export default function AdminPagesPage() {
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Pages</h1>
           <p className="text-gray-500 text-sm mt-1">{pages.length} pages &middot; Visual Page Builder</p>
         </div>
-        <button onClick={() => { resetForm(); setTab('edit') }} className="flex items-center gap-2 bg-teal hover:bg-[#37a6a6] text-white font-medium py-2 px-4 rounded-xl text-sm transition-colors"><Plus className="h-4 w-4" /> New Page</button>
+        <div className="flex items-center gap-2">
+          <button onClick={handleSync} disabled={syncing} className="flex items-center gap-2 bg-white border border-gray-200 hover:border-teal text-gray-700 font-medium py-2 px-4 rounded-xl text-sm transition-colors disabled:opacity-50"><RefreshCw className={`h-4 w-4 ${syncing ? 'animate-spin' : ''}`} /> {syncing ? 'Syncing…' : 'Sync Site Pages'}</button>
+          <button onClick={() => { resetForm(); setTab('edit') }} className="flex items-center gap-2 bg-teal hover:bg-[#37a6a6] text-white font-medium py-2 px-4 rounded-xl text-sm transition-colors"><Plus className="h-4 w-4" /> New Page</button>
+        </div>
       </div>
 
       <div className="flex gap-2 mb-6 overflow-x-auto">
@@ -266,7 +287,8 @@ export default function AdminPagesPage() {
                 </div>
                 <div className="flex items-center gap-1 flex-shrink-0">
                   <a href={isNJ ? livePath : '/p/' + page.slug} target="_blank" className="p-1.5 text-gray-400 hover:text-teal rounded transition-colors" title="View"><Globe className="h-4 w-4" /></a>
-                  <button onClick={() => handleEdit(page)} className="p-1.5 text-gray-400 hover:text-teal rounded transition-colors" title="Edit"><Edit className="h-4 w-4" /></button>
+                  <Link href={`/admin/pages/blocks/${page.slug}`} className="p-1.5 text-gray-400 hover:text-teal rounded transition-colors" title="Edit Content (text/images)"><Layers className="h-4 w-4" /></Link>
+                  <button onClick={() => handleEdit(page)} className="p-1.5 text-gray-400 hover:text-teal rounded transition-colors" title="Edit Page Settings"><Edit className="h-4 w-4" /></button>
                   <button onClick={() => { setCopyModal(page); setCopyName(page.title + ' (Copy)') }} className="p-1.5 text-gray-400 hover:text-blue-500 rounded transition-colors" title="Copy"><Copy className="h-4 w-4" /></button>
                   <button onClick={() => handleDelete(page.id)} className="p-1.5 text-gray-400 hover:text-red-500 rounded transition-colors" title="Delete"><Trash2 className="h-4 w-4" /></button>
                 </div>

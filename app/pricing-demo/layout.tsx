@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: 'Coaching Pricing & Plans',
   description: 'Explore executive coaching pricing and membership plans by Krystalore Crews. Individual coaching, group programs, corporate packages, and retreat experiences.',
   keywords: 'executive coaching pricing, leadership coaching plans, Krystalore Crews coaching, corporate coaching packages',
@@ -16,6 +17,11 @@ export const metadata: Metadata = {
     title: "Coaching Pricing & Plans",
     description: "Explore executive coaching pricing and membership plans by Krystalore Crews. Individual coaching, group programs, corporate packages, and retreat experiences.",
   },
+}
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/pricing-demo', defaults);
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: "Vault | KRYSTALORE",
   description: "Access exclusive content in the Krystalore Crews vault - premium coaching resources and materials.",
   openGraph: {
@@ -16,6 +17,11 @@ export const metadata: Metadata = {
     description: "Access exclusive content in the Krystalore Crews vault - premium coaching resources and materials.",
   },
 };
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/vault', defaults);
+}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
+import { getCmsMeta } from '@/lib/cms-meta';
 
-export const metadata: Metadata = {
+const defaults: Metadata = {
   title: 'Entrepreneur Coaching by Krystalore Crews | Business Coaching & Executive Coaching for Entrepreneurs',
   description: 'Scale your business with expert entrepreneur coaching from Krystalore Crews. Business growth training, mindset coaching, leadership development, and the proven 5 C\'s framework. Free business assessments and interactive tools.',
   keywords: ['entrepreneur coaching', 'business coaching', 'executive coaching for entrepreneurs', 'business growth coaching', 'entrepreneur mindset', 'leadership coaching', 'scale your business', 'business mentor', 'Krystalore Crews', 'Crews Beyond Limits'],
@@ -16,6 +17,11 @@ export const metadata: Metadata = {
     title: 'Entrepreneur Coaching by Krystalore Crews',
     description: 'Expert entrepreneur coaching to scale your business, sharpen your mindset, and lead with confidence.',
   },
+}
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getCmsMeta('/entrepreneur-coaching', defaults);
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
