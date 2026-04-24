@@ -202,6 +202,13 @@ const quizzes = [
 const categories = ['All', 'Leadership', 'Personal Development', 'Fitness', 'Wellness', 'Business', 'Relationships', 'Veterans']
 const audiences = ['Entrepreneurs', 'Veterans', 'Men', 'Women', 'Couples', 'Corporate Executives', 'Corporate Teams']
 
+const quizGallery = [
+  { src: '/images/go9/coaching.jpg', alt: 'Krystalore coaching session' },
+  { src: '/images/go9/fitness.jpg', alt: 'Fitness leadership training' },
+  { src: '/images/go9/group.jpg', alt: 'Community growth circle' },
+  { src: '/images/go9/keynote.jpg', alt: 'Leadership keynote moment' },
+]
+
 export default function QuizzesPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [selectedAudience, setSelectedAudience] = useState<string | null>(null)
@@ -222,18 +229,31 @@ export default function QuizzesPage() {
           ← Back to Dashboard
         </Link>
 
-        {/* Hero Image */}
-        <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl mb-8">
-          <Image src="/images/go9/hero.jpg" alt="Krystalore Crews empowerment and self-discovery assessments" fill className="object-cover" sizes="100vw" />
+        {/* Hero */}
+        <div className="relative h-[360px] md:h-[500px] w-full overflow-hidden rounded-2xl mb-10">
+          <Image src="/images/go9/keynote.jpg" alt="Krystalore quiz and alignment hero" fill className="object-cover" sizes="100vw" priority />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
+          <div className="absolute inset-0 flex items-end">
+            <div className="p-6 md:p-10 max-w-3xl">
+              <p className="text-teal-200 uppercase tracking-[0.2em] text-xs sm:text-sm font-semibold mb-2">Krystalore Quiz Hub</p>
+              <h1 className="text-3xl md:text-5xl font-black text-white leading-tight mb-3">Assessment Center</h1>
+              <p className="text-gray-200 text-sm md:text-lg mb-5">
+                Discover the right next step with category-based quizzes for alignment, leadership, wellness, business growth, and relationships.
+              </p>
+              <Link href="/alignment" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
+                Start with the Alignment Quiz →
+              </Link>
+            </div>
+          </div>
         </div>
 
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Assessment Center</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover insights about yourself with our comprehensive assessment tools. 
-            Each quiz provides personalized feedback to help guide your development journey.
-          </p>
+        {/* Supporting Photo Rail */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {quizGallery.map((img) => (
+            <div key={img.src} className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-sm">
+              <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+            </div>
+          ))}
         </div>
 
         {/* Category Filter */}

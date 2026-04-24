@@ -2,7 +2,8 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import MainLayout from '@/components/layout/MainLayout'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/Footer'
 // Diamond removed per Krystalore's request
 import { ArrowRight, Smartphone, Heart, Brain, TreePine, Mountain, CheckCircle, Quote, Star, Shield, Flame, Target, Users, Sparkles, Download, Play, Headphones, Building2, Megaphone, Dumbbell, Palette, Award, ShoppingBag } from 'lucide-react'
 
@@ -222,8 +223,18 @@ export default function HomePage() {
     }
   ]
 
+  const featuredQuizzes = [
+    { title: 'Alignment Quiz', href: '/alignment', category: 'Main Quiz', image: '/images/go9/coaching.jpg', desc: 'Start with your core alignment and get a strategic next-step path.' },
+    { title: 'Leadership Quizzes', href: '/quizzes?category=Leadership', category: 'Leadership', image: '/images/go9/keynote.jpg', desc: 'Emotional intelligence, social awareness, and executive readiness.' },
+    { title: 'Wellness Quizzes', href: '/quizzes?category=Wellness', category: 'Wellness', image: '/images/go9/fitness.jpg', desc: 'Anxiety, breathwork, and retreat readiness assessments.' },
+    { title: 'Business Quizzes', href: '/quizzes?category=Business', category: 'Business', image: '/images/go9/corporate.jpg', desc: 'Scale-readiness and entrepreneur growth diagnostics.' },
+    { title: 'Relationship Quizzes', href: '/quizzes?category=Relationships', category: 'Relationships', image: '/images/go9/group-sunset-dresses.webp', desc: 'Compatibility and relationship growth scorecards.' },
+  ]
+
   return (
-    <MainLayout>
+    <div className="min-h-screen bg-white">
+      <Header />
+      
       <style jsx global>{`
         @keyframes scroll {
           0% { transform: translateX(0); }
@@ -240,7 +251,7 @@ export default function HomePage() {
           src="/images/go9/hero.jpg"
           alt="Beyond Limits - Krystalore Crews"
           fill
-          className="object-cover object-top"
+          className="object-cover"
           style={{ objectPosition: '60% 20%' }}
           priority
           sizes="100vw"
@@ -302,13 +313,62 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured Quiz Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-sm font-bold tracking-[0.2em] text-[#0D9488] uppercase mb-2">Featured Quiz Path</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Start With Alignment, Then Explore by Category</h2>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                We added quizzes as a featured home section. Begin with the main Alignment quiz, then dive into leadership, wellness, business, and relationship categories.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-6 mb-8">
+              <Link href="/alignment" className="group relative min-h-[360px] rounded-2xl overflow-hidden shadow-xl">
+                <Image src="/images/go9/coaching.jpg" alt="Main alignment quiz hero" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                <div className="absolute bottom-0 p-6 md:p-8">
+                  <span className="inline-block text-xs font-bold tracking-widest uppercase text-teal-200 mb-2">Main Quiz • /alignment</span>
+                  <h3 className="text-3xl font-black text-white mb-2">Life Alignment Assessment</h3>
+                  <p className="text-gray-200 mb-4 max-w-xl">Get clear on where you are, where you want to go, and what to prioritize next.</p>
+                  <span className="inline-flex items-center gap-2 bg-[#34c5c5] text-white font-bold px-5 py-2.5 rounded-full">Take Alignment Quiz <ArrowRight className="h-4 w-4" /></span>
+                </div>
+              </Link>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {featuredQuizzes.slice(1).map((quiz) => (
+                  <Link key={quiz.title} href={quiz.href} className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                    <div className="relative h-36">
+                      <Image src={quiz.image} alt={quiz.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 100vw, 25vw" />
+                    </div>
+                    <div className="p-4">
+                      <p className="text-xs uppercase tracking-wider text-[#0D9488] font-bold mb-1">{quiz.category}</p>
+                      <h4 className="font-bold text-gray-900 mb-1">{quiz.title}</h4>
+                      <p className="text-sm text-gray-600">{quiz.desc}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Link href="/quizzes" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-7 py-3 font-bold hover:scale-105 transition-transform">
+                Explore All Quiz Categories <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Freedom Formula Section */}
       <section className="bg-[#F4F1EC] py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-12 items-center mb-16">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-md aspect-[3/4] flex-shrink-0">
-                <Image src="/images/go9/coaching.jpg" alt="Krystalore Crews" fill className="object-cover object-top" />
+                <Image src="/images/go9/coaching.jpg" alt="Krystalore Crews" fill className="object-cover" />
               </div>
               <div className="flex-1">
                 <div className="text-sm font-bold tracking-[0.2em] text-[#0D9488] uppercase mb-2">THE FREEDOM FORMULA</div>
@@ -324,7 +384,7 @@ export default function HomePage() {
               {fiveCCards.map((card, index) => (
                 <div key={index} className="bg-white rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
                   <div className="relative aspect-square overflow-hidden">
-                    <Image src={card.image} alt={card.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-300" />
+                    <Image src={card.image} alt={card.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
                   </div>
                   <div className="px-4 py-3 text-center">
                     <h3 className="text-xl font-bold text-gray-800 mb-2">{card.title}</h3>
@@ -347,7 +407,7 @@ export default function HomePage() {
                 src="/images/go9/keynote.jpg"
                 alt="Krystalore Crews speaking at event"
                 fill
-                className="object-cover object-top"
+                className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
@@ -375,7 +435,7 @@ export default function HomePage() {
           </div>
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[3/4] group">
-              <Image src="/images/go9/fitness.jpg" alt="Krystalore fitness training" fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+              <Image src="/images/go9/fitness.jpg" alt="Krystalore fitness training" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="text-[#F97316] text-xs font-bold uppercase tracking-widest mb-2">Sweat With Purpose</p>
                 <h3 className="text-2xl font-black text-white mb-2">No Excuses, Only Results</h3>
@@ -403,7 +463,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[3/4] group">
-              <Image src="/images/go9/group.jpg" alt="Krystalore group fitness class" fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+              <Image src="/images/go9/group.jpg" alt="Krystalore group fitness class" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="text-[#14B8A6] text-xs font-bold uppercase tracking-widest mb-2">Stronger Together</p>
                 <h3 className="text-2xl font-black text-white mb-2">Find Your Fire</h3>
@@ -433,7 +493,7 @@ export default function HomePage() {
                   src="/images/go9/meditation.webp"
                   alt="Somatic healing and body-centered therapy with Krystalore Crews"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent" />
@@ -474,7 +534,7 @@ export default function HomePage() {
                       src={img}
                       alt={title}
                       fill
-                      className="object-cover object-top"
+                      className="object-cover"
                       sizes="80px"
                     />
                   </div>
@@ -523,12 +583,12 @@ export default function HomePage() {
                   <Image src="/images/go9/speaking-headshot.jpg" alt="Krystalore Crews speaking at a coaching event" fill className="object-cover object-top" sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
                 <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-                  <Image src="/images/go9/retreat-costa-rica.jpg" alt="Womens somatic healing retreat" fill className="object-cover object-top" sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src="/images/go9/retreat-costa-rica.jpg" alt="Womens somatic healing retreat" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
               </div>
               <div className="pt-8">
                 <div className="relative h-80 rounded-2xl overflow-hidden shadow-lg">
-                  <Image src="/images/go9/hero.jpg" alt="Krystalore Crews fitness coaching" fill className="object-cover object-top" sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src="/images/go9/hero.jpg" alt="Krystalore Crews fitness coaching" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
               </div>
             </div>
@@ -618,7 +678,7 @@ export default function HomePage() {
             ].map(({ title, subtitle, desc, icon: Icon, img }, i) => (
               <div key={i} className="bg-gray-800 rounded-2xl overflow-hidden hover:bg-gray-750 transition-colors group">
                 <div className="h-48 relative overflow-hidden">
-                  <Image src={img} alt={title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
+                  <Image src={img} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform">
@@ -653,7 +713,7 @@ export default function HomePage() {
               <p className="text-gray-600 mb-8">Insights on leadership, resilience, somatic healing, and building a life of purpose. New posts weekly.</p>
               <div className="bg-[#F4F1EC] rounded-2xl overflow-hidden shadow-md mb-6">
                 <div className="relative h-56">
-                  <Image src="/images/krystalore/beach-rainbow.png" alt="Krystalore on the beach with double rainbow" fill className="object-cover object-top" sizes="(max-width: 1024px) 100vw, 50vw" />
+                  <Image src="/images/krystalore/beach-rainbow.png" alt="Krystalore on the beach with double rainbow" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
                 </div>
                 <div className="p-6">
                   <p className="text-[#0D9488] text-xs font-bold uppercase tracking-wider mb-2">Featured Post</p>
@@ -720,17 +780,17 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/go9/corporate.jpg" alt="Leadership retreats with Krystalore Crews" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src="/images/go9/corporate.jpg" alt="Leadership retreats with Krystalore Crews" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent" />
               <p className="absolute bottom-4 left-4 text-white font-bold text-sm">Leadership Retreats</p>
             </div>
             <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/go9/community-hands.jpg" alt="Corporate wellness workshops" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src="/images/go9/community-hands.jpg" alt="Corporate wellness workshops" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent" />
               <p className="absolute bottom-4 left-4 text-white font-bold text-sm">Corporate Wellness</p>
             </div>
             <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/go9/keynote.jpg" alt="Keynote speaking and corporate events" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src="/images/go9/keynote.jpg" alt="Keynote speaking and corporate events" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent" />
               <p className="absolute bottom-4 left-4 text-white font-bold text-sm">Keynote Speaking</p>
             </div>
@@ -773,10 +833,10 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-3xl mx-auto">
             <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/go9/fitness.jpg" alt="Krystalore Crews full body fitness and exercise pose" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 384px" />
+              <Image src="/images/go9/fitness.jpg" alt="Krystalore Crews full body fitness and exercise pose" fill className="object-cover" sizes="(max-width: 768px) 100vw, 384px" />
             </div>
             <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/krystalore/wny-heroes-speaking.png" alt="Krystalore Crews speaking to a group at WNY Heroes event" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 384px" />
+              <Image src="/images/krystalore/wny-heroes-speaking.png" alt="Krystalore Crews speaking to a group at WNY Heroes event" fill className="object-cover" sizes="(max-width: 768px) 100vw, 384px" />
             </div>
           </div>
 
@@ -818,17 +878,17 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-4 mb-10">
             <div className="relative h-64 rounded-xl overflow-hidden shadow-md">
-              <Image src="/images/go9/meditation.webp" alt="Wellness lifestyle and self-care products" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src="/images/go9/meditation.webp" alt="Wellness lifestyle and self-care products" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent" />
               <p className="absolute bottom-3 left-3 text-white font-bold text-sm">Wellness Collection</p>
             </div>
             <div className="relative h-64 rounded-xl overflow-hidden shadow-md">
-              <Image src="/images/go9/group-evening.webp" alt="Beyond Limits lifestyle and activewear" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src="/images/go9/group-evening.webp" alt="Beyond Limits lifestyle and activewear" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent" />
               <p className="absolute bottom-3 left-3 text-white font-bold text-sm">Lifestyle</p>
             </div>
             <div className="relative h-64 rounded-xl overflow-hidden shadow-md">
-              <Image src="/images/go9/fitness-balcony.jpg" alt="Beyond Limits merchandise and apparel" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src="/images/go9/fitness-balcony.jpg" alt="Beyond Limits merchandise and apparel" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent" />
               <p className="absolute bottom-3 left-3 text-white font-bold text-sm">Merch & Apparel</p>
             </div>
@@ -871,7 +931,7 @@ export default function HomePage() {
               {serviceCards.map((card, index) => (
                 <Link key={index} href={card.link} className="rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden bg-white group block">
                   <div className="relative aspect-square overflow-hidden">
-                    <Image src={card.image} alt={card.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-300" />
+                    <Image src={card.image} alt={card.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
                   </div>
                   <div className="px-3 py-3 text-center">
                     <h3 className="text-sm font-bold text-gray-800 mb-1">{card.title}</h3>
@@ -901,7 +961,7 @@ export default function HomePage() {
                     <div className="absolute top-4 right-4 bg-[#0D9488] text-white px-3 py-1 rounded-full text-sm font-semibold z-10">{tool.badge}</div>
                   )}
                   <div className="relative aspect-square overflow-hidden">
-                    <Image src={tool.image} alt={tool.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-300" />
+                    <Image src={tool.image} alt={tool.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
                   </div>
                   <div className="px-4 py-3">
                     <h3 className="text-lg font-bold text-gray-800 mb-1">{tool.title}</h3>
@@ -955,7 +1015,7 @@ export default function HomePage() {
                       src={membership.image} 
                       alt={membership.name}
                       fill
-                      className="object-cover object-top"
+                      className="object-cover"
                     />
                   </div>
                   
@@ -983,10 +1043,10 @@ export default function HomePage() {
 
       <CTABanner variant="teal" />
 
-      
+      <Footer />
       <div className="text-center py-2">
         <a href="https://jeff-cline.com" className="text-[6px] opacity-[0.08] hover:opacity-20 transition-opacity">JC</a>
       </div>
-    </MainLayout>
+    </div>
   )
 }
