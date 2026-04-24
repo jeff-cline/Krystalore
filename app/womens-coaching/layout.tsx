@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import { getCmsMeta } from '@/lib/cms-meta';
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: "Women's Empowerment Coaching by Krystalore Crews | Confidence, Leadership & Life Coaching for Women",
   description: "Transform your life with women's empowerment coaching from Krystalore Crews. Build courageous confidence, develop leadership skills, and create a life you love. Fitness, mindset, and personal development coaching for women.",
   keywords: ["women's coaching", "women's empowerment coaching", "confidence coaching for women", "women's leadership coaching", "life coaching for women", "women's personal development", "female empowerment", "women's fitness coaching", "Krystalore Crews", "Crews Beyond Limits"],
@@ -17,11 +16,6 @@ const defaults: Metadata = {
     title: "Women's Empowerment Coaching by Krystalore Crews",
     description: "Build courageous confidence, develop leadership skills, and create a life you love.",
   },
-}
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/womens-coaching', defaults);
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

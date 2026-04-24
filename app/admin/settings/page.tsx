@@ -75,7 +75,7 @@ export default function AdminSettingsPage() {
         },
         uploadthing: {
           configured: true, // We have the API key
-          apiKey: process.env.NEXT_PUBLIC_UPLOADTHING_PUBLIC_KEY ? 'configured' : ''
+          apiKey: 'configured (server-side)'
         },
         mux: {
           configured: false, // Would check if MUX_TOKEN_ID and MUX_TOKEN_SECRET exist

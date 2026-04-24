@@ -223,14 +223,6 @@ export default function HomePage() {
     }
   ]
 
-  const featuredQuizzes = [
-    { title: 'Alignment Quiz', href: '/alignment', category: 'Main Quiz', image: '/images/go9/coaching.jpg', desc: 'Start with your core alignment and get a strategic next-step path.' },
-    { title: 'Leadership Quizzes', href: '/quizzes?category=Leadership', category: 'Leadership', image: '/images/go9/keynote.jpg', desc: 'Emotional intelligence, social awareness, and executive readiness.' },
-    { title: 'Wellness Quizzes', href: '/quizzes?category=Wellness', category: 'Wellness', image: '/images/go9/fitness.jpg', desc: 'Anxiety, breathwork, and retreat readiness assessments.' },
-    { title: 'Business Quizzes', href: '/quizzes?category=Business', category: 'Business', image: '/images/go9/corporate.jpg', desc: 'Scale-readiness and entrepreneur growth diagnostics.' },
-    { title: 'Relationship Quizzes', href: '/quizzes?category=Relationships', category: 'Relationships', image: '/images/go9/group-sunset-dresses.webp', desc: 'Compatibility and relationship growth scorecards.' },
-  ]
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -309,55 +301,6 @@ export default function HomePage() {
                 {service.label}
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Quiz Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="text-sm font-bold tracking-[0.2em] text-[#0D9488] uppercase mb-2">Featured Quiz Path</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Start With Alignment, Then Explore by Category</h2>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                We added quizzes as a featured home section. Begin with the main Alignment quiz, then dive into leadership, wellness, business, and relationship categories.
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-6 mb-8">
-              <Link href="/alignment" className="group relative min-h-[360px] rounded-2xl overflow-hidden shadow-xl">
-                <Image src="/images/go9/coaching.jpg" alt="Main alignment quiz hero" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 1024px) 100vw, 50vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-                <div className="absolute bottom-0 p-6 md:p-8">
-                  <span className="inline-block text-xs font-bold tracking-widest uppercase text-teal-200 mb-2">Main Quiz • /alignment</span>
-                  <h3 className="text-3xl font-black text-white mb-2">Life Alignment Assessment</h3>
-                  <p className="text-gray-200 mb-4 max-w-xl">Get clear on where you are, where you want to go, and what to prioritize next.</p>
-                  <span className="inline-flex items-center gap-2 bg-[#34c5c5] text-white font-bold px-5 py-2.5 rounded-full">Take Alignment Quiz <ArrowRight className="h-4 w-4" /></span>
-                </div>
-              </Link>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {featuredQuizzes.slice(1).map((quiz) => (
-                  <Link key={quiz.title} href={quiz.href} className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
-                    <div className="relative h-36">
-                      <Image src={quiz.image} alt={quiz.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 100vw, 25vw" />
-                    </div>
-                    <div className="p-4">
-                      <p className="text-xs uppercase tracking-wider text-[#0D9488] font-bold mb-1">{quiz.category}</p>
-                      <h4 className="font-bold text-gray-900 mb-1">{quiz.title}</h4>
-                      <p className="text-sm text-gray-600">{quiz.desc}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="text-center">
-              <Link href="/quizzes" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-7 py-3 font-bold hover:scale-105 transition-transform">
-                Explore All Quiz Categories <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
           </div>
         </div>
       </section>

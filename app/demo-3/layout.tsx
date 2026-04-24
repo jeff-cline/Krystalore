@@ -1,5 +1,4 @@
 import { Metadata, Viewport } from 'next';
-import { getCmsMeta } from '@/lib/cms-meta';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -8,7 +7,7 @@ export const viewport: Viewport = {
   themeColor: '#0f766e',
 };
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: "Krystalore Crews | Executive Coaching, Leadership Training, Wellness Retreats & Keynote Speaking",
   description: "Transform your leadership with Krystalore Crews. Executive coaching, corporate training, luxury retreats, keynote speaking & fitness programs. Former NFL cheerleader helps women reclaim confidence.",
   keywords: [
@@ -118,11 +117,6 @@ const defaults: Metadata = {
   classification: 'Executive Coaching and Leadership Development',
   referrer: 'origin-when-cross-origin',
 };
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/demo-3', defaults);
-}
 
 export default function DemoLayout({
   children,

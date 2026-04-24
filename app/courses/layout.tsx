@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import { getCmsMeta } from '@/lib/cms-meta';
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: 'Premium Courses | Leadership, Fitness & Personal Development',
   description: 'Self-paced video courses by Krystalore Crews. Bombshell Bootcamp, Business Bootcamp, Million Dollar Body Academy, meditation, confidence building, and more for entrepreneurs and leaders.',
   keywords: 'online courses, leadership courses, fitness courses, business bootcamp, executive development, Krystalore Crews courses, personal development courses',
@@ -46,11 +45,6 @@ function CoursesJsonLd() {
     ],
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-}
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/courses', defaults);
 }
 
 export default function CoursesLayout({ children }: { children: React.ReactNode }) {

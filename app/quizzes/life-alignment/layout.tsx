@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import { getCmsMeta } from '@/lib/cms-meta';
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: 'Life Alignment Quiz',
   description: 'Take the Life Alignment self-assessment quiz. Discover your strengths and growth areas with Krystalore Crews executive coaching platform.',
   openGraph: {
@@ -16,11 +15,6 @@ const defaults: Metadata = {
     title: "Life Alignment Quiz",
     description: "Take the Life Alignment self-assessment quiz. Discover your strengths and growth areas with Krystalore Crews executive coaching platform.",
   },
-}
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/quizzes/life-alignment', defaults);
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

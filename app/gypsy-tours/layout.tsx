@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import { getCmsMeta } from '@/lib/cms-meta';
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: 'Gypsy Tours by Krystalore | Caribbean Cruise Shore Excursions - Virgin Voyages Valiant Lady March 2026',
   description: 'Curated Caribbean cruise shore excursion tours by Krystalore Crews for Virgin Voyages Valiant Lady, March 21-28, 2026. Authentic adventures in San Juan, Tortola, Barbados, St. Lucia, Antigua & St. Maarten with our unique hangover energy rating system.',
   keywords: 'Caribbean cruise tours, Virgin Voyages excursions, Valiant Lady March 2026, shore excursions, Tortola tours, Barbados adventures, St. Lucia activities, Antigua experiences, St. Maarten tours, cruise port guides, Caribbean travel, Krystalore Crews',
@@ -54,11 +53,6 @@ const defaults: Metadata = {
     'geo.position': '18.2208;-66.5901',
     'ICBM': '18.2208,-66.5901',
   },
-}
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/gypsy-tours', defaults);
 }
 
 export default function GypsyToursLayout({

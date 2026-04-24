@@ -1,6 +1,7 @@
 'use client'
 
-import MainLayout from '@/components/layout/MainLayout'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -41,9 +42,9 @@ function AboutJsonLd() {
 
 export default function AboutPage() {
   return (
-    <MainLayout>
+    <>
       <AboutJsonLd />
-      
+      <Header />
       <main className="min-h-screen bg-white">
         {/* Breadcrumbs */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -346,7 +347,7 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-      
-    </MainLayout>
+      <Footer />
+    </>
   )
 }

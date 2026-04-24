@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import { getCmsMeta } from '@/lib/cms-meta';
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: "Women's Retreats by Krystalore Crews | Empowerment, Wellness & Leadership Retreats for Women",
   description: "Join a transformational women's retreat with Krystalore Crews. Revive & Thrive experiences combining confidence building, fitness, sisterhood, wellness, and vision casting. Weekend and 5-day retreats available.",
   keywords: ["women's retreat", "women's empowerment retreat", "wellness retreat for women", "women's leadership retreat", "women's wellness retreat", "sisterhood retreat", "Revive and Thrive retreat", "Krystalore Crews retreat", "Crews Beyond Limits"],
@@ -17,11 +16,6 @@ const defaults: Metadata = {
     title: "Women's Retreats by Krystalore Crews",
     description: "Transformational retreats for women ready to level up — mind, body, and beyond.",
   },
-}
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/womens-retreats', defaults);
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

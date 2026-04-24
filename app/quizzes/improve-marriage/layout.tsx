@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import { getCmsMeta } from '@/lib/cms-meta';
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: 'Improve My Marriage Assessment | Free Marriage Health Quiz by Krystalore Crews',
   description: 'Evaluate key areas of your marriage health — communication, appreciation, intimacy, and more. Get personalized recommendations for growth.',
   keywords: ['improve my marriage', 'marriage quiz', 'marriage health assessment', 'marriage help', 'relationship assessment', 'Krystalore Crews'],
@@ -15,11 +14,6 @@ const defaults: Metadata = {
     title: "Improve My Marriage Assessment | Free Marriage Health Quiz by Krystalore Crews",
     description: "Evaluate key areas of your marriage health — communication, appreciation, intimacy, and more. Get personalized recommendations for growth.",
   },
-}
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/quizzes/improve-marriage', defaults);
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

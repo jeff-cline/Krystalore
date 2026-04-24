@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import { getCmsMeta } from '@/lib/cms-meta';
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: 'BREAKTHROUGH | Private Health Strategy Session for Entrepreneurs | Krystalore Crews',
   description: 'A private, high-level health strategy session for entrepreneurs who want sustainable success. Book your BREAKTHROUGH session with Krystalore Crews.',
   keywords: 'health strategy, entrepreneur health, executive wellness, burnout prevention, Krystalore Crews, health coaching, sustainable success',
@@ -19,11 +18,6 @@ const defaults: Metadata = {
       }
     ]
   },
-}
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/breakthrough', defaults);
 }
 
 export default function BreakthroughLayout({ children }: { children: React.ReactNode }) {

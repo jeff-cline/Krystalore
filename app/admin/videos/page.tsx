@@ -42,7 +42,7 @@ interface Category {
 export default function VideoManagementPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState<'videos' | 'categories' | 'upload' | 'feedflix-sync'>('categories')
+  const [activeTab, setActiveTab] = useState<'videos' | 'categories' | 'upload'>('categories')
 
   // Video state
   const [videos, setVideos] = useState<VideoItem[]>([])
@@ -76,15 +76,9 @@ export default function VideoManagementPage() {
   const [editingVideo, setEditingVideo] = useState<VideoItem | null>(null)
   const [editForm, setEditForm] = useState({ title: '', description: '', category: '', categoryId: '', seoTitle: '', seoDescription: '', keywords: '', membershipLevel: '', thumbnailUrl: '' })
   const [savingVideo, setSavingVideo] = useState(false)
-  const [deletingVideoId, setDeletingVideoId] = useState<string | null>(null)
 
   // Upload state
   const [importing, setImporting] = useState(false)
-
-  // Streaming sync state
-  const [syncData, setSyncData] = useState<any>(null)
-  const [syncLoading, setSyncLoading] = useState(false)
-  const [syncing, setSyncing] = useState(false)
 
   useEffect(() => {
     if (status === 'unauthenticated') router.push('/auth/login')
@@ -258,24 +252,6 @@ export default function VideoManagementPage() {
     fetchCategories()
   }
 
-  const handleDeleteVideo = async (id: string) => {
-    try {
-      const res = await fetch('/api/videos', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
-      })
-      const data = await res.json()
-      if (data.error) throw new Error(data.error)
-      setVideos(prev => prev.filter(v => v.id !== id))
-      setTotalVideos(prev => prev - 1)
-      setDeletingVideoId(null)
-    } catch (err: any) {
-      alert(err.message || 'Failed to delete video')
-      setDeletingVideoId(null)
-    }
-  }
-
   const openEditVideo = (video: VideoItem) => {
     setEditingVideo(video)
     setEditForm({
@@ -369,10 +345,6 @@ export default function VideoManagementPage() {
         <button onClick={() => setActiveTab('upload')}
           className={`px-6 py-2 rounded-lg font-medium transition-colors ${activeTab === 'upload' ? 'bg-[#34c5c5] text-white' : 'bg-dark-700 text-gray-300 hover:bg-dark-600'}`}>
           <Upload className="h-4 w-4 inline mr-2" />Upload & Import
-        </button>
-        <button onClick={() => { setActiveTab('feedflix-sync'); if (!syncData) { setSyncLoading(true); fetch('/api/admin/category-mapping').then(r => r.json()).then(setSyncData).finally(() => setSyncLoading(false)) } }}
-          className={`px-6 py-2 rounded-lg font-medium transition-colors ${activeTab === 'feedflix-sync' ? 'bg-[#34c5c5] text-white' : 'bg-dark-700 text-gray-300 hover:bg-dark-600'}`}>
-          <FolderOpen className="h-4 w-4 inline mr-2" />Stream Sync
         </button>
       </div>
 
@@ -503,7 +475,6 @@ export default function VideoManagementPage() {
                         <div className="flex items-center space-x-2">
                           <button onClick={() => setPlayingVideo(video)} className="p-1 text-gray-400 hover:text-primary" title="Play video"><Play className="h-4 w-4" /></button>
                           <button onClick={() => openEditVideo(video)} className="p-1 text-gray-400 hover:text-white" title="Edit video"><Edit className="h-4 w-4" /></button>
-                          <button onClick={() => setDeletingVideoId(video.id)} className="p-1 text-gray-400 hover:text-red-500" title="Delete video"><Trash2 className="h-4 w-4" /></button>
                         </div>
                       </td>
                     </tr>
@@ -614,7 +585,7 @@ export default function VideoManagementPage() {
             </table>
           </div>
         </div>
-      ) : activeTab === 'upload' ? (
+      ) : (
         /* Upload Tab */
         <div className="space-y-6">
           <div className="card">
@@ -664,101 +635,6 @@ export default function VideoManagementPage() {
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
-      ) : (
-        /* Streaming Sync Tab */
-        <div className="space-y-6">
-          <div className="card">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-xl font-semibold text-white">Stream Category Mapping</h2>
-                <p className="text-gray-400 text-sm mt-1">Map streaming categories to site categories so membership gating applies to streamed videos</p>
-              </div>
-              <button
-                onClick={async () => {
-                  setSyncing(true)
-                  try {
-                    await fetch('/api/admin/category-mapping', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'auto-sync' }) })
-                    const res = await fetch('/api/admin/category-mapping')
-                    setSyncData(await res.json())
-                  } finally { setSyncing(false) }
-                }}
-                disabled={syncing}
-                className="btn-primary flex items-center disabled:opacity-50 text-sm"
-              >
-                {syncing ? 'Syncing...' : 'Auto-Sync'}
-              </button>
-            </div>
-
-            {syncLoading ? (
-              <div className="text-center py-8 text-gray-400">Loading mappings...</div>
-            ) : syncData ? (
-              <div className="space-y-4">
-                {syncData.feedflixCategories?.length > 0 ? (
-                  <table className="w-full">
-                    <thead>
-                      <tr className="text-left text-xs font-medium text-gray-400 uppercase tracking-wider border-b border-gray-700">
-                        <th className="pb-3 pr-4">Streaming Category</th>
-                        <th className="pb-3 pr-4">Mapped to Local Category</th>
-                        <th className="pb-3">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {syncData.feedflixCategories.map((ff: any) => {
-                        const mapping = syncData.mappings?.find((m: any) => m.feedflixCategoryId === ff.id)
-                        return (
-                          <tr key={ff.id} className="border-b border-gray-700/50">
-                            <td className="py-3 pr-4">
-                              <span className="text-white font-medium">{ff.name}</span>
-                              <span className="text-gray-500 text-xs ml-2">({ff.id.slice(0, 8)}...)</span>
-                            </td>
-                            <td className="py-3 pr-4">
-                              <select
-                                value={mapping?.localCategoryId || ''}
-                                onChange={async (e) => {
-                                  const localCatId = e.target.value
-                                  if (localCatId) {
-                                    await fetch('/api/admin/category-mapping', {
-                                      method: 'POST',
-                                      headers: { 'Content-Type': 'application/json' },
-                                      body: JSON.stringify({ localCategoryId: localCatId, feedflixCategoryId: ff.id, feedflixCategoryName: ff.name }),
-                                    })
-                                  } else if (mapping) {
-                                    await fetch('/api/admin/category-mapping', {
-                                      method: 'DELETE',
-                                      headers: { 'Content-Type': 'application/json' },
-                                      body: JSON.stringify({ id: mapping.id }),
-                                    })
-                                  }
-                                  const res = await fetch('/api/admin/category-mapping')
-                                  setSyncData(await res.json())
-                                }}
-                                className="w-full bg-dark-700 border border-gray-600 rounded px-3 py-1.5 text-white text-sm"
-                              >
-                                <option value="">-- Not Mapped --</option>
-                                {syncData.localCategories?.map((lc: any) => (
-                                  <option key={lc.id} value={lc.id}>{lc.name} ({lc.membershipLevel})</option>
-                                ))}
-                              </select>
-                            </td>
-                            <td className="py-3">
-                              {mapping ? (
-                                <span className="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">Mapped</span>
-                              ) : (
-                                <span className="text-xs text-yellow-400 bg-yellow-400/10 px-2 py-1 rounded">Unmapped</span>
-                              )}
-                            </td>
-                          </tr>
-                        )
-                      })}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p className="text-gray-400 text-center py-8">No Streaming categories found. Make sure your Streaming API key is configured.</p>
-                )}
-              </div>
-            ) : null}
           </div>
         </div>
       )}
@@ -1086,32 +962,6 @@ export default function VideoManagementPage() {
                 className="btn-primary disabled:opacity-50"
               >
                 {sendingNotification ? 'Sending...' : 'Send'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* Delete Confirmation Modal */}
-      {deletingVideoId && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8">
-            <h3 className="text-lg font-bold text-gray-900 mb-3">Delete Video?</h3>
-            <p className="text-gray-600 mb-2">
-              Are you sure you want to delete this video? This action cannot be undone.
-            </p>
-            <p className="text-sm text-gray-400 mb-6 font-mono">{videos.find(v => v.id === deletingVideoId)?.title}</p>
-            <div className="flex gap-3 justify-end">
-              <button
-                onClick={() => setDeletingVideoId(null)}
-                className="px-6 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => handleDeleteVideo(deletingVideoId)}
-                className="px-6 py-2.5 rounded-xl text-sm font-medium bg-red-500 hover:bg-red-600 text-white transition-colors"
-              >
-                Delete
               </button>
             </div>
           </div>

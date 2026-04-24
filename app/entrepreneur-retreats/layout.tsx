@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import { getCmsMeta } from '@/lib/cms-meta';
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: 'Entrepreneur Retreats | Business & Leadership Retreats with Krystalore Crews',
   description: 'Transform your business at an entrepreneur retreat led by Krystalore Crews. Weekend intensives, 5-day masterminds, and VIP private retreats. Strategy sessions, mastermind groups, networking, and accountability. Scale with confidence.',
   keywords: 'entrepreneur retreat, business retreat, leadership retreat for entrepreneurs, mastermind retreat, business growth retreat, entrepreneur mastermind, CEO retreat, Krystalore Crews, Crews Beyond Limits',
@@ -18,11 +17,6 @@ const defaults: Metadata = {
     description: 'Immersive business retreats for entrepreneurs ready to scale. Strategy, mastermind, and breakthrough coaching.',
     images: ['https://executive-krystalore.vercel.app/images/krystalore-crews-logo.png'],
   },
-}
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/entrepreneur-retreats', defaults);
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

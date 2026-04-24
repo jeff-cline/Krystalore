@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { getCmsMeta } from '@/lib/cms-meta';
 
-const defaults: Metadata = {
+export const metadata: Metadata = {
   title: "Login | KRYSTALORE",
   description: "Sign in to your Krystalore Crews executive coaching platform account.",
   openGraph: {
@@ -17,11 +16,6 @@ const defaults: Metadata = {
     description: "Sign in to your Krystalore Crews executive coaching platform account.",
   },
 };
-
-
-export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/login', defaults);
-}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
