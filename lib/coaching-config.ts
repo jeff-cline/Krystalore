@@ -44,7 +44,7 @@ export const coachingConfig = {
   
   externalLinks: [
     { name: 'Home', path: '/' },
-    { name: 'Blog', path: '/blog' },
+    { name: 'News', path: '/news' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Courses', path: '/courses' },

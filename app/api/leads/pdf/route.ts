@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { quizPdfContent, defaultPdfContent, getScoreRange } from '@/data/quiz-pdf-content'
+import { normalizeQuizAnswers, slugifyQuizTitle } from '@/lib/quiz-answer-normalizer'
 
 const BRAND = {
   teal: '#34c5c5',
@@ -178,9 +179,13 @@ export async function POST(request: NextRequest) {
       name = 'Assessment Taker',
       answers = {},
       quizSlug = '',
+      quizTitle = '',
     } = body
 
-    const quizContent = quizPdfContent[quizSlug || ''] || defaultPdfContent
+    const resolvedQuizSlug = quizSlug || slugifyQuizTitle(quizTitle)
+    const normalizedAnswers = normalizeQuizAnswers(answers as Record<string, AnswerPayload>, quizTitle, resolvedQuizSlug)
+
+    const quizContent = quizPdfContent[resolvedQuizSlug || ''] || defaultPdfContent
     const overallScore = Math.max(0, Math.min(100, Math.round(Number(results.overallScore || 0))))
     const range = getScoreRange(overallScore)
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -189,7 +194,7 @@ export async function POST(request: NextRequest) {
     const portrait = toAbsoluteUrl(siteUrl, '/images/krystalore/colibri-image-145.jpg')
     const accentImage = toAbsoluteUrl(siteUrl, quizContent.accentImage)
     const categoryRows = buildCategoryRows(results.categories || {})
-    const responseRows = buildResponses(answers as Record<string, AnswerPayload>)
+    const responseRows = buildResponses(normalizedAnswers)
     const insights = buildResearchCards(quizContent.researchInsights)
     const actionSteps = buildActionSteps(quizContent.actionSteps)
     const services = buildServiceCards(quizContent.relatedServices)

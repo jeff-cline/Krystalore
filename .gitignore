@@ -1,24 +1,4 @@
-# dependencies
-node_modules/
-
-# next.js build output
-.next/
-out/
-
-# local env files
-.env
-.env.*
-!.env.example
-
-# local data and platform files
+.env.local
 data/integrations.json
-.vercel/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# macOS
-.DS_Store
+.vercel
+.env*.local

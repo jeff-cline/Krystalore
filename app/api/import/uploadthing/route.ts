@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { getSession } from '@/lib/auth'
 
-const UPLOADTHING_API_KEY = process.env.UPLOADTHING_API_KEY ?? ''
+const UPLOADTHING_API_KEY = process.env.UPLOADTHING_SECRET || ''
 
 interface UploadThingFile {
   id: string

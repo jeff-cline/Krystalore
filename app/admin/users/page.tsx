@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Users, Search, Filter, Download, Mail, Shield, UserX, UserCheck, MoreHorizontal } from 'lucide-react'
+import { Users, Search, Filter, Download, Mail, Shield, UserX, UserCheck, MoreHorizontal, UserPlus, BarChart3 } from 'lucide-react'
 
 interface User {
   id: string
@@ -37,6 +37,15 @@ export default function AdminUsersPage() {
   const [notificationMessage, setNotificationMessage] = useState('')
   const [showNotificationModal, setShowNotificationModal] = useState(false)
   const [sendingNotification, setSendingNotification] = useState(false)
+  const [showAddUserModal, setShowAddUserModal] = useState(false)
+  const [creatingUser, setCreatingUser] = useState(false)
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    role: 'MEMBER',
+    membershipLevel: 'FREE',
+    password: '',
+  })
 
   useEffect(() => {
     fetchUsers()
@@ -119,6 +128,36 @@ export default function AdminUsersPage() {
       alert('Notification failed due to network error')
     } finally {
       setSendingNotification(false)
+    }
+  }
+
+  const createUser = async () => {
+    if (!newUser.name || !newUser.email) {
+      alert('Name and email are required')
+      return
+    }
+
+    setCreatingUser(true)
+    try {
+      const response = await fetch('/api/admin/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser),
+      })
+
+      const result = await response.json()
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to create user')
+      }
+
+      alert(`User created successfully.${result.temporaryPassword ? ` Temporary password: ${result.temporaryPassword}` : ''}`)
+      setShowAddUserModal(false)
+      setNewUser({ name: '', email: '', role: 'MEMBER', membershipLevel: 'FREE', password: '' })
+      fetchUsers()
+    } catch (error: any) {
+      alert(error.message || 'Failed to create user')
+    } finally {
+      setCreatingUser(false)
     }
   }
 

@@ -119,17 +119,49 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json()
-    const { title, description, category, muxAssetId, muxPlaybackId, thumbnailUrl, duration } = body
+    const {
+      title,
+      description,
+      category,
+      categoryId,
+      muxAssetId,
+      muxPlaybackId,
+      thumbnailUrl,
+      duration,
+      membershipLevel,
+      fileUrl,
+      fileKey,
+      fileType,
+      fileSize,
+      mimeType,
+      originalName,
+      isPublished,
+    } = body
+
+    if (!title) {
+      return NextResponse.json({ error: 'Title is required' }, { status: 400 })
+    }
+
+    const resolvedCategory = category || 'Uncategorized'
 
     const video = await prisma.video.create({
       data: {
         title,
-        description,
-        category,
-        muxAssetId,
-        muxPlaybackId,
-        thumbnailUrl,
-        duration,
+        description: description || null,
+        category: resolvedCategory,
+        categoryId: categoryId || null,
+        muxAssetId: muxAssetId || null,
+        muxPlaybackId: muxPlaybackId || null,
+        thumbnailUrl: thumbnailUrl || null,
+        duration: duration || null,
+        membershipLevel: membershipLevel || 'FREE',
+        fileUrl: fileUrl || null,
+        fileKey: fileKey || null,
+        fileType: fileType || 'VIDEO',
+        fileSize: fileSize || null,
+        mimeType: mimeType || null,
+        originalName: originalName || null,
+        isPublished: typeof isPublished === 'boolean' ? isPublished : false,
         uploaderId: (session.user as any).id,
       },
     })
@@ -137,27 +169,6 @@ export async function POST(request: Request) {
     return NextResponse.json(video)
   } catch (error) {
     console.error('Video create error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
-  }
-}
-
-export async function DELETE(request: Request) {
-  try {
-    const session = await getSession()
-    if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    const role = (session.user as any).role
-    if (!['GOD', 'ADMIN'].includes(role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-
-    const { id } = await request.json()
-    if (!id) return NextResponse.json({ error: 'Video ID required' }, { status: 400 })
-
-    // Delete associated marketing snippets first
-    await prisma.marketingSnippet.deleteMany({ where: { videoId: id } })
-    await prisma.video.delete({ where: { id } })
-
-    return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error('Video delete error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

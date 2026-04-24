@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import MainLayout from '@/components/layout/MainLayout'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
 import { Heart, ArrowLeft, CheckCircle, Moon, Apple, Droplets, Footprints, Activity, Leaf, Compass } from 'lucide-react'
 import Link from 'next/link'
@@ -419,7 +420,8 @@ export default function AlignmentQuiz() {
   // ==================== INTRO ====================
   if (currentStep === 'intro') {
     return (
-      <MainLayout>
+      <>
+      <Header />
         <div className="max-w-4xl mx-auto space-y-8">
           <Link href="/quizzes" className="flex items-center text-primary hover:underline">
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -571,7 +573,8 @@ export default function AlignmentQuiz() {
             </div>
           </div>
         </div>
-      </MainLayout>
+              <Footer />
+      </>
     )
   }
 
@@ -583,7 +586,8 @@ export default function AlignmentQuiz() {
     const selected = multiSelections[currentQuestion] || new Set()
 
     return (
-      <MainLayout>
+      <>
+      <Header />
         <div className="max-w-3xl mx-auto px-2 sm:px-0">
           {/* Disclaimer - compact on mobile */}
           <div className="mb-3 sm:mb-6 p-2 sm:p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
@@ -663,7 +667,8 @@ export default function AlignmentQuiz() {
             )}
           </div>
         </div>
-      </MainLayout>
+              <Footer />
+      </>
     )
   }
 
@@ -704,7 +709,8 @@ export default function AlignmentQuiz() {
     }
 
     return (
-      <MainLayout>
+      <>
+      <Header />
         <div className="max-w-2xl mx-auto px-4 py-16">
           <div className="text-center mb-10">
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#34c5c5]/10 flex items-center justify-center">
@@ -808,7 +814,8 @@ export default function AlignmentQuiz() {
             </div>
           </div>
         </div>
-      </MainLayout>
+              <Footer />
+      </>
     )
   }
 
@@ -820,7 +827,8 @@ export default function AlignmentQuiz() {
   const overallColor = getScoreColor(totalPct)
 
   return (
-    <MainLayout>
+    <>
+      <Header />
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Results Header */}
         <div className="text-center">
@@ -932,6 +940,7 @@ export default function AlignmentQuiz() {
           </div>
         </div>
       </div>
-    </MainLayout>
+            <Footer />
+      </>
   )
 }

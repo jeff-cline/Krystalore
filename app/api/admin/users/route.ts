@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import * as bcrypt from 'bcryptjs'
 import prisma from '@/lib/db'
 import { getSession } from '@/lib/auth'
 
@@ -68,6 +69,68 @@ export async function GET(request: Request) {
     })
   } catch (error) {
     console.error('Users fetch error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const session = await getSession()
+    if (!session?.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const role = (session.user as any).role
+    if (!['GOD', 'ADMIN'].includes(role)) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
+    const body = await request.json()
+    const {
+      email,
+      name,
+      role: newRole = 'MEMBER',
+      membershipLevel = 'FREE',
+      password,
+    } = body
+
+    if (!email || !name) {
+      return NextResponse.json({ error: 'Name and email are required' }, { status: 400 })
+    }
+
+    const existing = await prisma.user.findUnique({ where: { email } })
+    if (existing) {
+      return NextResponse.json({ error: 'Email already in use' }, { status: 409 })
+    }
+
+    const generatedPassword = password || Math.random().toString(36).slice(-10) + 'A!'
+    const hashedPassword = await bcrypt.hash(generatedPassword, 12)
+
+    const user = await prisma.user.create({
+      data: {
+        email,
+        name,
+        role: newRole,
+        membershipLevel,
+        hashedPassword,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        membershipLevel: true,
+        createdAt: true,
+      },
+    })
+
+    return NextResponse.json({
+      success: true,
+      user,
+      temporaryPassword: generatedPassword,
+    })
+  } catch (error) {
+    console.error('User create error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

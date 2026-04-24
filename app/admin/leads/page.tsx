@@ -24,112 +24,50 @@ export default function LeadsPage() {
   const [selectedLead, setSelectedLead] = useState<QuizLead | null>(null)
 
   const downloadPdf = async (lead: QuizLead) => {
-    const results = lead.results || {}
-    const answers = lead.answers || {}
-    const categories = results.categories || {}
-    
-    // Build Q&A HTML
-    const qaHtml = Object.entries(answers).map(([qId, answer]: [string, any]) => {
-      const isEnriched = answer && typeof answer === 'object' && answer.question
-      const questionText = isEnriched ? answer.question : `Question ${qId}`
-      const answerValue = isEnriched ? answer.answer : answer
-      const answerType = isEnriched ? answer.type : (typeof answer === 'number' ? 'scale' : 'multiple-choice')
-      
-      let answerDisplay = String(answerValue)
-      if (answerType === 'scale' || typeof answerValue === 'number') {
-        const labels = ['', 'Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree']
-        answerDisplay = `${answerValue}/5 - ${labels[Number(answerValue)] || ''}`
+    try {
+      const response = await fetch('/api/leads/pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          results: lead.results || {},
+          quizTitle: lead.quizTitle,
+          name: lead.name,
+          answers: lead.answers || {},
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to generate PDF')
       }
-      
-      return `
-        <div style="margin-bottom: 16px; padding: 12px; background: #F4F1EC; border-radius: 8px; border-left: 4px solid #34c5c5;">
-          <div style="font-weight: 600; color: #1B2838; margin-bottom: 4px;">Q${qId}. ${questionText}</div>
-          <div style="color: #37a6a6; font-weight: 500;">${answerDisplay}</div>
-        </div>
-      `
-    }).join('')
-    
-    const categoriesHtml = Object.entries(categories).map(([name, score]: [string, any]) => `
-      <div style="margin-bottom: 12px;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-          <span style="color: #1B2838; font-weight: 500;">${name}</span>
-          <span style="color: #34c5c5; font-weight: 700;">${score}%</span>
-        </div>
-        <div style="background: #e5e7eb; border-radius: 99px; height: 8px; overflow: hidden;">
-          <div style="background: #34c5c5; height: 100%; width: ${score}%; border-radius: 99px;"></div>
-        </div>
-      </div>
-    `).join('')
-    
-    // Create branded PDF HTML
-    const pdfHtml = `
-      <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 700px; margin: 0 auto; color: #1B2838;">
-        <!-- Header with Krystalore branding -->
-        <div style="background: linear-gradient(135deg, #1B2838 0%, #2d3f52 100%); padding: 40px; text-align: center; border-radius: 12px 12px 0 0;">
-          <img src="https://krystalore.com/images/krystalore/63d23c1829f84e249e2d8003.png" alt="Krystalore" style="height: 60px; margin-bottom: 16px;" />
-          <h1 style="color: #E8A849; font-size: 28px; margin: 0 0 8px 0;">${lead.quizTitle}</h1>
-          <p style="color: #beeaea; font-size: 16px; margin: 0;">Assessment Results for ${lead.name}</p>
-          <p style="color: #84d7d7; font-size: 13px; margin: 8px 0 0 0;">Generated ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-        </div>
-        
-        <!-- Overall Score -->
-        <div style="background: #F4F1EC; padding: 30px; text-align: center;">
-          <div style="font-size: 64px; font-weight: 800; color: #34c5c5;">${results.overallScore || 0}%</div>
-          <div style="color: #1B2838; font-size: 16px; font-weight: 500;">Overall Score</div>
-        </div>
-        
-        <!-- Category Scores -->
-        <div style="background: white; padding: 30px;">
-          <h2 style="color: #1B2838; font-size: 20px; margin-bottom: 20px; border-bottom: 2px solid #E8A849; padding-bottom: 8px;">
-            Category Breakdown
-          </h2>
-          ${categoriesHtml}
-        </div>
-        
-        <!-- Questions & Answers -->
-        <div style="background: white; padding: 30px; border-top: 1px solid #e5e7eb;">
-          <h2 style="color: #1B2838; font-size: 20px; margin-bottom: 20px; border-bottom: 2px solid #34c5c5; padding-bottom: 8px;">
-            Your Responses
-          </h2>
-          ${qaHtml}
-        </div>
-        
-        <!-- Footer with contact -->
-        <div style="background: #1B2838; padding: 30px; text-align: center; border-radius: 0 0 12px 12px;">
-          <p style="color: #E8A849; font-size: 16px; font-weight: 600; margin: 0 0 8px 0;">Ready to Transform These Insights Into Action?</p>
-          <p style="color: #beeaea; font-size: 14px; margin: 0 0 16px 0;">Book a consultation to discuss your personalized results</p>
-          <a href="https://krystalore.com/book" style="display: inline-block; background: #E8A849; color: #1B2838; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px;">Book Your Consultation</a>
-          <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
-            <p style="color: #84d7d7; font-size: 13px; margin: 0;">Krystalore Crews | Somatic Leadership Coach</p>
-            <p style="color: #84d7d7; font-size: 13px; margin: 4px 0 0 0;">krystalore@thecrewscoach.com | (716) 390-6727</p>
-            <p style="color: #84d7d7; font-size: 13px; margin: 4px 0 0 0;">krystalore.com</p>
-          </div>
-        </div>
-      </div>
-    `
-    
-    // Open in new window for printing/saving as PDF
-    const printWindow = window.open('', '_blank')
-    if (printWindow) {
-      printWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>${lead.quizTitle} - ${lead.name}</title>
-          <style>
-            body { margin: 0; padding: 20px; background: #f5f5f5; }
-            @media print {
-              body { padding: 0; background: white; }
-            }
-          </style>
-        </head>
-        <body>
-          ${pdfHtml}
-          <script>setTimeout(() => window.print(), 500)<\/script>
-        </body>
-        </html>
-      `)
-      printWindow.document.close()
+
+      const { html } = await response.json()
+
+      const printWindow = window.open('', '_blank')
+      if (printWindow) {
+        printWindow.document.write(`
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>${lead.quizTitle} - ${lead.name}</title>
+            <style>
+              html, body { margin: 0; width: 100%; height: 100%; }
+              body { background: #fff; color: #1B2838; }
+              @media print {
+                @page { size: letter; margin: 0; }
+                html, body { width: 8.5in; height: auto; }
+              }
+            </style>
+          </head>
+          <body>
+            ${html}
+            <script>setTimeout(() => window.print(), 400)<\/script>
+          </body>
+          </html>
+        `)
+        printWindow.document.close()
+      }
+    } catch (error) {
+      console.error('Error generating PDF:', error)
     }
   }
 

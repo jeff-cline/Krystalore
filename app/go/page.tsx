@@ -6,6 +6,7 @@ import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import KrystaloreDiamond from '@/components/KrystaloreDiamond'
 import { ArrowRight, Dumbbell, Mic, Building2, UserCheck, BookOpen, Headphones, GraduationCap, Mountain, Handshake, MapPin, Users, Brain, Sparkles, Shield, Flame, Target, Clock, Calendar, Eye, Smartphone, Zap, Play } from 'lucide-react'
+import { SITE_ROUTES } from '@/lib/site-routes'
 
 export default function GoPage() {
   const services = [
@@ -222,6 +223,14 @@ export default function GoPage() {
       accent: '#37a6a6'
     }
   ]
+
+  const groupedAllRoutes = SITE_ROUTES.reduce((acc, route) => {
+    if (!acc[route.category]) acc[route.category] = []
+    acc[route.category].push(route)
+    return acc
+  }, {} as Record<string, typeof SITE_ROUTES>)
+
+  const orderedCategories = Object.keys(groupedAllRoutes).sort((a, b) => a.localeCompare(b))
 
   return (
     <>
@@ -493,6 +502,49 @@ export default function GoPage() {
                   >
                     {membership.cta}
                   </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Master Link Hub: every route linked at least once */}
+      <section className="bg-gray-50 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Complete Page Directory</h2>
+            <p className="text-lg text-gray-600">
+              Every live page is linked below by category for crawlability and quick access.
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {orderedCategories.map((category) => (
+              <div key={category} className="bg-white rounded-2xl border border-gray-200 p-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{category}</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {groupedAllRoutes[category].map((route) => (
+                    <Link
+                      key={route.path}
+                      href={route.path}
+                      className="group rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white"
+                    >
+                      <div className="relative h-28 w-full">
+                        <Image
+                          src={route.image}
+                          alt={route.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 50vw, 25vw"
+                        />
+                      </div>
+                      <div className="p-3">
+                        <p className="font-semibold text-sm text-gray-900 group-hover:text-[#34c5c5] transition-colors">{route.title}</p>
+                        <p className="text-xs text-gray-500 mt-1">{route.path}</p>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             ))}

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { PrismaClient } from '@prisma/client'
+import { normalizeQuizAnswers } from '@/lib/quiz-answer-normalizer'
 
 const prisma = new PrismaClient()
 
@@ -82,7 +83,12 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    return NextResponse.json(leads)
+    const normalizedLeads = leads.map((lead) => ({
+      ...lead,
+      answers: normalizeQuizAnswers(lead.answers, lead.quizTitle),
+    }))
+
+    return NextResponse.json(normalizedLeads)
   } catch (error) {
     console.error('Error fetching leads:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
