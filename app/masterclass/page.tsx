@@ -42,8 +42,8 @@ export default function RewritePage() {
                 How to stay consistent, confident, and in motion while everything in your life is changing.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="mailto:krystalore@thecrewscoach.com?subject=Rewrite%20Masterclass%20Registration" className="bg-[#E8A849] hover:bg-[#d4963f] text-white font-bold py-4 px-8 rounded-xl transition-colors text-center text-lg shadow-lg shadow-[#E8A849]/30">
-                  Join the Masterclass — $297
+                <a href="https://krystalorecrews.com/masterclass-checkout" className="bg-[#E8A849] hover:bg-[#d4963f] text-white font-bold py-4 px-8 rounded-xl transition-colors text-center text-lg shadow-lg shadow-[#E8A849]/30">
+                  Join the Masterclass
                 </a>
                 <a href="#details" className="bg-white/10 hover:bg-white/20 text-white font-medium py-4 px-8 rounded-xl transition-colors text-center backdrop-blur-sm border border-white/20">
                   Learn More
@@ -326,7 +326,7 @@ export default function RewritePage() {
             <p className="text-[#E8A849] font-bold text-sm uppercase tracking-wider mb-2">Investment</p>
             <p className="text-5xl font-bold text-gray-900 mb-2">$297</p>
             <p className="text-gray-500 mb-8">One-time payment &middot; Replay included</p>
-            <a href="mailto:krystalore@thecrewscoach.com?subject=Rewrite%20Masterclass%20Registration" className="block w-full bg-[#E8A849] hover:bg-[#d4963f] text-white font-bold py-4 rounded-xl transition-colors text-lg shadow-lg shadow-[#E8A849]/30 mb-4">
+            <a href="https://krystalorecrews.com/masterclass-checkout" className="block w-full bg-[#E8A849] hover:bg-[#d4963f] text-white font-bold py-4 rounded-xl transition-colors text-lg shadow-lg shadow-[#E8A849]/30 mb-4">
               Join the Masterclass
             </a>
             <div className="bg-gray-50 rounded-xl p-5 text-left mt-6">
@@ -352,7 +352,7 @@ export default function RewritePage() {
             <p className="font-semibold text-gray-900">You&apos;re in the middle of something that is asking you to rise.</p>
           </div>
           <p className="text-xl font-bold text-teal mt-6 mb-8">And the version of you you&apos;re becoming?<br />She doesn&apos;t quit here.</p>
-          <a href="mailto:krystalore@thecrewscoach.com?subject=Rewrite%20Masterclass%20Registration" className="inline-block bg-[#E8A849] hover:bg-[#d4963f] text-white font-bold py-4 px-10 rounded-xl transition-colors text-lg shadow-lg shadow-[#E8A849]/30">
+          <a href="https://krystalorecrews.com/masterclass-checkout" className="inline-block bg-[#E8A849] hover:bg-[#d4963f] text-white font-bold py-4 px-10 rounded-xl transition-colors text-lg shadow-lg shadow-[#E8A849]/30">
             Join the Masterclass <ArrowRight className="inline h-5 w-5 ml-2" />
           </a>
         </div>
