@@ -89,29 +89,43 @@ export default function ReviveAndThriveRetreatCheckout() {
           <h2 className="text-3xl font-bold text-gray-800 text-center mb-2">Ready to Transform? Let's Begin Your Journey</h2>
           <p className="text-gray-600 text-center mb-8">Secure your spot at the next Revive & Thrive Retreat</p>
 
+          {/* Top fallback button — always shown in case the embed below does not render */}
+          <div className="mb-8 text-center">
+            <a
+              href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#34c5c5] hover:bg-[#37a6a6] text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all inline-block shadow-lg shadow-[#34c5c5]/30"
+            >
+              GO TO CHECK OUT
+            </a>
+            <p className="text-gray-500 text-xs mt-3">Opens the secure checkout in a new tab if the embedded form below does not load.</p>
+          </div>
+
           {/* GHL Checkout Embed */}
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             <iframe
               src="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
               width="100%"
               height="3000"
-              style={{ border: 'none' }}
+              style={{ border: 'none', minHeight: '1200px' }}
               title="Revive & Thrive Retreat Checkout"
-              allow="payment; forms-payment; encrypted-media"
-              loading="lazy"
+              allow="payment *; forms-payment *; encrypted-media *; clipboard-write"
+              referrerPolicy="strict-origin-when-cross-origin"
+              loading="eager"
             />
           </div>
 
-          {/* Fallback Link */}
-          <div className="mt-6 text-center">
-            <p className="text-gray-600 text-sm mb-4">Form not loading? No problem!</p>
-            <a 
-              href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" 
-              target="_blank" 
+          {/* Bottom fallback button */}
+          <div className="mt-8 text-center">
+            <p className="text-gray-600 text-sm mb-4">Form not loading? Use the button below to complete your registration.</p>
+            <a
+              href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
+              target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#34c5c5] hover:bg-[#37a6a6] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-all inline-block"
+              className="bg-[#34c5c5] hover:bg-[#37a6a6] text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all inline-block shadow-lg shadow-[#34c5c5]/30"
             >
-              Complete Registration Here →
+              GO TO CHECK OUT
             </a>
           </div>
 
