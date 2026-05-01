@@ -1,4 +1,5 @@
-import MainLayout from '@/components/layout/MainLayout'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, MapPin, Play, Check, Star, ArrowRight, Zap, Heart, Users, Target, Flame, Shield } from 'lucide-react'
@@ -21,7 +22,8 @@ export default function RewritePage() {
   }
 
   return (
-    <MainLayout>
+    <div className="min-h-screen bg-white">
+      <Header />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* HERO */}
@@ -413,6 +415,8 @@ export default function RewritePage() {
           </div>
         </div>
       </section>
-    </MainLayout>
+
+      <Footer />
+    </div>
   )
 }
