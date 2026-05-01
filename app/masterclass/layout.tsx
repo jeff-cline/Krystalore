@@ -8,7 +8,7 @@ const defaults: Metadata = {
   openGraph: {
     title: "Rewrite in Real Time — Live Masterclass with Krystalore Crews",
     description: "How to stay consistent, confident, and in motion while everything in your life is changing. May 20, 2026.",
-    url: "https://krystalore.com/rewrite",
+    url: "https://krystalore.com/masterclass",
     siteName: "Krystalore Crews",
     type: "website",
     images: [{ url: "https://krystalore.com/images/go9/speaking-event.jpg", width: 1200, height: 630, alt: "Rewrite in Real Time Masterclass with Krystalore Crews" }],
@@ -19,12 +19,12 @@ const defaults: Metadata = {
     description: "Mastering the Messy Middle. Stay consistent, confident, and in motion while everything is changing.",
     images: ["https://krystalore.com/images/go9/speaking-event.jpg"],
   },
-  alternates: { canonical: "https://krystalore.com/rewrite" },
+  alternates: { canonical: "https://krystalore.com/masterclass" },
 };
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/rewrite', defaults);
+  return getCmsMeta('/masterclass', defaults);
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
