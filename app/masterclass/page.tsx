@@ -325,8 +325,7 @@ export default function RewritePage() {
       <section className="mb-16">
         <div className="max-w-2xl mx-auto px-4">
           <div className="bg-white rounded-2xl border-2 border-[#E8A849] p-8 sm:p-10 text-center shadow-lg">
-            <p className="text-[#E8A849] font-bold text-sm uppercase tracking-wider mb-2">Investment</p>
-            <p className="text-5xl font-bold text-gray-900 mb-2">$297</p>
+            <p className="text-[#E8A849] font-bold text-2xl sm:text-3xl mb-6">I am ready to &ldquo;Rewrite in Real Time&rdquo;</p>
             <p className="text-gray-500 mb-8">One-time payment &middot; Replay included</p>
             <a href="https://krystalorecrews.com/masterclass-checkout" className="block w-full bg-[#E8A849] hover:bg-[#d4963f] text-white font-bold py-4 rounded-xl transition-colors text-lg shadow-lg shadow-[#E8A849]/30 mb-4">
               Join the Masterclass
