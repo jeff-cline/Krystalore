@@ -36,9 +36,7 @@ import type { Metadata } from 'next'
 
 /* ─── Carousel Images ─── */
 const carouselImages = [
-  { src: '/images/retreat/retreat-01.jpg', alt: 'Infinity pool overlooking the ocean and Virgin Islands at the Puerto Rico rainforest retreat', caption: 'Infinity Pool with Ocean Views' },
   { src: '/images/retreat/retreat-02.jpg', alt: 'Golden sunset over tropical landscape from the hilltop retreat in Ceiba Puerto Rico', caption: 'Breathtaking Caribbean Sunsets' },
-  { src: '/images/retreat/retreat-03.jpg', alt: 'Aerial view of the 12-casita rainforest retreat property with pool in Ceiba Puerto Rico', caption: 'Your Private 12-Casita Retreat Estate' },
   { src: '/images/retreat/retreat-06.jpg', alt: 'Open-air covered terrace with infinity pool overlooking ocean and rainforest', caption: 'Open-Air Relaxation Terrace' },
   { src: '/images/retreat/retreat-07.jpg', alt: 'Covered outdoor dining area with panoramic ocean and jungle views seating 14', caption: 'Al Fresco Dining with Panoramic Views' },
   { src: '/images/retreat/retreat-08.jpg', alt: 'Bright casita bedroom with ocean views through floor-to-ceiling glass doors', caption: 'Wake Up to Paradise Every Morning' },
@@ -79,8 +77,8 @@ export default function RetreatPage() {
       {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative min-h-[95vh] flex items-center overflow-hidden">
         <Image
-          src="/images/retreat/retreat-01.jpg"
-          alt="Luxury women's wellness retreat infinity pool overlooking Caribbean ocean in Puerto Rico"
+          src="/images/retreat/retreat-group-03.jpg"
+          alt="Women celebrating at sunset on the Puerto Rico oceanview retreat estate"
           fill
           className="object-cover"
           priority
@@ -263,8 +261,8 @@ export default function RetreatPage() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/images/retreat/retreat-03.jpg"
-                  alt="Aerial view of the 12-casita women's retreat property in Puerto Rico rainforest"
+                  src="/images/retreat/retreat-06.jpg"
+                  alt="Open-air relaxation terrace with infinity pool overlooking the ocean at the Puerto Rico women's retreat"
                   width={600}
                   height={450}
                   className="w-full h-auto"
@@ -586,7 +584,7 @@ export default function RetreatPage() {
               availability: 'https://schema.org/LimitedAvailability',
               description: 'All-inclusive retreat package. Flights not included. Payment plans and scholarship opportunities available.',
             },
-            image: 'https://krystalore.com/images/retreat/retreat-01.jpg',
+            image: 'https://krystalore.com/images/retreat/retreat-group-03.jpg',
             keywords: 'women\'s retreat, wellness retreat, business retreat for women, luxury retreat Puerto Rico, women\'s empowerment retreat, executive wellness retreat, transformational coaching retreat',
           }),
         }}

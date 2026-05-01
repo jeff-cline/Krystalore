@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     url: 'https://krystalore.com/retreat',
     images: [
       {
-        url: 'https://krystalore.com/images/retreat/retreat-01.jpg',
+        url: 'https://krystalore.com/images/retreat/retreat-group-03.jpg',
         width: 1200,
         height: 675,
-        alt: 'Women\'s luxury wellness retreat infinity pool in Puerto Rico',
+        alt: 'Women celebrating at sunset on the Puerto Rico women\'s wellness retreat',
       },
     ],
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Women's Wellness Retreat | Revive & Thrive",
     description: "A 7-day luxury retreat for high-achieving women ready to reset, reflect, and rise.",
-    images: ['https://krystalore.com/images/retreat/retreat-01.jpg'],
+    images: ['https://krystalore.com/images/retreat/retreat-group-03.jpg'],
   },
   alternates: {
     canonical: 'https://krystalore.com/retreat',
