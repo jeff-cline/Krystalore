@@ -622,7 +622,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-8 items-stretch">
             {/* Left half — Featured Life Alignment 23-question quiz */}
             <Link
-              href="/quizzes/life-alignment"
+              href="/alignment"
               className="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#34c5c5] to-[#0D9488] shadow-xl hover:shadow-2xl transition-shadow flex flex-col p-8 sm:p-10 text-white min-h-[420px]"
             >
               <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-white/10 group-hover:scale-110 transition-transform" />

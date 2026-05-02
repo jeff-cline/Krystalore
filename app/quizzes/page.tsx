@@ -238,7 +238,7 @@ export default function QuizzesPage() {
 
         {/* Featured Assessment — Life Alignment */}
         <Link
-          href="/quizzes/life-alignment"
+          href="/alignment"
           className="block mb-12 group"
         >
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#34c5c5] to-[#0D9488] shadow-xl hover:shadow-2xl transition-shadow">
