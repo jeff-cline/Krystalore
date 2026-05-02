@@ -606,6 +606,87 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured Assessments — Life Alignment + 6 quick links */}
+      <section className="py-20 px-4 bg-white" id="assessments">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-[#0D9488] font-semibold uppercase tracking-wider text-sm mb-2">Featured Assessments</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+              Start With <span className="text-[#0D9488]">One Honest Question</span>
+            </h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Personalized insights in minutes. Begin with our flagship Life Alignment Assessment, or jump into any of the other featured quizzes.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+            {/* Left half — Featured Life Alignment 23-question quiz */}
+            <Link
+              href="/quizzes/life-alignment"
+              className="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#34c5c5] to-[#0D9488] shadow-xl hover:shadow-2xl transition-shadow flex flex-col p-8 sm:p-10 text-white min-h-[420px]"
+            >
+              <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-white/10 group-hover:scale-110 transition-transform" />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 bg-white/15 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-5">
+                  <Target className="h-3.5 w-3.5" />
+                  Featured Assessment
+                </div>
+                <h3 className="text-3xl sm:text-4xl font-bold mb-3 leading-tight">
+                  Life Alignment Assessment
+                </h3>
+                <p className="text-[#E8A849] font-bold text-base mb-4">23 questions &middot; 10 minutes</p>
+                <p className="text-teal-50 text-base sm:text-lg leading-relaxed mb-6">
+                  Discover how aligned your current life is with your core values and long-term goals — and where to put your energy next.
+                </p>
+              </div>
+              <div className="relative mt-auto">
+                <span className="inline-flex items-center gap-2 bg-white text-[#0D9488] font-bold px-7 py-3.5 rounded-full shadow group-hover:scale-105 transition-transform">
+                  Start the Assessment
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </div>
+            </Link>
+
+            {/* Right half — buttons to other featured quizzes */}
+            <div className="flex flex-col">
+              <p className="text-[#F97316] font-semibold uppercase tracking-wider text-xs mb-4">More Featured Quizzes</p>
+              <div className="grid sm:grid-cols-2 gap-3 flex-1">
+                {[
+                  { slug: 'emotional-intelligence', title: 'Emotional Intelligence', tag: 'Leadership', icon: Heart },
+                  { slug: 'womens-confidence', title: "Women's Confidence", tag: 'Personal Development', icon: Sparkles },
+                  { slug: 'couples-compatibility', title: 'Couples Compatibility', tag: 'Relationships', icon: Users },
+                  { slug: 'veteran-transition', title: 'Veteran Transition Readiness', tag: 'Veterans', icon: Shield },
+                  { slug: 'anxiety', title: 'Anxiety Assessment', tag: 'Wellness', icon: Brain },
+                  { slug: 'entrepreneur-readiness', title: 'Entrepreneur Readiness', tag: 'Business', icon: Award },
+                ].map(({ slug, title, tag, icon: Icon }) => (
+                  <Link
+                    key={slug}
+                    href={`/quizzes/${slug}`}
+                    className="group flex items-center gap-3 bg-[#F4F1EC] hover:bg-white border border-transparent hover:border-[#0D9488]/30 rounded-xl p-4 transition-all hover:shadow-md"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-[#0D9488]/10 group-hover:bg-[#0D9488]/15 flex items-center justify-center flex-shrink-0">
+                      <Icon className="h-5 w-5 text-[#0D9488]" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-bold text-gray-800 text-sm group-hover:text-[#0D9488] transition-colors leading-tight">{title}</p>
+                      <p className="text-gray-500 text-xs mt-0.5">{tag}</p>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-[#0D9488] transition-colors flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="/quizzes"
+                className="mt-4 inline-flex items-center justify-center gap-2 border-2 border-[#0D9488] text-[#0D9488] hover:bg-[#0D9488] hover:text-white font-bold px-6 py-3 rounded-full transition-colors"
+              >
+                See All Assessments
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Content */}
       <section className="py-20 px-4 bg-[#37a6a6]" id="content">
         <div className="max-w-6xl mx-auto">
