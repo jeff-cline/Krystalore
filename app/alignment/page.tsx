@@ -676,6 +676,19 @@ export default function AlignmentQuiz() {
         const sectionScoresForLead = getSectionScores()
         const totalForLead = sectionScoresForLead.reduce((a, s) => a + s.score, 0)
         const maxForLead = sectionScoresForLead.reduce((a, s) => a + s.max, 0)
+
+        // Enrich answers with question text + section so admin sees the actual
+        // questions in /admin/leads, not just numeric indexes.
+        const enrichedAnswers: Record<string, { question: string; answer: number; type: string; section: string }> = {}
+        questions.forEach((q, i) => {
+          enrichedAnswers[q.id] = {
+            question: q.text,
+            answer: answers[i],
+            type: 'scale',
+            section: sectionNames[q.section],
+          }
+        })
+
         const res = await fetch('/api/leads', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -684,7 +697,7 @@ export default function AlignmentQuiz() {
             email: leadForm.email,
             phone: leadForm.phone,
             quizTitle: 'Life Alignment Assessment',
-            answers: answers,
+            answers: enrichedAnswers,
             results: {
               totalScore: totalForLead,
               totalMax: maxForLead,

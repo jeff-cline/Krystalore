@@ -327,8 +327,15 @@ export default function LeadsPage() {
               const answerValue = isEnriched ? answer.answer : answer
               const answerType = isEnriched ? answer.type : (typeof answer === 'number' ? 'scale' : 'multiple-choice')
               
+              const section = isEnriched && answer.section ? answer.section : null
+
               return (
                 <div key={questionId} className="border-b border-gray-100 pb-4 last:border-0">
+                  {section && (
+                    <div className="text-[10px] font-bold text-[#0D9488] uppercase tracking-widest mb-1">
+                      {section}
+                    </div>
+                  )}
                   <div className="text-sm font-medium text-[#1B2838] mb-2">
                     <span className="text-[#34c5c5] font-bold mr-2">Q{questionId}.</span>
                     {questionText}
