@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 // Diamond removed per Krystalore's request
-import { ArrowRight, Smartphone, Heart, Brain, TreePine, Mountain, CheckCircle, Quote, Star, Shield, Flame, Target, Users, Sparkles, Download, Play, Headphones, Building2, Megaphone, Dumbbell, Palette, Award, ShoppingBag } from 'lucide-react'
+import { ArrowRight, Smartphone, Heart, Brain, TreePine, Mountain, CheckCircle, Quote, Star, Shield, Flame, Target, Users, Sparkles, Download, Play, Headphones, Building2, Megaphone, Dumbbell, Palette, Award, ShoppingBag, Moon, Sun, Wind } from 'lucide-react'
 
 function CTABanner({ variant = 'teal' }: { variant?: 'teal' | 'orange' | 'dark' }) {
   const styles = {
@@ -1060,6 +1060,93 @@ export default function HomePage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Just Breathe — Meditation Library */}
+      <section className="py-20 px-4 bg-white" id="just-breathe">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: cover image with intro */}
+            <div className="relative">
+              <div className="relative aspect-square w-full max-w-md mx-auto rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/just-breathe/cover.jpg"
+                  alt="Just Breathe — A Beyond Limits Meditation Library with Krystalore Crews"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 hidden sm:flex items-center gap-2 bg-white rounded-full shadow-lg px-4 py-2">
+                <Headphones className="h-4 w-4 text-[#0D9488]" />
+                <span className="text-xs font-bold text-gray-800">15 Guided Meditations</span>
+              </div>
+            </div>
+
+            {/* Right: intro + 3 series cards */}
+            <div>
+              <p className="text-[#0D9488] font-semibold uppercase tracking-wider text-sm mb-2">Just Breathe</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                A <span className="text-[#0D9488]">Beyond Limits</span> Meditation Library
+              </h2>
+              <p className="text-gray-600 text-lg mb-8">
+                Three transformational series — start with Awakening, progress through Activation, and evolve with Rebirth. Three minutes at a time.
+              </p>
+
+              <div className="space-y-3 mb-6">
+                {[
+                  {
+                    name: 'Awakening Series',
+                    desc: 'Come home to yourself. Grounding, clarity, and reconnection.',
+                    icon: Sun,
+                    gradient: 'from-teal to-[#006767]',
+                    badge: 'Episodes 1–5',
+                  },
+                  {
+                    name: 'Activation Series',
+                    desc: 'Ignite your power. Movement, discipline, and mindset for high achievers.',
+                    icon: Flame,
+                    gradient: 'from-[#E8A849] to-orange-600',
+                    badge: 'Episodes 6–10',
+                  },
+                  {
+                    name: 'Rebirth Series',
+                    desc: 'Release the old, welcome the new. Healing, identity shifts, new beginnings.',
+                    icon: Moon,
+                    gradient: 'from-purple-600 to-indigo-700',
+                    badge: 'Episodes 11–15',
+                  },
+                ].map(({ name, desc, icon: Icon, gradient, badge }) => (
+                  <Link
+                    key={name}
+                    href="/just-breathe"
+                    className="group flex items-start gap-4 bg-white border border-gray-200 hover:border-[#0D9488]/40 rounded-xl p-4 transition-all hover:shadow-md"
+                  >
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0`}>
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-bold text-gray-800 group-hover:text-[#0D9488] transition-colors">{name}</h3>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{badge}</span>
+                      </div>
+                      <p className="text-gray-600 text-sm leading-snug">{desc}</p>
+                    </div>
+                    <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-[#0D9488] transition-colors flex-shrink-0 mt-2" />
+                  </Link>
+                ))}
+              </div>
+
+              <Link
+                href="/just-breathe"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white font-bold px-7 py-3.5 rounded-full shadow hover:scale-105 transition-transform"
+              >
+                <Wind className="h-4 w-4" />
+                Open the Meditation Library
+              </Link>
             </div>
           </div>
         </div>
