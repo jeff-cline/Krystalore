@@ -689,6 +689,15 @@ export default function AlignmentQuiz() {
           }
         })
 
+        const overallPct = Math.round((totalForLead / maxForLead) * 100)
+        // Build the categories map the shared leads UI expects: sectionName -> percent
+        const categoriesForLead: Record<string, number> = {}
+        sectionScoresForLead.forEach((s: any) => {
+          if (s?.name && s?.score != null && s?.max) {
+            categoriesForLead[s.name] = Math.round((s.score / s.max) * 100)
+          }
+        })
+
         const res = await fetch('/api/leads', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -699,9 +708,13 @@ export default function AlignmentQuiz() {
             quizTitle: 'Life Alignment Assessment',
             answers: enrichedAnswers,
             results: {
+              // Standard fields the /admin/leads UI reads first
+              overallScore: overallPct,
+              categories: categoriesForLead,
+              // Alignment-specific extras (kept for backwards compat / detail)
               totalScore: totalForLead,
               totalMax: maxForLead,
-              totalPct: Math.round((totalForLead / maxForLead) * 100),
+              totalPct: overallPct,
               sections: sectionScoresForLead,
             },
           }),

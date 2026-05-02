@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Users, Mail, Phone, Calendar, Filter, ChevronDown, ChevronUp, X, BarChart3, FileText, ArrowLeft, AlertCircle } from 'lucide-react'
+import { ALIGNMENT_QUESTIONS, ALIGNMENT_SECTION_NAMES } from '@/lib/alignment-quiz-meta'
 
 interface QuizLead {
   id: string
@@ -221,7 +222,18 @@ export default function LeadsPage() {
   if (selectedLead) {
     const answers = selectedLead.answers || {}
     const results = selectedLead.results || {}
-    const categories = results.categories || {}
+    // Fall back to alignment-specific field names so older /alignment leads
+    // (which sent totalPct/sections instead of overallScore/categories) still
+    // render their score and section bars.
+    const overallScore = results.overallScore ?? results.totalPct ?? 0
+    let categories: Record<string, any> = results.categories || {}
+    if (Object.keys(categories).length === 0 && Array.isArray(results.sections)) {
+      const fromSections: Record<string, number> = {}
+      results.sections.forEach((s: any) => {
+        if (s?.name) fromSections[s.name] = s.pct ?? Math.round((s.score / s.max) * 100)
+      })
+      categories = fromSections
+    }
 
     return (
       <div className="p-6">
@@ -270,7 +282,7 @@ export default function LeadsPage() {
           </h2>
           <div className="flex items-center justify-center mb-6">
             <div className="text-center">
-              <div className="text-5xl font-bold text-[#34c5c5]">{results.overallScore || 0}%</div>
+              <div className="text-5xl font-bold text-[#34c5c5]">{overallScore}%</div>
               <div className="text-gray-500 mt-1">Overall Score</div>
             </div>
           </div>
@@ -323,11 +335,30 @@ export default function LeadsPage() {
             {Object.entries(answers).map(([questionId, answer]: [string, any]) => {
               // Support both enriched format (with question text) and legacy format
               const isEnriched = answer && typeof answer === 'object' && answer.question
-              const questionText = isEnriched ? answer.question : `Question ${questionId}`
+              // Backfill: for older Life Alignment Assessment leads stored as raw
+              // numbers (no enriched question text), look up the actual question
+              // text from the shared meta. Answer keys are 0..22 (array indexes)
+              // for legacy format, or 1..23 (question ids) for enriched format.
+              let alignmentBackfill: { text: string; section: string } | null = null
+              if (!isEnriched && selectedLead.quizTitle === 'Life Alignment Assessment') {
+                const idx = Number(questionId)
+                const meta = ALIGNMENT_QUESTIONS[idx] // legacy: 0-based index
+                if (meta) {
+                  alignmentBackfill = {
+                    text: meta.text,
+                    section: ALIGNMENT_SECTION_NAMES[meta.section],
+                  }
+                }
+              }
+              const questionText = isEnriched
+                ? answer.question
+                : alignmentBackfill?.text ?? `Question ${questionId}`
               const answerValue = isEnriched ? answer.answer : answer
               const answerType = isEnriched ? answer.type : (typeof answer === 'number' ? 'scale' : 'multiple-choice')
               
-              const section = isEnriched && answer.section ? answer.section : null
+              const section = isEnriched && answer.section
+                ? answer.section
+                : alignmentBackfill?.section ?? null
 
               return (
                 <div key={questionId} className="border-b border-gray-100 pb-4 last:border-0">
