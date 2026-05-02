@@ -28,23 +28,52 @@ export default function LeadsPage() {
   const downloadPdf = async (lead: QuizLead) => {
     const results = lead.results || {}
     const answers = lead.answers || {}
-    const categories = results.categories || {}
-    
+    // Same fallbacks as the inline detail view: support older /alignment leads
+    // that used totalPct/sections instead of overallScore/categories.
+    const overallScore = results.overallScore ?? results.totalPct ?? 0
+    let categories: Record<string, any> = results.categories || {}
+    if (Object.keys(categories).length === 0 && Array.isArray(results.sections)) {
+      const fromSections: Record<string, number> = {}
+      results.sections.forEach((s: any) => {
+        if (s?.name) fromSections[s.name] = s.pct ?? Math.round((s.score / s.max) * 100)
+      })
+      categories = fromSections
+    }
+
     // Build Q&A HTML
     const qaHtml = Object.entries(answers).map(([qId, answer]: [string, any]) => {
       const isEnriched = answer && typeof answer === 'object' && answer.question
-      const questionText = isEnriched ? answer.question : `Question ${qId}`
+      // Backfill question text + section for older Life Alignment leads stored
+      // as raw numeric ratings keyed by zero-based index.
+      let alignmentBackfill: { text: string; section: string } | null = null
+      if (!isEnriched && lead.quizTitle === 'Life Alignment Assessment') {
+        const idx = Number(qId)
+        const meta = ALIGNMENT_QUESTIONS[idx]
+        if (meta) {
+          alignmentBackfill = {
+            text: meta.text,
+            section: ALIGNMENT_SECTION_NAMES[meta.section],
+          }
+        }
+      }
+      const questionText = isEnriched
+        ? answer.question
+        : alignmentBackfill?.text ?? `Question ${qId}`
+      const sectionLabel = isEnriched && answer.section
+        ? answer.section
+        : alignmentBackfill?.section ?? null
       const answerValue = isEnriched ? answer.answer : answer
       const answerType = isEnriched ? answer.type : (typeof answer === 'number' ? 'scale' : 'multiple-choice')
-      
+
       let answerDisplay = String(answerValue)
       if (answerType === 'scale' || typeof answerValue === 'number') {
         const labels = ['', 'Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree']
         answerDisplay = `${answerValue}/5 - ${labels[Number(answerValue)] || ''}`
       }
-      
+
       return `
         <div style="margin-bottom: 16px; padding: 12px; background: #F4F1EC; border-radius: 8px; border-left: 4px solid #34c5c5;">
+          ${sectionLabel ? `<div style="font-size: 10px; font-weight: 700; color: #0D9488; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">${sectionLabel}</div>` : ''}
           <div style="font-weight: 600; color: #1B2838; margin-bottom: 4px;">Q${qId}. ${questionText}</div>
           <div style="color: #37a6a6; font-weight: 500;">${answerDisplay}</div>
         </div>
@@ -76,7 +105,7 @@ export default function LeadsPage() {
         
         <!-- Overall Score -->
         <div style="background: #F4F1EC; padding: 30px; text-align: center;">
-          <div style="font-size: 64px; font-weight: 800; color: #34c5c5;">${results.overallScore || 0}%</div>
+          <div style="font-size: 64px; font-weight: 800; color: #34c5c5;">${overallScore}%</div>
           <div style="color: #1B2838; font-size: 16px; font-weight: 500;">Overall Score</div>
         </div>
         
