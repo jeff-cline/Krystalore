@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { PrismaClient } from '@prisma/client'
+import { authOptions } from '@/lib/auth'
 
 const prisma = new PrismaClient()
 
@@ -65,14 +66,16 @@ async function pushToJeffCRM(lead: Record<string, unknown>) {
 // GET /api/leads - get all leads (admin only)
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession()
-    
+    const session = await getServerSession(authOptions)
+
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const role = (session.user as any).role
-    if (!['GOD', 'ADMIN'].includes(role)) {
+    const adminEmails = ['krystalore@crewsbeyondlimitsconsulting.com', 'krystalore@thecrewscoach.com']
+    const allowed = ['GOD', 'ADMIN'].includes(role) || adminEmails.includes(session.user.email)
+    if (!allowed) {
       return NextResponse.json({ error: 'Forbidden - Admin access required' }, { status: 403 })
     }
 
