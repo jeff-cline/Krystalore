@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Users, Mail, Phone, Calendar, Filter, ChevronDown, ChevronUp, X, BarChart3, FileText, ArrowLeft } from 'lucide-react'
+import { Users, Mail, Phone, Calendar, Filter, ChevronDown, ChevronUp, X, BarChart3, FileText, ArrowLeft, AlertCircle } from 'lucide-react'
 
 interface QuizLead {
   id: string
@@ -22,6 +22,7 @@ export default function LeadsPage() {
   const [sortBy, setSortBy] = useState<'createdAt' | 'quizTitle'>('createdAt')
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [selectedLead, setSelectedLead] = useState<QuizLead | null>(null)
+  const [fetchError, setFetchError] = useState<string | null>(null)
 
   const downloadPdf = async (lead: QuizLead) => {
     const results = lead.results || {}
@@ -138,15 +139,22 @@ export default function LeadsPage() {
   }, [])
 
   const fetchLeads = async () => {
+    setFetchError(null)
     try {
       const response = await fetch('/api/leads')
       if (response.ok) {
         const data = await response.json()
         setLeads(data)
       } else {
-        console.error('Failed to fetch leads')
+        let detail = ''
+        try { detail = (await response.json())?.error || '' } catch {}
+        const msg = `API ${response.status}${detail ? ` — ${detail}` : ''}`
+        setFetchError(msg)
+        console.error('Failed to fetch leads:', msg)
       }
-    } catch (error) {
+    } catch (error: any) {
+      const msg = `Network error: ${error?.message || String(error)}`
+      setFetchError(msg)
       console.error('Error fetching leads:', error)
     } finally {
       setLoading(false)
@@ -449,12 +457,30 @@ export default function LeadsPage() {
       </div>
 
       {/* Leads Table */}
+      {fetchError && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4 flex items-start gap-3">
+          <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+          <div className="flex-1">
+            <p className="font-semibold text-red-900">Could not load leads</p>
+            <p className="text-sm text-red-700 mt-1">{fetchError}</p>
+            <p className="text-xs text-red-600 mt-2">
+              If this says <code>API 401</code> you need to log in. <code>API 403</code> means your account does not have admin/role access. Anything else is a server-side issue.
+            </p>
+            <button
+              onClick={fetchLeads}
+              className="mt-3 inline-flex items-center text-xs font-semibold text-red-700 hover:text-red-900 underline"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      )}
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         {filteredLeads.length === 0 ? (
           <div className="p-8 text-center text-gray-500">
             <Users className="h-12 w-12 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-medium mb-2">No leads found</h3>
-            <p>No quiz leads match your current filters.</p>
+            <p>{fetchError ? 'See error above.' : leads.length === 0 ? 'No quizzes have been submitted yet, or quiz POSTs are not reaching the database.' : 'No quiz leads match your current filters.'}</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
