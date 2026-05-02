@@ -71,8 +71,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const adminEmails = ['krystalore@crewsbeyondlimitsconsulting.com']
-    if (!adminEmails.includes(session.user.email)) {
+    const role = (session.user as any).role
+    if (!['GOD', 'ADMIN'].includes(role)) {
       return NextResponse.json({ error: 'Forbidden - Admin access required' }, { status: 403 })
     }
 

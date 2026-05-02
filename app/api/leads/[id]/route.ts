@@ -17,9 +17,8 @@ export async function PATCH(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // For this demo, we'll check if the email matches the admin email
-    const adminEmails = ['krystalore@crewsbeyondlimitsconsulting.com']
-    if (!adminEmails.includes(session.user.email)) {
+    const role = (session.user as any).role
+    if (!['GOD', 'ADMIN'].includes(role)) {
       return NextResponse.json({ error: 'Forbidden - Admin access required' }, { status: 403 })
     }
 

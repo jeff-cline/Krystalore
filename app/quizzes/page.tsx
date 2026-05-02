@@ -231,10 +231,44 @@ export default function QuizzesPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Assessment Center</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover insights about yourself with our comprehensive assessment tools. 
+            Discover insights about yourself with our comprehensive assessment tools.
             Each quiz provides personalized feedback to help guide your development journey.
           </p>
         </div>
+
+        {/* Featured Assessment — Life Alignment */}
+        <Link
+          href="/quizzes/life-alignment"
+          className="block mb-12 group"
+        >
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#34c5c5] to-[#0D9488] shadow-xl hover:shadow-2xl transition-shadow">
+            <div className="px-6 sm:px-10 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-white">
+              <div className="flex items-start gap-5">
+                <div className="hidden sm:flex w-16 h-16 rounded-full bg-white/15 items-center justify-center flex-shrink-0">
+                  <Target className="h-8 w-8 text-white" />
+                </div>
+                <div>
+                  <p className="text-[#E8A849] font-bold text-xs uppercase tracking-widest mb-2">
+                    Featured Assessment
+                  </p>
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+                    Life Alignment Assessment
+                  </h2>
+                  <p className="text-teal-50 text-base sm:text-lg max-w-xl">
+                    Discover how aligned your current life is with your core values and long-term goals.
+                  </p>
+                  <div className="mt-3 flex items-center gap-4 text-sm text-teal-100">
+                    <span className="inline-flex items-center gap-1"><Clock className="h-4 w-4" /> 10 min</span>
+                    <span>&middot; Personal Development</span>
+                  </div>
+                </div>
+              </div>
+              <span className="inline-flex items-center justify-center bg-white text-[#0D9488] font-bold px-6 py-3 rounded-full shadow group-hover:scale-105 transition-transform whitespace-nowrap">
+                Start the Assessment →
+              </span>
+            </div>
+          </div>
+        </Link>
 
         {/* Category Filter */}
         <div className="flex justify-center mb-4">
