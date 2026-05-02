@@ -4,7 +4,6 @@ import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
 import {
   Dumbbell, ChevronRight, Flame, Brain, Timer, Zap,
   CheckCircle, Target, Users, ArrowRight, Star, Heart,
@@ -13,18 +12,8 @@ import {
 
 const GHL_PAGE = '/group-fitness'
 const CHECKOUT_URL = '/virtual-hiit-camp-checkout'
-const FALLBACK_HERO = 'https://assets.cdn.filesafe.space/pWRRbUgck3MdxOGpZGhY/media/6908e28de5ed23d57d8bf9c8.png'
 
 export default function BootcampPage() {
-  const [heroImage, setHeroImage] = useState(FALLBACK_HERO)
-
-  useEffect(() => {
-    fetch('/api/ghl-bootcamp-image')
-      .then(r => r.json())
-      .then(data => { if (data.url) setHeroImage(data.url) })
-      .catch(() => {})
-  }, [])
-
   return (
     <>
       <Header />
@@ -38,20 +27,13 @@ export default function BootcampPage() {
         </div>
 
         {/* Hero Image */}
-        <div className="relative h-64 md:h-80 w-full overflow-hidden">
-          <Image src="/images/go9/fitness-alt.jpg" alt="Krystalore Crews bootcamp fitness training and strength" fill className="object-cover" sizes="100vw" />
+        <div className="relative h-80 md:h-[28rem] lg:h-[32rem] w-full overflow-hidden">
+          <Image src="/images/go9/fitness-alt.jpg" alt="Krystalore Crews bootcamp fitness training and strength" fill className="object-cover object-center" sizes="100vw" priority />
         </div>
 
         {/* Hero */}
         <section className="relative bg-gradient-to-br from-[#E8A849] via-orange-600 to-red-700 text-white py-20 lg:py-28">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="mb-8">
-              <img
-                src={heroImage}
-                alt="Beyond Limits Bootcamp"
-                className="mx-auto max-w-xs w-full"
-              />
-            </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-4">Welcome to Beyond Limits Bootcamp</h1>
             <p className="text-xl md:text-2xl text-orange-100 max-w-3xl mx-auto mb-4">
               Transform Your Life in Just 34 Minutes a Day &mdash; All From Your Living Room!

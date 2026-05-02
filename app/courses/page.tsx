@@ -42,8 +42,8 @@ export default function CoursesPage() {
       <Header />
       
       {/* Hero Image */}
-      <div className="relative h-64 md:h-80 w-full overflow-hidden">
-        <Image src="/images/go9/planner.jpg" alt="Krystalore Crews courses and educational content" fill className="object-cover object-top" sizes="100vw" />
+      <div className="relative h-80 md:h-[28rem] lg:h-[32rem] w-full overflow-hidden">
+        <Image src="/images/go9/planner.jpg" alt="Krystalore Crews courses and educational content" fill className="object-cover object-center" sizes="100vw" priority />
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

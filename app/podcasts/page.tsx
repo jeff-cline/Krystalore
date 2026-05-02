@@ -110,8 +110,8 @@ export default function PodcastsPage() {
         </div>
 
         {/* Hero Image */}
-        <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl mb-8">
-          <Image src="/images/go9/speaking-headshot.jpg" alt="Krystalore Crews speaking at a leadership event" fill className="object-cover object-top" sizes="100vw" />
+        <div className="relative h-80 md:h-[28rem] lg:h-[32rem] w-full overflow-hidden rounded-xl mb-8">
+          <Image src="/images/go9/speaking-headshot.jpg" alt="Krystalore Crews speaking at a leadership event" fill className="object-cover object-center" sizes="100vw" priority />
         </div>
 
         {/* Podcast Stats */}
