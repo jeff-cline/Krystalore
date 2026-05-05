@@ -98,12 +98,12 @@ export default function RetreatPage() {
             Puerto Rico &bull; El Yunque Rainforest &bull; Private Oceanview Estate
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/revive-and-thrive-retreat-checkout"
+            <a
+              href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
               className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 hover:shadow-teal/40 transition-all duration-300 transform hover:scale-105"
             >
               Reserve My Spot <ArrowRight className="w-5 h-5" />
-            </Link>
+            </a>
             <a
               href="https://www.krystalorecrews.com/book"
               className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-semibold text-lg px-10 py-4 rounded-full hover:bg-white/10 transition-all duration-300"
@@ -452,12 +452,12 @@ export default function RetreatPage() {
             >
               <Phone className="w-5 h-5" /> Book a Call
             </Link>
-            <Link
-              href="/revive-and-thrive-retreat-checkout"
+            <a
+              href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
               className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-600 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
             >
               <Calendar className="w-5 h-5" /> Register Now
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -527,12 +527,12 @@ export default function RetreatPage() {
             Stop waiting for permission to put yourself first. This is your invitation to reset, to be held, to be seen — and to rise into the next-level version of yourself.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-            <Link
-              href="/revive-and-thrive-retreat-checkout"
+            <a
+              href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
               className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 transition-all duration-300 transform hover:scale-105"
             >
               Register Now <ArrowRight className="w-5 h-5" />
-            </Link>
+            </a>
             <Link
               href="/engage"
               className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-600 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 transition-all duration-300 transform hover:scale-105"

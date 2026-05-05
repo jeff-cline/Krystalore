@@ -42,6 +42,8 @@ const nextConfig = {
       { source: '/crews-beyond-limits--referral-programs', destination: '/referral-program', permanent: true },
       { source: '/visionboard', destination: '/vision-board', permanent: true },
       { source: '/rewrite', destination: '/masterclass', permanent: true },
+      // /revive-and-thrive-retreat-checkout is hosted on GHL, not here
+      { source: '/revive-and-thrive-retreat-checkout', destination: 'https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout', permanent: true },
 
     ]
   },
