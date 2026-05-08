@@ -8,36 +8,36 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Krystalore Crews | Executive Coaching, Leadership & Transformation Platform',
+    default: 'Krystalore Crews — International Speaker, Corporate Host & Wellness Consultant',
     template: '%s | Krystalore Crews',
   },
-  description: 'Executive coaching, fitness transformation, and personal development platform by Krystalore Crews. Leadership courses, self-assessment quizzes, books, and live coaching for entrepreneurs, veterans, and corporate leaders.',
-  keywords: 'executive coaching, leadership development, Krystalore Crews, personal transformation, fitness coaching, life coaching, military spouse, veteran coaching, business coaching, wellness',
+  description: 'Creating experiences that energize people, elevate culture, and make teams feel seen — then challenge them to rise. International speaker, corporate host, retreat leader, and wellness consultant.',
+  keywords: 'Krystalore Crews, keynote speaker, corporate host, corporate wellness, retreat leader, leadership training, emotional intelligence, veteran speaker, women\'s empowerment, somatic coaching, resilience speaker',
   metadataBase: new URL('https://krystalore.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Krystalore Crews | Executive Coaching & Leadership Platform',
-    description: 'Transform your leadership journey with executive coaching, fitness, courses, and personal development by Krystalore Crews.',
+    title: 'Krystalore Crews — International Speaker, Corporate Host & Wellness Consultant',
+    description: 'Creating experiences that energize people, elevate culture, and make teams feel seen — then challenge them to rise.',
     url: 'https://krystalore.com',
-    siteName: 'Krystalore Crews Executive Platform',
+    siteName: 'Krystalore Crews',
     type: 'website',
     locale: 'en_US',
     images: [
       {
-        url: '/images/books/road-to-resilience-book-cover.png',
+        url: '/og/krystalore-og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Krystalore Crews Executive Coaching Platform',
+        alt: 'Krystalore Crews on stage — international speaker and corporate host',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Krystalore Crews | Executive Coaching & Leadership Platform',
-    description: 'Transform your leadership journey with executive coaching, fitness, courses, and personal development.',
-    images: ['/images/books/road-to-resilience-book-cover.png'],
+    title: 'Krystalore Crews — International Speaker & Corporate Host',
+    description: 'Creating experiences that energize people, elevate culture, and make teams feel seen — then challenge them to rise.',
+    images: ['/og/krystalore-og.jpg'],
   },
   viewport: {
     width: 'device-width',
