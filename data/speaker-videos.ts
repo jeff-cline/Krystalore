@@ -14,6 +14,9 @@ export type SpeakerVideoCategory = {
 export const SPEAKER_PLAYLIST_URL =
   'https://www.youtube.com/playlist?list=PLY4DtUstl0-uYuj3-IM9g3LA_57_i1YBw'
 
+export const SPEAKER_CHANNEL_URL =
+  'https://www.youtube.com/channel/UC_01CTPIejytkwrWRdxwYdg'
+
 export function videoUrl(id: string): string {
   return `https://www.youtube.com/watch?v=${id}&list=PLY4DtUstl0-uYuj3-IM9g3LA_57_i1YBw`
 }

@@ -22,6 +22,8 @@ import {
   videoUrl,
   videoThumbnail,
   SPEAKER_PLAYLIST_URL,
+  SPEAKER_CHANNEL_URL,
+  type SpeakerVideo,
 } from '@/data/speaker-videos'
 
 function JsonLd() {
@@ -429,11 +431,67 @@ function SpeakerBookingForm() {
   )
 }
 
+function PlayableVideoCard({ video }: { video: SpeakerVideo }) {
+  const [playing, setPlaying] = useState(false)
+  return (
+    <div className="group">
+      <div className="relative aspect-video rounded-xl overflow-hidden shadow-md group-hover:shadow-xl transition-shadow bg-black">
+        {playing ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0`}
+            title={video.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            aria-label={`Play ${video.title}`}
+            className="absolute inset-0 w-full h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-[#34c5c5]"
+          >
+            <Image
+              src={videoThumbnail(video)}
+              alt={video.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              sizes="(max-width: 768px) 100vw, 33vw"
+              unoptimized
+            />
+            <div className="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                <Play className="w-7 h-7 text-[#0D9488] fill-[#0D9488] ml-1" />
+              </div>
+            </div>
+          </button>
+        )}
+      </div>
+      <h4 className="mt-3 font-semibold text-gray-900 line-clamp-2 leading-snug">
+        {video.title}
+      </h4>
+      {!playing && (
+        <a
+          href={videoUrl(video.id)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-1 inline-block text-sm text-[#0D9488] hover:underline"
+        >
+          Open on YouTube ↗
+        </a>
+      )}
+    </div>
+  )
+}
+
 function VideoLibrary() {
   if (!speakerVideos.length) {
     return (
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-sm font-semibold tracking-widest uppercase text-[#34c5c5] mb-3">
+            Krystalore Speaks
+          </p>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Watch Krystalore in Action
           </h2>
@@ -442,7 +500,7 @@ function VideoLibrary() {
             the scenes from stages around the country.
           </p>
           <a
-            href={SPEAKER_PLAYLIST_URL}
+            href={SPEAKER_CHANNEL_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform shadow-lg"
@@ -458,74 +516,50 @@ function VideoLibrary() {
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Watch Krystalore in Action
+          <p className="text-sm font-semibold tracking-widest uppercase text-[#34c5c5] mb-3">
+            Watch & Listen
+          </p>
+          <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+            KRYSTALORE SPEAKS
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            A handful of favorites organized by theme. Tap any video to watch on YouTube — or jump
-            into the full library for more.
+            Tap any video to play it right here on the page. Nine favorites — keynotes,
+            interviews, and signature messages — organized by theme.
           </p>
         </div>
-        <div className="space-y-16">
+        <div className="space-y-14">
           {speakerVideos.map((cat) => (
             <div key={cat.slug}>
-              <div className="flex items-end justify-between flex-wrap gap-3 mb-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">{cat.name}</h3>
-                  {cat.description && (
-                    <p className="text-gray-600 mt-1 max-w-xl">{cat.description}</p>
-                  )}
-                </div>
-                <a
-                  href={SPEAKER_PLAYLIST_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0D9488] font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
-                >
-                  View all on YouTube <ArrowRight className="w-4 h-4" />
-                </a>
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-gray-900">{cat.name}</h3>
+                {cat.description && (
+                  <p className="text-gray-600 mt-1 max-w-2xl">{cat.description}</p>
+                )}
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {cat.videos.map((v) => (
-                  <a
-                    key={v.id}
-                    href={videoUrl(v.id)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group"
-                  >
-                    <div className="relative aspect-video rounded-xl overflow-hidden shadow-md group-hover:shadow-xl transition-shadow">
-                      <Image
-                        src={videoThumbnail(v)}
-                        alt={v.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        unoptimized
-                      />
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                          <Play className="w-7 h-7 text-[#0D9488] fill-[#0D9488] ml-1" />
-                        </div>
-                      </div>
-                    </div>
-                    <h4 className="mt-3 font-semibold text-gray-900 group-hover:text-[#0D9488] transition-colors line-clamp-2">
-                      {v.title}
-                    </h4>
-                  </a>
+                  <PlayableVideoCard key={v.id} video={v} />
                 ))}
               </div>
             </div>
           ))}
         </div>
-        <div className="text-center mt-16">
+        <div className="text-center mt-16 flex flex-col sm:flex-row gap-3 justify-center items-center">
           <a
-            href={SPEAKER_PLAYLIST_URL}
+            href={SPEAKER_CHANNEL_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform shadow-lg"
           >
-            <Play className="w-5 h-5" /> View Full Video Library on YouTube
+            <Play className="w-5 h-5" /> More videos on YouTube
+          </a>
+          <a
+            href={SPEAKER_PLAYLIST_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#0D9488] font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all px-4 py-3"
+          >
+            See the full Krystalore Speaks playlist <ArrowRight className="w-4 h-4" />
           </a>
         </div>
       </div>
@@ -854,23 +888,7 @@ export default function SpeakerPage() {
         </div>
       </section>
 
-      {/* Speaker Reel (kept) */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-10">Speaker Reel</h2>
-          <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl">
-            <iframe
-              src="https://www.youtube.com/embed/1nDPdZd21VE"
-              title="Krystalore Crews Speaker Reel"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Video Library (new) */}
+      {/* Krystalore Speaks — 9 click-to-play videos + channel CTA */}
       <VideoLibrary />
 
       {/* Booking Request Form */}
