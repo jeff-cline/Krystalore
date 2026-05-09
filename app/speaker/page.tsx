@@ -6,7 +6,6 @@ import Footer from '@/components/layout/Footer'
 import FAQSection from '@/components/FAQSection'
 import {
   CheckCircle,
-  Send,
   Sparkles,
   Eye,
   Shield,
@@ -15,6 +14,7 @@ import {
   Mountain,
   Play,
   ArrowRight,
+  Mail,
 } from 'lucide-react'
 import { useState } from 'react'
 import {
@@ -25,6 +25,35 @@ import {
   SPEAKER_CHANNEL_URL,
   type SpeakerVideo,
 } from '@/data/speaker-videos'
+
+const SPEAKER_BOOKING_EMAIL = 'krystalore@thecrewscoach.com'
+const SPEAKER_BOOKING_SUBJECT = 'Interested in booking Krystalore to speak'
+const SPEAKER_BOOKING_BODY = `Hi Krystalore,
+
+I'd love to explore booking you for an upcoming event. A few details to get us started:
+
+INTRO OF COMPANY:
+
+YOUR NAME:
+
+EVENT DATE / TIME:
+
+LOCATION (or virtual):
+
+AUDIENCE / FORMAT:
+
+CONTENT / TOPIC:
+
+BUDGET:
+
+ADDITIONAL DETAILS:
+
+Looking forward to connecting.
+`
+
+const speakerMailtoHref = `mailto:${SPEAKER_BOOKING_EMAIL}?subject=${encodeURIComponent(
+  SPEAKER_BOOKING_SUBJECT,
+)}&body=${encodeURIComponent(SPEAKER_BOOKING_BODY)}`
 
 function JsonLd() {
   const jsonLd = {
@@ -57,7 +86,7 @@ function JsonLd() {
             name: 'How do I book Krystalore as a keynote speaker?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Submit the booking request form on this page or email krystalore@thecrewscoach.com. Krystalore speaks at corporate events, conferences, retreats, military events, and women\'s empowerment gatherings worldwide.',
+              text: 'Click the REQUEST KRYSTALORE TO SPEAK button on this page to open a pre-filled email, or write to krystalore@thecrewscoach.com directly. Krystalore speaks at corporate events, conferences, retreats, military events, and women\'s empowerment gatherings worldwide.',
             },
           },
         ],
@@ -235,7 +264,7 @@ const faqs = [
   {
     question: 'How do I book Krystalore as a keynote speaker?',
     answer:
-      'Submit the booking request form on this page or schedule a call to discuss your event details — audience, topic, format, and logistics. Krystalore speaks at corporate events, conferences, retreats, military events, women\'s empowerment gatherings, and association meetings worldwide.',
+      'Click the REQUEST KRYSTALORE TO SPEAK button on this page to open a pre-filled email — it includes prompts for company intro, event date, audience, topic, and budget. Krystalore\'s team replies within 24 hours. You can also email krystalore@thecrewscoach.com directly. Krystalore speaks at corporate events, conferences, retreats, military events, women\'s empowerment gatherings, and association meetings worldwide.',
   },
   {
     question: 'What does Krystalore typically deliver?',
@@ -273,163 +302,6 @@ const faqs = [
       'Yes. For organizations that want lasting impact beyond the keynote, Krystalore offers post-event workshops, coaching programs, and follow-up sessions to reinforce key messages and drive behavioral change.',
   },
 ]
-
-function SpeakerBookingForm() {
-  const [form, setForm] = useState({
-    firstName: '',
-    email: '',
-    phone: '',
-    organization: '',
-    date: '',
-    budget: '',
-    topic: '',
-    details: '',
-  })
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('sending')
-    try {
-      const res = await fetch('/api/speaker-booking', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      if (res.ok) setStatus('sent')
-      else setStatus('error')
-    } catch {
-      setStatus('error')
-    }
-  }
-
-  if (status === 'sent') {
-    return (
-      <div className="text-center py-12 bg-[#0D9488]/5 rounded-2xl border border-[#0D9488]/20">
-        <CheckCircle className="w-16 h-16 text-[#0D9488] mx-auto mb-4" />
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">Request Received</h3>
-        <p className="text-gray-600">
-          We&apos;ll be in touch within 24 hours to discuss your event. A confirmation has
-          been sent to <strong>{form.email}</strong>.
-        </p>
-      </div>
-    )
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1">First Name *</label>
-        <input
-          type="text"
-          required
-          value={form.firstName}
-          onChange={(e) => setForm((f) => ({ ...f, firstName: e.target.value }))}
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#34c5c5] focus:border-transparent outline-none"
-          placeholder="First Name"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
-        <input
-          type="email"
-          required
-          value={form.email}
-          onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#34c5c5] focus:border-transparent outline-none"
-          placeholder="Email"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1">Phone *</label>
-        <input
-          type="tel"
-          required
-          value={form.phone}
-          onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#34c5c5] focus:border-transparent outline-none"
-          placeholder="Phone"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1">Organization</label>
-        <input
-          type="text"
-          value={form.organization}
-          onChange={(e) => setForm((f) => ({ ...f, organization: e.target.value }))}
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#34c5c5] focus:border-transparent outline-none"
-          placeholder="Organization"
-        />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Event Date</label>
-          <input
-            type="date"
-            value={form.date}
-            onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))}
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#34c5c5] focus:border-transparent outline-none"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Budget</label>
-          <input
-            type="text"
-            value={form.budget}
-            onChange={(e) => setForm((f) => ({ ...f, budget: e.target.value }))}
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#34c5c5] focus:border-transparent outline-none"
-            placeholder="$"
-          />
-        </div>
-      </div>
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1">Speaking Topic</label>
-        <select
-          value={form.topic}
-          onChange={(e) => setForm((f) => ({ ...f, topic: e.target.value }))}
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#34c5c5] focus:border-transparent outline-none bg-white"
-        >
-          <option value="">Select a topic...</option>
-          <option value="keynote">Keynote Address</option>
-          <option value="leadership">Leadership & Emotional Intelligence</option>
-          <option value="resilience">Resilience & Mindset</option>
-          <option value="wellness">Health & Wellness</option>
-          <option value="women">Women&apos;s Empowerment</option>
-          <option value="veteran">Veteran Transition</option>
-          <option value="workshop">Workshop / Training</option>
-          <option value="emcee">Emcee / Host</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1">Details</label>
-        <textarea
-          rows={4}
-          value={form.details}
-          onChange={(e) => setForm((f) => ({ ...f, details: e.target.value }))}
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#34c5c5] focus:border-transparent outline-none resize-none"
-          placeholder="Tell us about your event, audience, and what you're looking for..."
-        />
-      </div>
-      {status === 'error' && (
-        <p className="text-sm text-red-600">
-          Something went wrong. Please try again, or email{' '}
-          <a className="underline" href="mailto:krystalore@thecrewscoach.com">
-            krystalore@thecrewscoach.com
-          </a>{' '}
-          directly.
-        </p>
-      )}
-      <button
-        type="submit"
-        disabled={status === 'sending'}
-        className="w-full bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-xl px-8 py-4 font-bold hover:scale-[1.02] transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
-      >
-        <Send className="w-5 h-5" /> {status === 'sending' ? 'Sending...' : 'Submit Booking Request'}
-      </button>
-    </form>
-  )
-}
 
 function PlayableVideoCard({ video }: { video: SpeakerVideo }) {
   const [playing, setPlaying] = useState(false)
@@ -891,19 +763,31 @@ export default function SpeakerPage() {
       {/* Krystalore Speaks — 9 click-to-play videos + channel CTA */}
       <VideoLibrary />
 
-      {/* Booking Request Form */}
-      <section id="book" className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
-        <div className="max-w-2xl mx-auto px-6">
-          <p className="text-center text-sm font-semibold tracking-widest uppercase text-[#34c5c5] mb-3">
+      {/* Booking CTA — opens email with prefilled prompts */}
+      <section id="book" className="py-24 bg-gradient-to-br from-[#0D9488] via-[#14B8A6] to-[#34c5c5] text-white">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-sm font-semibold tracking-widest uppercase text-teal-50 mb-3">
             Book Krystalore
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-4">
+          <h2 className="text-3xl md:text-5xl font-black mb-6 leading-tight">
             Let&apos;s create an experience your people will never forget.
           </h2>
-          <p className="text-center text-gray-600 mb-10">
-            Fill out the form and Krystalore&apos;s team will be in touch within 24 hours.
+          <p className="text-lg text-teal-50 mb-10 leading-relaxed">
+            Tap the button below to open a pre-written email with all the prompts you need.
+            Krystalore&apos;s team will reply within 24 hours.
           </p>
-          <SpeakerBookingForm />
+          <a
+            href={speakerMailtoHref}
+            className="inline-flex items-center gap-3 bg-white text-[#0D9488] rounded-full px-8 md:px-12 py-5 md:py-6 text-lg md:text-2xl font-black shadow-2xl hover:scale-105 transition-transform"
+          >
+            <Mail className="w-6 h-6 md:w-7 md:h-7" />
+            REQUEST KRYSTALORE TO SPEAK
+          </a>
+          <p className="mt-6 text-sm text-teal-50/90">
+            Opens your email app with{' '}
+            <span className="font-semibold underline">{SPEAKER_BOOKING_EMAIL}</span> pre-filled.
+            Prefer to type your own? Email us directly.
+          </p>
         </div>
       </section>
 
