@@ -100,7 +100,7 @@ export default function HealthMasteryPage() {
             />
           </div>
           <div>
-            <p className="text-teal font-semibold text-sm uppercase tracking-wider mb-2">Is this you?</p>
+            <p className="text-[#006767] font-semibold text-sm uppercase tracking-wider mb-2">Is this you?</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">
               &ldquo;I want my life back.&rdquo;
             </h2>
@@ -129,7 +129,7 @@ export default function HealthMasteryPage() {
 
       {/* EMOTIONAL MASTERY — the hook */}
       <section className="mb-12 sm:mb-16 text-center max-w-3xl mx-auto px-4">
-        <p className="text-teal font-semibold text-sm uppercase tracking-wider mb-3">The Root Beneath Every Pattern</p>
+        <p className="text-[#006767] font-semibold text-sm uppercase tracking-wider mb-3">The Root Beneath Every Pattern</p>
         <h2 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-5 leading-tight">Emotional Mastery</h2>
         <p className="text-gray-700 text-lg sm:text-xl leading-relaxed mb-8">
           The same emotional patterns affecting your relationships are also shaping your health, confidence,
@@ -223,14 +223,38 @@ export default function HealthMasteryPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {pillars.map((p) => (
-            <Link key={p.slug} href={`/emotional-mastery/${p.slug}`} className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-teal/40 hover:shadow-md transition-all">
-              <p className="font-bold text-gray-900 mb-1">{p.title}</p>
-              <p className="text-sm text-gray-600 leading-relaxed">{p.oneLineTeaser}</p>
-              <p className="text-teal text-xs font-semibold uppercase tracking-wider mt-3 inline-flex items-center gap-1">
-                Explore <ArrowRight className="h-3 w-3" />
-              </p>
+            <Link key={p.slug} href={`/emotional-mastery/${p.slug}`} className="group block bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-[#006767]/50 hover:shadow-md transition-all">
+              <div className="relative w-full" style={{ aspectRatio: '4/3' }}>
+                <Image
+                  src={p.heroImage}
+                  alt={p.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+              <div className="p-4">
+                <p className="font-bold text-gray-900 mb-1">{p.title}</p>
+                <p className="text-sm text-gray-700 leading-relaxed">{p.oneLineTeaser}</p>
+                <p className="text-[#006767] text-xs font-semibold uppercase tracking-wider mt-3 inline-flex items-center gap-1">
+                  Explore <ArrowRight className="h-3 w-3" />
+                </p>
+              </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* WIDE IMAGE BREAK BEFORE TAKE A DEEPER LOOK */}
+      <section className="mb-12 sm:mb-16 max-w-6xl mx-auto px-4">
+        <div className="relative w-full rounded-2xl overflow-hidden shadow-md" style={{ aspectRatio: '21/9' }}>
+          <Image
+            src="/images/retreat/retreat-05.jpg"
+            alt="Krystalore Crews — community in retreat"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 1024px"
+          />
         </div>
       </section>
 
@@ -252,10 +276,32 @@ export default function HealthMasteryPage() {
             { title: 'Depression', slug: 'depression' },
             { title: 'Life Alignment', slug: 'life-alignment' },
           ].map((q) => (
-            <Link key={q.slug} href={`/quizzes/${q.slug}`} className="block bg-gray-50 border border-gray-200 rounded-xl p-4 hover:border-teal/40 hover:bg-white transition-colors">
-              <p className="text-xs text-teal font-semibold uppercase tracking-wider mb-1">Free Assessment</p>
+            <Link key={q.slug} href={`/quizzes/${q.slug}`} className="block bg-gray-50 border border-gray-200 rounded-xl p-4 hover:border-[#006767]/50 hover:bg-white transition-colors">
+              <p className="text-xs text-[#006767] font-semibold uppercase tracking-wider mb-1">Free Assessment</p>
               <p className="font-semibold text-gray-900">{q.title}</p>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 4-IMAGE GALLERY BREAK */}
+      <section className="mb-12 sm:mb-16 max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {[
+            '/images/krystalore/cropped-KrystalCrews-145-scaled-1.jpg',
+            '/images/leadership-programs/leadership-event.jpeg',
+            '/images/go9/group.jpg',
+            '/images/krystalore/cropped-HighResolution-143-scaled-2.jpg',
+          ].map((src, i) => (
+            <div key={src + i} className="relative w-full rounded-xl overflow-hidden" style={{ aspectRatio: '1/1' }}>
+              <Image
+                src={src}
+                alt="Krystalore Crews — Emotional Mastery"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 50vw, 25vw"
+              />
+            </div>
           ))}
         </div>
       </section>
@@ -267,39 +313,50 @@ export default function HealthMasteryPage() {
           <p className="text-gray-600 max-w-2xl mx-auto">Start with whichever one fits where you are right now.</p>
         </div>
         <div className="grid md:grid-cols-2 gap-6">
-          <Link href="/quizzes/emotional-mastery-self-assessment" className="block bg-white border border-gray-200 rounded-2xl p-6 hover:border-teal/40 hover:shadow-md transition-all">
-            <p className="text-xs text-teal font-semibold uppercase tracking-wider mb-2">Self-Assessment · ~5 min</p>
+          <Link href="/quizzes/emotional-mastery-self-assessment" className="block bg-white border border-gray-200 rounded-2xl p-6 hover:border-[#006767]/50 hover:shadow-md transition-all">
+            <p className="text-xs text-[#006767] font-semibold uppercase tracking-wider mb-2">Self-Assessment · ~5 min</p>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Emotional Mastery Self-Assessment</h3>
-            <p className="text-gray-600 leading-relaxed">A short reflection across all 8 pillars to surface where your patterns are most active right now.</p>
-            <p className="text-teal font-semibold mt-4 inline-flex items-center gap-1">Begin the assessment <ArrowRight className="h-4 w-4" /></p>
+            <p className="text-gray-700 leading-relaxed">A short reflection across all 8 pillars to surface where your patterns are most active right now.</p>
+            <p className="text-[#006767] font-semibold mt-4 inline-flex items-center gap-1">Begin the assessment <ArrowRight className="h-4 w-4" /></p>
           </Link>
-          <Link href="/quizzes/emotional-mastery-readiness" className="block bg-white border-2 border-teal/30 rounded-2xl p-6 hover:border-teal hover:shadow-md transition-all">
-            <p className="text-xs text-teal font-semibold uppercase tracking-wider mb-2">Readiness Scorecard · ~3 min</p>
+          <Link href="/quizzes/emotional-mastery-readiness" className="block bg-white border-2 border-[#006767]/40 rounded-2xl p-6 hover:border-[#006767] hover:shadow-md transition-all">
+            <p className="text-xs text-[#006767] font-semibold uppercase tracking-wider mb-2">Readiness Scorecard · ~3 min</p>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Emotional Mastery Readiness</h3>
-            <p className="text-gray-600 leading-relaxed">A short scorecard to see if the monthly Emotional Mastery Intensive with Krystalore fits where you are.</p>
-            <p className="text-teal font-semibold mt-4 inline-flex items-center gap-1">Check your readiness <ArrowRight className="h-4 w-4" /></p>
+            <p className="text-gray-700 leading-relaxed">A short scorecard to see if the monthly Emotional Mastery Intensive with Krystalore fits where you are.</p>
+            <p className="text-[#006767] font-semibold mt-4 inline-flex items-center gap-1">Check your readiness <ArrowRight className="h-4 w-4" /></p>
           </Link>
         </div>
       </section>
 
       {/* MONTHLY INTENSIVE */}
-      <section className="mb-12 sm:mb-16 bg-gradient-to-r from-[#006767] to-teal rounded-2xl p-8 sm:p-12 text-white text-center max-w-6xl mx-auto">
-        <h2 className="text-2xl sm:text-4xl font-bold mb-3">The Monthly Emotional Mastery Intensive</h2>
-        <p className="text-white/85 text-lg max-w-2xl mx-auto mb-7">
-          A guided monthly container with Krystalore Crews for the people ready to actually do the work — not just read about it.
-        </p>
-        <div className="flex justify-center">
-          <MailtoCTA
-            hook="Get info on the Monthly Intensive"
-            topic="Monthly Emotional Mastery Intensive"
-            probingQuestions={[
-              'Which pillar feels most active in your life right now?',
-              'What have you already tried, and what felt like it was missing?',
-              'What would the next 90 days look like if this work landed for you?',
-            ]}
-            variant="primary"
-            className="bg-white text-teal hover:bg-white/90 shadow-none"
+      <section className="mb-12 sm:mb-16 relative overflow-hidden rounded-2xl max-w-6xl mx-auto">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/retreat/retreat-02.jpg"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 1024px"
           />
+        </div>
+        <div className="relative bg-gradient-to-r from-[#003939]/95 to-[#006767]/85 p-8 sm:p-12 text-white text-center">
+          <h2 className="text-2xl sm:text-4xl font-bold mb-3 drop-shadow">The Monthly Emotional Mastery Intensive</h2>
+          <p className="text-white text-lg max-w-2xl mx-auto mb-7 drop-shadow">
+            A guided monthly container with Krystalore Crews for the people ready to actually do the work — not just read about it.
+          </p>
+          <div className="flex justify-center">
+            <MailtoCTA
+              hook="Get info on the Monthly Intensive"
+              topic="Monthly Emotional Mastery Intensive"
+              probingQuestions={[
+                'Which pillar feels most active in your life right now?',
+                'What have you already tried, and what felt like it was missing?',
+                'What would the next 90 days look like if this work landed for you?',
+              ]}
+              variant="primary"
+              className="!bg-white !text-[#006767] hover:!bg-white/95 hover:!text-[#004d4d] !shadow-lg !shadow-black/30"
+            />
+          </div>
         </div>
       </section>
 

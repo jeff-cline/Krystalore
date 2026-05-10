@@ -24,6 +24,10 @@ export interface Pillar {
   relatedQuizzes: RelatedQuiz[]
   ctaTopic: string
   probingQuestions: string[]
+  /** Wide hero image at the top of the pillar page; also used as the pillar's thumbnail in cross-link grids. */
+  heroImage: string
+  /** 4 supporting images interspersed through the pillar page body. */
+  bodyImages: string[]
 }
 
 export const pillars: Pillar[] = [
@@ -64,6 +68,13 @@ export const pillars: Pillar[] = [
       'Where do you most often go quiet, defensive, or over-explain?',
       "What would change in your life if your relationships felt safer and more honest?",
     ],
+    heroImage: '/images/krystalore/cropped-KrystalCrews-15-scaled-1.jpg',
+    bodyImages: [
+      '/images/go9/group-sunset-dresses.webp',
+      '/images/krystalore/cropped-HighResolution-143-scaled-2.jpg',
+      '/images/blog/stuck-feeling.jpg',
+      '/images/krystalore/cropped-KrystalCrews-185-scaled-1.jpg',
+    ],
   },
   {
     slug: 'self-worth',
@@ -81,19 +92,19 @@ export const pillars: Pillar[] = [
     ],
     whatItShapes: [
       'The boundaries you set (and the ones you cave on).',
-      "What you’ll tolerate from partners, family, and clients.",
+      "What you'll tolerate from partners, family, and clients.",
       'Whether you can receive support, money, love, or rest.',
       'How loud your inner critic is when you slow down.',
     ],
     whatChanges: [
-      "You stop outsourcing your worth to anyone’s approval.",
+      "You stop outsourcing your worth to anyone's approval.",
       'Rest stops feeling like a betrayal of who you are.',
       'You ask for what you need without 47 layers of apology.',
       'Boundaries become a felt sense, not a performance.',
     ],
     relatedQuizzes: [
       { title: 'Self-Awareness', slug: 'self-awareness' },
-      { title: "Women’s Confidence", slug: 'womens-confidence' },
+      { title: "Women's Confidence", slug: 'womens-confidence' },
       { title: 'Life Alignment', slug: 'life-alignment' },
     ],
     ctaTopic: 'Emotional Mastery — Self-Worth & Self-Trust',
@@ -102,18 +113,25 @@ export const pillars: Pillar[] = [
       "What do you have a hard time letting yourself receive?",
       'What would feel different if you trusted yourself the way others trust you?',
     ],
+    heroImage: '/images/krystalore/cropped-LowResolution-172.jpg',
+    bodyImages: [
+      '/images/krystalore/REM08628.jpg',
+      '/images/go9/portrait.jpg',
+      '/images/krystalore/beach-rainbow.png',
+      '/images/krystalore/cropped-KrystalLowResolution-18.jpg',
+    ],
   },
   {
     slug: 'leadership',
     title: 'Leadership & Visibility',
     subtitle:
-      "You can only lead others as far as you’ve led yourself. Emotional regulation, presence, and a healed relationship with being seen are the real leadership skills.",
+      "You can only lead others as far as you've led yourself. Emotional regulation, presence, and a healed relationship with being seen are the real leadership skills.",
     oneLineTeaser:
       'Why visibility, presence, and influence start with regulation.',
     patternSigns: [
       'You can hold the room, but it costs you afterward.',
       'You over-prepare to feel safe being visible.',
-      'You absorb your team’s emotions and call it empathy.',
+      "You absorb your team's emotions and call it empathy.",
       'You communicate from urgency more than from clarity.',
       'You avoid the hard conversation until it becomes a bigger one.',
     ],
@@ -136,9 +154,16 @@ export const pillars: Pillar[] = [
     ],
     ctaTopic: 'Emotional Mastery — Leadership & Visibility',
     probingQuestions: [
-      "What emotional pattern shows up when you’re under real pressure?",
+      "What emotional pattern shows up when you're under real pressure?",
       'Where is fear of visibility quietly shaping your decisions?',
       'What would your leadership look like with 30% less reactivity?',
+    ],
+    heroImage: '/images/leadership-programs/leadership-hero.png',
+    bodyImages: [
+      '/images/leadership-programs/leadership-event.jpeg',
+      '/images/speaker-page/speaker-hero.jpeg',
+      '/images/go9/keynote.jpg',
+      '/images/go9/speaking-event.jpg',
     ],
   },
   {
@@ -176,25 +201,32 @@ export const pillars: Pillar[] = [
     probingQuestions: [
       'Where do you feel a ceiling that strategy alone keeps failing to break?',
       'What emotional pattern shows up around money, pricing, or sales?',
-      "What would change in your business if success didn’t feel unsafe?",
+      "What would change in your business if success didn't feel unsafe?",
+    ],
+    heroImage: '/images/leadership-programs/leadership-team-1.jpeg',
+    bodyImages: [
+      '/images/leadership-programs/leadership-team-2.jpeg',
+      '/images/blog/level-up.jpg',
+      '/images/krystalore/cropped-KrystalCrews-145-scaled-1.jpg',
+      '/images/leadership-programs/leadership-credentials.png',
     ],
   },
   {
     slug: 'parenting',
     title: 'Parenting & Family',
     subtitle:
-      "You can’t teach what you haven’t healed. Your nervous system is the room your children are growing up inside.",
+      "You can't teach what you haven't healed. Your nervous system is the room your children are growing up inside.",
     oneLineTeaser:
-      "What you don’t heal becomes the inheritance.",
+      "What you don't heal becomes the inheritance.",
     patternSigns: [
       "You react first, then feel guilty about how you reacted.",
-      "You see your old wounds in your kids’ faces and don’t know what to do with it.",
+      "You see your old wounds in your kids' faces and don't know what to do with it.",
       'You parent from a script you swore you would never repeat.',
       'You can regulate everyone but yourself.',
-      "Your home feels like one more thing you’re managing.",
+      "Your home feels like one more thing you're managing.",
     ],
     whatItShapes: [
-      "Your child’s developing nervous system.",
+      "Your child's developing nervous system.",
       'The repair conversations you can have when things go sideways.',
       "What gets passed down, and what stops with you.",
       'How present you can actually be at home.',
@@ -216,6 +248,13 @@ export const pillars: Pillar[] = [
       'When do you tend to lose your regulation at home?',
       'What would feel different if you could repair instead of react?',
     ],
+    heroImage: '/images/blog/eat-healthy-travel.jpg',
+    bodyImages: [
+      '/images/blog/short-term-goals.jpg',
+      '/images/blog/accountability.jpg',
+      '/images/krystalore/cropped-cropped-HighResolution-130-scaled-1.jpg',
+      '/images/private-mindset/mindset-coaching-1.png',
+    ],
   },
   {
     slug: 'health',
@@ -227,7 +266,7 @@ export const pillars: Pillar[] = [
     patternSigns: [
       'You live in low-grade activation and call it being productive.',
       'You crash on weekends and wonder why.',
-      "You can’t fall asleep, or you can’t stay asleep.",
+      "You can't fall asleep, or you can't stay asleep.",
       'You feel tense in your body for no clear reason.',
       'You numb out with food, scrolling, or work and call it relaxing.',
     ],
@@ -250,9 +289,16 @@ export const pillars: Pillar[] = [
     ],
     ctaTopic: 'Emotional Mastery — Health & Nervous System',
     probingQuestions: [
-      "What is your body telling you that you’ve been overriding?",
+      "What is your body telling you that you've been overriding?",
       'Where does stress most often live in your body?',
       'What would change if rest stopped feeling like a betrayal?',
+    ],
+    heroImage: '/images/go9/fitness-balcony.jpg',
+    bodyImages: [
+      '/images/go9/fitness-outdoor.jpg',
+      '/images/go9/meditation.webp',
+      '/images/just-breathe/cover.jpg',
+      '/images/go9/fitness.jpg',
     ],
   },
   {
@@ -267,7 +313,7 @@ export const pillars: Pillar[] = [
       'You go silent, then explode, then apologize for exploding.',
       "You over-explain to keep the other person from getting upset.",
       "You agree to things in the moment that you resent later.",
-      "You wait until you can’t take it anymore, then deliver an ultimatum.",
+      "You wait until you can't take it anymore, then deliver an ultimatum.",
     ],
     whatItShapes: [
       'The boundaries you set and the ones you abandon.',
@@ -292,6 +338,13 @@ export const pillars: Pillar[] = [
       'How do you tend to react when someone is upset with you?',
       'What would shift if you could say the real thing without falling apart?',
     ],
+    heroImage: '/images/leadership-programs/leadership-team-3.jpeg',
+    bodyImages: [
+      '/images/private-mindset/mindset-coaching-2.png',
+      '/images/go9/coaching.jpg',
+      '/images/blog/run-a-race.jpg',
+      '/images/leadership-programs/leadership-group.jpeg',
+    ],
   },
   {
     slug: 'purpose',
@@ -299,16 +352,16 @@ export const pillars: Pillar[] = [
     subtitle:
       "The blocks between you and your purpose are rarely strategic. They are emotional — fear of being seen, fear of finishing, fear of being wrong about who you are.",
     oneLineTeaser:
-      'Why your purpose isn’t a strategy problem.',
+      "Why your purpose isn't a strategy problem.",
     patternSigns: [
       "You start things, then sabotage them right before they land.",
       'You collect frameworks instead of finishing one.',
       'You feel called to something but freeze when it asks you to be seen.',
       "You measure meaning in productivity.",
-      "You wait to feel ready before you’ll let yourself begin.",
+      "You wait to feel ready before you'll let yourself begin.",
     ],
     whatItShapes: [
-      "Whether you let yourself be known for what you’re actually here for.",
+      "Whether you let yourself be known for what you're actually here for.",
       'How long ideas sit on the shelf.',
       'How willing you are to be a beginner in public.',
       "Whether your work feels alive to you or like another performance.",
@@ -328,7 +381,14 @@ export const pillars: Pillar[] = [
     probingQuestions: [
       'What are you almost ready to start, but keep delaying?',
       'Where does fear of being seen show up in your creative life?',
-      "What would you make if you knew you couldn’t get it wrong?",
+      "What would you make if you knew you couldn't get it wrong?",
+    ],
+    heroImage: '/images/retreat/retreat-05.jpg',
+    bodyImages: [
+      '/images/retreat/retreat-02.jpg',
+      '/images/retreat/retreat-08.jpg',
+      '/images/krystalore/colibri-image-126.png',
+      '/images/blog/energy-secrets.jpg',
     ],
   },
 ]
