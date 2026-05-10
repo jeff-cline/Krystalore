@@ -161,9 +161,17 @@ export type Pillar = {
 export const pillars: Pillar[] = [ /* 8 entries */ ]
 ```
 
-## 9. Two new assessments — scoring
+## 9. Two new assessments — scoring & lead capture
 
 Both built on the existing `components/quiz-template.tsx` pattern (see `app/quizzes/emotional-intelligence/` for the canonical example).
+
+**Results are LOCKED.** Both quizzes set `gatedContactForm={true}`. When a quiz-taker finishes the questions, results are blocked by an **UNLOCK RESULTS** form requiring **Name**, **Email**, and **Phone** (all HTML `required`). On submit, the form POSTs to `/api/leads`:
+
+1. A row is created in the `QuizLead` Prisma model with `name`, `email`, `phone`, `quizTitle`, `answers`, `results`, `status="new"`.
+2. The contact is pushed to **GoHighLevel** (Krystalore's CRM) via `pushToGHL()` when `GHL_API_KEY` + `GHL_LOCATION_ID` env vars are set in the deployment environment. Lead is tagged `"Krystalore Quiz"` + `"Quiz: <quizTitle>"`.
+3. The contact is also pushed to **Jeff CRM** (`jeff-cline.com/api/todo/webhook/lead-ingest`) with `assignedTo: ["krystalore@thecrewscoach.com"]`.
+
+Krystalore views the captured leads in the back office at `/admin/leads` (admin-only).
 
 **Self-Assessment** (`/quizzes/emotional-mastery-self-assessment`):
 - 12–15 questions, each tagged with a pillar (1-2 questions per pillar)
@@ -215,6 +223,7 @@ Pillar pages link 1–3 most relevant quizzes; the masterclass hub's "Take a Dee
 - [ ] All 8 `/emotional-mastery/<slug>` URLs render the pillar template with pillar-specific copy
 - [ ] Both new assessment URLs render and produce a scored result
 - [ ] Every `<MailtoCTA>` button on every page opens a mailto link whose subject ends with `-Emotional Mastery` and whose body contains the topic line, probing questions, and the 8 contact-info fields
+- [ ] Both new assessments LOCK results behind the UNLOCK RESULTS form (Name + Email + Phone required), and a successful submit creates a `QuizLead` row visible at `/admin/leads`
 - [ ] The handwritten "I want my life back!" image displays in the IS THIS YOU? section
 - [ ] No console errors; existing pages still build
 - [ ] No TypeScript errors
