@@ -249,8 +249,8 @@ export default function HealthMasteryPage() {
       <section className="mb-12 sm:mb-16 max-w-6xl mx-auto px-4">
         <div className="relative w-full rounded-2xl overflow-hidden shadow-md" style={{ aspectRatio: '21/9' }}>
           <Image
-            src="/images/retreat/retreat-05.jpg"
-            alt="Krystalore Crews — community in retreat"
+            src="/images/go9/group.jpg"
+            alt="Krystalore Crews — women in community, Costa Rica retreat"
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 1024px"
@@ -288,15 +288,15 @@ export default function HealthMasteryPage() {
       <section className="mb-12 sm:mb-16 max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {[
-            '/images/krystalore/cropped-KrystalCrews-145-scaled-1.jpg',
-            '/images/leadership-programs/leadership-event.jpeg',
-            '/images/go9/group.jpg',
-            '/images/krystalore/cropped-HighResolution-143-scaled-2.jpg',
-          ].map((src, i) => (
-            <div key={src + i} className="relative w-full rounded-xl overflow-hidden" style={{ aspectRatio: '1/1' }}>
+            { src: '/images/krystalore/REM08628.jpg', alt: 'Krystalore Crews speaking on stage about Level Up Life & Business' },
+            { src: '/images/go9/group-sunset.jpg', alt: 'Krystalore Crews retreat — sisterhood at sunset' },
+            { src: '/images/go9/community-hands.jpg', alt: 'Krystalore Crews — close-up of two women holding hands' },
+            { src: '/images/krystalore/cropped-KrystalCrews-15-scaled-1.jpg', alt: 'Krystalore Crews — strength and embodiment' },
+          ].map((img, i) => (
+            <div key={img.src + i} className="relative w-full rounded-xl overflow-hidden" style={{ aspectRatio: '1/1' }}>
               <Image
-                src={src}
-                alt="Krystalore Crews — Emotional Mastery"
+                src={img.src}
+                alt={img.alt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 50vw, 25vw"
@@ -332,7 +332,7 @@ export default function HealthMasteryPage() {
       <section className="mb-12 sm:mb-16 relative overflow-hidden rounded-2xl max-w-6xl mx-auto">
         <div className="absolute inset-0">
           <Image
-            src="/images/retreat/retreat-02.jpg"
+            src="/images/go9/meditation.webp"
             alt=""
             fill
             className="object-cover"
