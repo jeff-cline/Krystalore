@@ -1,22 +1,6 @@
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
-import {
-  Check,
-  Star,
-  Zap,
-  Heart,
-  Users,
-  Target,
-  ArrowRight,
-  Shield,
-  Clock,
-  Flame,
-  Calendar,
-  Mail,
-  TrendingUp,
-  Repeat,
-  Play,
-} from 'lucide-react'
+import { ArrowRight, Play } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import MailtoCTA from '@/components/MailtoCTA'
@@ -25,54 +9,13 @@ import { pillars } from '@/data/emotional-mastery-pillars'
 const CHECKOUT_URL = 'https://krystalorecrews.com/healthmasterycheckout'
 
 export default function HealthMasteryPage() {
-  const features = [
-    { icon: Users, title: 'Weekly Coaching Calls', description: 'Live group Zoom sessions with Krystalore covering fitness, mindset, nutrition, and leadership integration.' },
-    { icon: Flame, title: 'Fitness & Energy Systems', description: 'Science-backed training designed for longevity — build sustainable energy that fuels your business and life.' },
-    { icon: Zap, title: 'Beyond Limits Bootcamp', description: 'Full access to the signature bootcamp program — structured workouts you can do anywhere, anytime.' },
-    { icon: Shield, title: 'Accountability & Community', description: 'A private community of driven entrepreneurs and leaders who hold each other to a higher standard.' },
-    { icon: Heart, title: 'Leadership Integration', description: 'Identity, confidence, relationships, boundaries, nutrition, and habit design — the whole person, elevated.' },
-    { icon: Clock, title: 'Monthly Workshops', description: 'Deep-dive workshops and co-working sessions on topics from stress management to peak performance.' },
-  ]
-
-  const testimonials = [
-    {
-      quote: 'I have never loved my body more. She is fun, fabulous and results driven. The workouts are totally manageable and so is the price.',
-      name: 'Health Mastery Member',
-    },
-    {
-      quote: "I feel like you know what is in my head. You meet me where I\'m at. You get me. This is way more than just a fitness program. I\'ve elevated my life!",
-      name: 'Health Mastery Member',
-    },
-    {
-      quote: "I\'m really starting to feel like myself again. Your program has been so good for me. Thank you for being so amazing and supportive!",
-      name: 'Health Mastery Member',
-    },
-  ]
-
-  const gallery = [
-    '/images/health-mastery/hero.webp',
-    '/images/health-mastery/features.webp',
-    '/images/go9/fitness.jpg',
-    '/images/go9/fitness-outdoor.jpg',
-    '/images/go9/fitness-balcony.jpg',
-    '/images/go9/coaching.jpg',
-    '/images/go9/group.jpg',
-    '/images/go9/retreat-group.jpg',
-  ]
-
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: 'Emotional Mastery Masterclass',
     description:
-      'A high-level group coaching experience for entrepreneurs and leaders ready to reclaim their energy, rebuild consistency, and lead their life from the inside out.',
+      'Emotional patterns shape every area of life — relationships, health, confidence, leadership, business, and self-worth. Free book, two free assessments, eight pillar pages, and information about the monthly intensive with Krystalore Crews.',
     brand: { '@type': 'Brand', name: 'Krystalore Crews' },
-    offers: [
-      { '@type': 'Offer', name: 'Monthly Plan', price: '497', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: CHECKOUT_URL },
-      { '@type': 'Offer', name: 'Annual Plan', price: '5500', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: CHECKOUT_URL },
-    ],
-    review: testimonials.map((t) => ({ '@type': 'Review', reviewBody: t.quote, author: { '@type': 'Person', name: t.name }, reviewRating: { '@type': 'Rating', ratingValue: '5' } })),
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', reviewCount: '3' },
   }
 
   return (
@@ -270,126 +213,113 @@ export default function HealthMasteryPage() {
         </p>
       </section>
 
-      <section className="mb-12 sm:mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">What&apos;s Included</h2>
-          <p className="text-gray-600 max-w-xl mx-auto">Everything you need to transform your health, energy, and leadership — in one powerful program.</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, i) => (
-            <div key={i} className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-teal/30 transition-all group">
-              <div className="w-12 h-12 bg-teal/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal/20 transition-colors">
-                <feature.icon className="h-6 w-6 text-teal" />
-              </div>
-              <h3 className="font-bold text-gray-900 mb-2">{feature.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
+      {/* THE 8 PILLARS */}
       <section className="mb-12 sm:mb-16 max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 text-center">Program Gallery</h2>
-        <p className="text-gray-600 text-center mb-8">More photos added to showcase the coaching energy, fitness, and community experience.</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {gallery.map((src, i) => (
-            <a key={src + i} href={CHECKOUT_URL} className="block relative aspect-square rounded-xl overflow-hidden group">
-              <Image src={src} alt={`Health Mastery photo ${i + 1}`} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 50vw, 25vw" />
-            </a>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">The 8 Pillars of Emotional Mastery</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            One emotional pattern can quietly shape every area of life. Each pillar is a focused entry point into the same root work.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {pillars.map((p) => (
+            <Link key={p.slug} href={`/emotional-mastery/${p.slug}`} className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-teal/40 hover:shadow-md transition-all">
+              <p className="font-bold text-gray-900 mb-1">{p.title}</p>
+              <p className="text-sm text-gray-600 leading-relaxed">{p.oneLineTeaser}</p>
+              <p className="text-teal text-xs font-semibold uppercase tracking-wider mt-3 inline-flex items-center gap-1">
+                Explore <ArrowRight className="h-3 w-3" />
+              </p>
+            </Link>
           ))}
         </div>
       </section>
 
-      <section className="mb-12 sm:mb-16">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">What Members Are Saying</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, i) => (
-            <div key={i} className="bg-white rounded-xl border border-gray-200 p-6 relative">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, j) => <Star key={j} className="h-4 w-4 text-[#E8A849] fill-current" />)}
-              </div>
-              <blockquote className="text-gray-700 italic mb-4 leading-relaxed">&ldquo;{testimonial.quote}&rdquo;</blockquote>
-              <p className="text-sm font-medium text-gray-500">— {testimonial.name}</p>
-            </div>
-          ))}
+      {/* TAKE A DEEPER LOOK — existing related quizzes */}
+      <section className="mb-12 sm:mb-16 max-w-6xl mx-auto px-4">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Take a Deeper Look</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">Free assessments that map closely to the work of Emotional Mastery.</p>
         </div>
-      </section>
-
-      <section className="mb-12 sm:mb-16 bg-gray-50 border border-gray-200 rounded-2xl p-8 sm:p-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 text-center">Enrollment Funnel Strategy (Continuous + Downsell)</h2>
-        <p className="text-center text-gray-600 max-w-3xl mx-auto mb-8">
-          Built for ongoing enrollment with a clean path from high-intent buyers to lower-friction commitments.
-        </p>
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
           {[
-            {
-              icon: TrendingUp,
-              title: 'Primary Offer',
-              text: 'Direct to full Health Mastery enrollment via checkout page with social proof and urgency-based bonuses.',
-            },
-            {
-              icon: Repeat,
-              title: 'Downsell Path',
-              text: 'If no checkout, offer lower-friction entry (discovery call + 14-day activation challenge) then auto-invite into monthly plan.',
-            },
-            {
-              icon: Calendar,
-              title: 'Continuous Enrollment',
-              text: 'Weekly application cadence + monthly onboarding kickoff so leads never wait for a launch window.',
-            },
-          ].map((item) => (
-            <div key={item.title} className="bg-white border border-gray-200 rounded-xl p-5">
-              <item.icon className="h-6 w-6 text-teal mb-2" />
-              <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-gray-600">{item.text}</p>
-            </div>
+            { title: 'Emotional Intelligence', slug: 'emotional-intelligence' },
+            { title: 'Self-Awareness', slug: 'self-awareness' },
+            { title: 'Self-Management', slug: 'self-management' },
+            { title: 'Social Awareness', slug: 'social-awareness' },
+            { title: 'Relationship Management', slug: 'relationship-management' },
+            { title: 'Personality', slug: 'personality' },
+            { title: 'Anxiety', slug: 'anxiety' },
+            { title: 'Depression', slug: 'depression' },
+            { title: 'Life Alignment', slug: 'life-alignment' },
+          ].map((q) => (
+            <Link key={q.slug} href={`/quizzes/${q.slug}`} className="block bg-gray-50 border border-gray-200 rounded-xl p-4 hover:border-teal/40 hover:bg-white transition-colors">
+              <p className="text-xs text-teal font-semibold uppercase tracking-wider mb-1">Free Assessment</p>
+              <p className="font-semibold text-gray-900">{q.title}</p>
+            </Link>
           ))}
         </div>
       </section>
 
-      <section className="mb-12 sm:mb-16 relative overflow-hidden rounded-2xl" style={{ backgroundImage: 'url(/images/health-mastery/pricing-bg.webp)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="bg-black/60 backdrop-blur-sm p-8 sm:p-12">
-          <h2 className="text-2xl sm:text-4xl font-bold text-white mb-3 text-center">Choose Your Plan</h2>
-          <p className="text-white/70 text-center mb-10 max-w-lg mx-auto">Invest in the version of you that leads with energy, clarity, and confidence.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 text-center hover:shadow-xl transition-shadow">
-              <h3 className="text-lg font-bold text-gray-900 mb-1">Monthly Plan</h3>
-              <p className="text-gray-500 text-sm mb-4">(3 month minimum)</p>
-              <p className="text-4xl font-bold text-gray-900 mb-1">$497<span className="text-lg font-normal text-gray-500">/mo</span></p>
-              <p className="text-xs text-gray-400 mb-6">Billed monthly</p>
-              <a href={CHECKOUT_URL} className="block w-full bg-teal hover:bg-[#37a6a6] text-white font-bold py-3 rounded-xl transition-colors">Select Plan</a>
-            </div>
-            <div className="bg-white rounded-2xl p-8 text-center hover:shadow-xl transition-shadow relative border-2 border-teal">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-teal text-white text-xs font-bold px-4 py-1 rounded-full">BEST VALUE</div>
-              <h3 className="text-lg font-bold text-gray-900 mb-1">Annual Plan</h3>
-              <p className="text-gray-500 text-sm mb-4">(get one month free)</p>
-              <p className="text-4xl font-bold text-gray-900 mb-1">$5,500</p>
-              <p className="text-xs text-gray-400 mb-6">Billed annually — save $464</p>
-              <a href={CHECKOUT_URL} className="block w-full bg-teal hover:bg-[#37a6a6] text-white font-bold py-3 rounded-xl transition-colors">Select Plan</a>
-            </div>
-          </div>
-
-          <div className="text-center mt-7">
-            <a href="mailto:krystalore@thecrewscoach.com" className="inline-flex items-center gap-2 text-white/90 hover:text-white text-sm font-medium">
-              <Mail className="h-4 w-4" /> VIP members: email for special pricing details
-            </a>
-          </div>
+      {/* TWO NEW ASSESSMENTS */}
+      <section className="mb-12 sm:mb-16 max-w-5xl mx-auto px-4">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Two Assessments Built for This Work</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">Start with whichever one fits where you are right now.</p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Link href="/quizzes/emotional-mastery-self-assessment" className="block bg-white border border-gray-200 rounded-2xl p-6 hover:border-teal/40 hover:shadow-md transition-all">
+            <p className="text-xs text-teal font-semibold uppercase tracking-wider mb-2">Self-Assessment · ~5 min</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Emotional Mastery Self-Assessment</h3>
+            <p className="text-gray-600 leading-relaxed">A short reflection across all 8 pillars to surface where your patterns are most active right now.</p>
+            <p className="text-teal font-semibold mt-4 inline-flex items-center gap-1">Begin the assessment <ArrowRight className="h-4 w-4" /></p>
+          </Link>
+          <Link href="/quizzes/emotional-mastery-readiness" className="block bg-white border-2 border-teal/30 rounded-2xl p-6 hover:border-teal hover:shadow-md transition-all">
+            <p className="text-xs text-teal font-semibold uppercase tracking-wider mb-2">Readiness Scorecard · ~3 min</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Emotional Mastery Readiness</h3>
+            <p className="text-gray-600 leading-relaxed">A short scorecard to see if the monthly Emotional Mastery Intensive with Krystalore fits where you are.</p>
+            <p className="text-teal font-semibold mt-4 inline-flex items-center gap-1">Check your readiness <ArrowRight className="h-4 w-4" /></p>
+          </Link>
         </div>
       </section>
 
+      {/* MONTHLY INTENSIVE */}
+      <section className="mb-12 sm:mb-16 bg-gradient-to-r from-[#006767] to-teal rounded-2xl p-8 sm:p-12 text-white text-center max-w-6xl mx-auto">
+        <h2 className="text-2xl sm:text-4xl font-bold mb-3">The Monthly Emotional Mastery Intensive</h2>
+        <p className="text-white/85 text-lg max-w-2xl mx-auto mb-7">
+          A guided monthly container with Krystalore Crews for the people ready to actually do the work — not just read about it.
+        </p>
+        <div className="flex justify-center">
+          <MailtoCTA
+            hook="Get info on the Monthly Intensive"
+            topic="Monthly Emotional Mastery Intensive"
+            probingQuestions={[
+              'Which pillar feels most active in your life right now?',
+              'What have you already tried, and what felt like it was missing?',
+              'What would the next 90 days look like if this work landed for you?',
+            ]}
+            variant="primary"
+            className="bg-white text-teal hover:bg-white/90 shadow-none"
+          />
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
       <section className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Ready to Lead Your Life from the Inside Out?</h2>
-        <p className="text-gray-600 mb-8">Stop waiting for the &ldquo;right time.&rdquo; The right time is when you decide you&apos;re worth it.</p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href={CHECKOUT_URL}
-            className="bg-teal hover:bg-[#37a6a6] text-white font-bold py-4 px-10 rounded-xl transition-colors text-lg shadow-lg shadow-teal/30 flex items-center justify-center gap-2"
-          >
-            Join Health Mastery <ArrowRight className="h-5 w-5" />
-          </a>
-          <Link href="/contact" className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-4 px-10 rounded-xl transition-colors text-lg">
-            Have Questions? Let&apos;s Talk
-          </Link>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Begin the Journey</h2>
+        <p className="text-gray-600 mb-8">
+          One real conversation can change the trajectory of a pattern that&apos;s been running for years.
+        </p>
+        <div className="flex justify-center">
+          <MailtoCTA
+            hook="Book my Free Breakthrough Call"
+            topic="Free 1-on-1 Breakthrough Call"
+            probingQuestions={[
+              'What is the one thing in your life that you most want to shift?',
+              "What pattern keeps showing up that you're ready to be done with?",
+              'What would your life look like 90 days from now if this finally moved?',
+            ]}
+            variant="primary"
+          />
         </div>
       </section>
       </div>
