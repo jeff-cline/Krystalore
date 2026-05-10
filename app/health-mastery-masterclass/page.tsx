@@ -19,6 +19,8 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import MailtoCTA from '@/components/MailtoCTA'
+import { pillars } from '@/data/emotional-mastery-pillars'
 
 const CHECKOUT_URL = 'https://krystalorecrews.com/healthmasterycheckout'
 
@@ -142,40 +144,130 @@ export default function HealthMasteryPage() {
         </p>
       </section>
 
-      <section className="mb-12 sm:mb-16 text-center max-w-3xl mx-auto px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Sound Familiar?</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {[
-            { emoji: '😮‍💨', text: "You're successful but exhausted" },
-            { emoji: '⏰', text: 'Health keeps getting pushed back' },
-            { emoji: '🔄', text: "You start strong... but don't sustain" },
-          ].map((item, i) => (
-            <div key={i} className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
-              <span className="text-4xl mb-3 block">{item.emoji}</span>
-              <p className="text-gray-800 font-medium">{item.text}</p>
-            </div>
-          ))}
+      {/* IS THIS YOU? */}
+      <section className="mb-12 sm:mb-16 max-w-6xl mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-8 items-center bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-10">
+          <div className="relative w-full rounded-xl overflow-hidden shadow-sm" style={{ aspectRatio: '3/4' }}>
+            <Image
+              src="/images/emotional-mastery/i-want-my-life-back.jpg"
+              alt="Handwritten note: I want my life back!"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+          <div>
+            <p className="text-teal font-semibold text-sm uppercase tracking-wider mb-2">Is this you?</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+              &ldquo;I want my life back.&rdquo;
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed mb-4">
+              If something in you read that and went <em>yes</em>, you&apos;re not broken and you&apos;re not behind.
+              You&apos;ve been carrying a version of life that no longer fits, and you&apos;re ready for the foundation,
+              framework, and support to actually shift it.
+            </p>
+            <p className="text-gray-700 text-lg leading-relaxed mb-6">
+              A free 1-on-1 Breakthrough Call with Krystalore is where that begins. Not a sales call. A real conversation
+              about what&apos;s actually running underneath — and what could be different.
+            </p>
+            <MailtoCTA
+              hook="Book my Free Breakthrough Call"
+              topic="Free 1-on-1 Breakthrough Call"
+              probingQuestions={[
+                'Which area of life feels most stuck right now (relationships, work, health, self-worth, parenting)?',
+                'What pattern have you noticed yourself repeating?',
+                'What would it mean if this could finally shift?',
+              ]}
+              variant="primary"
+            />
+          </div>
         </div>
       </section>
 
-      <section className="mb-12 sm:mb-16 bg-gradient-to-r from-[#006767] to-teal rounded-2xl p-8 sm:p-12 text-white text-center">
-        <h2 className="text-2xl sm:text-4xl font-bold mb-4">Health Mastery = Life, Fitness & Business Accelerator</h2>
-        <p className="text-white/80 text-lg max-w-2xl mx-auto mb-8">
-          The level you want requires a version of you with more energy, discipline, and alignment.
+      {/* EMOTIONAL MASTERY — the hook */}
+      <section className="mb-12 sm:mb-16 text-center max-w-3xl mx-auto px-4">
+        <p className="text-teal font-semibold text-sm uppercase tracking-wider mb-3">The Root Beneath Every Pattern</p>
+        <h2 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-5 leading-tight">Emotional Mastery</h2>
+        <p className="text-gray-700 text-lg sm:text-xl leading-relaxed mb-8">
+          The same emotional patterns affecting your relationships are also shaping your health, confidence,
+          business, visibility, boundaries, self-worth, and ability to receive love and success.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
-          {[
-            { icon: Target, label: 'Consistency', text: 'becomes who you are' },
-            { icon: Zap, label: 'Energy', text: 'becomes your advantage' },
-            { icon: Star, label: 'Confidence', text: 'becomes your standard' },
-          ].map((item, i) => (
-            <div key={i} className="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
-              <item.icon className="h-8 w-8 mx-auto mb-3 text-white" />
-              <p className="font-bold text-lg">{item.label}</p>
-              <p className="text-white/70 text-sm">{item.text}</p>
-            </div>
-          ))}
+        <MailtoCTA
+          hook="Get the Free Emotional Mastery Book"
+          topic="Free Emotional Mastery Book + Monthly Intensive info"
+          probingQuestions={[
+            'Where in life does the same pattern keep showing up?',
+            'What have you already tried (therapy, coaching, books, modalities)?',
+            'What would feel like a real shift for you in the next 90 days?',
+          ]}
+          variant="primary"
+        />
+        <p className="text-sm text-gray-500 mt-4">Includes information about the monthly Emotional Mastery Intensive with Krystalore Crews.</p>
+      </section>
+
+      {/* YOU MAY LOOK SUCCESSFUL ON THE OUTSIDE */}
+      <section className="mb-12 sm:mb-16 max-w-4xl mx-auto px-4">
+        <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-10">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">You may look successful on the outside…</h2>
+          <p className="text-gray-600 mb-6">…and still quietly struggle with any of these:</p>
+          <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3 text-gray-700">
+            {[
+              'Overthinking',
+              'Burnout',
+              'Emotional overwhelm',
+              'Fear of visibility',
+              'Conflict avoidance',
+              'Anxious attachment',
+              'People pleasing',
+              'Self-sabotage',
+              'Disconnection',
+              'Difficulty receiving love, support, or success',
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <span className="text-teal mt-1">•</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-gray-700 mt-6 leading-relaxed">
+            None of these are character flaws. They&apos;re patterns. And patterns can change.
+          </p>
         </div>
+      </section>
+
+      {/* WHY EMOTIONAL MASTERY MATTERS */}
+      <section className="mb-12 sm:mb-16 max-w-4xl mx-auto px-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-5 text-center">Why Emotional Mastery Matters</h2>
+        <p className="text-gray-700 text-lg mb-6 text-center max-w-2xl mx-auto">
+          Your emotions influence almost everything you think is about strategy:
+        </p>
+        <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-3 text-gray-700 mb-8">
+          {[
+            'How you communicate',
+            'How safe you feel being seen',
+            'The relationships you choose',
+            'The boundaries you set',
+            'Your health and stress response',
+            'Your confidence',
+            'Your creativity',
+            'Your leadership',
+            'Your parenting',
+            'Your ability to trust yourself',
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-2">
+              <span className="text-teal mt-1">•</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="text-gray-700 leading-relaxed mb-3">
+          Until emotional patterns are addressed, most people keep repeating the same cycles — even with more
+          information, more strategy, or more effort.
+        </p>
+        <p className="text-gray-700 leading-relaxed">
+          Emotional Mastery is not about perfection. It&apos;s about awareness, regulation, healing, embodiment, and
+          learning how to respond instead of react.
+        </p>
       </section>
 
       <section className="mb-12 sm:mb-16">
