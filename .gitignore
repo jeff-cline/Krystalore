@@ -2,3 +2,6 @@
 data/integrations.json
 .vercel
 .env*.local
+node_modules/
+.next/
+*.tsbuildinfo
