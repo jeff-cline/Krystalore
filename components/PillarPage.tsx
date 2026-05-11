@@ -4,10 +4,10 @@ import { ArrowLeft, Check, Sparkles } from 'lucide-react'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import MailtoCTA from '@/components/MailtoCTA'
-import { pillars, type Pillar } from '@/data/emotional-mastery-pillars'
+import PillarMegaPanel from '@/components/PillarMegaPanel'
+import { type Pillar } from '@/data/emotional-mastery-pillars'
 
 export default function PillarPage({ data }: { data: Pillar }) {
-  const others = pillars.filter((p) => p.slug !== data.slug)
   return (
     <>
       <Header />
@@ -143,30 +143,16 @@ export default function PillarPage({ data }: { data: Pillar }) {
           </div>
         </section>
 
-        {/* CROSS-LINK GRID WITH THUMBNAILS */}
-        <section>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-5">Explore other pillars</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {others.map((p) => (
-              <Link key={p.slug} href={`/emotional-mastery/${p.slug}`} className="block bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-[#006767]/50 hover:shadow-md transition-all">
-                <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
-                  <Image
-                    src={p.heroImage}
-                    alt={p.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="p-5">
-                  <p className="font-bold text-gray-900 mb-1">{p.title}</p>
-                  <p className="text-sm text-gray-700">{p.oneLineTeaser}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
       </div>
+
+      {/* CROSS-LINK MEGA PANEL */}
+      <PillarMegaPanel
+        excludeSlug={data.slug}
+        title="Explore the other pillars"
+        intro="Emotional Mastery is one root with many entry points. Wherever you land, the work is the same."
+        showCtaBar={false}
+      />
+
       <Footer />
     </>
   )

@@ -4,7 +4,7 @@ import { ArrowRight, Play } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import MailtoCTA from '@/components/MailtoCTA'
-import { pillars } from '@/data/emotional-mastery-pillars'
+import PillarMegaPanel from '@/components/PillarMegaPanel'
 
 const CHECKOUT_URL = 'https://krystalorecrews.com/healthmasterycheckout'
 
@@ -213,37 +213,11 @@ export default function HealthMasteryPage() {
         </p>
       </section>
 
-      {/* THE 8 PILLARS */}
-      <section className="mb-12 sm:mb-16 max-w-6xl mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">The 8 Pillars of Emotional Mastery</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            One emotional pattern can quietly shape every area of life. Each pillar is a focused entry point into the same root work.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {pillars.map((p) => (
-            <Link key={p.slug} href={`/emotional-mastery/${p.slug}`} className="group block bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-[#006767]/50 hover:shadow-md transition-all">
-              <div className="relative w-full" style={{ aspectRatio: '4/3' }}>
-                <Image
-                  src={p.heroImage}
-                  alt={p.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-              <div className="p-4">
-                <p className="font-bold text-gray-900 mb-1">{p.title}</p>
-                <p className="text-sm text-gray-700 leading-relaxed">{p.oneLineTeaser}</p>
-                <p className="text-[#006767] text-xs font-semibold uppercase tracking-wider mt-3 inline-flex items-center gap-1">
-                  Explore <ArrowRight className="h-3 w-3" />
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* THE 8 PILLARS — MEGA PANEL */}
+      <PillarMegaPanel
+        title="The 8 Pillars of Emotional Mastery"
+        intro="One emotional pattern can quietly shape every area of life. Each pillar is a focused entry point into the same root work."
+      />
 
       {/* WIDE IMAGE BREAK BEFORE TAKE A DEEPER LOOK */}
       <section className="mb-12 sm:mb-16 max-w-6xl mx-auto px-4">
