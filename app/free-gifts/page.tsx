@@ -1,17 +1,18 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import { Lock, ArrowRight, CheckCircle } from 'lucide-react'
 
 type GiftColor = 'primary' | 'teal' | 'gold' | 'ink'
 
-const COLOR_STYLES: Record<GiftColor, { border: string; ribbon: string; number: string; bow: string }> = {
-  primary: { border: 'border-[#e07800]', ribbon: 'bg-[#e07800]', number: 'text-[#e07800]', bow: 'bg-[#E8A849]' },
-  teal: { border: 'border-[#34c5c5]', ribbon: 'bg-[#34c5c5]', number: 'text-[#34c5c5]', bow: 'bg-[#E8A849]' },
-  gold: { border: 'border-[#E8A849]', ribbon: 'bg-[#E8A849]', number: 'text-[#E8A849]', bow: 'bg-[#e07800]' },
-  ink: { border: 'border-gray-900', ribbon: 'bg-gray-900', number: 'text-gray-900', bow: 'bg-[#E8A849]' },
+const COLOR_STYLES: Record<GiftColor, { border: string; number: string; bow: string; bowText: string }> = {
+  primary: { border: 'border-[#e07800]', number: 'text-[#e07800]', bow: 'bg-[#e07800]', bowText: 'text-white' },
+  teal: { border: 'border-[#34c5c5]', number: 'text-[#34c5c5]', bow: 'bg-[#34c5c5]', bowText: 'text-white' },
+  gold: { border: 'border-[#E8A849]', number: 'text-[#E8A849]', bow: 'bg-[#E8A849]', bowText: 'text-gray-900' },
+  ink: { border: 'border-gray-900', number: 'text-gray-900', bow: 'bg-gray-900', bowText: 'text-[#E8A849]' },
 }
 
 type Gift = {
@@ -22,6 +23,8 @@ type Gift = {
   url: string
   color: GiftColor
   cta: string
+  image: string
+  imageAlt: string
 }
 
 const gifts: Gift[] = [
@@ -34,6 +37,8 @@ const gifts: Gift[] = [
     url: 'https://www.krystalorecrews.com/bombshellbootcamp',
     color: 'primary',
     cta: 'Start Day 1',
+    image: '/images/bombshell-bootcamp/bombshell-hero.png',
+    imageAlt: 'Bombshell Bootcamp — 5-day reset',
   },
   {
     number: 2,
@@ -45,6 +50,8 @@ const gifts: Gift[] = [
     url: 'https://www.krystalorecrews.com/coworking',
     color: 'teal',
     cta: 'Grab Your Seat',
+    image: '/images/coworking/coworking-hero.png',
+    imageAlt: 'Weekly coworking session over Zoom',
   },
   {
     number: 3,
@@ -55,6 +62,8 @@ const gifts: Gift[] = [
     url: 'https://www.krystalorecrews.com/habittracker',
     color: 'gold',
     cta: 'Download Tracker',
+    image: '/images/go9/planner.jpg',
+    imageAlt: 'One-page habit tracker / planner',
   },
   {
     number: 4,
@@ -66,6 +75,8 @@ const gifts: Gift[] = [
     url: 'https://open.spotify.com/show/6acctiaNwQqFy8HVuiXlN7?si=5795f2082f1a46a9',
     color: 'ink',
     cta: 'Listen Now',
+    image: '/images/just-breathe/cover.jpg',
+    imageAlt: 'Just Breathe meditation podcast cover',
   },
   {
     number: 5,
@@ -76,6 +87,8 @@ const gifts: Gift[] = [
     url: 'https://krystalore.com/masterclass',
     color: 'primary',
     cta: 'Save My Seat',
+    image: '/images/go9/keynote.jpg',
+    imageAlt: 'Krystalore delivering a live keynote masterclass',
   },
   {
     number: 6,
@@ -87,24 +100,37 @@ const gifts: Gift[] = [
     url: 'https://krystalore.com/quizzes',
     color: 'teal',
     cta: 'Take a Quiz',
+    image: '/images/go9/coaching.jpg',
+    imageAlt: 'One-on-one coaching session — the Quiz Library',
   },
 ]
 
 function GiftCard({ gift, unlocked }: { gift: Gift; unlocked: boolean }) {
   const c = COLOR_STYLES[gift.color]
   return (
-    <div className={`relative rounded-2xl border-2 ${c.border} bg-white overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow`} style={{ minHeight: 380 }}>
-      {/* Ribbon + bow */}
-      <div className="relative h-32 overflow-visible">
-        <div className={`absolute inset-x-0 bottom-0 h-20 ${c.ribbon}`}>
-          <div className="absolute left-1/2 -translate-x-1/2 inset-y-0 w-3 bg-white/80" />
-          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-3 bg-white/80" />
-        </div>
-        <div className={`absolute inset-x-0 top-0 h-12 ${c.ribbon} flex items-center justify-center`}>
-          <div className="relative">
-            <div className={`w-6 h-6 ${c.bow} rounded-full`} />
-            <div className={`absolute -left-2 top-1 w-4 h-4 ${c.bow} rounded-full opacity-90`} />
-            <div className={`absolute -right-2 top-1 w-4 h-4 ${c.bow} rounded-full opacity-90`} />
+    <div className={`relative rounded-2xl border-2 ${c.border} bg-white overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow`} style={{ minHeight: 480 }}>
+      {/* Image header */}
+      <div className="relative h-44 w-full overflow-hidden bg-gray-100">
+        <Image
+          src={gift.image}
+          alt={gift.imageAlt}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className={`object-cover ${unlocked ? '' : 'opacity-90 blur-[2px] grayscale'} transition-all duration-500`}
+        />
+        {/* Vertical ribbon stripe down the middle */}
+        <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-3 bg-white/80" />
+
+        {/* KRYSTALS bow overlay */}
+        <div className="absolute left-1/2 -translate-x-1/2 -top-1 z-10 flex flex-col items-center">
+          <div
+            className={`relative ${c.bow} ${c.bowText} font-black tracking-[0.2em] text-xs px-5 py-1.5 shadow-md`}
+            style={{
+              clipPath:
+                'polygon(0% 0%, 100% 0%, 100% 100%, 88% 70%, 50% 100%, 12% 70%, 0% 100%)',
+            }}
+          >
+            <span className="relative z-10">KRYSTALS</span>
           </div>
         </div>
       </div>
