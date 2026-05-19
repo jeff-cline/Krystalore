@@ -24,7 +24,7 @@ const navLinks: NavLink[] = [
   { href: '/quizzes', label: 'Quizzes' },
   { href: '/books', label: 'Books' },
   { href: '/podcasts', label: 'Podcast' },
-  { href: 'https://blog.krystalore.com/', label: 'Blog', external: true },
+  { href: 'https://news.krystalore.com/', label: 'Blog', external: true },
   { href: '/shop', label: 'Shop' },
 ]
 
