@@ -3,11 +3,27 @@
 import { useState } from 'react'
 import MainLayout from '@/components/layout/MainLayout'
 import Image from 'next/image'
-import { Wind, Play, Headphones, Heart, Sparkles, Flame, Sun, Moon, ChevronDown, ChevronUp, Clock } from 'lucide-react'
+import { Wind, Play, Headphones, Heart, Sparkles, Flame, Sun, Moon, ChevronDown, ChevronUp, Clock, Crown } from 'lucide-react'
 
 const SPOTIFY_SHOW_ID = '6acctiaNwQqFy8HVuiXlN7'
 
 const series = [
+  {
+    name: 'High Performers Series',
+    featured: true,
+    icon: Crown,
+    color: 'from-[#e07800] to-[#34c5c5]',
+    tagColor: 'bg-[#e07800]/10 text-[#e07800]',
+    description:
+      'Made for executives, founders, and the women carrying everything. Three-minute resets between meetings, before pitches, and after long days.',
+    episodes: [
+      { num: 20, title: 'The Pre-Meeting Reset', duration: '3 min', desc: 'Center your breath and your message before high-stakes conversations.' },
+      { num: 19, title: 'Decision Fatigue Antidote', duration: '3 min', desc: 'A mid-day clarity break that returns your sharpest thinking when you need it most.' },
+      { num: 18, title: 'Boardroom Breath', duration: '3 min', desc: 'Regulate your nervous system in real time without anyone noticing.' },
+      { num: 17, title: "The Founder's Steady", duration: '4 min', desc: 'Grounding for the solo operator carrying the company on their back.' },
+      { num: 16, title: 'Recovery on Demand', duration: '3 min', desc: 'A nighttime reset that protects tomorrow from today.' },
+    ],
+  },
   {
     name: 'Rebirth Series',
     icon: Moon,
@@ -176,19 +192,27 @@ export default function JustBreathePage() {
 
         {/* Series tabs */}
         <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide justify-center">
-          {series.map((s, i) => (
-            <button
-              key={s.name}
-              onClick={() => setActiveSeries(i)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                activeSeries === i
-                  ? 'bg-gray-900 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              <s.icon className="h-4 w-4" /> {s.name}
-            </button>
-          ))}
+          {series.map((s, i) => {
+            const featured = 'featured' in s && s.featured
+            return (
+              <button
+                key={s.name}
+                onClick={() => setActiveSeries(i)}
+                className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                  activeSeries === i
+                    ? 'bg-gray-900 text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                <s.icon className="h-4 w-4" /> {s.name}
+                {featured && (
+                  <span className="ml-1 bg-[#E8A849] text-gray-900 text-[10px] font-black tracking-wider px-2 py-0.5 rounded-full uppercase">
+                    Featured
+                  </span>
+                )}
+              </button>
+            )
+          })}
         </div>
 
         {/* Active series */}
