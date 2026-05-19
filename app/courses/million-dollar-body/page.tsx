@@ -75,13 +75,14 @@ export default function MillionDollarBodyAcademy() {
       
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-screen flex items-center">
-        <Image src="/images/go9/fitness-alt.jpg" alt="Million Dollar Body" fill className="object-cover" priority sizes="100vw" />
+        <Image src="/images/go9/fitness-alt.jpg" alt="Million Dollar Body Academy" fill className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40 z-[1]" />
         <div className="container mx-auto px-4 relative z-10 py-20 md:py-28">
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6">Million Dollar Body</h1>
-          <p className="text-lg text-gray-200 mb-8 max-w-2xl">The premium fitness and mindset program designed to build a body and life that commands respect.</p>
+          <h1 className="text-4xl md:text-6xl font-black text-white mb-6">Million Dollar Body Academy</h1>
+          <p className="text-lg text-white mb-8 max-w-2xl font-medium">The premium fitness and mindset program designed to build a body and life that commands respect.</p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
-            <Link href="#content" className="border-2 border-white/60 text-white rounded-full px-8 py-4 font-bold hover:bg-white/10 transition-colors text-center">Explore More</Link>
+            <a href="https://www.krystalorecrews.com/mdbthankyou" className="border-2 border-white/60 text-white rounded-full px-8 py-4 font-bold hover:bg-white/10 transition-colors text-center">Enroll Today</a>
           </div>
         </div>
       </section>
@@ -372,8 +373,8 @@ export default function MillionDollarBodyAcademy() {
             <div className="text-lg mb-6 opacity-90">Save $500 with Full Payment!</div>
             <div className="text-lg opacity-90">Monthly payment plans also available!</div>
           </div>
-          <a 
-            href="/courses/million-dollar-body"
+          <a
+            href="https://www.krystalorecrews.com/mdbthankyou"
             className="inline-block bg-[#34c5c5] hover:bg-[#d4943d] text-gray-800 font-bold text-2xl px-16 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
           >
             Enroll Now - Transform Your Life
@@ -459,8 +460,8 @@ export default function MillionDollarBodyAcademy() {
             Stop waiting for the "perfect time" - that time is now. Join hundreds of powerful women 
             who have transformed their bodies, confidence, and lives through the Million Dollar Body Academy.
           </p>
-          <a 
-            href="/courses/million-dollar-body"
+          <a
+            href="https://www.krystalorecrews.com/mdbthankyou"
             className="inline-block bg-[#34c5c5] hover:bg-[#d4943d] text-gray-800 font-bold text-2xl px-16 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mb-4"
           >
             Start Your Transformation Today

@@ -10,14 +10,21 @@ const retreatLinks = [
   { href: '/veteran-retreats', label: 'Veterans Retreats' },
 ]
 
-const navLinks = [
+const coachingLinks = [
+  { href: '/services', label: 'All Coaching' },
+  { href: '/health-mastery', label: 'Health Mastery' },
+]
+
+type NavLink = { href: string; label: string; external?: boolean }
+
+const navLinks: NavLink[] = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
   { href: '/courses', label: 'Courses' },
   { href: '/quizzes', label: 'Quizzes' },
   { href: '/books', label: 'Books' },
   { href: '/podcasts', label: 'Podcast' },
+  { href: 'https://blog.krystalore.com/', label: 'Blog', external: true },
   { href: '/shop', label: 'Shop' },
 ]
 
@@ -25,6 +32,8 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [retreatsOpen, setRetreatsOpen] = useState(false)
   const [mobileRetreatsOpen, setMobileRetreatsOpen] = useState(false)
+  const [coachingOpen, setCoachingOpen] = useState(false)
+  const [mobileCoachingOpen, setMobileCoachingOpen] = useState(false)
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 relative z-50">
@@ -43,11 +52,59 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-7">
-            {navLinks.map(link => (
-              <Link key={link.href} href={link.href} className="text-gray-700 hover:text-[#34c5c5] transition-colors">
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map(link =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-700 hover:text-[#34c5c5] transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link key={link.href} href={link.href} className="text-gray-700 hover:text-[#34c5c5] transition-colors">
+                  {link.label}
+                </Link>
+              )
+            )}
+
+            {/* Coaching dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setCoachingOpen(true)}
+              onMouseLeave={() => setCoachingOpen(false)}
+            >
+              <button
+                type="button"
+                onClick={() => setCoachingOpen(o => !o)}
+                className="flex items-center gap-1 text-gray-700 hover:text-[#34c5c5] transition-colors"
+                aria-haspopup="true"
+                aria-expanded={coachingOpen}
+              >
+                Coaching
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {coachingOpen && (
+                <div className="absolute left-0 top-full pt-2 w-56 z-50">
+                  <div className="bg-white rounded-md shadow-lg border border-gray-200 py-1">
+                    {coachingLinks.map(link => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setCoachingOpen(false)}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:text-[#34c5c5] hover:bg-gray-50"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Retreats dropdown */}
             <div
@@ -124,16 +181,65 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50">
           <nav className="px-4 py-4 space-y-1">
-            {navLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 text-gray-700 hover:bg-teal-50 hover:text-[#34c5c5] rounded-lg transition-colors text-lg"
+            {navLinks.map(link =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-4 py-3 text-gray-700 hover:bg-teal-50 hover:text-[#34c5c5] rounded-lg transition-colors text-lg"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-4 py-3 text-gray-700 hover:bg-teal-50 hover:text-[#34c5c5] rounded-lg transition-colors text-lg"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
+
+            {/* Coaching expandable */}
+            <button
+              type="button"
+              onClick={() => setMobileCoachingOpen(o => !o)}
+              className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-teal-50 hover:text-[#34c5c5] rounded-lg transition-colors text-lg"
+              aria-expanded={mobileCoachingOpen}
+            >
+              Coaching
+              <svg
+                className={`h-5 w-5 transition-transform ${mobileCoachingOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
               >
-                {link.label}
-              </Link>
-            ))}
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {mobileCoachingOpen && (
+              <div className="pl-4 space-y-1">
+                {coachingLinks.map(link => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setMobileCoachingOpen(false)
+                    }}
+                    className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-[#34c5c5] rounded-lg transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
 
             {/* Retreats expandable */}
             <button

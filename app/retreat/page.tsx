@@ -84,7 +84,10 @@ export default function RetreatPage() {
           priority
           sizes="100vw"
         />
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        <div
+          className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white"
+          style={{ textShadow: '0 2px 8px rgba(0,0,0,0.95), 0 0 18px rgba(0,0,0,0.7)' }}
+        >
           <p className="text-primary font-semibold tracking-[0.3em] uppercase text-sm mb-4">
             Revive &amp; Thrive Retreat Experience
           </p>

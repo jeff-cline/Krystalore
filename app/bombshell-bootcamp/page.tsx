@@ -5,7 +5,6 @@ import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import FAQSection from '@/components/FAQSection'
 import { Sparkles, Heart, Shield, Zap, Star, CheckCircle, Clock, Crown, Users, Target, Award, Flame, ArrowRight } from 'lucide-react'
-import { useState } from 'react'
 
 function JsonLd() {
   const jsonLd = { '@context': 'https://schema.org', '@graph': [
@@ -45,45 +44,7 @@ const faqs = [
   { question: 'What results can I expect?', answer: 'Participants report dramatic shifts in self-confidence, clearer decision-making from defined core values, sustainable daily routines, deeper community connections, and the courage to celebrate their wins. Many say it\'s the reset that changed everything.' },
 ]
 
-function BootcampSignupForm() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '' })
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('sending')
-    try {
-      const res = await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: form.name, email: form.email, phone: form.phone, source: 'krystalore.com/bombshell-bootcamp', leadType: 'bombshell-bootcamp' }),
-      })
-      if (res.ok) setStatus('sent')
-      else setStatus('error')
-    } catch { setStatus('error') }
-  }
-
-  if (status === 'sent') {
-    return (
-      <div className="text-center py-8">
-        <CheckCircle className="w-12 h-12 text-[#0D9488] mx-auto mb-3" />
-        <h3 className="text-xl font-bold text-gray-900 mb-2">You&apos;re In!</h3>
-        <p className="text-gray-600">Check your email for details. Your glow up starts now.</p>
-      </div>
-    )
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input type="text" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#0D9488] focus:border-transparent outline-none" placeholder="Your Name" />
-      <input type="email" required value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#0D9488] focus:border-transparent outline-none" placeholder="Email Address" />
-      <input type="tel" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#0D9488] focus:border-transparent outline-none" placeholder="Phone (optional)" />
-      <button type="submit" disabled={status === 'sending'} className="w-full bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white rounded-xl px-8 py-4 font-bold hover:scale-[1.02] transition-transform disabled:opacity-50 text-lg">
-        {status === 'sending' ? 'Joining...' : 'Join Bombshell Bootcamp'}
-      </button>
-    </form>
-  )
-}
+const BOMBSHELL_CHECKOUT_URL = 'https://www.krystalorecrews.com/bombshell-bootcamp-checkout'
 
 export default function BombshellBootcampPage() {
   return (
@@ -104,7 +65,7 @@ export default function BombshellBootcampPage() {
             <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 5 Days | 12-12:30 PM EST | Replays Available</span>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="#signup" className="bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white rounded-full px-10 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg text-lg">Join Now</a>
+            <a href={BOMBSHELL_CHECKOUT_URL} className="bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white rounded-full px-10 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg text-lg">JOIN NOW</a>
             <a href="#formula" className="border-2 border-white/60 text-white rounded-full px-10 py-4 font-bold hover:bg-white/10 transition-colors text-center" onClick={e => { e.preventDefault(); document.getElementById('formula')?.scrollIntoView({ behavior: 'smooth' }) }}>See the 5-Day Formula</a>
           </div>
           <div className="mt-6 inline-block bg-[#0D9488]/20 border border-[#0D9488]/40 rounded-xl px-6 py-3">
@@ -259,20 +220,6 @@ export default function BombshellBootcampPage() {
         </div>
       </section>
 
-      {/* Signup Form */}
-      <section id="signup" className="py-20 bg-gray-50">
-        <div className="max-w-lg mx-auto px-6">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">Join Bombshell Bootcamp</h2>
-            <p className="text-gray-600">Enter your details below to claim your spot. Replays available -- you won&apos;t miss a thing.</p>
-            <div className="mt-4 inline-block bg-[#0D9488]/10 border border-[#0D9488]/20 rounded-xl px-4 py-2">
-              <p className="text-[#0D9488] font-bold text-sm">BONUS: $250 Retreat Credit included!</p>
-            </div>
-          </div>
-          <BootcampSignupForm />
-        </div>
-      </section>
-
       <FAQSection faqs={faqs} title="Bombshell Bootcamp FAQ" />
 
       {/* Final CTA */}
@@ -280,7 +227,12 @@ export default function BombshellBootcampPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Stop Waiting. Claim Your Spot.</h2>
           <p className="text-xl text-teal-100 max-w-2xl mx-auto mb-8">Activate your Freedom Formula and lead with unstoppable brilliance -- starting now. That inner BOMBSHELL is in there. It&apos;s time to let her out.</p>
-          <a href="#signup" className="inline-block bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold rounded-xl px-10 py-5 text-lg hover:scale-105 transition-all" onClick={e => { e.preventDefault(); document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' }) }}>Join Bombshell Bootcamp</a>
+          <div className="mb-8 inline-block bg-white/10 border border-white/30 rounded-xl px-6 py-3">
+            <p className="text-white font-bold text-sm">BONUS: $250 Retreat Credit included!</p>
+          </div>
+          <div>
+          <a href={BOMBSHELL_CHECKOUT_URL} className="inline-block bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold rounded-xl px-10 py-5 text-lg hover:scale-105 transition-all">JOIN NOW</a>
+          </div>
           <div className="flex flex-wrap gap-6 justify-center mt-8 text-teal-100 text-sm">
             <Link href="/services" className="hover:text-white">All Services</Link>
             <Link href="/million-dollar-body" className="hover:text-white">Million Dollar Body</Link>

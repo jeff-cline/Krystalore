@@ -44,6 +44,7 @@ const nextConfig = {
       { source: '/rewrite', destination: '/masterclass', permanent: true },
       // /revive-and-thrive-retreat-checkout is hosted on GHL, not here
       { source: '/revive-and-thrive-retreat-checkout', destination: 'https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout', permanent: true },
+      { source: '/virtual-hiit-camp-checkout', destination: 'https://www.krystalorecrews.com/virtual-hiit-camp-checkout', permanent: true },
 
     ]
   },

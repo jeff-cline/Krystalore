@@ -1,7 +1,6 @@
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import {
-  Check,
   Star,
   Zap,
   Heart,
@@ -11,10 +10,7 @@ import {
   Shield,
   Clock,
   Flame,
-  Calendar,
   Mail,
-  TrendingUp,
-  Repeat,
   Play,
 } from 'lucide-react'
 import Link from 'next/link'
@@ -218,38 +214,6 @@ export default function HealthMasteryPage() {
               </div>
               <blockquote className="text-gray-700 italic mb-4 leading-relaxed">&ldquo;{testimonial.quote}&rdquo;</blockquote>
               <p className="text-sm font-medium text-gray-500">— {testimonial.name}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-12 sm:mb-16 bg-gray-50 border border-gray-200 rounded-2xl p-8 sm:p-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 text-center">Enrollment Funnel Strategy (Continuous + Downsell)</h2>
-        <p className="text-center text-gray-600 max-w-3xl mx-auto mb-8">
-          Built for ongoing enrollment with a clean path from high-intent buyers to lower-friction commitments.
-        </p>
-        <div className="grid md:grid-cols-3 gap-5">
-          {[
-            {
-              icon: TrendingUp,
-              title: 'Primary Offer',
-              text: 'Direct to full Health Mastery enrollment via checkout page with social proof and urgency-based bonuses.',
-            },
-            {
-              icon: Repeat,
-              title: 'Downsell Path',
-              text: 'If no checkout, offer lower-friction entry (discovery call + 14-day activation challenge) then auto-invite into monthly plan.',
-            },
-            {
-              icon: Calendar,
-              title: 'Continuous Enrollment',
-              text: 'Weekly application cadence + monthly onboarding kickoff so leads never wait for a launch window.',
-            },
-          ].map((item) => (
-            <div key={item.title} className="bg-white border border-gray-200 rounded-xl p-5">
-              <item.icon className="h-6 w-6 text-teal mb-2" />
-              <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-gray-600">{item.text}</p>
             </div>
           ))}
         </div>
