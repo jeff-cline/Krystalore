@@ -75,7 +75,7 @@ export default function VisionBoardPage() {
           <div className="flex flex-wrap gap-6 justify-center mt-8 text-orange-100 text-sm">
             <Link href="/courses" className="hover:text-white">Courses</Link>
             <Link href="/coworking" className="hover:text-white">Power Hour</Link>
-            <Link href="/private-mindset" className="hover:text-white">Mindset Coaching</Link>
+            <Link href="/privatemindset" className="hover:text-white">Mindset Coaching</Link>
             <Link href="/retreat" className="hover:text-white">Retreats</Link>
           </div>
         </div>

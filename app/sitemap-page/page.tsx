@@ -64,7 +64,7 @@ const sitemapData: SitemapCategory[] = [
     color: '#F97316', // Orange
     pages: [
       { path: '/private', title: 'Private Coaching' },
-      { path: '/private-mindset', title: 'Private Mindset' },
+      { path: '/privatemindset', title: 'Private Mindset' },
       { path: '/c-suite-executive-coaching', title: 'C-Suite Executive Coaching' },
       { path: '/emotional-intelligence-training', title: 'Emotional Intelligence Training' },
       { path: '/entrepreneur-coaching', title: 'Entrepreneur Coaching' },

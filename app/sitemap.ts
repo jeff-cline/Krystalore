@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '', '/about', '/contact', '/team', '/services', '/news',
 
     // Coaching & Programs
-    '/private', '/private-mindset', '/c-suite-executive-coaching',
+    '/private', '/privatemindset', '/c-suite-executive-coaching',
     '/emotional-intelligence-training', '/entrepreneur-coaching',
     '/leadership-training', '/leadership-training-programs',
     '/relationship-coaching', '/womens-coaching', '/veteran-coaching',

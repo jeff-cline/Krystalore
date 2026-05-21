@@ -125,7 +125,7 @@ export default function EmotionalIntelligenceTrainingPage() {
           <div className="flex flex-wrap gap-6 justify-center mt-8 text-teal-100 text-sm">
             <Link href="/leadership-training" className="hover:text-white">Leadership Training</Link>
             <Link href="/c-suite-executive-coaching" className="hover:text-white">C-Suite Coaching</Link>
-            <Link href="/private-mindset" className="hover:text-white">Private Mindset</Link>
+            <Link href="/privatemindset" className="hover:text-white">Private Mindset</Link>
             <Link href="/workshops" className="hover:text-white">Workshops</Link>
           </div>
         </div>

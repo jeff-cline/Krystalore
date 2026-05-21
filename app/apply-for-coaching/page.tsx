@@ -101,7 +101,7 @@ export default function ApplyForCoachingPage() {
           <p className="text-xl text-teal-50 max-w-2xl mx-auto mb-8">Don&apos;t wait for the perfect moment. Apply now and take the first step toward the life and leadership you&apos;ve been building toward.</p>
           <div className="flex flex-wrap gap-6 justify-center text-teal-100 text-sm">
             <Link href="/c-suite-executive-coaching" className="hover:text-white">C-Suite Coaching</Link>
-            <Link href="/private-mindset" className="hover:text-white">Private Mindset</Link>
+            <Link href="/privatemindset" className="hover:text-white">Private Mindset</Link>
             <Link href="/entrepreneur-coaching" className="hover:text-white">Entrepreneur Coaching</Link>
             <Link href="/emotional-intelligence-training" className="hover:text-white">EQ Training</Link>
             <Link href="/book" className="hover:text-white">Book a Call</Link>

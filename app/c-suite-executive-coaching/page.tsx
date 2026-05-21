@@ -128,7 +128,7 @@ export default function CSuiteExecutiveCoachingPage() {
           <div className="flex flex-wrap gap-6 justify-center mt-8 text-teal-100 text-sm">
             <Link href="/leadership-training" className="hover:text-white">Leadership Training</Link>
             <Link href="/emotional-intelligence-training" className="hover:text-white">EQ Training</Link>
-            <Link href="/private-mindset" className="hover:text-white">Private Mindset</Link>
+            <Link href="/privatemindset" className="hover:text-white">Private Mindset</Link>
             <Link href="/entrepreneur-coaching" className="hover:text-white">Entrepreneur Coaching</Link>
           </div>
         </div>
