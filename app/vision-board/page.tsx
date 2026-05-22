@@ -37,9 +37,10 @@ export default function VisionBoardPage() {
           <h1 className="text-4xl md:text-6xl font-black text-white mb-6">Vision Board</h1>
           <p className="text-lg text-gray-200 mb-8 max-w-2xl">Create a powerful visual roadmap for your goals, dreams, and the life you're building.</p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
+            <a href="https://krystalorecrews.com/masterclass-checkout" target="_blank" rel="noopener noreferrer" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Register Now</a>
             <Link href="#content" className="border-2 border-white/60 text-white rounded-full px-8 py-4 font-bold hover:bg-white/10 transition-colors text-center">Explore More</Link>
           </div>
+          <p className="mt-6 text-white/90 font-semibold">Next Session: Saturday, June 27, 2026 · 12:00 PM – 2:00 PM EST</p>
         </div>
       </section>
 
@@ -71,11 +72,11 @@ export default function VisionBoardPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Your Vision Deserves to Be Seen</h2>
           <p className="text-xl text-orange-50 max-w-2xl mx-auto mb-8">Stop dreaming in silence. Join a Vision Board Party and design the life you were made for.</p>
-          <Link href="/go" className="inline-block bg-white text-orange-600 font-bold rounded-xl px-10 py-5 text-lg hover:bg-gray-100 transition-all">Join the Next Event</Link>
+          <a href="https://krystalorecrews.com/masterclass-checkout" target="_blank" rel="noopener noreferrer" className="inline-block bg-white text-orange-600 font-bold rounded-xl px-10 py-5 text-lg hover:bg-gray-100 transition-all">Join the Next Event</a>
           <div className="flex flex-wrap gap-6 justify-center mt-8 text-orange-100 text-sm">
             <Link href="/courses" className="hover:text-white">Courses</Link>
             <Link href="/coworking" className="hover:text-white">Power Hour</Link>
-            <Link href="/privatemindset" className="hover:text-white">Mindset Coaching</Link>
+            <Link href="/private-mindset" className="hover:text-white">Mindset Coaching</Link>
             <Link href="/retreat" className="hover:text-white">Retreats</Link>
           </div>
         </div>

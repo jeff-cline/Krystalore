@@ -110,9 +110,15 @@ export default function PodcastsPage() {
         </div>
 
         {/* Hero Image */}
-        <div className="relative h-80 md:h-[28rem] lg:h-[32rem] w-full overflow-hidden rounded-xl mb-8">
-          <Image src="/images/go9/speaking-headshot.jpg" alt="Krystalore Crews speaking at a leadership event" fill className="object-cover object-center" sizes="100vw" priority />
+        <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl mb-8">
+          <Image src="/images/go9/speaking-headshot.jpg" alt="Krystalore Crews speaking at a leadership event" fill className="object-cover object-top" sizes="100vw" />
         </div>
+
+        <section className="rounded-xl bg-gradient-to-r from-[#0D9488] to-[#F97316] p-6 md:p-8 border border-white/10">
+          <p className="text-xs tracking-[0.2em] uppercase font-bold text-white/80 mb-2">Featured Banner</p>
+          <h2 className="text-3xl font-black text-white mb-2">Just Breathe</h2>
+          <p className="text-white/90">Breathwork, clarity, and guided reset sessions — featured now above all podcast stats.</p>
+        </section>
 
         {/* Podcast Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

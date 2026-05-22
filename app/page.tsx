@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 // Diamond removed per Krystalore's request
-import { ArrowRight, Smartphone, Heart, Brain, TreePine, Mountain, CheckCircle, Quote, Star, Shield, Flame, Target, Users, Sparkles, Download, Play, Headphones, Building2, Megaphone, Dumbbell, Palette, Award, ShoppingBag, Moon, Sun, Wind } from 'lucide-react'
+import { ArrowRight, Smartphone, Heart, Brain, TreePine, Mountain, CheckCircle, Quote, Star, Shield, Flame, Target, Users, Sparkles, Download, Play, Headphones, Building2, Megaphone, Dumbbell, Palette, Award, ShoppingBag } from 'lucide-react'
 
 function CTABanner({ variant = 'teal' }: { variant?: 'teal' | 'orange' | 'dark' }) {
   const styles = {
@@ -189,13 +189,13 @@ export default function HomePage() {
       accent: "#14B8A6"
     },
     {
-      name: "Beyond Limits Health Mastery",
+      name: "Health Mastery",
       subtitle: "Group Coaching",
-      price: "$250",
+      price: "$497",
       priceNote: "/mo",
       image: "/images/go9/coaching.jpg",
       desc: "Complete wellness transformation. Nutrition, fitness, somatic healing, and group coaching. Includes potential for VIP days, special member-only pricing on retreats and immersive experiences.",
-      link: "/fitness",
+      link: "/health-mastery",
       cta: "Transform",
       accent: "#F97316"
     },
@@ -221,6 +221,14 @@ export default function HomePage() {
       cta: "Apply",
       accent: "#37a6a6"
     }
+  ]
+
+  const featuredQuizzes = [
+    { title: 'Alignment Quiz', href: '/alignment', category: 'Main Quiz', image: '/images/go9/coaching.jpg', desc: 'Start with your core alignment and get a strategic next-step path.' },
+    { title: 'Leadership Quizzes', href: '/quizzes?category=Leadership', category: 'Leadership', image: '/images/go9/keynote.jpg', desc: 'Emotional intelligence, social awareness, and executive readiness.' },
+    { title: 'Wellness Quizzes', href: '/quizzes?category=Wellness', category: 'Wellness', image: '/images/go9/fitness.jpg', desc: 'Anxiety, breathwork, and retreat readiness assessments.' },
+    { title: 'Business Quizzes', href: '/quizzes?category=Business', category: 'Business', image: '/images/go9/corporate.jpg', desc: 'Scale-readiness and entrepreneur growth diagnostics.' },
+    { title: 'Relationship Quizzes', href: '/quizzes?category=Relationships', category: 'Relationships', image: '/images/go9/group-sunset-dresses.webp', desc: 'Compatibility and relationship growth scorecards.' },
   ]
 
   return (
@@ -301,6 +309,55 @@ export default function HomePage() {
                 {service.label}
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Quiz Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-sm font-bold tracking-[0.2em] text-[#0D9488] uppercase mb-2">Featured Quiz Path</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Start With Alignment, Then Explore by Category</h2>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                We added quizzes as a featured home section. Begin with the main Alignment quiz, then dive into leadership, wellness, business, and relationship categories.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-6 mb-8">
+              <Link href="/alignment" className="group relative min-h-[360px] rounded-2xl overflow-hidden shadow-xl">
+                <Image src="/images/go9/coaching.jpg" alt="Main alignment quiz hero" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                <div className="absolute bottom-0 p-6 md:p-8">
+                  <span className="inline-block text-xs font-bold tracking-widest uppercase text-teal-200 mb-2">Main Quiz • /alignment</span>
+                  <h3 className="text-3xl font-black text-white mb-2">Life Alignment Assessment</h3>
+                  <p className="text-gray-200 mb-4 max-w-xl">Get clear on where you are, where you want to go, and what to prioritize next.</p>
+                  <span className="inline-flex items-center gap-2 bg-[#34c5c5] text-white font-bold px-5 py-2.5 rounded-full">Take Alignment Quiz <ArrowRight className="h-4 w-4" /></span>
+                </div>
+              </Link>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {featuredQuizzes.slice(1).map((quiz) => (
+                  <Link key={quiz.title} href={quiz.href} className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                    <div className="relative h-36">
+                      <Image src={quiz.image} alt={quiz.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 100vw, 25vw" />
+                    </div>
+                    <div className="p-4">
+                      <p className="text-xs uppercase tracking-wider text-[#0D9488] font-bold mb-1">{quiz.category}</p>
+                      <h4 className="font-bold text-gray-900 mb-1">{quiz.title}</h4>
+                      <p className="text-sm text-gray-600">{quiz.desc}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Link href="/quizzes" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-7 py-3 font-bold hover:scale-105 transition-transform">
+                Explore All Quiz Categories <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -602,87 +659,6 @@ export default function HomePage() {
             <Link href="/vault" className="bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-8 py-4 font-bold inline-flex items-center gap-2 hover:scale-105 transition-transform">
               <Download className="h-4 w-4" /> Download Free Guides
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Assessments — Life Alignment + 6 quick links */}
-      <section className="py-20 px-4 bg-white" id="assessments">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-[#0D9488] font-semibold uppercase tracking-wider text-sm mb-2">Featured Assessments</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Start With <span className="text-[#0D9488]">One Honest Question</span>
-            </h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              Personalized insights in minutes. Begin with our flagship Life Alignment Assessment, or jump into any of the other featured quizzes.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-            {/* Left half — Featured Life Alignment 23-question quiz */}
-            <Link
-              href="/alignment"
-              className="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#34c5c5] to-[#0D9488] shadow-xl hover:shadow-2xl transition-shadow flex flex-col p-8 sm:p-10 text-white min-h-[420px]"
-            >
-              <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-white/10 group-hover:scale-110 transition-transform" />
-              <div className="relative">
-                <div className="inline-flex items-center gap-2 bg-white/15 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-5">
-                  <Target className="h-3.5 w-3.5" />
-                  Featured Assessment
-                </div>
-                <h3 className="text-3xl sm:text-4xl font-bold mb-3 leading-tight">
-                  Life Alignment Assessment
-                </h3>
-                <p className="text-[#E8A849] font-bold text-base mb-4">23 questions &middot; 10 minutes</p>
-                <p className="text-teal-50 text-base sm:text-lg leading-relaxed mb-6">
-                  Discover how aligned your current life is with your core values and long-term goals — and where to put your energy next.
-                </p>
-              </div>
-              <div className="relative mt-auto">
-                <span className="inline-flex items-center gap-2 bg-white text-[#0D9488] font-bold px-7 py-3.5 rounded-full shadow group-hover:scale-105 transition-transform">
-                  Start the Assessment
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              </div>
-            </Link>
-
-            {/* Right half — buttons to other featured quizzes */}
-            <div className="flex flex-col">
-              <p className="text-[#F97316] font-semibold uppercase tracking-wider text-xs mb-4">More Featured Quizzes</p>
-              <div className="grid sm:grid-cols-2 gap-3 flex-1">
-                {[
-                  { slug: 'emotional-intelligence', title: 'Emotional Intelligence', tag: 'Leadership', icon: Heart },
-                  { slug: 'womens-confidence', title: "Women's Confidence", tag: 'Personal Development', icon: Sparkles },
-                  { slug: 'couples-compatibility', title: 'Couples Compatibility', tag: 'Relationships', icon: Users },
-                  { slug: 'veteran-transition', title: 'Veteran Transition Readiness', tag: 'Veterans', icon: Shield },
-                  { slug: 'anxiety', title: 'Anxiety Assessment', tag: 'Wellness', icon: Brain },
-                  { slug: 'entrepreneur-readiness', title: 'Entrepreneur Readiness', tag: 'Business', icon: Award },
-                ].map(({ slug, title, tag, icon: Icon }) => (
-                  <Link
-                    key={slug}
-                    href={`/quizzes/${slug}`}
-                    className="group flex items-center gap-3 bg-[#F4F1EC] hover:bg-white border border-transparent hover:border-[#0D9488]/30 rounded-xl p-4 transition-all hover:shadow-md"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-[#0D9488]/10 group-hover:bg-[#0D9488]/15 flex items-center justify-center flex-shrink-0">
-                      <Icon className="h-5 w-5 text-[#0D9488]" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-bold text-gray-800 text-sm group-hover:text-[#0D9488] transition-colors leading-tight">{title}</p>
-                      <p className="text-gray-500 text-xs mt-0.5">{tag}</p>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-[#0D9488] transition-colors flex-shrink-0" />
-                  </Link>
-                ))}
-              </div>
-              <Link
-                href="/quizzes"
-                className="mt-4 inline-flex items-center justify-center gap-2 border-2 border-[#0D9488] text-[#0D9488] hover:bg-[#0D9488] hover:text-white font-bold px-6 py-3 rounded-full transition-colors"
-              >
-                See All Assessments
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
           </div>
         </div>
       </section>
@@ -1065,89 +1041,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Just Breathe — Meditation Library */}
-      <section className="py-20 px-4 bg-white" id="just-breathe">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left: cover image with intro */}
-            <div className="relative">
-              <div className="relative aspect-square w-full max-w-md mx-auto rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/just-breathe/cover.jpg"
-                  alt="Just Breathe — A Beyond Limits Meditation Library with Krystalore Crews"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <div className="absolute -bottom-4 -right-4 hidden sm:flex items-center gap-2 bg-white rounded-full shadow-lg px-4 py-2">
-                <Headphones className="h-4 w-4 text-[#0D9488]" />
-                <span className="text-xs font-bold text-gray-800">15 Guided Meditations</span>
-              </div>
-            </div>
-
-            {/* Right: intro + 3 series cards */}
-            <div>
-              <p className="text-[#0D9488] font-semibold uppercase tracking-wider text-sm mb-2">Just Breathe</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                A <span className="text-[#0D9488]">Beyond Limits</span> Meditation Library
-              </h2>
-              <p className="text-gray-600 text-lg mb-8">
-                Three transformational series — start with Awakening, progress through Activation, and evolve with Rebirth. Three minutes at a time.
-              </p>
-
-              <div className="space-y-3 mb-6">
-                {[
-                  {
-                    name: 'Awakening Series',
-                    desc: 'Come home to yourself. Grounding, clarity, and reconnection.',
-                    icon: Sun,
-                    gradient: 'from-teal to-[#006767]',
-                    badge: 'Episodes 1–5',
-                  },
-                  {
-                    name: 'Activation Series',
-                    desc: 'Ignite your power. Movement, discipline, and mindset for high achievers.',
-                    icon: Flame,
-                    gradient: 'from-[#E8A849] to-orange-600',
-                    badge: 'Episodes 6–10',
-                  },
-                  {
-                    name: 'Rebirth Series',
-                    desc: 'Release the old, welcome the new. Healing, identity shifts, new beginnings.',
-                    icon: Moon,
-                    gradient: 'from-purple-600 to-indigo-700',
-                    badge: 'Episodes 11–15',
-                  },
-                ].map(({ name, desc, icon: Icon, gradient, badge }) => (
-                  <Link
-                    key={name}
-                    href="/just-breathe"
-                    className="group flex items-start gap-4 bg-white border border-gray-200 hover:border-[#0D9488]/40 rounded-xl p-4 transition-all hover:shadow-md"
-                  >
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0`}>
-                      <Icon className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-bold text-gray-800 group-hover:text-[#0D9488] transition-colors">{name}</h3>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{badge}</span>
-                      </div>
-                      <p className="text-gray-600 text-sm leading-snug">{desc}</p>
-                    </div>
-                    <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-[#0D9488] transition-colors flex-shrink-0 mt-2" />
-                  </Link>
-                ))}
-              </div>
-
-              <Link
-                href="/just-breathe"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white font-bold px-7 py-3.5 rounded-full shadow hover:scale-105 transition-transform"
-              >
-                <Wind className="h-4 w-4" />
-                Open the Meditation Library
-              </Link>
-            </div>
+      <section className="py-16 bg-white border-t border-b border-gray-100">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="rounded-3xl p-8 md:p-12 bg-gradient-to-r from-teal-50 to-orange-50 border border-teal-100">
+            <p className="text-sm font-bold tracking-widest text-teal-700 uppercase mb-3">Featured Community</p>
+            <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">HER NEXT MISSION</h3>
+            <p className="text-gray-700 text-lg max-w-3xl mb-6">A focused initiative supporting women with community, training, leadership, and practical tools to rise into their next mission.</p>
+            <a href="https://hernextmission.org" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full px-7 py-3 bg-[#34c5c5] text-white font-bold hover:scale-105 transition-transform">Explore Her Next Mission</a>
           </div>
         </div>
       </section>

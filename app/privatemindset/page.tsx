@@ -451,8 +451,11 @@ export default function PrivateMindsetPage() {
           <h2 className="text-3xl md:text-5xl font-black text-white mb-5 leading-tight">
             One conversation is all it takes to know.
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Send a quick note. Krystalore replies personally — usually the same day — and you decide from there.
+          <p className="text-lg md:text-xl text-slate-700 max-w-2xl mb-4">
+            A private coaching experience for leaders who are done performing and ready to become deeply aligned.
+          </p>
+          <p className="text-base md:text-lg text-slate-600 max-w-3xl mb-8">
+            Built with Compassionate Inquiry practices, somatic coaching, and real-world strategy for sustainable transformation.
           </p>
           <CTAButtons label="final" />
           <p className="text-xs text-gray-500 mt-8 tracking-wider">

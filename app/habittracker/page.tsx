@@ -283,8 +283,9 @@ export default function HabitTrackerPage() {
             Grab your free 30-day life &amp; fitness plan today.
           </p>
           <a
-            href="#download"
-            onClick={e => { e.preventDefault(); document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' }) }}
+            href="https://krystalorecrews.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-[#e07800] font-black rounded-full px-10 py-5 text-lg hover:scale-105 transition-transform shadow-xl"
           >
             Get Your Free Copy <ArrowRight className="w-5 h-5" />

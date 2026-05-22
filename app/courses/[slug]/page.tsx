@@ -1,6 +1,6 @@
 'use client'
 
-import { notFound } from 'next/navigation'
+
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
@@ -99,8 +99,17 @@ function CourseJsonLd({ course, slug }: { course: typeof courses[string]; slug: 
 }
 
 export default function CourseDetailPage({ params }: { params: { slug: string } }) {
-  const course = courses[params.slug]
-  if (!course) notFound()
+  const course = courses[params.slug] || {
+    title: params.slug.split('-').map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(' '),
+    subtitle: 'Krystalore Course Experience',
+    description: 'This course page is currently being refreshed. Tap GET MORE INFO below and our team will send complete details, curriculum, and enrollment options.',
+    icon: BookOpen,
+    color: 'from-[#34c5c5] to-teal-700',
+    duration: 'Self-paced',
+    modules: ['Curriculum details coming soon', 'Updated lesson plan', 'Private support options'],
+    benefits: ['Clarity on your next step', 'Custom-fit training path', 'Direct support from team Krystalore'],
+    forWho: ['Leaders and entrepreneurs', 'Wellness and mindset builders', 'Anyone ready for transformational growth'],
+  }
 
   const Icon = course.icon
 
@@ -176,9 +185,9 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
           <div className="max-w-3xl mx-auto px-4">
             <h2 className="text-3xl font-bold mb-6">Ready to Start {course.title}?</h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/pricing-demo" className="bg-[#34c5c5] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#e07800] transition-colors">
-                Enroll Now
-              </Link>
+              <a href={`mailto:krystalore@thecrewscoach.com?subject=${encodeURIComponent(`GET MORE INFO: ${course.title}`)}`} className="bg-[#34c5c5] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#e07800] transition-colors">
+                GET MORE INFO
+              </a>
               <Link href="/courses" className="border-2 border-[#34c5c5] text-[#34c5c5] px-8 py-4 rounded-xl font-bold hover:bg-[#34c5c5]/10 transition-colors">
                 Browse All Courses
               </Link>

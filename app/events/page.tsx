@@ -22,10 +22,12 @@ function EventsJsonLd() {
 }
 
 const events = [
-  { icon: Sun, title: 'Monday Motivation LIVE', schedule: 'Every Monday', desc: 'Kick-start your week with energy, accountability, and intention. Join Krystalore live for mindset activation, goal setting, and community connection.', color: 'from-[#E8A849] to-orange-600' },
-  { icon: Flame, title: 'Freedom Friday LIVE', schedule: 'Every Friday', desc: 'Celebrate wins, reflect on growth, and set weekend intentions. A powerful community check-in to close out the week with purpose.', color: 'from-[#34c5c5] to-teal-600' },
-  { icon: Zap, title: 'Beyond Limits Power Hour', schedule: 'Monthly', desc: 'Intensive group coaching sessions focused on breaking through specific challenges — leadership blocks, fitness plateaus, relationship patterns, and more.', color: 'from-purple-500 to-purple-700' },
-  { icon: Mountain, title: 'Retreats', schedule: 'Quarterly', desc: 'Immersive multi-day experiences combining coaching, fitness, wellness, and adventure. Transform in an environment designed for breakthroughs.', color: 'from-gray-700 to-gray-900' },
+  { icon: Sun, title: 'Bombshell Bootcamp', schedule: 'Monthly', desc: 'High-energy women\'s transformation coaching and accountability.', color: 'from-[#E8A849] to-orange-600' },
+  { icon: Flame, title: 'Retreats', schedule: 'Quarterly', desc: 'Immersive retreat experiences for deep personal breakthroughs.', color: 'from-[#34c5c5] to-teal-600' },
+  { icon: Zap, title: 'Vision Board', schedule: 'Quarterly', desc: 'Creative intention-setting workshop with guided visualization.', color: 'from-purple-500 to-purple-700' },
+  { icon: Mountain, title: 'Masterclass', schedule: 'Monthly', desc: 'Signature teaching events on mindset, leadership, and health mastery.', color: 'from-gray-700 to-gray-900' },
+  { icon: Users, title: 'Speaking', schedule: 'By Request', desc: 'Keynotes and leadership talks for teams, events, and organizations.', color: 'from-sky-600 to-blue-800' },
+  { icon: Mic, title: 'Beyond Limits Power Hour', schedule: 'Weekly', desc: 'Focused accountability sessions to execute your highest-priority goals.', color: 'from-emerald-600 to-teal-800' },
 ]
 
 export default function EventsPage() {
