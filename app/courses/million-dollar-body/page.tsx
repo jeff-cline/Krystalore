@@ -82,7 +82,7 @@ export default function MillionDollarBodyAcademy() {
           <p className="text-lg text-white mb-8 max-w-2xl font-medium">The premium fitness and mindset program designed to build a body and life that commands respect.</p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
-            <a href="https://www.krystalorecrews.com/mdbthankyou" className="border-2 border-white/60 text-white rounded-full px-8 py-4 font-bold hover:bg-white/10 transition-colors text-center">Enroll Today</a>
+            <a href="mailto:krystalore@thecrewscoach.com?subject=GET%20MORE%20INFO%3A%20Million%20Dollar%20Body" className="border-2 border-white/60 text-white rounded-full px-8 py-4 font-bold hover:bg-white/10 transition-colors text-center">GET MORE INFO</a>
           </div>
         </div>
       </section>
