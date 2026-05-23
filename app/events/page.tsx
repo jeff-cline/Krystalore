@@ -22,12 +22,12 @@ function EventsJsonLd() {
 }
 
 const events = [
-  { icon: Sun, title: 'Bombshell Bootcamp', schedule: 'Monthly', desc: 'High-energy women\'s transformation coaching and accountability.', color: 'from-[#E8A849] to-orange-600' },
-  { icon: Flame, title: 'Retreats', schedule: 'Quarterly', desc: 'Immersive retreat experiences for deep personal breakthroughs.', color: 'from-[#34c5c5] to-teal-600' },
-  { icon: Zap, title: 'Vision Board', schedule: 'Quarterly', desc: 'Creative intention-setting workshop with guided visualization.', color: 'from-purple-500 to-purple-700' },
-  { icon: Mountain, title: 'Masterclass', schedule: 'Monthly', desc: 'Signature teaching events on mindset, leadership, and health mastery.', color: 'from-gray-700 to-gray-900' },
-  { icon: Users, title: 'Speaking', schedule: 'By Request', desc: 'Keynotes and leadership talks for teams, events, and organizations.', color: 'from-sky-600 to-blue-800' },
-  { icon: Mic, title: 'Beyond Limits Power Hour', schedule: 'Weekly', desc: 'Focused accountability sessions to execute your highest-priority goals.', color: 'from-emerald-600 to-teal-800' },
+  { icon: Flame, title: 'Bombshell Bootcamp', schedule: 'Monthly Online Course', href: '/bombshell-bootcamp', desc: 'The Freedom Formula in a 6-week container — build unstoppable confidence from the inside out.', color: 'from-[#E8A849] to-orange-600' },
+  { icon: Mountain, title: 'Retreats', schedule: 'Quarterly', href: '/retreat', desc: 'Immersive multi-day experiences combining coaching, fitness, wellness, and adventure. Women’s, Couples, Veterans, Entrepreneurs.', color: 'from-[#34c5c5] to-teal-600' },
+  { icon: Zap, title: 'Vision Board Workshop', schedule: 'Quarterly Live on Zoom', href: '/vision-board', desc: 'A 2-hour virtual experience to craft your vision and design a fulfilling life. Replay included.', color: 'from-purple-500 to-purple-700' },
+  { icon: Sun, title: 'Masterclass', schedule: 'Live & On-Demand', href: '/masterclass', desc: 'Krystalore’s signature masterclass for high-performers ready to elevate fitness, business, and life.', color: 'from-[#0D9488] to-teal-700' },
+  { icon: Mic, title: 'Speaking & Keynotes', schedule: 'Booking Now', href: '/keynote-speaker', desc: 'Bring Krystalore to your stage. Keynotes on leadership, resilience, and human performance.', color: 'from-gray-700 to-gray-900' },
+  { icon: Users, title: 'Monday Motivation & Freedom Friday LIVE', schedule: 'Weekly', href: '/go-live', desc: 'Live community sessions to open and close the week — mindset, accountability, and reflection.', color: 'from-[#e07800] to-orange-700' },
 ]
 
 export default function EventsPage() {
@@ -63,16 +63,17 @@ export default function EventsPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-8">
               {events.map((e) => (
-                <div key={e.title} className="rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
+                <Link key={e.title} href={e.href} className="block rounded-2xl overflow-hidden border border-gray-200 hover:shadow-lg hover:border-[#34c5c5] transition-all">
                   <div className={`bg-gradient-to-r ${e.color} p-6 text-white`}>
                     <e.icon className="w-10 h-10 mb-3 opacity-90" />
                     <h2 className="text-2xl font-bold">{e.title}</h2>
                     <p className="text-sm opacity-80 mt-1">{e.schedule}</p>
                   </div>
                   <div className="p-6">
-                    <p className="text-gray-600">{e.desc}</p>
+                    <p className="text-gray-600 mb-3">{e.desc}</p>
+                    <span className="text-[#34c5c5] font-semibold text-sm inline-flex items-center gap-1">Learn more <ArrowRight className="w-4 h-4" /></span>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

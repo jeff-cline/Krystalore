@@ -43,6 +43,18 @@ const nextConfig = {
       { source: '/crews-beyond-limits--referral-programs', destination: '/referral-program', permanent: true },
       { source: '/visionboard', destination: '/vision-board', permanent: true },
 
+      // Her Next Mission nonprofit — 301 to external site
+      { source: '/nonprofit', destination: 'https://hernextmission.org', permanent: true },
+      { source: '/nonprofit/:path*', destination: 'https://hernextmission.org/:path*', permanent: true },
+
+      // Events nav short-slugs → real pages
+      { source: '/bombshell', destination: '/bombshell-bootcamp', permanent: true },
+      { source: '/retreats', destination: '/retreat', permanent: true },
+      { source: '/speaking', destination: '/keynote-speaker', permanent: true },
+
+      // Use the dedicated /just-breathe lander as the course page
+      { source: '/courses/just-breathe', destination: '/just-breathe', permanent: true },
+
     ]
   },
 }

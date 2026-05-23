@@ -596,6 +596,53 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Her Next Mission — Featured Nonprofit for Veterans */}
+      <section className="relative py-20 px-4 bg-white overflow-hidden" id="her-next-mission">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-5 gap-10 items-center rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-[#0D1B2A] via-[#0D1B2A] to-[#1B3A5C] text-white">
+            <div className="relative lg:col-span-2 h-72 lg:h-full min-h-[360px] w-full">
+              <Image src="/images/go9/veteran.jpg" alt="HER NEXT MISSION — Krystalore Crews nonprofit for Veterans" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A]/40 to-transparent" />
+            </div>
+            <div className="lg:col-span-3 p-8 md:p-12">
+              <div className="inline-flex items-center gap-2 bg-[#E8A849]/15 border border-[#E8A849]/40 text-[#E8A849] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
+                <Shield className="w-3.5 h-3.5" /> Featured Nonprofit
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">
+                HER NEXT MISSION
+              </h2>
+              <p className="text-lg md:text-xl text-gray-200 mb-4 leading-relaxed">
+                The nonprofit Krystalore created to help Veterans — and the families who serve alongside them — transition from service into purpose, health, and economic freedom.
+              </p>
+              <p className="text-gray-300 leading-relaxed mb-8">
+                Programs span mental and physical wellness, leadership, entrepreneurship, and community for active duty, Veterans, and military spouses. Built on lived experience: 22 years USAF service, on the ground with Veteran families today.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://hernextmission.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-lg"
+                >
+                  GET MORE INFO <ArrowRight className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://hernextmission.org/donate"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-bold px-8 py-4 rounded-full hover:bg-white/10 transition-colors"
+                >
+                  Donate
+                </a>
+              </div>
+              <p className="text-xs text-gray-400 mt-6 tracking-wider">
+                hernextmission.org — Service. Health. Purpose.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-20 px-4 bg-[#F4F1EC]" id="testimonials">
         <div className="max-w-6xl mx-auto">

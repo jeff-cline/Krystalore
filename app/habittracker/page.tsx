@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
@@ -19,6 +18,8 @@ import {
   ArrowRight,
   ShieldCheck,
 } from 'lucide-react'
+
+const HABIT_TRACKER_CHECKOUT_URL = 'https://www.krystalorecrews.com/habittracker'
 
 function JsonLd() {
   const jsonLd = {
@@ -54,134 +55,60 @@ const inside = [
   { icon: ShieldCheck, title: 'Zero Shame Design', desc: 'Built for humans who burned out on perfection. Miss a day. Start again. No drama.' },
 ]
 
-function SignupForm() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '' })
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('sending')
-    try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          phone: form.phone || 'n/a',
-          quizTitle: 'Habit Tracker Download',
-          answers: {},
-          results: { source: 'krystalore.com/habittracker' },
-        }),
-      })
-      if (res.ok) setStatus('sent')
-      else setStatus('error')
-    } catch {
-      setStatus('error')
-    }
-  }
-
-  if (status === 'sent') {
-    return (
-      <div className="text-center py-8">
-        <CheckCircle className="w-14 h-14 text-[#0D9488] mx-auto mb-4" />
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">It&apos;s on its way!</h3>
-        <p className="text-gray-600">Check your inbox in the next minute or two. Your 30-day reset starts now.</p>
-      </div>
-    )
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        type="text"
-        required
-        value={form.name}
-        onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-        className="w-full border-2 border-gray-200 focus:border-[#e07800] rounded-xl px-4 py-3 outline-none transition-colors"
-        placeholder="Your Name"
-      />
-      <input
-        type="email"
-        required
-        value={form.email}
-        onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-        className="w-full border-2 border-gray-200 focus:border-[#e07800] rounded-xl px-4 py-3 outline-none transition-colors"
-        placeholder="Email Address"
-      />
-      <input
-        type="tel"
-        value={form.phone}
-        onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
-        className="w-full border-2 border-gray-200 focus:border-[#e07800] rounded-xl px-4 py-3 outline-none transition-colors"
-        placeholder="Phone (optional)"
-      />
-      <button
-        type="submit"
-        disabled={status === 'sending'}
-        className="w-full bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black text-xl px-6 py-4 rounded-xl hover:scale-[1.01] transition-transform shadow-lg disabled:opacity-50 flex items-center justify-center gap-2"
-      >
-        {status === 'sending' ? 'Sending…' : (
-          <>
-            <Download className="w-5 h-5" /> GET YOUR FREE COPY
-          </>
-        )}
-      </button>
-      {status === 'error' && (
-        <p className="text-sm text-red-600 text-center">Something went wrong. Try again or email krystalore@thecrewscoach.com.</p>
-      )}
-      <p className="text-xs text-gray-500 text-center pt-1 flex items-center justify-center gap-1.5">
-        <ShieldCheck className="w-3.5 h-3.5" /> Your details are safe. 100% secure. Unsubscribe anytime.
-      </p>
-    </form>
-  )
-}
-
 export default function HabitTrackerPage() {
   return (
     <>
       <JsonLd />
       <Header />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden min-h-[85vh] flex items-center">
-        <Image
-          src="/images/go9/planner.jpg"
-          alt="Krystalore Crews 30-Day Habit Tracker — one page, five minutes a day"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/20 z-[1]" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 md:py-28">
-          <p className="text-[#E8A849] font-bold tracking-widest uppercase text-sm mb-4">
-            Free Download • Instant Access
-          </p>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 max-w-3xl leading-[1.05]">
-            Free 30-Day <span className="text-[#E8A849]">Habit Tracker</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-200 mb-6 max-w-2xl leading-relaxed">
-            Struggling to stay on track with your healthy habits? Tired of half-finished routines? Here&apos;s the simple, shame-free reset.
-          </p>
-          <p className="text-lg text-[#34c5c5] font-bold mb-10 max-w-2xl">
-            One page. Five minutes a day. Real momentum.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="#download"
-              onClick={e => { e.preventDefault(); document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' }) }}
-              className="bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white rounded-full px-10 py-4 font-black text-lg hover:scale-105 transition-transform text-center shadow-lg inline-flex items-center justify-center gap-2"
-            >
-              <Download className="w-5 h-5" /> GET YOUR FREE COPY
-            </a>
-            <a
-              href="#inside"
-              onClick={e => { e.preventDefault(); document.getElementById('inside')?.scrollIntoView({ behavior: 'smooth' }) }}
-              className="border-2 border-white/60 text-white rounded-full px-10 py-4 font-bold hover:bg-white/10 transition-colors text-center"
-            >
-              See What&apos;s Inside
-            </a>
+      {/* Hero — light, split layout */}
+      <section className="relative bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white pt-12 md:pt-20 pb-16 md:pb-24 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#0D9488] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
+                <Download className="w-3.5 h-3.5" /> Free Download · Instant Access
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-5 leading-[1.05]">
+                Free 30-Day <span className="text-[#e07800]">Habit Tracker</span>
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 mb-4 max-w-xl leading-relaxed">
+                Struggling to stay on track with your healthy habits? Tired of half-finished routines? Here&apos;s the simple, shame-free reset.
+              </p>
+              <p className="text-base md:text-lg text-[#0D9488] font-bold mb-8 max-w-xl">
+                One page. Five minutes a day. Real momentum.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href={HABIT_TRACKER_CHECKOUT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-10 py-4 rounded-full hover:scale-105 transition-transform shadow-lg"
+                >
+                  <Download className="w-5 h-5" /> GET YOUR FREE COPY
+                </a>
+                <a
+                  href="#inside"
+                  onClick={e => { e.preventDefault(); document.getElementById('inside')?.scrollIntoView({ behavior: 'smooth' }) }}
+                  className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#0D9488] font-bold px-10 py-4 rounded-full hover:bg-[#34c5c5]/5 transition-colors"
+                >
+                  See What&apos;s Inside
+                </a>
+              </div>
+              <p className="text-xs text-gray-500 mt-5 flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5" /> Secure download on krystalorecrews.com — sent straight to your inbox.
+              </p>
+            </div>
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/go9/planner.jpg"
+                alt="Krystalore Crews 30-Day Habit Tracker — one page, five minutes a day"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -249,27 +176,13 @@ export default function HabitTrackerPage() {
         </div>
       </section>
 
-      {/* Quote / encouragement */}
-      <section className="py-16 bg-gradient-to-br from-[#34c5c5] to-[#006767] text-white">
+      {/* Quote / encouragement — light teal band */}
+      <section className="py-16 bg-[#34c5c5]/10 border-y border-[#34c5c5]/20">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-3xl md:text-4xl font-black mb-3 leading-tight">
+          <p className="text-3xl md:text-4xl font-black mb-3 leading-tight text-gray-900">
             &ldquo;One day at a time.&rdquo;
           </p>
-          <p className="text-xl text-teal-100">Stronger than yesterday.</p>
-        </div>
-      </section>
-
-      {/* Download form */}
-      <section id="download" className="py-20 bg-[#F6F8FA] scroll-mt-20">
-        <div className="max-w-lg mx-auto px-6">
-          <div className="text-center mb-8">
-            <Download className="w-12 h-12 text-[#e07800] mx-auto mb-4" />
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-3">Grab Your Free Copy</h2>
-            <p className="text-gray-600">Tell us where to send it. Instant delivery to your inbox.</p>
-          </div>
-          <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-[#E8A849]/30">
-            <SignupForm />
-          </div>
+          <p className="text-xl text-[#0D9488] font-bold">Stronger than yesterday.</p>
         </div>
       </section>
 
@@ -283,7 +196,7 @@ export default function HabitTrackerPage() {
             Grab your free 30-day life &amp; fitness plan today.
           </p>
           <a
-            href="https://krystalorecrews.com"
+            href={HABIT_TRACKER_CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-[#e07800] font-black rounded-full px-10 py-5 text-lg hover:scale-105 transition-transform shadow-xl"
