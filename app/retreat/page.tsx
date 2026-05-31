@@ -98,11 +98,11 @@ export default function RetreatPage() {
             A 7-Day Luxury Wellness Retreat for High-Achieving Women Ready to Reset, Reflect, and Rise
           </p>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
-            Puerto Rico &bull; El Yunque Rainforest &bull; Private Oceanview Estate
+            Costa Rica &middot; October 18&ndash;25, 2026
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
+              href="https://www.krystalorecrews.com/checkout"
               className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 hover:shadow-teal/40 transition-all duration-300 transform hover:scale-105"
             >
               Reserve My Spot <ArrowRight className="w-5 h-5" />
@@ -113,6 +113,46 @@ export default function RetreatPage() {
             >
               Apply for Scholarship
             </a>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ═══════════════ UPCOMING & PRIVATE RETREATS ═══════════════ */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Upcoming &amp; Private Retreats</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Choose Your Next Beyond Limits Experience</h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              Reserve the Costa Rica retreat, join the waitlist for the next revival experience, or book a private call to design a custom retreat.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
+              <p className="text-teal font-bold uppercase tracking-widest text-xs mb-2">Featured Retreat</p>
+              <h3 className="text-2xl font-bold mb-3">Costa Rica Retreat</h3>
+              <p className="text-gray-600 mb-5">October 18&ndash;25, 2026. A tropical reset for women ready to revive, reconnect, and rise.</p>
+              <a href="https://www.krystalorecrews.com/checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
+                Reserve <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
+              <p className="text-primary font-bold uppercase tracking-widest text-xs mb-2">Next Experience</p>
+              <h3 className="text-2xl font-bold mb-3">Costa Rica Revival Retreat Waitlist</h3>
+              <p className="text-gray-600 mb-5">Get first notice as new retreat dates, rooms, and scholarship options open.</p>
+              <a href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-600 text-white font-bold px-6 py-3 rounded-full transition-colors">
+                Join the Waitlist <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
+              <p className="text-teal font-bold uppercase tracking-widest text-xs mb-2">Private Groups</p>
+              <h3 className="text-2xl font-bold mb-3">Private Retreat Planning</h3>
+              <p className="text-gray-600 mb-5">Bring your team, circle, or community together for a custom Beyond Limits retreat.</p>
+              <Link href="/engage" className="inline-flex items-center gap-2 border-2 border-teal text-teal font-bold px-6 py-3 rounded-full hover:bg-teal/5 transition-colors">
+                Book a Call <Phone className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

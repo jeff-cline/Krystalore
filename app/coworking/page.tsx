@@ -17,7 +17,7 @@ import {
   ArrowRight,
 } from 'lucide-react'
 
-const COWORKING_CHECKOUT_URL = 'https://www.krystalorecrews.com/habittracker'
+const COWORKING_CHECKOUT_URL = 'https://www.krystalorecrews.com/coworking'
 
 function JsonLd() {
   const jsonLd = {

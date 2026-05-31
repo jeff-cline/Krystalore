@@ -600,23 +600,28 @@ export default function HomePage() {
       <section className="relative py-20 px-4 bg-white overflow-hidden" id="her-next-mission">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-5 gap-10 items-center rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-[#0D1B2A] via-[#0D1B2A] to-[#1B3A5C] text-white">
-            <div className="relative lg:col-span-2 h-72 lg:h-full min-h-[360px] w-full">
-              <Image src="/images/go9/veteran.jpg" alt="HER NEXT MISSION — Krystalore Crews nonprofit for Veterans" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A]/40 to-transparent" />
+            <div className="relative lg:col-span-2 h-72 lg:h-full min-h-[360px] w-full bg-white flex items-center justify-center p-10">
+              <Image src="/images/nonprofit/her-next-mission-logo.png" alt="HER NEXT MISSION phoenix logo" width={420} height={420} className="h-auto w-full max-w-sm object-contain" sizes="(max-width: 1024px) 80vw, 320px" />
             </div>
             <div className="lg:col-span-3 p-8 md:p-12">
               <div className="inline-flex items-center gap-2 bg-[#E8A849]/15 border border-[#E8A849]/40 text-[#E8A849] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
                 <Shield className="w-3.5 h-3.5" /> Featured Nonprofit
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-2 leading-tight">
                 HER NEXT MISSION
               </h2>
-              <p className="text-lg md:text-xl text-gray-200 mb-4 leading-relaxed">
-                The nonprofit Krystalore created to help Veterans — and the families who serve alongside them — transition from service into purpose, health, and economic freedom.
-              </p>
-              <p className="text-gray-300 leading-relaxed mb-8">
-                Programs span mental and physical wellness, leadership, entrepreneurship, and community for active duty, Veterans, and military spouses. Built on lived experience: 22 years USAF service, on the ground with Veteran families today.
-              </p>
+              <p className="text-[#E8A849] text-xl md:text-2xl font-black mb-4">From Service to Success</p>
+              <div className="space-y-4 text-gray-200 leading-relaxed mb-8">
+                <p>
+                  HER NEXT MISSION helps women Veterans and military-connected families translate the courage, discipline, and leadership forged in service into renewed purpose, wellness, and economic opportunity.
+                </p>
+                <p>
+                  Through coaching, community, entrepreneurship support, and whole-person wellness resources, the mission is to make sure every woman who served has a clear next chapter — and a trusted team walking beside her.
+                </p>
+                <p>
+                  Built from Krystalore’s 22 years of USAF service and her own transition journey, HER NEXT MISSION exists to turn service-earned strength into lasting civilian success.
+                </p>
+              </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="https://hernextmission.org"

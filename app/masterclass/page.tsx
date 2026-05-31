@@ -10,8 +10,8 @@ export default function RewritePage() {
     "@type": "Event",
     "name": "Rewrite in Real Time: Mastering the Messy Middle of Your Transformation",
     "description": "A 90-minute live masterclass on staying consistent, confident, and in motion while everything in your life is changing.",
-    "startDate": "2026-05-20T17:00:00-05:00",
-    "endDate": "2026-05-20T18:30:00-05:00",
+    "startDate": "2026-06-13T17:00:00-05:00",
+    "endDate": "2026-06-13T18:30:00-05:00",
     "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled",
     "location": { "@type": "VirtualLocation", "url": "https://krystalore.com/masterclass" },
@@ -125,7 +125,7 @@ export default function RewritePage() {
             <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">Live Masterclass Details</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {[
-                { icon: Calendar, label: 'May 20, 2026', desc: 'Date' },
+                { icon: Calendar, label: 'June 13, 2026', desc: 'Date' },
                 { icon: Clock, label: '5:00–6:30 PM EST', desc: 'Time' },
                 { icon: MapPin, label: 'Live on Zoom', desc: 'Location' },
                 { icon: Play, label: 'Replay Included', desc: 'Registered Only' },

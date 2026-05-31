@@ -20,7 +20,7 @@ import {
   CheckCircle,
 } from 'lucide-react'
 
-const MASTERCLASS_CHECKOUT_URL = 'https://krystalorecrews.com/masterclass-checkout'
+const MASTERCLASS_CHECKOUT_URL = 'https://krystalorecrews.com/vision-board-workshop-thankyou'
 
 // Quarterly schedule — edit this list to add future events.
 // Each entry is the start datetime in America/New_York (UTC-5 standard / UTC-4 DST).
