@@ -4,7 +4,10 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 const retreatLinks = [
-  { href: '/retreat', label: "Women's Retreats" },
+  { href: '/retreat', label: 'All Retreat Options' },
+  { href: '/cr-retreat', label: 'Costa Rica Retreat' },
+  { href: '/pr-retreat', label: 'Puerto Rico Retreat' },
+  { href: '/tn-retreat', label: 'Tennessee Retreat' },
   { href: '/business-smart-start', label: 'Business Retreats' },
   { href: '/couples-retreats', label: 'Couples Retreats' },
   { href: '/veteran-retreats', label: 'Veterans Retreats' },

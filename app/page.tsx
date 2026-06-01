@@ -613,13 +613,10 @@ export default function HomePage() {
               <p className="text-[#E8A849] text-xl md:text-2xl font-black mb-4">From Service to Success</p>
               <div className="space-y-4 text-gray-200 leading-relaxed mb-8">
                 <p>
-                  HER NEXT MISSION helps women Veterans and military-connected families translate the courage, discipline, and leadership forged in service into renewed purpose, wellness, and economic opportunity.
+                  Her Next Mission empowers female Veterans and first responders transitioning out of service to reclaim their identity, rebuild their confidence, and discover their next mission — through coaching, community, fitness, and transformative experiences that honor their service and fuel their future.
                 </p>
                 <p>
-                  Through coaching, community, entrepreneurship support, and whole-person wellness resources, the mission is to make sure every woman who served has a clear next chapter — and a trusted team walking beside her.
-                </p>
-                <p>
-                  Built from Krystalore’s 22 years of USAF service and her own transition journey, HER NEXT MISSION exists to turn service-earned strength into lasting civilian success.
+                  Her Next Mission Foundation empowers female Veterans and first responders navigating life beyond the uniform. Through wellness programs, leadership development, entrepreneurship education, coaching, retreats, and community, we help women rebuild confidence, rediscover purpose, and thrive in their next chapter. Founded by a 22-year Air Force Veteran who has personally navigated the challenges of identity transition, our mission is to ensure no woman has to face the journey from service to self alone. We believe the skills that made you exceptional in service can become the foundation for a healthy, fulfilling, and purpose-driven life beyond it.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
