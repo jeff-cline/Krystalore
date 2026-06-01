@@ -50,6 +50,7 @@ const nextConfig = {
       // Events nav short-slugs → real pages
       { source: '/bombshell', destination: '/bombshell-bootcamp', permanent: true },
       { source: '/retreats', destination: '/retreat', permanent: true },
+      { source: '/ton-retreat', destination: '/tn-retreat', permanent: true },
       { source: '/speaking', destination: '/keynote-speaker', permanent: true },
 
       // Use the dedicated /just-breathe lander as the course page

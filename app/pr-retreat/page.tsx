@@ -105,7 +105,7 @@ export default function PuertoRicoRetreatPage() {
               href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
               className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 hover:shadow-teal/40 transition-all duration-300 transform hover:scale-105"
             >
-              Checkout <ArrowRight className="w-5 h-5" />
+              Book Now <ArrowRight className="w-5 h-5" />
             </a>
             <a
               href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist"
@@ -134,16 +134,21 @@ export default function PuertoRicoRetreatPage() {
               <h3 className="text-2xl font-bold mb-3">Puerto Rico Retreat</h3>
               <p className="text-gray-600 mb-5">March 28&ndash;April 3, 2027. A Caribbean reset for women ready to revive, reconnect, and rise.</p>
               <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
-                Checkout <ArrowRight className="w-4 h-4" />
+                Book Now <ArrowRight className="w-4 h-4" />
               </a>
             </div>
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
               <p className="text-primary font-bold uppercase tracking-widest text-xs mb-2">Next Experience</p>
               <h3 className="text-2xl font-bold mb-3">2027 Retreat Waitlist</h3>
               <p className="text-gray-600 mb-5">Get first notice for future 2027 retreat dates, rooms, and updates.</p>
-              <a href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-600 text-white font-bold px-6 py-3 rounded-full transition-colors">
-                Join the Waitlist <ArrowRight className="w-4 h-4" />
-              </a>
+              <div className="flex flex-col gap-3 items-start">
+                <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
+                  Book Now <ArrowRight className="w-4 h-4" />
+                </a>
+                <a href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-600 text-white font-bold px-6 py-3 rounded-full transition-colors">
+                  Join the Waitlist <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
               <p className="text-teal font-bold uppercase tracking-widest text-xs mb-2">Private Groups</p>
@@ -499,7 +504,7 @@ export default function PuertoRicoRetreatPage() {
               href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
               className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-600 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
             >
-              <Calendar className="w-5 h-5" /> Wait List & Updates
+              <Calendar className="w-5 h-5" /> Book Now
             </a>
           </div>
         </div>
@@ -518,12 +523,20 @@ export default function PuertoRicoRetreatPage() {
           <p className="text-gray-600 text-lg leading-relaxed mb-8">
             Use the waitlist for retreat announcements, room releases, and next-step details.
           </p>
-          <a
-            href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist"
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-primary/20 transition-all duration-300 transform hover:scale-105"
-          >
-            <GraduationCap className="w-5 h-5" /> Join Waitlist
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
+              className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 transition-all duration-300 transform hover:scale-105"
+            >
+              <Calendar className="w-5 h-5" /> Book Now
+            </a>
+            <a
+              href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-primary/20 transition-all duration-300 transform hover:scale-105"
+            >
+              <GraduationCap className="w-5 h-5" /> Join Waitlist
+            </a>
+          </div>
         </div>
       </section>
 
@@ -574,7 +587,7 @@ export default function PuertoRicoRetreatPage() {
               href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
               className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 transition-all duration-300 transform hover:scale-105"
             >
-              Wait List & Updates <ArrowRight className="w-5 h-5" />
+              Book Now <ArrowRight className="w-5 h-5" />
             </a>
             <Link
               href="https://www.krystalorecrews.com/costa-rica-retreat-private-request-page"
