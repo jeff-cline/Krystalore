@@ -276,7 +276,7 @@ export default function PrivateMindsetPage() {
             </div>
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/private-mindset/mindset-coaching-1.png"
+                src="/images/go6/tropical-porch-dress.jpg"
                 alt="Krystalore Crews — Compassionate Inquiry somatic coaching"
                 fill
                 priority
@@ -311,7 +311,7 @@ export default function PrivateMindsetPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-square lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-xl order-2 lg:order-1">
               <Image
-                src="/images/krystalore/cropped-KrystalCrews-15-scaled-1.jpg"
+                src="/images/go9/speaking-headshot.jpg"
                 alt="Krystalore Crews in session — body-centered coaching"
                 fill
                 className="object-cover"
@@ -426,14 +426,14 @@ export default function PrivateMindsetPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { src: '/images/private-mindset/mindset-coaching-2.png', alt: 'Krystalore Crews in private coaching session' },
-              { src: '/images/krystalore/cropped-KrystalCrews-145-scaled-1.jpg', alt: 'Krystalore Crews leading a session' },
-              { src: '/images/private-mindset/mindset-coaching-3.png', alt: 'Krystalore Crews — somatic coaching practice' },
-              { src: '/images/krystalore/cropped-KrystalCrews-185-scaled-1.jpg', alt: 'Krystalore Crews — coaching portrait' },
-              { src: '/images/krystalore/cropped-HighResolution-143-scaled-2.jpg', alt: 'Krystalore Crews — retreat leadership' },
-              { src: '/images/krystalore/cropped-SAM_3347-scaled-1.jpg', alt: 'Krystalore Crews in retreat setting' },
-              { src: '/images/krystalore/cropped-SAM_3454-scaled-2.jpg', alt: 'Krystalore Crews — group work' },
-              { src: '/images/krystalore/REM08628.jpg', alt: 'Krystalore Crews speaking' },
+              { src: '/images/go6/spa-relaxation.jpg', alt: 'Krystalore Crews in private coaching session' },
+              { src: '/images/go6/floor-journaling-wide.jpg', alt: 'Krystalore Crews leading a session' },
+              { src: '/images/go9/coaching.jpg', alt: 'Krystalore Crews — somatic coaching practice' },
+              { src: '/images/go6/tropical-porch-2.jpg', alt: 'Krystalore Crews — coaching portrait' },
+              { src: '/images/retreat/retreat-group-03.jpg', alt: 'Krystalore Crews — retreat leadership' },
+              { src: '/images/go6/beach-cocktails.jpg', alt: 'Krystalore Crews in retreat setting' },
+              { src: '/images/go9/community-hands.jpg', alt: 'Krystalore Crews — group work' },
+              { src: '/images/go6/wny-heroes-speaking.jpg', alt: 'Krystalore Crews speaking' },
             ].map((img, i) => (
               <div key={i} className="relative aspect-square rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:scale-[1.02] transition-all">
                 <Image
@@ -445,6 +445,42 @@ export default function PrivateMindsetPage() {
                 />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Private Program Options */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="text-[#0D9488] font-bold tracking-widest uppercase text-sm mb-3">More Private Options</p>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-3">Choose the private path that fits your season.</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Explore private coaching options for fitness, somatic work, mindset, business, Veteran transition, and custom packages.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+            {[
+              { title: 'Fitness Coaching', href: '/private', image: '/images/go9/fitness-outdoor.jpg' },
+              { title: 'Somatic Coaching', href: '/privatemindset', image: '/images/go9/meditation.webp' },
+              { title: 'Mindset Coaching', href: '/private', image: '/images/go9/coaching.jpg' },
+              { title: 'Business Coaching', href: '/private', image: '/images/go9/keynote.jpg' },
+              { title: 'Veteran Coaching', href: '/veteran-coaching', image: '/images/go9/veteran.jpg' },
+              { title: 'Custom Packages', href: '/private', image: '/images/go6/tropical-porch-dress.jpg' },
+            ].map((program) => (
+              <Link key={program.title} href={program.href} className="group bg-[#F6F8FA] rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all">
+                <div className="relative aspect-[16/10]">
+                  <Image src={program.image} alt={program.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
+                </div>
+                <div className="p-5 flex items-center justify-between">
+                  <h3 className="font-black text-gray-900">{program.title}</h3>
+                  <ArrowRight className="w-5 h-5 text-[#0D9488]" />
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link href="/private" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black text-lg px-10 py-4 rounded-full hover:scale-105 transition-transform shadow-lg">
+              View Private Options <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </section>
@@ -499,7 +535,7 @@ export default function PrivateMindsetPage() {
           <div className="grid md:grid-cols-5 gap-10 items-center">
             <div className="md:col-span-2 relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/go9/hero.jpg"
+                src="/images/go9/speaking-headshot.jpg"
                 alt="Krystalore Crews — private coach for executives and high-achievers"
                 fill
                 className="object-cover"

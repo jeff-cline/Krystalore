@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import {
   ChevronRight, CheckCircle, Shield, Crown, Star,
-  ArrowRight, Zap, Heart, Brain, Target, Lock
+  ArrowRight, Zap, Heart, Brain, Target, Lock, Quote, Users
 } from 'lucide-react'
 
 const FEATURES = [
@@ -123,7 +123,7 @@ export default function PrivatePage() {
 
         {/* Hero Image */}
         <div className="relative h-64 md:h-80 w-full overflow-hidden">
-          <Image src="/images/go9/coaching.jpg" alt="Krystalore Crews private coaching and one-on-one mentorship" fill className="object-cover" sizes="100vw" />
+          <Image src="/images/go9/coaching.jpg" alt="Krystalore Crews private coaching and one-on-one mentorship" fill className="object-cover object-[50%_18%]" sizes="100vw" />
         </div>
 
         {/* Hero */}
@@ -138,11 +138,14 @@ export default function PrivatePage() {
             <p className="text-xl md:text-2xl text-gray-300 font-light mb-8 max-w-3xl mx-auto leading-relaxed">
               For Leaders Who Refuse to Operate at 70%
             </p>
-            <div className="max-w-2xl mx-auto text-gray-400 space-y-4 text-lg leading-relaxed">
+            <div className="max-w-2xl mx-auto text-gray-400 space-y-4 text-lg leading-relaxed mb-8">
               <p>You&apos;ve built success. But your nervous system is tired. Your body feels tight. Your leadership carries weight.</p>
               <p>And somewhere inside... you know there&apos;s another level.</p>
               <p className="text-white font-medium">You don&apos;t need more information. You need integration.</p>
             </div>
+            <Link href="/book" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#0D9488] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-all">
+              Book a Call <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
         </section>
 
@@ -195,56 +198,67 @@ export default function PrivatePage() {
           </div>
         </section>
 
-        {/* Investment */}
+        {/* Private Options */}
         <section className="py-20 lg:py-28 bg-gray-50">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-4">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
               <Shield className="w-8 h-8 text-[#34c5c5] mx-auto mb-4" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Investment</h2>
-              <p className="text-lg text-gray-600 mb-12">
-                Private mentorship is limited to 3–5 clients at a time. Depth requires focus.
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Private Coaching Options</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Private mentorship is customized around your season, goals, body, business, and next chapter. Book a call and we&apos;ll map the right container together.
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* 6-Month */}
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-                <div className="bg-[#34c5c5] p-6 text-white text-center">
-                  <p className="text-sm tracking-[0.2em] uppercase mb-2">6-Month</p>
-                  <h3 className="text-2xl font-bold">Elite Mentorship</h3>
-                </div>
-                <div className="p-8 text-center">
-                  <p className="text-4xl font-bold text-gray-900 mb-2">$19,500</p>
-                  <p className="text-gray-500 mb-4">paid in full</p>
-                  <p className="text-gray-600 mb-6">or <span className="font-semibold text-gray-900">$3,250/month</span> for 6 months</p>
-                  <p className="text-gray-600 text-sm">For leaders in a season of recalibration or acceleration.</p>
-                </div>
-              </div>
-              {/* 12-Month */}
-              <div className="bg-white rounded-2xl shadow-lg border-2 border-[#E8A849] overflow-hidden relative">
-                <div className="absolute top-4 right-4">
-                  <span className="bg-[#34c5c5] text-white text-xs font-bold px-3 py-1 rounded-full">RECOMMENDED</span>
-                </div>
-                <div className="bg-gradient-to-r from-[#E8A849] to-orange-600 p-6 text-white text-center">
-                  <p className="text-sm tracking-[0.2em] uppercase mb-2">12-Month</p>
-                  <h3 className="text-2xl font-bold">Executive Performance Partnership</h3>
-                </div>
-                <div className="p-8">
-                  <div className="text-center mb-6">
-                    <p className="text-4xl font-bold text-gray-900 mb-2">$33,000</p>
-                    <p className="text-gray-500 mb-4">paid in full</p>
-                    <p className="text-gray-600">or <span className="font-semibold text-gray-900">$3,000/month</span> for 12 months</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              {[
+                { title: 'Mindset Coaching', img: '/images/go9/coaching.jpg', desc: 'Identity, confidence, clarity, emotional regulation, and aligned decision-making.' },
+                { title: 'Somatic Coaching', img: '/images/go9/meditation.webp', desc: 'Body-centered support for nervous system steadiness, boundaries, and integration.' },
+                { title: 'Business Coaching', img: '/images/go9/keynote.jpg', desc: 'Strategic support for founders and leaders ready to grow without burning out.' },
+                { title: 'Fitness Integration', img: '/images/go9/fitness-outdoor.jpg', desc: 'Strength, energy, habits, and accountability designed around your real life.' },
+                { title: 'Veteran Transition', img: '/images/go9/veteran.jpg', desc: 'Identity and leadership support for Veterans navigating their next mission.' },
+                { title: 'Custom Packages', img: '/images/go6/tropical-porch-dress.jpg', desc: 'A custom private container for life, leadership, wellness, and retreat integration.' },
+              ].map((item) => (
+                <div key={item.title} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100">
+                  <div className="relative aspect-[16/10]">
+                    <Image src={item.img} alt={item.title} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 33vw" />
                   </div>
-                  <div className="space-y-3 mb-6">
-                    {TWELVE_MONTH_INCLUDES.map((item, i) => (
-                      <div key={i} className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-[#E8A849] mt-1 flex-shrink-0" />
-                        <span className="text-gray-700 text-sm">{item}</span>
-                      </div>
-                    ))}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{item.desc}</p>
                   </div>
-                  <p className="text-center text-sm font-semibold text-[#E8A849]">This is for legacy-level transformation.</p>
                 </div>
-              </div>
+              ))}
+            </div>
+            <div className="text-center">
+              <Link href="/book" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-all">
+                Book a Call <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Colorful Coaching Gallery */}
+        <section className="py-16 bg-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <Users className="w-8 h-8 text-[#E8A849] mx-auto mb-4" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Inviting, Empowering, Whole-Life Support</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">Private work can include strategy, healing, movement, leadership, joy, identity, and community — not just fitness.</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                '/images/go6/tropical-porch-dress.jpg',
+                '/images/go9/speaking-headshot.jpg',
+                '/images/go6/beach-cocktails.jpg',
+                '/images/retreat/retreat-group-03.jpg',
+                '/images/go6/spa-relaxation.jpg',
+                '/images/go9/community-hands.jpg',
+                '/images/go6/lobster-dinner-smile.jpg',
+                '/images/go9/group-sunset.jpg',
+              ].map((src) => (
+                <div key={src} className="relative aspect-square rounded-2xl overflow-hidden shadow-md">
+                  <Image src={src} alt="Private coaching lifestyle and empowerment" fill className="object-cover object-top" sizes="(max-width: 768px) 50vw, 25vw" />
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -264,7 +278,7 @@ export default function PrivatePage() {
                 </div>
               ))}
             </div>
-            <div className="bg-gray-50 rounded-2xl p-8 md:p-12">
+            <div className="bg-gray-50 rounded-2xl p-8 md:p-12 mb-8">
               <p className="text-center text-gray-500 mb-6 text-sm tracking-[0.2em] uppercase">Most say:</p>
               <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
                 {QUOTES.map((q, i) => (
@@ -273,6 +287,13 @@ export default function PrivatePage() {
                   </div>
                 ))}
               </div>
+            </div>
+            <div className="bg-gradient-to-br from-[#34c5c5]/10 via-white to-[#E8A849]/10 rounded-2xl p-8 md:p-12 border border-[#34c5c5]/20">
+              <Quote className="w-10 h-10 text-[#E8A849] mb-5" />
+              <p className="text-xl md:text-2xl italic text-gray-800 leading-relaxed mb-5">
+                &ldquo;Krystalore helped me feel seen, supported, and strong enough to take the next aligned step in my life. Her private coaching gave me clarity, confidence, and tools I actually use.&rdquo;
+              </p>
+              <p className="text-sm tracking-widest uppercase text-[#0D9488] font-bold">— Emily, Private Client</p>
             </div>
           </div>
         </section>
@@ -369,10 +390,10 @@ export default function PrivatePage() {
 
                   {/* Section 4 */}
                   <div>
-                    <p className="text-sm tracking-[0.2em] uppercase text-[#E8A849] mb-6">Section 4: Investment Readiness</p>
+                    <p className="text-sm tracking-[0.2em] uppercase text-[#E8A849] mb-6">Section 4: Private Support Fit</p>
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">Which option are you most interested in?</label>
+                        <label className="block text-sm text-gray-400 mb-2">Which private support path are you most interested in?</label>
                         {INVESTMENT_OPTIONS.map(opt => (
                           <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
                             <input type="radio" name="investmentOption" value={opt} checked={form.investmentOption === opt} onChange={e => update('investmentOption', e.target.value)} className="accent-[#E8A849]" />
@@ -381,7 +402,7 @@ export default function PrivatePage() {
                         ))}
                       </div>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">Are you prepared to invest at this level if we determine it is aligned?</label>
+                        <label className="block text-sm text-gray-400 mb-2">Are you ready to discuss a custom private coaching plan if we determine it is aligned?</label>
                         {READINESS.map(opt => (
                           <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
                             <input type="radio" name="investmentReady" value={opt} checked={form.investmentReady === opt} onChange={e => update('investmentReady', e.target.value)} className="accent-[#E8A849]" />
@@ -446,9 +467,9 @@ export default function PrivatePage() {
             <p className="text-gray-500 text-lg">
               Private mentorship is by application only. If aligned, we schedule a private clarity call. If we both feel resonance, we begin.
             </p>
-            <a href="#apply" className="inline-flex items-center gap-2 mt-6 text-[#34c5c5] font-semibold hover:text-gray-800 transition-colors">
-              Apply Now <ArrowRight className="w-4 h-4" />
-            </a>
+            <Link href="/book" className="inline-flex items-center gap-2 mt-6 text-[#34c5c5] font-semibold hover:text-gray-800 transition-colors">
+              Book a Call <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </section>
       </main>

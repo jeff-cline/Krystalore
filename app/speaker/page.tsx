@@ -446,51 +446,36 @@ export default function SpeakerPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden min-h-[85vh] flex items-end">
-        <Image
-          src="/images/go9/keynote.jpg"
-          alt="Krystalore Crews — international speaker and corporate host"
-          fill
-          className="object-cover"
-          style={{ objectPosition: '50% 20%' }}
-          priority
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent z-[1]" />
-        <div className="container mx-auto px-4 relative z-10 pb-12 lg:pb-16">
-          <p className="text-sm md:text-base font-semibold tracking-widest uppercase text-[#34c5c5] mb-3 drop-shadow">
-            Corporate Experiences by
-          </p>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-4 drop-shadow-lg max-w-3xl leading-tight">
-            Krystalore Crews
-          </h1>
-          <p className="text-lg md:text-xl text-gray-100 mb-6 max-w-2xl drop-shadow-md leading-relaxed">
-            Creating experiences that energize people, elevate culture, and make teams feel
-            seen — then challenge them to rise.
-          </p>
-          <div className="flex flex-wrap gap-2 mb-8 max-w-3xl">
-            {roleChips.map((chip) => (
-              <span
-                key={chip}
-                className="text-xs md:text-sm font-semibold text-white/90 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5"
-              >
-                {chip}
-              </span>
-            ))}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white py-14 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div>
+            <p className="text-sm md:text-base font-bold tracking-widest uppercase text-[#0D9488] mb-3">
+              Speaker · Emcee · Retreat Leader · Corporate Host
+            </p>
+            <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-4 max-w-3xl leading-tight">
+              Krystalore Crews
+            </h1>
+            <p className="text-lg md:text-xl text-gray-700 mb-6 max-w-2xl leading-relaxed">
+              Creating experiences that energize people, elevate culture, and make teams feel seen — then challenge them to rise.
+            </p>
+            <div className="flex flex-wrap gap-2 mb-8 max-w-3xl">
+              {roleChips.map((chip) => (
+                <span key={chip} className="text-xs md:text-sm font-semibold text-[#0D9488] bg-white border border-[#34c5c5]/25 rounded-full px-3 py-1.5 shadow-sm">
+                  {chip}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-4">
+              <a href="#book" className="bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">
+                Book to Speak / Emcee
+              </a>
+              <Link href="/corporate-wellness" className="bg-[#E8A849] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">
+                Book Leadership Training
+              </Link>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="#book"
-              className="bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg"
-            >
-              Book to Speak / Emcee
-            </a>
-            <Link
-              href="/corporate-wellness"
-              className="bg-[#E8A849] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg"
-            >
-              Book Leadership Training
-            </Link>
+          <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+            <Image src="/images/go9/keynote.jpg" alt="Krystalore Crews — international speaker and corporate host" fill className="object-cover object-[50%_20%]" priority sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
         </div>
       </section>
@@ -536,8 +521,8 @@ export default function SpeakerPage() {
           <div className="md:col-span-2">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/scraped/krystalore-keynote.jpg"
-                alt="Krystalore Crews keynote portrait"
+                src="/images/scraped/speaker-stage.jpg"
+                alt="Krystalore Crews speaking on stage"
                 fill
                 className="object-cover object-top"
                 sizes="(max-width: 768px) 100vw, 40vw"
@@ -548,9 +533,6 @@ export default function SpeakerPage() {
             <p className="text-sm font-semibold tracking-widest uppercase text-[#34c5c5] mb-3">
               About Krystalore
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-              She doesn&apos;t just perform — she transforms.
-            </h2>
             <div className="space-y-5 text-gray-700 leading-relaxed text-lg">
               <p>
                 Krystalore Crews is an internationally recognized speaker, corporate wellness
