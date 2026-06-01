@@ -36,19 +36,21 @@ import type { Metadata } from 'next'
 
 /* ─── Carousel Images ─── */
 const carouselImages = [
-  { src: '/images/retreat-destinations/tn-01.png', alt: 'Tennessee retreat cabin property surrounded by fall trees', caption: 'A Cozy Tennessee Fall Setting' },
-  { src: '/images/retreat-destinations/tn-02.png', alt: "Tennessee retreat home exterior for a women's fall reset", caption: 'Private Mountain Retreat Energy' },
-  { src: '/images/retreat-destinations/tn-03.png', alt: 'Tennessee retreat gathering space with warm cabin feel', caption: 'Warm Gathering Spaces' },
-  { src: '/images/retreat-destinations/tn-04.png', alt: 'Tennessee retreat bedroom prepared for rest and restoration', caption: 'Restorative Rooms' },
-  { src: '/images/retreat-destinations/tn-05.png', alt: 'Tennessee retreat deck and outdoor lounge area', caption: 'Fall Air & Quiet Moments' },
-  { src: '/images/retreat-destinations/tn-06.png', alt: "Tennessee retreat property details for a women's wellness weekend", caption: 'Cozy, Elevated Details' },
+  { src: '/images/retreat-destinations/tn-airbnb/tn-lake-01.png', alt: 'Norris Lake view from the Tennessee retreat patio with Adirondack chairs and fire table', caption: 'Big Norris Lake Views' },
+  { src: '/images/retreat-destinations/tn-airbnb/tn-lake-02.jpg', alt: 'Modern lake cottage living room with vaulted ceilings, stone fireplace, and floor-to-ceiling lake windows', caption: 'Vaulted Lake-View Living Room' },
+  { src: '/images/retreat-destinations/tn-airbnb/tn-lake-03.jpg', alt: 'Open living and dining space with wall of windows overlooking Norris Lake', caption: 'Light-Filled Gathering Spaces' },
+  { src: '/images/retreat-destinations/tn-airbnb/tn-lake-05.jpg', alt: 'Modern kitchen and living room designed for group retreat connection', caption: 'Kitchen + Community Flow' },
+  { src: '/images/retreat-destinations/tn-airbnb/tn-lake-11.png', alt: 'Indoor outdoor lounge opening to patio for the Tennessee lake cottage retreat', caption: 'Indoor / Outdoor Retreat Lounge' },
+  { src: '/images/retreat-destinations/tn-airbnb/tn-lake-12.jpg', alt: 'Bright modern kitchen island for retreat meals and gathering', caption: 'Modern Retreat Kitchen' },
+  { src: '/images/retreat-destinations/tn-airbnb/tn-lake-16.jpg', alt: 'Dining area and kitchen for shared meals at the Norris Lake retreat cottage', caption: 'Shared Meals + Sisterhood' },
+  { src: '/images/retreat-destinations/tn-airbnb/tn-lake-17.jpg', alt: 'King bedroom at the Tennessee Norris Lake retreat property', caption: 'King Bedroom Comfort' },
 ]
 
 /* ─── 7-Day Itinerary ─── */
 const itinerary = [
   { day: 'Day 1', title: 'Arrival & Grounding', icon: Sunrise, desc: 'Arrive in Tennessee, settle into the property, meet your retreat sisters, and begin with a grounding welcome dinner and intention-setting circle.' },
   { day: 'Day 2', title: 'Mind Reset & Movement', icon: Dumbbell, desc: 'Start with movement, breath, and mindset work in the crisp fall energy. Release the pressure you have been carrying and reconnect with your next-season vision.' },
-  { day: 'Day 3', title: 'Nature & Discovery', icon: Mountain, desc: 'Spend intentional time in the Tennessee hills with reflection, journaling, and outdoor connection designed to help you hear yourself again.' },
+  { day: 'Day 3', title: 'Lake & Discovery', icon: Mountain, desc: 'Spend intentional time around Norris Lake with reflection, journaling, and outdoor connection — with nearby marinas, hiking, ATV trails, and Sugar Hollow Water Park options for the adventurous parts of the group.' },
   { day: 'Day 4', title: 'Deep Healing & Clarity', icon: Heart, desc: 'Move through guided coaching and meaningful sisterhood conversations. Name what is changing, what is calling you forward, and what support you need next.' },
   { day: 'Day 5', title: 'Strength & Strategy', icon: Crown, desc: 'Blend movement with practical life, leadership, and purpose strategy so the retreat becomes a plan — not just a beautiful pause.' },
   { day: 'Day 6', title: 'Radiance & Renewal', icon: Sparkles, desc: 'Celebrate your reset with cozy fall connection, photos, laughter, and a dinner that marks the next chapter you are choosing.' },
@@ -75,8 +77,8 @@ export default function TennesseeRetreatPage() {
       {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative min-h-[95vh] flex items-center overflow-hidden">
         <Image
-          src="/images/retreat-destinations/tn-03.png"
-          alt="Women gathering for a cozy Tennessee Revive and Thrive fall retreat"
+          src="/images/retreat-destinations/tn-airbnb/tn-lake-01.png"
+          alt="Norris Lake cottage view from the Tennessee Revive and Thrive fall retreat patio"
           fill
           className="object-cover"
           priority
@@ -96,7 +98,7 @@ export default function TennesseeRetreatPage() {
             A 7-Day Luxury Wellness Retreat for High-Achieving Women Ready to Reset, Reflect, and Rise
           </p>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
-            Tennessee &middot; Fall 2027 — dates TBD
+            LaFollette, Tennessee &middot; Norris Lake &middot; Fall 2027 — dates TBD
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -120,25 +122,25 @@ export default function TennesseeRetreatPage() {
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Tennessee Retreat Options</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Tennessee Revive & Thrive Retreat</h2>
+            <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Tennessee Norris Lake Retreat Options</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Tennessee Norris Lake Revive & Thrive Retreat</h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-              Join updates for the Fall 2027 Tennessee retreat, or book a private retreat experience for your own group.
+              Join updates for the Fall 2027 Norris Lake retreat at a modern lake cottage in LaFollette, Tennessee — or book a private retreat experience for your own group.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
               <p className="text-teal font-bold uppercase tracking-widest text-xs mb-2">Featured Retreat</p>
-              <h3 className="text-2xl font-bold mb-3">Tennessee Retreat</h3>
-              <p className="text-gray-600 mb-5">Fall 2027, dates TBD. A cozy mountain reset for women ready to revive, reconnect, and rise.</p>
+              <h3 className="text-2xl font-bold mb-3">Tennessee Lake Retreat</h3>
+              <p className="text-gray-600 mb-5">Fall 2027, dates TBD. A modern Norris Lake reset for women ready to revive, reconnect, and rise.</p>
               <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
                 Book Now <ArrowRight className="w-4 h-4" />
               </a>
             </div>
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
               <p className="text-primary font-bold uppercase tracking-widest text-xs mb-2">Next Experience</p>
-              <h3 className="text-2xl font-bold mb-3">Tennessee Retreat Updates</h3>
-              <p className="text-gray-600 mb-5">Get first notice when Tennessee dates, rooms, and checkout details open.</p>
+              <h3 className="text-2xl font-bold mb-3">Tennessee Lake Retreat Updates</h3>
+              <p className="text-gray-600 mb-5">Get first notice when Tennessee dates, room details, and checkout details open.</p>
               <div className="flex flex-col gap-3 items-start">
                 <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
                   Book Now <ArrowRight className="w-4 h-4" />
@@ -184,12 +186,12 @@ export default function TennesseeRetreatPage() {
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Your Cozy Fall Reset</p>
+            <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Your Norris Lake Reset</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Tennessee Fall Retreat Property
+              Modern Norris Lake Cottage Retreat
             </h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-              A warm Tennessee retreat property designed for fall restoration, quiet clarity, sisterhood, and a powerful Revive & Thrive reset
+              A modern 6-bedroom / 5.5-bath lake cottage in LaFollette with big Norris Lake views, indoor/outdoor gathering space, hot tub, fire pit, and room for a powerful Revive & Thrive reset
             </p>
           </div>
 
@@ -251,10 +253,10 @@ export default function TennesseeRetreatPage() {
           {/* Property Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
             {[
-              { icon: Home, label: 'Cozy Lodging', sub: 'Fall retreat rooms' },
-              { icon: Users, label: 'Intimate Group', sub: 'Sisterhood-focused setting' },
-              { icon: TreePine, label: 'Nature Reset', sub: 'Tennessee fall energy' },
-              { icon: Star, label: 'Fall 2027', sub: 'Dates to be announced' },
+              { icon: Home, label: '6 Bedrooms', sub: '11 beds for group lodging' },
+              { icon: Users, label: '5.5 Baths', sub: 'Private bath comfort' },
+              { icon: Waves, label: 'Norris Lake', sub: 'Lake view + waterfront setting' },
+              { icon: Star, label: '4.98 Stars', sub: 'Airbnb guest rating' },
             ].map((item, i) => (
               <div key={i} className="text-center p-4">
                 <item.icon className="w-8 h-8 text-teal mx-auto mb-2" />
@@ -272,17 +274,17 @@ export default function TennesseeRetreatPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">
-                <MapPin className="w-4 h-4 inline mr-1" /> Tennessee
+                <MapPin className="w-4 h-4 inline mr-1" /> LaFollette, Tennessee
               </p>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Where Cozy Mountain Energy Meets Clarity
+                Where Norris Lake Views Meet Deep Reset
               </h2>
               <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  This Tennessee retreat setting gives you cozy fall beauty, privacy, and the space to step out of daily noise so you can hear yourself again.
+                  This modern lake cottage sits above Norris Lake in LaFollette, Tennessee, giving the group a beautiful 2nd-row lake setting with big views, privacy, and space to step out of daily noise so you can hear yourself again.
                 </p>
                 <p>
-                  Wake up to crisp fall air, warm gathering spaces, and the kind of quiet that helps your nervous system soften while your vision gets stronger.
+                  Wake up to lake views, gather in the vaulted living room, open the glass garage door to the patio, unwind in the hot tub, and close the night around the fire pit with the kind of quiet that helps your nervous system soften while your vision gets stronger.
                 </p>
                 <p>
                   Each casita features its own private indoor and outdoor space, queen-size bed, en-suite bathroom, ceiling fan, and a small patio. The main property includes a chef&apos;s kitchen, oceanview dining terrace, a pool bar and live music lounge, and a meditation temple.
@@ -290,12 +292,12 @@ export default function TennesseeRetreatPage() {
               </div>
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {[
-                  { icon: Bed, text: 'Cozy Lodging' },
-                  { icon: Bath, text: 'Comfortable Amenities' },
-                  { icon: TreePine, text: 'Nature + Quiet' },
-                  { icon: Utensils, text: 'Nourishing Meals' },
-                  { icon: Wind, text: 'Crisp Fall Air' },
-                  { icon: Coffee, text: 'Slow Mornings' },
+                  { icon: Bed, text: '6 Bedrooms / 11 Beds' },
+                  { icon: Bath, text: '5.5 Private Baths' },
+                  { icon: Waves, text: 'Norris Lake Views' },
+                  { icon: Utensils, text: 'Modern Kitchen' },
+                  { icon: Wind, text: 'Indoor / Outdoor Lounge' },
+                  { icon: Coffee, text: 'Hot Tub + Fire Pit' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-gray-700">
                     <item.icon className="w-5 h-5 text-teal flex-shrink-0" />
@@ -307,8 +309,8 @@ export default function TennesseeRetreatPage() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/images/retreat-destinations/tn-05.png"
-                  alt="Tennessee retreat outdoor deck and peaceful fall relaxation space"
+                  src="/images/retreat-destinations/tn-airbnb/tn-lake-02.jpg"
+                  alt="Modern Norris Lake cottage living room with lake view windows"
                   width={600}
                   height={450}
                   className="w-full h-auto"
@@ -316,8 +318,8 @@ export default function TennesseeRetreatPage() {
               </div>
               <div className="absolute -bottom-6 -left-6 rounded-xl overflow-hidden shadow-lg w-48 h-48 border-4 border-white">
                 <Image
-                  src="/images/retreat-destinations/tn-03.png"
-                  alt="Tennessee retreat warm gathering space"
+                  src="/images/retreat-destinations/tn-airbnb/tn-lake-12.jpg"
+                  alt="Modern kitchen and gathering space at the Tennessee lake cottage"
                   fill
                   className="object-cover"
                 />
@@ -342,11 +344,11 @@ export default function TennesseeRetreatPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { icon: Sparkles, title: 'Transformational Coaching', desc: 'Daily guided sessions to spark clarity, ignite self-reflection, and map out your next bold move in life, love, business, or wellness.' },
-              { icon: Home, title: 'Luxury Accommodations', desc: 'Cozy retreat lodging and warm gathering spaces designed to help you fully unwind.' },
+              { icon: Home, title: 'Luxury Accommodations', desc: 'A modern 6-bedroom / 5.5-bath lake cottage with 11 beds, lake-view gathering spaces, hot tub, fire pit, and indoor/outdoor flow designed to help you fully unwind.' },
               { icon: Utensils, title: 'Private Chef & Nourishing Cuisine', desc: 'Delicious, healthy meals and refreshing beverages — all thoughtfully prepared to fuel your body and energize your spirit.' },
-              { icon: Sunrise, title: 'Cozy Fall Mornings', desc: 'Wake up to crisp Tennessee mornings that remind you how good it feels to put yourself first.' },
+              { icon: Sunrise, title: 'Lake-View Mornings', desc: 'Wake up to Norris Lake views that remind you how good it feels to put yourself first.' },
               { icon: Dumbbell, title: 'Daily Movement', desc: 'Energizing fitness and stretching sessions to awaken your body, clear your mind, and set the tone for powerful breakthroughs.' },
-              { icon: TreePine, title: 'Tennessee Nature Reset', desc: 'Step into your bold, grounded self with nature, reflection, and fall retreat energy.' },
+              { icon: TreePine, title: 'Lake + Nature Reset', desc: 'Step into your bold, grounded self with Norris Lake views, nearby marinas, hiking, ATV trails, and fall retreat energy.' },
               { icon: Crown, title: 'Butler-Level Service', desc: 'Be treated like the queen you are. Every detail is handled so you can fully relax, receive, and focus on YOU.' },
               { icon: Users, title: 'Soul-Aligned Sisterhood', desc: 'Leave with lifelong friendships with women who see you, support you, and are rising right alongside you.' },
             ].map((item, i) => (
@@ -371,13 +373,13 @@ export default function TennesseeRetreatPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/retreat-destinations/tn-01.png" alt="Women in matching retreat shirts posing on tropical beach" width={400} height={300} className="w-full h-64 object-cover" />
+              <Image src="/images/retreat-destinations/tn-airbnb/tn-lake-01.png" alt="Norris Lake view patio at the Tennessee retreat cottage" width={400} height={300} className="w-full h-64 object-cover" />
             </div>
             <div className="rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/retreat-destinations/tn-03.png" alt="Retreat women celebrating at sunset with ocean views" width={400} height={300} className="w-full h-64 object-cover" />
+              <Image src="/images/retreat-destinations/tn-airbnb/tn-lake-12.jpg" alt="Modern living room with vaulted ceilings and lake views" width={400} height={300} className="w-full h-64 object-cover" />
             </div>
             <div className="rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/retreat-destinations/tn-04.png" alt="Women running together during retreat fitness activity" width={400} height={300} className="w-full h-64 object-cover" />
+              <Image src="/images/retreat-destinations/tn-airbnb/tn-lake-17.jpg" alt="King bedroom at the Tennessee retreat cottage" width={400} height={300} className="w-full h-64 object-cover" />
             </div>
           </div>
         </div>
@@ -441,7 +443,7 @@ export default function TennesseeRetreatPage() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/images/retreat-destinations/tn-06.png"
+                  src="/images/retreat-destinations/tn-airbnb/tn-lake-16.jpg"
                   alt="Krystalore Crews - retreat host and transformational coach"
                   width={500}
                   height={600}
@@ -474,8 +476,8 @@ export default function TennesseeRetreatPage() {
       {/* ═══════════════ BOOK A CALL CTA ═══════════════ */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <Image
-          src="/images/retreat-destinations/tn-01.png"
-          alt="Tennessee fall retreat setting for women's wellness and renewal"
+          src="/images/retreat-destinations/tn-airbnb/tn-lake-01.png"
+          alt="Norris Lake view from the Tennessee retreat cottage patio"
           fill
           className="object-cover"
           sizes="100vw"
@@ -516,7 +518,7 @@ export default function TennesseeRetreatPage() {
             Waitlist & Updates
           </h2>
           <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            Want updates for the Tennessee Fall 2027 retreat experience? Join the updates list and be first to know when dates, rooms, and checkout options open.
+            Want updates for the Tennessee Norris Lake Fall 2027 retreat experience? Join the updates list and be first to know when dates, rooms, and checkout options open.
           </p>
           <p className="text-gray-600 text-lg leading-relaxed mb-8">
             Use the waitlist for retreat announcements, room releases, and next-step details.
@@ -548,11 +550,11 @@ export default function TennesseeRetreatPage() {
             {[
               { q: 'What is a women\'s wellness retreat?', a: 'A women\'s wellness retreat is an immersive, multi-day experience designed specifically for women to step away from daily responsibilities and focus on personal growth, physical health, mental clarity, and emotional renewal. Our Revive & Thrive retreat combines luxury accommodations, transformational coaching, fitness, adventure, and sisterhood in a stunning mountain setting.' },
               { q: 'Who is this retreat for?', a: 'This retreat is designed for high-achieving women — entrepreneurs, executives, business owners, and leaders — who give everything to everyone else and are ready to invest in themselves. Whether you\'re navigating burnout, a life transition, or simply craving a reset, this experience meets you where you are.' },
-              { q: 'Where is the retreat located?', a: 'The retreat takes place at a beautiful Tennessee property chosen for fall restoration, coaching, movement, sisterhood, and next-season clarity. Final dates, arrival airport, and transportation recommendations will be shared when registration opens.' },
-              { q: 'What\'s included in the retreat?', a: 'Everything is all-inclusive once you arrive: luxury cozy retreat lodging, all meals prepared by a private chef, daily coaching sessions, fitness and yoga classes, spa treatments, a Tennessee nature reset, butler service, and daily surprises. Flights are not included.' },
+              { q: 'Where is the retreat located?', a: 'The retreat is planned around a modern lake cottage in LaFollette, Tennessee with Norris Lake views, 6 bedrooms, 11 beds, 5.5 private baths, a hot tub, fire pit, indoor/outdoor gathering space, and nearby marinas, hiking, ATV trails, and Sugar Hollow Marina Water Park. Final dates, arrival airport, and transportation recommendations will be shared when registration opens.' },
+              { q: 'What\'s included in the retreat?', a: 'Everything is designed as a hosted retreat experience once you arrive: lake-cottage lodging, nourishing meals, daily coaching sessions, movement, reflection, sisterhood, and curated lake/nature reset time. Flights are not included.' },
               { q: 'Do I need to be extremely fit to attend?', a: 'Not at all. Our daily movement sessions are designed for all fitness levels. Whether you\'re a marathon runner or haven\'t worked out in months, everything is adaptable. The goal is to reconnect with your body, not compete.' },
               { q: 'Is this a business retreat or a wellness retreat?', a: 'It\'s both. Our Revive & Thrive experience weaves together wellness, personal development, and strategic life/business coaching. You\'ll gain clarity not just about your health but about your next bold move — whether that\'s in your career, relationships, or personal goals.' },
-              { q: 'What airport should I fly into?', a: 'Final flight and airport guidance will be shared when Fall 2027 registration details open.' },
+              { q: 'What airport should I fly into?', a: 'Final flight and transportation guidance for LaFollette / Norris Lake will be shared when Fall 2027 registration details open.' },
               { q: 'Are payment plans available?', a: 'Yes. We offer flexible payment plans so you can secure your spot and pay over time. We also have limited scholarship spots available for each retreat. Contact us through the booking form to discuss options.' },
               { q: 'Can I book a private retreat for my group?', a: 'Absolutely. We offer private retreat experiences for friend groups, families, corporate teams, and organizations. We also offer co-ed retreats focused on book writing and business planning. Contact us to design your custom experience.' },
               { q: 'What makes this different from other women\'s retreats?', a: 'This isn\'t a vacation with a couple of workshops tacked on. Every single day is intentionally designed with coaching, movement, adventure, and luxury service. You\'ll be treated like royalty while doing deep, transformational inner work. Our retreats consistently produce breakthroughs that women carry with them for years.' },
@@ -612,16 +614,16 @@ export default function TennesseeRetreatPage() {
             '@context': 'https://schema.org',
             '@type': 'Event',
             name: 'Revive & Thrive Women\'s Wellness Retreat',
-            description: 'A 7-day luxury wellness retreat for high-achieving women in Tennessee. Includes transformational coaching, fitness, adventure, spa treatments, and private chef cuisine at a stunning Tennessee oceanview estate in the Tennessee hills Rainforest.',
-            url: 'https://krystalore.com/pr-retreat',
+            description: 'A future Fall 2027 Tennessee Norris Lake wellness retreat for high-achieving women at a modern 6-bedroom lake cottage in LaFollette. Includes transformational coaching, movement, rest, sisterhood, nature, and next-season clarity.',
+            url: 'https://krystalore.com/tn-retreat',
             eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
             eventStatus: 'https://schema.org/EventScheduled',
             location: {
               '@type': 'Place',
-              name: 'Tennessee Fall Retreat Property',
+              name: 'Modern Norris Lake Cottage Retreat',
               address: {
                 '@type': 'PostalAddress',
-                addressLocality: 'Tennessee',
+                addressLocality: 'LaFollette',
                 addressRegion: 'PR',
                 addressCountry: 'US',
               },
@@ -638,8 +640,8 @@ export default function TennesseeRetreatPage() {
               availability: 'https://schema.org/LimitedAvailability',
               description: 'All-inclusive retreat package. Flights not included. Payment plans and scholarship opportunities available.',
             },
-            image: 'https://krystalore.com/images/retreat-destinations/tn-03.png',
-            keywords: 'women\'s retreat, wellness retreat, business retreat for women, Tennessee retreat, women\'s empowerment retreat, executive wellness retreat, transformational coaching retreat',
+            image: 'https://krystalore.com/images/retreat-destinations/tn-airbnb/tn-lake-01.png',
+            keywords: 'women\'s retreat, wellness retreat, business retreat for women, Tennessee retreat, Norris Lake retreat, LaFollette retreat, women\'s empowerment retreat, executive wellness retreat, transformational coaching retreat',
           }),
         }}
       />
@@ -651,7 +653,7 @@ export default function TennesseeRetreatPage() {
             '@type': 'FAQPage',
             mainEntity: [
               { '@type': 'Question', name: 'What is a women\'s wellness retreat?', acceptedAnswer: { '@type': 'Answer', text: 'A women\'s wellness retreat is an immersive, multi-day experience designed specifically for women to step away from daily responsibilities and focus on personal growth, physical health, mental clarity, and emotional renewal.' } },
-              { '@type': 'Question', name: 'Where is the Revive & Thrive retreat located?', acceptedAnswer: { '@type': 'Answer', text: 'The retreat takes place at a beautiful Tennessee retreat property selected for fall restoration, coaching, movement, and sisterhood.' } },
+              { '@type': 'Question', name: 'Where is the Revive & Thrive retreat located?', acceptedAnswer: { '@type': 'Answer', text: 'The retreat takes place at a modern Norris Lake cottage in LaFollette, Tennessee selected for lake views, group gathering space, fall restoration, coaching, movement, and sisterhood.' } },
               { '@type': 'Question', name: 'What\'s included in the retreat?', acceptedAnswer: { '@type': 'Answer', text: 'Everything is all-inclusive: luxury accommodations, private chef meals, daily coaching, fitness, spa treatments, Tennessee nature reset, butler service. Flights not included.' } },
               { '@type': 'Question', name: 'Is this a business retreat or wellness retreat?', acceptedAnswer: { '@type': 'Answer', text: 'It\'s both. The Revive & Thrive experience combines wellness, personal development, and strategic life/business coaching for high-achieving women.' } },
               { '@type': 'Question', name: 'Are payment plans available?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Flexible payment plans and limited scholarship opportunities are available for each retreat.' } },
