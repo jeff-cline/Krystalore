@@ -141,9 +141,12 @@ export default function WellnessPage() {
                 <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#0D9488] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
                   <Sparkles className="w-3.5 h-3.5" /> Corporate Wellness with Soul
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-5 leading-[1.05]">
-                  Your team’s greatest asset is their <span className="text-[#0D9488]">energy</span>.
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.95] mb-4" style={{ color: '#34c5c5', textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000, 1px 0 0 #000, 0 0 8px #e07800, 0 0 14px #ff8c1a, 0 0 22px #e07800, 0 0 30px #e07800' }}>
+                  Corporate Wellness
                 </h1>
+                <p className="text-2xl md:text-3xl font-black text-gray-900 mb-5 leading-[1.1]">
+                  Your team’s greatest asset is their <span className="text-[#0D9488]">energy</span>.
+                </p>
                 <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-xl">
                   A self-leadership and vitality-first wellness program that lifts energy, resilience, and confidence —
                   starting with leadership and flowing to your whole team. High-touch, accountable, and tailored to you.

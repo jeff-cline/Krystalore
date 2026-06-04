@@ -132,9 +132,12 @@ export default function FireChallengePage() {
                 <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#37a6a6] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
                   <Flame className="w-3.5 h-3.5" /> Beyond Limits Corporate FIRE Challenge
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-black text-black mb-5 leading-[1.05]">
-                  30 Days to Reignite Energy, Reduce Overwhelm, and Build a Body &amp; Mind That Can Keep Up With Your Life
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.95] mb-4" style={{ color: '#34c5c5', textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000, 1px 0 0 #000, 0 0 8px #e07800, 0 0 14px #ff8c1a, 0 0 22px #e07800, 0 0 30px #e07800' }}>
+                  FIRE Challenge
                 </h1>
+                <p className="text-xl md:text-2xl font-black text-black mb-5 leading-[1.15]">
+                  30 Days to Reignite Energy, Reduce Overwhelm, and Build a Body &amp; Mind That Can Keep Up With Your Life
+                </p>
                 <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-xl">
                   A corporate wellness experience designed to improve employee energy, confidence, resilience, and
                   performance — through practical daily habits and real accountability. This is self-leadership first.
