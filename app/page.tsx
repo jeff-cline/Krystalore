@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
+import CorporateWellnessFeature from '@/components/sections/CorporateWellnessFeature'
 // Diamond removed per Krystalore's request
 import { ArrowRight, Smartphone, Heart, Brain, TreePine, Mountain, CheckCircle, Quote, Star, Shield, Flame, Target, Users, Sparkles, Download, Play, Headphones, Building2, Megaphone, Dumbbell, Palette, Award, ShoppingBag } from 'lucide-react'
 
@@ -813,6 +814,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Corporate Wellness — featured (Team + FIRE Challenge) */}
+      <CorporateWellnessFeature />
 
       {/* Corporate Wellness & Leadership Solutions */}
       <section className="py-20 px-4 bg-[#F4F1EC]" id="corporate">
