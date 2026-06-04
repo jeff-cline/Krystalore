@@ -279,7 +279,7 @@ export default function WellnessPage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-                <Image src="/images/corporate-retreat/krystal-crews-185.jpg" alt="Krystalore Crews — corporate wellness and leadership consultant" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <Image src="/images/scraped/krystalore-event.jpg" alt="Krystalore Crews — corporate wellness and leadership consultant" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
               <div>
                 <p className="text-[#0D9488] font-bold uppercase tracking-widest text-sm mb-3">Led by Krystalore Crews</p>

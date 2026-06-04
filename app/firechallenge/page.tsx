@@ -7,7 +7,7 @@ import Footer from '@/components/layout/Footer'
 import BusinessToolsFeature from '@/components/sections/BusinessToolsFeature'
 import StayConnected from '@/components/sections/StayConnected'
 import {
-  Flame, Target, Compass, Shield, Zap, Lock,
+  Flame, Target, Compass, Shield, Zap, Lock, Rocket, Quote,
   ArrowRight, Mail, CalendarCheck, CheckCircle2, Battery,
   HeartPulse, Brain, Users, Sparkles, Award, BarChart3,
 } from 'lucide-react'
@@ -45,6 +45,28 @@ Best email & phone:
 
 Thanks!`
 const PRICE_MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent(PRICE_SUBJECT)}&body=${encodeURIComponent(PRICE_BODY)}`
+
+// "Bring FIRE to Our Team" — email widget CTA
+const TEAM_SUBJECT = 'FIRE Challenge — Request FIRE Challenge for My Team'
+const TEAM_BODY = `Full name & role:
+Team size:
+Best email & phone:
+What's prompting this (energy, burnout, engagement, culture, etc.):`
+const TEAM_MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent(TEAM_SUBJECT)}&body=${encodeURIComponent(TEAM_BODY)}`
+
+// Core-problem statistics (industry research)
+const STATS = [
+  { pct: 55, label: 'of U.S. employees report experiencing burnout — impacting productivity, retention, innovation, and workplace culture.' },
+  { pct: 72, label: 'of employees experience moderate to very high workplace stress — leading to lower energy, focus, and performance.' },
+  { pct: 80, label: 'of employees say stress negatively impacts their productivity or quality of work.' },
+]
+
+// Real client testimonials
+const TESTIMONIALS = [
+  { quote: 'Our team’s communication has improved dramatically since the workshop. The tools we learned are practical and easy to implement daily.', name: 'HR Director', org: 'Healthcare Organization' },
+  { quote: 'It was a game-changer for our department. We finally understand each other’s working styles and conflicts have decreased significantly.', name: 'Operations Manager', org: 'Tech Company' },
+  { quote: 'Krystalore’s experience exceeded every expectation. Our leadership team returned energized, aligned, and ready to execute our vision.', name: 'VP of People', org: 'Fortune 500 Company' },
+]
 
 function JsonLd() {
   const jsonLd = {
@@ -177,15 +199,27 @@ export default function FireChallengePage() {
                 </div>
               ))}
             </div>
-            {/* Stat placeholders for future data insertion */}
+            {/* Stat charts */}
             <div className="grid sm:grid-cols-3 gap-6 mt-12">
-              {['__%', '__%', '__%'].map((stat, i) => (
-                <div key={i} className="text-center rounded-2xl border border-gray-200 py-8">
-                  <div className="text-4xl font-black text-[#34c5c5]">{stat}</div>
-                  <p className="text-gray-500 text-sm mt-2">Stat placeholder — add data</p>
-                </div>
-              ))}
+              {STATS.map((s) => {
+                const r = 46, C = 2 * Math.PI * r
+                return (
+                  <div key={s.pct} className="rounded-2xl border border-[#beeaea] bg-[#beeaea]/15 p-6 flex flex-col items-center text-center">
+                    <div className="relative w-[124px] h-[124px]">
+                      <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
+                        <circle cx="60" cy="60" r={r} fill="none" stroke="#beeaea" strokeWidth="12" />
+                        <circle cx="60" cy="60" r={r} fill="none" stroke="#e07800" strokeWidth="12" strokeLinecap="round" strokeDasharray={C} strokeDashoffset={C * (1 - s.pct / 100)} />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-3xl font-black text-[#37a6a6]">{s.pct}%</span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-700 mt-4 leading-snug">{s.label}</p>
+                  </div>
+                )
+              })}
             </div>
+            <p className="text-xs text-gray-400 mt-4">*Industry research on workplace burnout and stress.</p>
           </div>
         </section>
 
@@ -255,13 +289,18 @@ export default function FireChallengePage() {
               <p className="text-[#37a6a6] font-bold uppercase tracking-widest text-sm mb-3">The outcomes</p>
               <h2 className="text-3xl md:text-4xl font-black text-black">What changes for your people — and your bottom line.</h2>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
-              {benefits.map((b) => (
-                <div key={b.label} className="bg-[#beeaea]/30 rounded-2xl p-6 border border-[#beeaea]">
-                  <b.icon className="w-8 h-8 text-[#37a6a6] mb-3" />
-                  <p className="font-bold leading-snug text-gray-900">{b.label}</p>
-                </div>
-              ))}
+            <div className="grid lg:grid-cols-5 gap-8 items-center">
+              <div className="lg:col-span-2 relative aspect-[4/5] rounded-3xl overflow-hidden shadow-xl ring-1 ring-[#beeaea]">
+                <Image src="/images/scraped/krystalore-event.jpg" alt="Krystalore Crews leading a corporate FIRE Challenge event" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
+              </div>
+              <div className="lg:col-span-3 grid grid-cols-2 gap-5">
+                {benefits.map((b) => (
+                  <div key={b.label} className="bg-[#beeaea]/30 rounded-2xl p-6 border border-[#beeaea]">
+                    <b.icon className="w-8 h-8 text-[#37a6a6] mb-3" />
+                    <p className="font-bold leading-snug text-gray-900">{b.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -302,12 +341,13 @@ export default function FireChallengePage() {
               <h2 className="text-3xl md:text-4xl font-black text-black">Trusted by leaders, teams, and audiences.</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-white rounded-2xl p-7 shadow-sm border border-[#beeaea]">
-                  <div className="flex gap-1 mb-4 text-[#E8A849]">{'★★★★★'}</div>
-                  <p className="text-gray-600 italic leading-relaxed mb-5">“Testimonial placeholder — add a corporate, wellness, or speaking client quote here.”</p>
-                  <p className="font-bold text-gray-900">Client Name</p>
-                  <p className="text-sm text-gray-500">Title, Company</p>
+              {TESTIMONIALS.map((t) => (
+                <div key={t.name + t.org} className="bg-white rounded-2xl p-7 shadow-sm border border-[#beeaea] flex flex-col">
+                  <div className="flex gap-1 mb-4 text-[#E8A849] text-lg tracking-wider">★★★★★</div>
+                  <Quote className="w-7 h-7 text-[#beeaea] mb-2" />
+                  <p className="text-gray-600 italic leading-relaxed mb-5 flex-1">“{t.quote}”</p>
+                  <p className="font-bold text-gray-900">{t.name}</p>
+                  <p className="text-sm text-gray-500">{t.org}</p>
                 </div>
               ))}
             </div>
@@ -340,10 +380,18 @@ export default function FireChallengePage() {
         {/* GHL CHECKOUT — embedded form (placeholder src) */}
         <section id="register" className="py-16 md:py-24 bg-gradient-to-b from-[#beeaea]/30 to-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10">
+            <div className="text-center mb-8">
               <p className="text-[#37a6a6] font-bold uppercase tracking-widest text-sm mb-3">Get started</p>
               <h2 className="text-3xl md:text-4xl font-black text-black mb-3">Bring FIRE to Your Team</h2>
-              <p className="text-lg text-gray-700">Complete the form below and we’ll be in touch to design your team’s challenge.</p>
+              <p className="text-lg text-gray-700">Join the 30-day challenge now, or book a call and we’ll design it with you.</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+              <a href={FIRE_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#e07800] hover:bg-[#c46700] text-white font-bold px-8 py-4 rounded-xl shadow-lg transition">
+                <Rocket className="w-5 h-5" /> Join the Challenge
+              </a>
+              <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#37a6a6] hover:bg-[#34c5c5] hover:text-white font-bold px-8 py-4 rounded-xl transition-colors">
+                <CalendarCheck className="w-5 h-5" /> Book a Discovery Call
+              </a>
             </div>
             <div className="rounded-3xl overflow-hidden border border-[#beeaea] shadow-lg bg-white">
               {/* Embedded GoHighLevel checkout — FIRE_CHECKOUT_URL */}
@@ -374,8 +422,8 @@ export default function FireChallengePage() {
               <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-8 py-4 rounded-xl shadow-lg transition">
                 <CalendarCheck className="w-5 h-5" /> Schedule a Discovery Call
               </a>
-              <a href="#register" className="inline-flex items-center justify-center gap-2 border-2 border-black text-black font-bold px-8 py-4 rounded-xl hover:bg-black hover:text-white transition-colors">
-                <Flame className="w-5 h-5" /> Bring FIRE to Our Team
+              <a href={TEAM_MAILTO} className="inline-flex items-center justify-center gap-2 border-2 border-black text-black font-bold px-8 py-4 rounded-xl hover:bg-black hover:text-white transition-colors">
+                <Rocket className="w-5 h-5" /> Bring FIRE to Our Team
               </a>
             </div>
           </div>

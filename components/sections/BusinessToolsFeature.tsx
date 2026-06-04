@@ -55,9 +55,9 @@ export default function BusinessToolsFeature() {
             </ul>
 
             <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-              <Link href={LEADERSHIP_URL} className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition">
+              <a href="https://krystalorecrews.com/book" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition">
                 <CalendarCheck className="w-5 h-5" /> Book a Call
-              </Link>
+              </a>
               <Link href={LEADERSHIP_URL} className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#0D9488] hover:bg-[#34c5c5] hover:text-white font-bold px-6 py-3.5 rounded-xl transition-colors">
                 <MessageSquare className="w-5 h-5" /> Request a Custom Package
               </Link>
