@@ -310,7 +310,7 @@ export default function FireChallengePage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-[#beeaea]">
-                <Image src="/images/corporate-retreat/highres-portrait.jpg" alt="Krystalore Crews — corporate wellness and leadership expert" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <Image src="/images/scraped/krystalore-speaking-2.jpg" alt="Krystalore Crews speaking — corporate wellness and leadership expert" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
               <div>
                 <p className="text-[#37a6a6] font-bold uppercase tracking-widest text-sm mb-3">About Krystalore</p>
@@ -377,36 +377,15 @@ export default function FireChallengePage() {
         {/* MORE BUSINESS SUCCESS TOOLS — leadership training feature */}
         <BusinessToolsFeature />
 
-        {/* GHL CHECKOUT — embedded form (placeholder src) */}
+        {/* JOIN THE CHALLENGE — employee checkout */}
         <section id="register" className="py-16 md:py-24 bg-gradient-to-b from-[#beeaea]/30 to-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <p className="text-[#37a6a6] font-bold uppercase tracking-widest text-sm mb-3">Get started</p>
-              <h2 className="text-3xl md:text-4xl font-black text-black mb-3">Bring FIRE to Your Team</h2>
-              <p className="text-lg text-gray-700">Join the 30-day challenge now, or book a call and we’ll design it with you.</p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-              <a href={FIRE_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#e07800] hover:bg-[#c46700] text-white font-bold px-8 py-4 rounded-xl shadow-lg transition">
-                <Rocket className="w-5 h-5" /> Join the Challenge
-              </a>
-              <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#37a6a6] hover:bg-[#34c5c5] hover:text-white font-bold px-8 py-4 rounded-xl transition-colors">
-                <CalendarCheck className="w-5 h-5" /> Book a Discovery Call
-              </a>
-            </div>
-            <div className="rounded-3xl overflow-hidden border border-[#beeaea] shadow-lg bg-white">
-              {/* Embedded GoHighLevel checkout — FIRE_CHECKOUT_URL */}
-              <iframe
-                src={FIRE_CHECKOUT_URL}
-                title="Beyond Limits FIRE Challenge registration"
-                className="w-full"
-                style={{ height: 760, border: 'none' }}
-                loading="lazy"
-              />
-            </div>
-            <p className="text-center text-sm text-gray-500 mt-4">
-              Form not loading?{' '}
-              <a href={CALL_MAILTO} className="text-[#37a6a6] font-semibold underline underline-offset-2">Email us instead →</a>
-            </p>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <Rocket className="w-12 h-12 text-[#e07800] mx-auto mb-5" />
+            <h2 className="text-3xl md:text-5xl font-black text-black mb-3 leading-tight">Ready to Ignite Your FIRE?</h2>
+            <p className="text-lg md:text-xl text-gray-700 mb-9">Employees, join the challenge here!</p>
+            <a href={FIRE_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-[#e07800] hover:bg-[#c46700] text-white font-black text-xl md:text-2xl px-10 md:px-14 py-5 md:py-6 rounded-2xl shadow-xl hover:shadow-2xl transition">
+              <Rocket className="w-7 h-7" /> Join the Challenge
+            </a>
           </div>
         </section>
 
