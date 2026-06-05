@@ -15,6 +15,9 @@ const retreatLinks = [
 
 const coachingLinks = [
   { href: '/services', label: 'All Coaching' },
+  { href: '/wellness', label: 'Corporate Wellness' },
+  { href: '/leadership-training', label: 'Leadership Training' },
+  { href: '/firechallenge', label: 'FIRE Challenge' },
   { href: '/health-mastery', label: 'Health Mastery' },
 ]
 

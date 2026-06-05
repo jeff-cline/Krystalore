@@ -41,7 +41,7 @@ export default function CorporateWellnessFeature() {
           {/* Card 1 — Corporate Wellness (Team) */}
           <div className="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
             <div className="relative h-56">
-              <Image src="/images/wellness/wellness-hero.jpg" alt="Corporate Wellness program for your team" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+              <Image src="/images/wellness/wellness-hero.jpg" alt="Corporate Wellness program for your team" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
               <span className="absolute top-4 left-4 bg-[#0D9488] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">For Your Team</span>
             </div>
             <div className="p-7 flex flex-col flex-1">

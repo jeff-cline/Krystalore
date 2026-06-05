@@ -86,7 +86,7 @@ export default function TennesseeRetreatPage() {
         />
         <div
           className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white"
-          style={{ textShadow: '0 2px 8px rgba(0,0,0,0.95), 0 0 18px rgba(0,0,0,0.7)' }}
+          style={{ textShadow: '-1px -1px 0 rgba(0,0,0,.9),1px -1px 0 rgba(0,0,0,.9),-1px 1px 0 rgba(0,0,0,.9),1px 1px 0 rgba(0,0,0,.9), 0 2px 10px rgba(0,0,0,.95), 0 0 16px #e07800, 0 0 28px #e07800' }}
         >
           <p className="text-primary font-semibold tracking-[0.3em] uppercase text-sm mb-4">
             Revive &amp; Thrive Retreat Experience
@@ -443,7 +443,7 @@ export default function TennesseeRetreatPage() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/images/retreat-destinations/tn-airbnb/tn-lake-16.jpg"
+                  src="/images/scraped/krystalore-speaking-2.jpg"
                   alt="Krystalore Crews - retreat host and transformational coach"
                   width={500}
                   height={600}

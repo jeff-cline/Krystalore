@@ -121,31 +121,30 @@ export default function PrivatePage() {
           </nav>
         </div>
 
-        {/* Hero Image */}
-        <div className="relative h-64 md:h-80 w-full overflow-hidden">
-          <Image src="/images/go9/coaching.jpg" alt="Krystalore Crews private coaching and one-on-one mentorship" fill className="object-cover object-[50%_18%]" sizes="100vw" />
-        </div>
-
-        {/* Hero */}
-        <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-[#1a3a40] text-white py-24 lg:py-36">
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(42,123,136,0.4), transparent 60%)' }} />
-          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="flex items-center justify-center gap-2 mb-6">
-              <Crown className="w-6 h-6 text-[#E8A849]" />
-              <span className="text-sm tracking-[0.3em] uppercase text-[#E8A849] font-medium">Private Coaching</span>
+        {/* Hero — light split */}
+        <section className="relative bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white pt-8 md:pt-12 pb-16 md:pb-24 overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 mb-5">
+                  <Crown className="w-5 h-5 text-[#E8A849]" />
+                  <span className="text-sm tracking-[0.3em] uppercase text-[#0D9488] font-bold">Private Coaching</span>
+                </div>
+                <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-5 tracking-tight leading-[1.05]">Elite Private Mentorship</h1>
+                <p className="text-xl md:text-2xl text-[#0D9488] font-semibold mb-6">For Leaders Who Refuse to Operate at 70%</p>
+                <div className="space-y-3 text-gray-700 text-lg leading-relaxed mb-8 max-w-xl">
+                  <p>You&apos;ve built success. But your nervous system is tired. Your body feels tight. Your leadership carries weight.</p>
+                  <p>And somewhere inside... you know there&apos;s another level.</p>
+                  <p className="text-gray-900 font-semibold">You don&apos;t need more information. You need integration.</p>
+                </div>
+                <Link href="/book" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-all">
+                  Book a Call <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+                <Image src="/images/go9/coaching.jpg" alt="Krystalore Crews private coaching and one-on-one mentorship" fill priority className="object-cover object-top" sizes="(max-width: 1024px) 100vw, 50vw" />
+              </div>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Elite Private Mentorship</h1>
-            <p className="text-xl md:text-2xl text-gray-300 font-light mb-8 max-w-3xl mx-auto leading-relaxed">
-              For Leaders Who Refuse to Operate at 70%
-            </p>
-            <div className="max-w-2xl mx-auto text-gray-400 space-y-4 text-lg leading-relaxed mb-8">
-              <p>You&apos;ve built success. But your nervous system is tired. Your body feels tight. Your leadership carries weight.</p>
-              <p>And somewhere inside... you know there&apos;s another level.</p>
-              <p className="text-white font-medium">You don&apos;t need more information. You need integration.</p>
-            </div>
-            <Link href="/book" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#0D9488] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-all">
-              Book a Call <ArrowRight className="w-5 h-5" />
-            </Link>
           </div>
         </section>
 
@@ -183,17 +182,17 @@ export default function PrivatePage() {
                 Most coaches work on one layer. We integrate all of them.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-gray-900 to-[#1a3a40] rounded-2xl p-8 md:p-12 text-white">
+            <div className="bg-gradient-to-br from-[#34c5c5]/12 via-white to-[#E8A849]/12 rounded-2xl p-8 md:p-12 border border-[#34c5c5]/20">
               <p className="text-sm tracking-[0.2em] uppercase text-[#E8A849] mb-6">Your mentorship includes:</p>
               <div className="grid md:grid-cols-2 gap-4">
                 {FEATURES.map((f, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-[#E8A849] mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-200">{f}</span>
+                    <span className="text-gray-700">{f}</span>
                   </div>
                 ))}
               </div>
-              <p className="mt-8 text-center text-xl font-semibold text-white">This is whole-human leadership.</p>
+              <p className="mt-8 text-center text-xl font-semibold text-gray-900">This is whole-human leadership.</p>
             </div>
           </div>
         </section>
@@ -299,15 +298,15 @@ export default function PrivatePage() {
         </section>
 
         {/* Application */}
-        <section id="apply" className="py-20 lg:py-28 bg-gradient-to-br from-gray-900 via-gray-800 to-[#1a3a40] text-white">
+        <section id="apply" className="py-20 lg:py-28 bg-gradient-to-b from-[#F6F8FA] to-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             {submitted ? (
               <div className="text-center py-16">
                 <CheckCircle className="w-16 h-16 text-[#E8A849] mx-auto mb-6" />
-                <p className="text-xl leading-relaxed text-gray-300 max-w-xl mx-auto">
+                <p className="text-xl leading-relaxed text-gray-700 max-w-xl mx-auto">
                   Thank you for applying. If aligned, you will receive an invitation to schedule a private clarity call within 48 hours.
                 </p>
-                <p className="mt-6 text-gray-400">
+                <p className="mt-6 text-gray-600">
                   Private mentorship is reserved for leaders ready to move decisively. I look forward to learning more about your vision.
                 </p>
                 <p className="mt-4 text-[#E8A849] font-medium">— Krystalore</p>
@@ -316,8 +315,8 @@ export default function PrivatePage() {
               <>
                 <div className="text-center mb-12">
                   <Lock className="w-8 h-8 text-[#E8A849] mx-auto mb-4" />
-                  <h2 className="text-3xl md:text-4xl font-bold mb-2">Apply for Private Mentorship</h2>
-                  <p className="text-gray-400">Elite 1:1 Executive Performance Partnership with Krystalore Crews</p>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900">Apply for Private Mentorship</h2>
+                  <p className="text-gray-600">Elite 1:1 Executive Performance Partnership with Krystalore Crews</p>
                   <p className="text-gray-500 text-sm mt-2">Private mentorship is limited to 3–5 clients at a time. Please complete thoughtfully.</p>
                 </div>
 
@@ -326,11 +325,11 @@ export default function PrivatePage() {
                   <div>
                     <p className="text-sm tracking-[0.2em] uppercase text-[#E8A849] mb-6">Section 1: Basic Information</p>
                     <div className="space-y-4">
-                      <input type="text" required placeholder="Full Name *" value={form.name} onChange={e => update('name', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
-                      <input type="email" required placeholder="Email *" value={form.email} onChange={e => update('email', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
-                      <input type="tel" placeholder="Phone" value={form.phone} onChange={e => update('phone', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
-                      <input type="text" placeholder="City / Time Zone" value={form.cityTimezone} onChange={e => update('cityTimezone', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
-                      <input type="text" placeholder="Website or LinkedIn (if applicable)" value={form.website} onChange={e => update('website', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
+                      <input type="text" required placeholder="Full Name *" value={form.name} onChange={e => update('name', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
+                      <input type="email" required placeholder="Email *" value={form.email} onChange={e => update('email', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
+                      <input type="tel" placeholder="Phone" value={form.phone} onChange={e => update('phone', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
+                      <input type="text" placeholder="City / Time Zone" value={form.cityTimezone} onChange={e => update('cityTimezone', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
+                      <input type="text" placeholder="Website or LinkedIn (if applicable)" value={form.website} onChange={e => update('website', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
                     </div>
                   </div>
 
@@ -339,22 +338,22 @@ export default function PrivatePage() {
                     <p className="text-sm tracking-[0.2em] uppercase text-[#E8A849] mb-6">Section 2: Current Season</p>
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">What role best describes you right now?</label>
-                        <select value={form.role} onChange={e => update('role', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#E8A849]">
+                        <label className="block text-sm text-gray-600 mb-2">What role best describes you right now?</label>
+                        <select value={form.role} onChange={e => update('role', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-[#E8A849]">
                           <option value="" className="text-gray-900">Select...</option>
                           {ROLES.map(r => <option key={r} value={r} className="text-gray-900">{r}</option>)}
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">What is the biggest pressure you are currently carrying?</label>
-                        <textarea rows={3} value={form.biggestPressure} onChange={e => update('biggestPressure', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
+                        <label className="block text-sm text-gray-600 mb-2">What is the biggest pressure you are currently carrying?</label>
+                        <textarea rows={3} value={form.biggestPressure} onChange={e => update('biggestPressure', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
                       </div>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">What feels fragmented or misaligned in your life right now?</label>
-                        <textarea rows={3} value={form.misaligned} onChange={e => update('misaligned', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
+                        <label className="block text-sm text-gray-600 mb-2">What feels fragmented or misaligned in your life right now?</label>
+                        <textarea rows={3} value={form.misaligned} onChange={e => update('misaligned', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
                       </div>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">On a scale of 1–10, how regulated and grounded does your nervous system feel most days?</label>
+                        <label className="block text-sm text-gray-600 mb-2">On a scale of 1–10, how regulated and grounded does your nervous system feel most days?</label>
                         <div className="flex items-center gap-4">
                           <span className="text-xs text-gray-500">1 = constantly reactive</span>
                           <input type="range" min="1" max="10" value={form.nervousSystemScale} onChange={e => update('nervousSystemScale', e.target.value)} className="flex-1 accent-[#E8A849]" />
@@ -363,8 +362,8 @@ export default function PrivatePage() {
                         </div>
                       </div>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">How is your physical health currently impacting your leadership or daily performance?</label>
-                        <textarea rows={3} value={form.healthImpact} onChange={e => update('healthImpact', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
+                        <label className="block text-sm text-gray-600 mb-2">How is your physical health currently impacting your leadership or daily performance?</label>
+                        <textarea rows={3} value={form.healthImpact} onChange={e => update('healthImpact', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
                       </div>
                     </div>
                   </div>
@@ -374,16 +373,16 @@ export default function PrivatePage() {
                     <p className="text-sm tracking-[0.2em] uppercase text-[#E8A849] mb-6">Section 3: Clarity & Commitment</p>
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">Why now? Why is this season requiring deeper integration and support?</label>
-                        <textarea rows={3} value={form.whyNow} onChange={e => update('whyNow', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
+                        <label className="block text-sm text-gray-600 mb-2">Why now? Why is this season requiring deeper integration and support?</label>
+                        <textarea rows={3} value={form.whyNow} onChange={e => update('whyNow', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
                       </div>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">What have you already tried to improve your situation?</label>
-                        <textarea rows={3} value={form.alreadyTried} onChange={e => update('alreadyTried', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
+                        <label className="block text-sm text-gray-600 mb-2">What have you already tried to improve your situation?</label>
+                        <textarea rows={3} value={form.alreadyTried} onChange={e => update('alreadyTried', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
                       </div>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">What would change in your life if you operated fully aligned — mentally, physically, emotionally?</label>
-                        <textarea rows={3} value={form.fullyAligned} onChange={e => update('fullyAligned', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
+                        <label className="block text-sm text-gray-600 mb-2">What would change in your life if you operated fully aligned — mentally, physically, emotionally?</label>
+                        <textarea rows={3} value={form.fullyAligned} onChange={e => update('fullyAligned', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
                       </div>
                     </div>
                   </div>
@@ -393,20 +392,20 @@ export default function PrivatePage() {
                     <p className="text-sm tracking-[0.2em] uppercase text-[#E8A849] mb-6">Section 4: Private Support Fit</p>
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">Which private support path are you most interested in?</label>
+                        <label className="block text-sm text-gray-600 mb-2">Which private support path are you most interested in?</label>
                         {INVESTMENT_OPTIONS.map(opt => (
                           <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
                             <input type="radio" name="investmentOption" value={opt} checked={form.investmentOption === opt} onChange={e => update('investmentOption', e.target.value)} className="accent-[#E8A849]" />
-                            <span className="text-gray-300">{opt}</span>
+                            <span className="text-gray-700">{opt}</span>
                           </label>
                         ))}
                       </div>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">Are you ready to discuss a custom private coaching plan if we determine it is aligned?</label>
+                        <label className="block text-sm text-gray-600 mb-2">Are you ready to discuss a custom private coaching plan if we determine it is aligned?</label>
                         {READINESS.map(opt => (
                           <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
                             <input type="radio" name="investmentReady" value={opt} checked={form.investmentReady === opt} onChange={e => update('investmentReady', e.target.value)} className="accent-[#E8A849]" />
-                            <span className="text-gray-300">{opt}</span>
+                            <span className="text-gray-700">{opt}</span>
                           </label>
                         ))}
                       </div>
@@ -418,20 +417,20 @@ export default function PrivatePage() {
                     <p className="text-sm tracking-[0.2em] uppercase text-[#E8A849] mb-6">Section 5: Decision Making</p>
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">Are you the primary decision-maker regarding this investment?</label>
+                        <label className="block text-sm text-gray-600 mb-2">Are you the primary decision-maker regarding this investment?</label>
                         {['Yes', 'No'].map(opt => (
                           <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
                             <input type="radio" name="primaryDecisionMaker" value={opt} checked={form.primaryDecisionMaker === opt} onChange={e => update('primaryDecisionMaker', e.target.value)} className="accent-[#E8A849]" />
-                            <span className="text-gray-300">{opt}</span>
+                            <span className="text-gray-700">{opt}</span>
                           </label>
                         ))}
                       </div>
                       <div>
-                        <label className="block text-sm text-gray-400 mb-2">If selected, how quickly are you prepared to begin?</label>
+                        <label className="block text-sm text-gray-600 mb-2">If selected, how quickly are you prepared to begin?</label>
                         {BEGIN_OPTIONS.map(opt => (
                           <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
                             <input type="radio" name="readyToBegin" value={opt} checked={form.readyToBegin === opt} onChange={e => update('readyToBegin', e.target.value)} className="accent-[#E8A849]" />
-                            <span className="text-gray-300">{opt}</span>
+                            <span className="text-gray-700">{opt}</span>
                           </label>
                         ))}
                       </div>
@@ -441,8 +440,8 @@ export default function PrivatePage() {
                   {/* Final Question */}
                   <div>
                     <p className="text-sm tracking-[0.2em] uppercase text-[#E8A849] mb-4">Final Question</p>
-                    <label className="block text-sm text-gray-400 mb-2">In one sentence, tell me why you are ready to rise beyond your current limits.</label>
-                    <textarea rows={2} value={form.finalStatement} onChange={e => update('finalStatement', e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8A849]" />
+                    <label className="block text-sm text-gray-600 mb-2">In one sentence, tell me why you are ready to rise beyond your current limits.</label>
+                    <textarea rows={2} value={form.finalStatement} onChange={e => update('finalStatement', e.target.value)} className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#E8A849]" />
                   </div>
 
                   <div className="text-center pt-4">
