@@ -22,6 +22,7 @@ export default function ImagesPage() {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [lightboxAlt, setLightboxAlt] = useState<string>('');
   const [managed, setManaged] = useState<{ id: string; title: string; images: { src: string; alt: string; featured?: boolean }[] }[]>([]);
+  const [openFolder, setOpenFolder] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/feature-images')
@@ -187,34 +188,6 @@ export default function ImagesPage() {
 
       {/* Gallery Sections */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Admin-managed Feature Images (from /admin/feature-images) */}
-        {managed.map((category) => (
-          <section key={category.id} id={category.id} className="mb-20">
-            <div className="text-center mb-12">
-              <p className="text-[#0D9488] font-bold uppercase tracking-widest text-xs mb-2">Featured</p>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{category.title}</h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-              {category.images.map((image, index) => (
-                <div
-                  key={index}
-                  className={`relative group rounded-xl overflow-hidden shadow-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${image.featured ? 'ring-2 ring-[#E8A849]' : ''}`}
-                  onClick={() => openLightbox(image.src, image.alt)}
-                >
-                  <div className="relative aspect-[4/5]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={image.src} alt={image.alt} className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    {image.featured && (
-                      <span className="absolute top-2 left-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Featured</span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        ))}
-
         {categories.map((category) => (
           <section key={category.id} id={category.id} className="mb-20">
             <div className="text-center mb-12">
@@ -254,6 +227,58 @@ export default function ImagesPage() {
           </section>
         ))}
       </div>
+
+      {/* Managed Galleries (admin Feature Images) — folders at the very bottom, drill in */}
+      {managed.length > 0 && (
+        <section className="py-16 md:py-24 bg-white border-t border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <p className="text-[#0D9488] font-bold uppercase tracking-widest text-xs mb-2">More Galleries</p>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Browse by Folder</h2>
+              <p className="text-lg text-gray-600 mt-3">Tap a folder to explore more photos.</p>
+            </div>
+            {(() => {
+              const folder = managed.find((f) => f.id === openFolder)
+              if (folder) {
+                return (
+                  <div>
+                    <button onClick={() => setOpenFolder(null)} className="inline-flex items-center gap-2 text-[#0D9488] font-semibold mb-6 hover:underline">← Back to all folders</button>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">{folder.title}</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                      {folder.images.map((image, index) => (
+                        <div key={index} className="relative group rounded-xl overflow-hidden shadow-lg cursor-pointer hover:scale-105 hover:shadow-xl transition-all duration-300" onClick={() => openLightbox(image.src, image.alt)}>
+                          <div className="relative aspect-[4/5]">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={image.src} alt={image.alt} className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+                            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
+              }
+              return (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {managed.map((f) => (
+                    <button key={f.id} onClick={() => setOpenFolder(f.id)} className="text-left group rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white">
+                      <div className="relative aspect-[4/3]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={f.images[0]?.src} alt={f.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                          <h3 className="text-white font-bold text-lg leading-tight">{f.title}</h3>
+                          <p className="text-white/80 text-sm">{f.images.length} photos</p>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )
+            })()}
+          </div>
+        </section>
+      )}
 
       {/* Call to Action */}
       <section className="py-16 md:py-24 bg-gray-50">
