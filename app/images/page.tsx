@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/Footer';
 import Image from 'next/image';
@@ -21,6 +21,23 @@ interface Category {
 export default function ImagesPage() {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [lightboxAlt, setLightboxAlt] = useState<string>('');
+  const [managed, setManaged] = useState<{ id: string; title: string; images: { src: string; alt: string; featured?: boolean }[] }[]>([]);
+
+  useEffect(() => {
+    fetch('/api/feature-images')
+      .then((r) => r.json())
+      .then((d) => {
+        const f = (d.folders || []).map((fld: any) => ({
+          id: 'g-' + (fld.slug || fld.id),
+          title: fld.title,
+          images: [...(fld.images || [])]
+            .sort((a: any, b: any) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || a.order - b.order)
+            .map((im: any) => ({ src: im.url, alt: im.alt || fld.title, featured: !!im.featured })),
+        }));
+        setManaged(f);
+      })
+      .catch(() => {});
+  }, []);
 
   const openLightbox = (src: string, alt: string) => {
     setLightboxImage(src);
@@ -170,6 +187,34 @@ export default function ImagesPage() {
 
       {/* Gallery Sections */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Admin-managed Feature Images (from /admin/feature-images) */}
+        {managed.map((category) => (
+          <section key={category.id} id={category.id} className="mb-20">
+            <div className="text-center mb-12">
+              <p className="text-[#0D9488] font-bold uppercase tracking-widest text-xs mb-2">Featured</p>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{category.title}</h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+              {category.images.map((image, index) => (
+                <div
+                  key={index}
+                  className={`relative group rounded-xl overflow-hidden shadow-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${image.featured ? 'ring-2 ring-[#E8A849]' : ''}`}
+                  onClick={() => openLightbox(image.src, image.alt)}
+                >
+                  <div className="relative aspect-[4/5]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={image.src} alt={image.alt} className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    {image.featured && (
+                      <span className="absolute top-2 left-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Featured</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+
         {categories.map((category) => (
           <section key={category.id} id={category.id} className="mb-20">
             <div className="text-center mb-12">

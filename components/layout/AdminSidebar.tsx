@@ -15,7 +15,8 @@ import {
   Shield,
   Database,
   Plug,
-  UserPlus
+  UserPlus,
+  Images
 } from 'lucide-react'
 
 export default function AdminSidebar() {
@@ -27,6 +28,7 @@ export default function AdminSidebar() {
     { href: '/admin/leads', icon: UserPlus, label: 'Leads' },
     { href: '/admin/reports', icon: BarChart3, label: 'Reports' },
     { href: '/admin/content', icon: FileText, label: 'Content' },
+    { href: '/admin/feature-images', icon: Images, label: 'Feature Images' },
     { href: '/admin/videos', icon: Video, label: 'Video Management' },
     { href: '/admin/permissions', icon: Shield, label: 'Permissions' },
     { href: '/admin/integrations', icon: Plug, label: 'Integrations' },
