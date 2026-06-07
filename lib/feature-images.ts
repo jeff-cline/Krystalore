@@ -3,8 +3,11 @@ import { UTApi, UTFile } from 'uploadthing/server'
 // uploadthing app id is public (appears in file URLs). Token is derived from the
 // secret key so it works whether the env holds the sk_ key OR a base64 token.
 const APP_ID = process.env.UPLOADTHING_APP_ID || '66x17tzw9x'
-const INDEX_ID = 'krystalore-gallery-index'
-const INDEX_NAME = 'krystalore-gallery-index.json'
+// v2 identity: the original `krystalore-gallery-index` customId got into a
+// permanently-locked phantom state on uploadthing's side (409 on re-save, stale
+// copy served to the edge). v2 escapes it cleanly.
+const INDEX_ID = 'krystalore-gallery-index-v2'
+const INDEX_NAME = 'krystalore-gallery-index-v2.json'
 
 function buildToken(): string {
   const raw = process.env.UPLOADTHING_TOKEN || process.env.UPLOADTHING_SECRET || process.env.UPLOADTHING_API_KEY || ''
@@ -45,10 +48,18 @@ export async function loadIndex(): Promise<GalleryIndex> {
     const a = api()
     const keys = await findIndexKeys(a)
     if (!keys.length) return { folders: [] }
-    const res = await fetch(fileUrl(keys[0]), { cache: 'no-store' })
-    if (!res.ok) return { folders: [] }
-    const data = await res.json()
-    return data && Array.isArray(data.folders) ? (data as GalleryIndex) : { folders: [] }
+    // Fetch every matching index file and keep the richest (most folders).
+    // Protects against a stale/duplicate index lingering at an edge.
+    let best: GalleryIndex = { folders: [] }
+    for (const key of keys) {
+      try {
+        const res = await fetch(fileUrl(key), { cache: 'no-store' })
+        if (!res.ok) continue
+        const data = await res.json()
+        if (data && Array.isArray(data.folders) && data.folders.length >= best.folders.length) best = data as GalleryIndex
+      } catch {}
+    }
+    return best
   } catch {
     return { folders: [] }
   }
