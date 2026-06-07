@@ -1,0 +1,332 @@
+{
+  "folders": [
+    {
+      "id": "seed-0",
+      "title": "On Stage & Speaking",
+      "slug": "on-stage-speaking",
+      "order": 0,
+      "images": [
+        {
+          "key": "/images/scraped/speaker-stage.jpg",
+          "url": "/images/scraped/speaker-stage.jpg",
+          "alt": "On Stage & Speaking",
+          "order": 0,
+          "featured": true
+        },
+        {
+          "key": "/images/scraped/speaking.jpg",
+          "url": "/images/scraped/speaking.jpg",
+          "alt": "On Stage & Speaking",
+          "order": 1,
+          "featured": false
+        },
+        {
+          "key": "/images/krystalore/wny-heroes-speaking.png",
+          "url": "/images/krystalore/wny-heroes-speaking.png",
+          "alt": "On Stage & Speaking",
+          "order": 2,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/krystalore-coaching-headshot.jpg",
+          "url": "/images/scraped/krystalore-coaching-headshot.jpg",
+          "alt": "On Stage & Speaking",
+          "order": 3,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/krystalore-speaking-2.jpg",
+          "url": "/images/scraped/krystalore-speaking-2.jpg",
+          "alt": "On Stage & Speaking",
+          "order": 4,
+          "featured": false
+        },
+        {
+          "key": "/images/krystalore/speaker-event-ros.jpg",
+          "url": "/images/krystalore/speaker-event-ros.jpg",
+          "alt": "On Stage & Speaking",
+          "order": 5,
+          "featured": false
+        }
+      ]
+    },
+    {
+      "id": "seed-1",
+      "title": "Leadership & Coaching",
+      "slug": "leadership-coaching",
+      "order": 1,
+      "images": [
+        {
+          "key": "/images/scraped/krystalore-event.jpg",
+          "url": "/images/scraped/krystalore-event.jpg",
+          "alt": "Leadership & Coaching",
+          "order": 0,
+          "featured": true
+        },
+        {
+          "key": "/images/scraped/leadership-hero-opt.jpg",
+          "url": "/images/scraped/leadership-hero-opt.jpg",
+          "alt": "Leadership & Coaching",
+          "order": 1,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/leadership-team-1.jpg",
+          "url": "/images/scraped/leadership-team-1.jpg",
+          "alt": "Leadership & Coaching",
+          "order": 2,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/leadership-team-2.jpg",
+          "url": "/images/scraped/leadership-team-2.jpg",
+          "alt": "Leadership & Coaching",
+          "order": 3,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/leadership-team-3.jpg",
+          "url": "/images/scraped/leadership-team-3.jpg",
+          "alt": "Leadership & Coaching",
+          "order": 4,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/leadership-workshop.jpg",
+          "url": "/images/scraped/leadership-workshop.jpg",
+          "alt": "Leadership & Coaching",
+          "order": 5,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/leadership-event.jpg",
+          "url": "/images/scraped/leadership-event.jpg",
+          "alt": "Leadership & Coaching",
+          "order": 6,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/leadership-corporate-opt.jpg",
+          "url": "/images/scraped/leadership-corporate-opt.jpg",
+          "alt": "Leadership & Coaching",
+          "order": 7,
+          "featured": false
+        }
+      ]
+    },
+    {
+      "id": "seed-2",
+      "title": "Fitness & Wellness",
+      "slug": "fitness-wellness",
+      "order": 2,
+      "images": [
+        {
+          "key": "/images/scraped/section-bg-3-opt.jpg",
+          "url": "/images/scraped/section-bg-3-opt.jpg",
+          "alt": "Fitness & Wellness",
+          "order": 0,
+          "featured": true
+        },
+        {
+          "key": "/images/scraped/fitness-group-outdoor.jpg",
+          "url": "/images/scraped/fitness-group-outdoor.jpg",
+          "alt": "Fitness & Wellness",
+          "order": 1,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/fitness-class-1.jpg",
+          "url": "/images/scraped/fitness-class-1.jpg",
+          "alt": "Fitness & Wellness",
+          "order": 2,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/fitness-class-2.jpg",
+          "url": "/images/scraped/fitness-class-2.jpg",
+          "alt": "Fitness & Wellness",
+          "order": 3,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/krystalore-fitness.webp",
+          "url": "/images/scraped/krystalore-fitness.webp",
+          "alt": "Fitness & Wellness",
+          "order": 4,
+          "featured": false
+        }
+      ]
+    },
+    {
+      "id": "seed-3",
+      "title": "Retreats & Adventures",
+      "slug": "retreats-adventures",
+      "order": 3,
+      "images": [
+        {
+          "key": "/images/retreat/retreat-01.jpg",
+          "url": "/images/retreat/retreat-01.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 0,
+          "featured": true
+        },
+        {
+          "key": "/images/retreat/retreat-02.jpg",
+          "url": "/images/retreat/retreat-02.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 1,
+          "featured": false
+        },
+        {
+          "key": "/images/retreat/retreat-03.jpg",
+          "url": "/images/retreat/retreat-03.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 2,
+          "featured": false
+        },
+        {
+          "key": "/images/retreat/retreat-04.jpg",
+          "url": "/images/retreat/retreat-04.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 3,
+          "featured": false
+        },
+        {
+          "key": "/images/retreat/retreat-05.jpg",
+          "url": "/images/retreat/retreat-05.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 4,
+          "featured": false
+        },
+        {
+          "key": "/images/retreat/retreat-group-01.jpg",
+          "url": "/images/retreat/retreat-group-01.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 5,
+          "featured": false
+        },
+        {
+          "key": "/images/retreat/retreat-group-02.jpg",
+          "url": "/images/retreat/retreat-group-02.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 6,
+          "featured": false
+        },
+        {
+          "key": "/images/retreat/retreat-group-03.jpg",
+          "url": "/images/retreat/retreat-group-03.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 7,
+          "featured": false
+        },
+        {
+          "key": "/images/retreat/retreat-group-04.jpg",
+          "url": "/images/retreat/retreat-group-04.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 8,
+          "featured": false
+        },
+        {
+          "key": "/images/retreat/retreat-group-05.jpg",
+          "url": "/images/retreat/retreat-group-05.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 9,
+          "featured": false
+        },
+        {
+          "key": "/images/retreat/retreat-group-06.jpg",
+          "url": "/images/retreat/retreat-group-06.jpg",
+          "alt": "Retreats & Adventures",
+          "order": 10,
+          "featured": false
+        }
+      ]
+    },
+    {
+      "id": "seed-4",
+      "title": "Books & Media",
+      "slug": "books-media",
+      "order": 4,
+      "images": [
+        {
+          "key": "/images/scraped/book-krystalore.jpg",
+          "url": "/images/scraped/book-krystalore.jpg",
+          "alt": "Books & Media",
+          "order": 0,
+          "featured": true
+        },
+        {
+          "key": "/images/scraped/book-milspouse-opt.jpg",
+          "url": "/images/scraped/book-milspouse-opt.jpg",
+          "alt": "Books & Media",
+          "order": 1,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/book-resilience-opt.jpg",
+          "url": "/images/scraped/book-resilience-opt.jpg",
+          "alt": "Books & Media",
+          "order": 2,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/book-planner-opt.jpg",
+          "url": "/images/scraped/book-planner-opt.jpg",
+          "alt": "Books & Media",
+          "order": 3,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/podcast-cover-opt.jpg",
+          "url": "/images/scraped/podcast-cover-opt.jpg",
+          "alt": "Books & Media",
+          "order": 4,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/krystalore-keynote.jpg",
+          "url": "/images/scraped/krystalore-keynote.jpg",
+          "alt": "Books & Media",
+          "order": 5,
+          "featured": false
+        }
+      ]
+    },
+    {
+      "id": "seed-5",
+      "title": "About Krystalore",
+      "slug": "about-krystalore",
+      "order": 5,
+      "images": [
+        {
+          "key": "/images/scraped/krystalore-profile-opt.jpg",
+          "url": "/images/scraped/krystalore-profile-opt.jpg",
+          "alt": "About Krystalore",
+          "order": 0,
+          "featured": true
+        },
+        {
+          "key": "/images/scraped/krystalore-bio-fitness.jpg",
+          "url": "/images/scraped/krystalore-bio-fitness.jpg",
+          "alt": "About Krystalore",
+          "order": 1,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/about-hero.webp",
+          "url": "/images/scraped/about-hero.webp",
+          "alt": "About Krystalore",
+          "order": 2,
+          "featured": false
+        },
+        {
+          "key": "/images/scraped/krystalore-leadership.webp",
+          "url": "/images/scraped/krystalore-leadership.webp",
+          "alt": "About Krystalore",
+          "order": 3,
+          "featured": false
+        }
+      ]
+    }
+  ]
+}
