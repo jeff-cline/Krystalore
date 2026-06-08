@@ -297,6 +297,21 @@ export default function AdminSettingsPage() {
             </div>
           </div>
 
+          {/* Email Sender (Zapmail default) — the spot to change email config */}
+          <div className="p-4 bg-dark-700 rounded-lg">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center">
+                <Mail className="h-5 w-5 text-[#34c5c5] mr-2" />
+                <h3 className="text-white font-medium">Email Sender</h3>
+              </div>
+              {getStatusIcon(true)}
+            </div>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-400">Default: <span className="text-white">Zapmail</span> (SMTP) &rarr; SendGrid fallback</p>
+              <p className="text-sm text-gray-500">Change the sender by setting <code className="text-gray-300">ZAPMAIL_API_KEY</code> (or custom SMTP) in the environment. Editable panel coming soon.</p>
+            </div>
+          </div>
+
           {/* NextAuth */}
           <div className="p-4 bg-dark-700 rounded-lg">
             <div className="flex items-center justify-between mb-3">
