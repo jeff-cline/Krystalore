@@ -1,12 +1,14 @@
 import sgMail from '@sendgrid/mail'
+import { sendViaZapmail } from './zapmail'
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
+// Zapmail is the default sender; SendGrid is the fallback if a key is present.
+if (process.env.SENDGRID_API_KEY) sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const FROM_EMAIL = 'krystalore@thecrewscoach.com'
 const FROM_NAME = 'Krystalore'
 
 export async function sendPasswordResetEmail(to: string, resetToken: string) {
-  const resetUrl = `https://executive.krystalore.com/auth/reset-password?token=${resetToken}`
+  const resetUrl = `${process.env.NEXTAUTH_URL || 'https://krystalore.com'}/auth/reset-password?token=${resetToken}`
 
   const msg = {
     to,
@@ -71,5 +73,16 @@ export async function sendPasswordResetEmail(to: string, resetToken: string) {
 </html>`,
   }
 
-  await sgMail.send(msg)
+  // Default: Zapmail (SMTP via a provisioned mailbox). Fallback: SendGrid.
+  try {
+    const sent = await sendViaZapmail({ to, subject: msg.subject, html: msg.html, fromName: FROM_NAME })
+    if (sent) return
+  } catch (err) {
+    console.error('Zapmail send failed, trying SendGrid:', err)
+  }
+  if (process.env.SENDGRID_API_KEY) {
+    await sgMail.send(msg)
+    return
+  }
+  throw new Error('No email sender configured (set ZAPMAIL_API_KEY or SENDGRID_API_KEY)')
 }
