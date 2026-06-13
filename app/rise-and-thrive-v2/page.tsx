@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
@@ -59,6 +59,89 @@ const faqs = [
   { q: 'Are there payment options?', a: 'Yes — pay in full to unlock bonus value, or choose a payment plan. All options are on the checkout page.' },
   { q: 'What results can I expect?', a: 'More energy, confidence, and clarity; consistency that finally sticks; deeper relationships; and a concrete plan for your next chapter — plus the embodied belief that your best chapter is still ahead.' },
 ]
+
+const roles = ['The Veteran', 'The Entrepreneur', 'The Executive', 'The Caretaker', 'The Woman Ready for More']
+
+// Slot-machine reel: large teal-glowing text that scrolls up, pauses on each role, and keeps going.
+function RoleReel() {
+  const [i, setI] = useState(0)
+  const [animate, setAnimate] = useState(true)
+
+  // advance one role at a time
+  useEffect(() => {
+    const id = setInterval(() => setI((v) => v + 1), 2000)
+    return () => clearInterval(id)
+  }, [])
+
+  // when we reach the duplicated first item, snap back to 0 (no transition) for a seamless one-way loop
+  useEffect(() => {
+    if (i === roles.length) {
+      const t = setTimeout(() => {
+        setAnimate(false)
+        setI(0)
+      }, 700)
+      return () => clearTimeout(t)
+    }
+  }, [i])
+
+  // re-enable the slide on the next frame after a snap-back
+  useEffect(() => {
+    if (!animate) {
+      const r = requestAnimationFrame(() => requestAnimationFrame(() => setAnimate(true)))
+      return () => cancelAnimationFrame(r)
+    }
+  }, [animate])
+
+  const reel = [...roles, roles[0]]
+  const glow = '0 0 18px rgba(52,197,197,0.55), 0 0 44px rgba(13,148,136,0.40)'
+
+  return (
+    <div className="overflow-hidden h-[3.4rem] sm:h-[4.6rem] md:h-[5.6rem] [mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)]">
+      <div
+        className="flex flex-col"
+        style={{
+          transform: `translateY(-${(i / reel.length) * 100}%)`,
+          transition: animate ? 'transform 600ms cubic-bezier(0.22, 1, 0.36, 1)' : 'none',
+        }}
+      >
+        {reel.map((r, idx) => (
+          <div key={idx} className="h-[3.4rem] sm:h-[4.6rem] md:h-[5.6rem] flex items-center justify-center">
+            <span
+              className="text-3xl sm:text-5xl md:text-6xl font-black text-[#0D9488] leading-none text-center whitespace-nowrap"
+              style={{ textShadow: glow }}
+            >
+              {r}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// Horizontal marquee of "wants" — boxes that scroll left→right with a teal glow so they pop.
+function WantsMarquee() {
+  const loop = [...wants, ...wants]
+  return (
+    <div className="relative overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+      <div className="flex w-max gap-4 rt-marquee hover:[animation-play-state:paused]">
+        {loop.map((w, idx) => (
+          <div
+            key={idx}
+            className="flex items-center gap-2.5 bg-white border border-[#34c5c5]/40 text-gray-800 font-bold px-6 py-4 rounded-2xl text-base md:text-lg whitespace-nowrap shadow-[0_0_18px_rgba(52,197,197,0.18)]"
+          >
+            <Check className="w-5 h-5 text-[#0D9488] flex-shrink-0" />
+            {w}
+          </div>
+        ))}
+      </div>
+      <style>{`
+        @keyframes rt-marquee { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+        .rt-marquee { animation: rt-marquee 38s linear infinite; }
+      `}</style>
+    </div>
+  )
+}
 
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
@@ -122,12 +205,8 @@ export default function RiseAndThriveV2() {
             <h2 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight mb-6">
               You&apos;ve spent years taking care of everyone else. It&apos;s time to come home to <span className="text-[#0D9488]">yourself</span>.
             </h2>
-            <p className="text-lg text-gray-600 font-light leading-relaxed mb-8">This is for the high-achieving woman in a season of change — the veteran, the entrepreneur, the executive, the caretaker — who is finally ready to choose herself.</p>
-            <div className="flex flex-wrap justify-center gap-2.5">
-              {['The Veteran', 'The Entrepreneur', 'The Executive', 'The Caretaker', 'The Woman Ready for More'].map((p) => (
-                <span key={p} className="bg-[#F4F1EC] text-gray-800 font-semibold text-sm px-4 py-2 rounded-full">{p}</span>
-              ))}
-            </div>
+            <p className="text-lg text-gray-600 font-light leading-relaxed mb-10">This is for the high-achieving woman in a season of change — who is finally ready to choose herself.</p>
+            <RoleReel />
           </div>
         </section>
 
@@ -159,16 +238,12 @@ export default function RiseAndThriveV2() {
         </section>
 
         {/* WHAT YOU WANT */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section className="py-16 md:py-24 bg-white overflow-hidden">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
             <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">What you actually want</p>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-9">It was never just about losing weight.</h2>
-            <div className="flex flex-wrap justify-center gap-3">
-              {wants.map((w) => (
-                <span key={w} className="inline-flex items-center gap-2 bg-[#F4F1EC] text-gray-800 font-semibold px-4 py-2.5 rounded-full text-[15px]"><Check className="w-4 h-4 text-[#0D9488]" /> {w}</span>
-              ))}
-            </div>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">It was never just about losing weight.</h2>
           </div>
+          <WantsMarquee />
         </section>
 
         {/* TRANSFORMATION ROADMAP */}
