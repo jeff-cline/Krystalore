@@ -28,6 +28,13 @@ const phases = [
   { n: '03', month: 'Month 3', name: 'RISE', color: '#e07800', from: ['Playing small', 'Waiting', 'Settling'], to: ['Taking action', 'Showing up fully', 'Living intentionally', 'Creating your next chapter'], body: 'Vision becomes reality. You step into the next-level version of you — and you make it real.' },
 ]
 
+// Foundation steps 1-3 — standalone offerings that lead into the bundle. Each links to its own page.
+const foundation = [
+  { n: 1, label: 'Vision Board Workshop', sub: 'Vision Board Party', text: 'Craft your vision and embrace the chaos — get crystal clear on the life you’re calling in, and the woman you’re becoming.', img: '/images/krystalore/REM08628.jpg', href: '/vision-board' },
+  { n: 2, label: 'Bombshell Bootcamp', sub: '5-Day Reset', text: 'Go from burned-out and running on fumes to a vibrant, grounded leader who commands energy, balance, and momentum.', img: '/images/go9/fitness.jpg', href: '/bombshell-bootcamp' },
+  { n: 3, label: 'Rewrite Masterclass', sub: 'Mastering the Messy Middle', text: 'Rewrite in real time — master the messy middle of your transformation, and learn how to stay when it gets hard.', img: '/images/go9/speaking-event.jpg', href: '/masterclass' },
+]
+
 const components = [
   { icon: Brain, label: 'The Academy', gives: 'The roadmap', img: '/images/million-dollar-body/mdb-hero.png' },
   { icon: Dumbbell, label: 'Beyond Limits Bootcamp', gives: 'The accountability', img: '/images/go6/beach-fitness-live.png' },
@@ -407,10 +414,39 @@ export default function RiseAndThrive() {
               <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">Most women try to change one piece. This changes the whole woman.</h2>
               <p className="text-lg text-gray-600 font-light">Separately, each of these is powerful. Together, they become life-changing.</p>
             </div>
+
+            {/* FOUNDATION — steps 1-3, each links to its own page */}
+            <div className="text-center mb-8">
+              <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm">Laying the foundation with</p>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-6 mb-14">
+              {foundation.map((f) => (
+                <div key={f.label} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col">
+                  <div className="relative h-44">
+                    <Image src={f.img} alt={f.label} fill className="object-cover" sizes="(max-width:640px) 100vw, 33vw" />
+                    <span className="absolute top-3 left-3 w-9 h-9 rounded-full bg-[#0D9488] text-white font-black flex items-center justify-center shadow-lg">{f.n}</span>
+                  </div>
+                  <div className="p-5 flex flex-col flex-1">
+                    <p className="text-[#34c5c5] font-bold uppercase tracking-wider text-[11px] mb-1">{f.sub}</p>
+                    <h3 className="font-black text-gray-900 leading-tight mb-2">{f.label}</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-1">{f.text}</p>
+                    <a href={f.href} className="inline-flex items-center gap-1.5 text-[#0D9488] font-bold text-sm hover:gap-2.5 transition-all">Get More Info <ArrowRight className="w-4 h-4" /></a>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* FULL PACKAGE — steps 4-7 */}
+            <div className="text-center mb-8">
+              <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm">Then you step into the full transformation package</p>
+            </div>
             <div className="grid grid-cols-2 gap-6">
-              {components.map((c) => (
+              {components.map((c, i) => (
                 <div key={c.label} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
-                  <div className="relative h-72 bg-[#F4F1EC]"><Image src={c.img} alt={c.label} fill className="object-contain p-3" sizes="(max-width:768px) 100vw, 50vw" /></div>
+                  <div className="relative h-72 bg-[#F4F1EC]">
+                    <Image src={c.img} alt={c.label} fill className="object-contain p-3" sizes="(max-width:768px) 100vw, 50vw" />
+                    <span className="absolute top-3 left-3 w-9 h-9 rounded-full bg-[#0D9488] text-white font-black flex items-center justify-center shadow-lg">{i + 4}</span>
+                  </div>
                   <div className="p-5">
                     <c.icon className="w-6 h-6 text-[#0D9488] mb-2" />
                     <h3 className="font-black text-gray-900 leading-tight">{c.label}</h3>
