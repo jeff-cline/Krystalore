@@ -252,20 +252,20 @@ export default function RiseAndThrive() {
             <div className="text-center max-w-2xl mx-auto mb-14">
               <p className="text-[#E8A849] font-bold uppercase tracking-[0.18em] text-sm mb-3">The transformation roadmap</p>
               <h2 className="text-3xl md:text-5xl font-black mb-4">90 days. Three phases. A new you.</h2>
-              <p className="text-lg text-gray-300 font-light">A proven path from exhausted and overwhelmed to clear, confident, and fully alive.</p>
+              <p className="text-lg text-white/90 font-light">A proven path from exhausted and overwhelmed to clear, confident, and fully alive.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {phases.map((p) => (
                 <div key={p.name} className="bg-white/5 border border-white/10 rounded-3xl p-7">
                   <div className="flex items-center gap-3 mb-5">
                     <span className="w-12 h-12 rounded-2xl font-black text-xl flex items-center justify-center text-gray-900" style={{ background: p.color }}>{p.n}</span>
-                    <div><p className="text-xs text-gray-400 uppercase tracking-wider">{p.month}</p><p className="text-2xl font-black" style={{ color: p.color }}>{p.name}</p></div>
+                    <div><p className="text-xs text-white/70 uppercase tracking-wider">{p.month}</p><p className="text-2xl font-black" style={{ color: p.color }}>{p.name}</p></div>
                   </div>
                   <div className="grid grid-cols-2 gap-3 mb-5">
-                    <div><p className="text-[11px] uppercase tracking-wider text-gray-500 mb-1.5">From</p><ul className="space-y-1">{p.from.map((f) => <li key={f} className="text-[13px] text-gray-400 line-through decoration-gray-600">{f}</li>)}</ul></div>
-                    <div><p className="text-[11px] uppercase tracking-wider text-gray-500 mb-1.5">To</p><ul className="space-y-1">{p.to.map((t) => <li key={t} className="text-[13px] text-white font-semibold">{t}</li>)}</ul></div>
+                    <div><p className="text-[11px] uppercase tracking-wider text-white/70 mb-1.5">From</p><ul className="space-y-1">{p.from.map((f) => <li key={f} className="text-[13px] text-white/60 line-through decoration-white/40">{f}</li>)}</ul></div>
+                    <div><p className="text-[11px] uppercase tracking-wider text-white/70 mb-1.5">To</p><ul className="space-y-1">{p.to.map((t) => <li key={t} className="text-[13px] text-white font-semibold">{t}</li>)}</ul></div>
                   </div>
-                  <p className="text-[14px] text-gray-300 leading-relaxed">{p.body}</p>
+                  <p className="text-[14px] text-white/90 leading-relaxed">{p.body}</p>
                 </div>
               ))}
             </div>
@@ -359,7 +359,7 @@ export default function RiseAndThrive() {
                 <p className="text-white/75 mb-6">Everything in The Bundle — plus the deepest support.</p>
                 <ul className="space-y-3 mb-8 flex-1">
                   {['Everything in The Bundle', 'Private Coaching Sessions with Krystalore', 'Personalized Strategy & Accountability', 'Direct-Access Support', 'Customized Success Plan'].map((p) => (
-                    <li key={p} className="flex items-start gap-2 text-gray-200"><Check className="w-5 h-5 text-[#E8A849] flex-shrink-0 mt-0.5" /><span className="text-[15px]">{p}</span></li>
+                    <li key={p} className="flex items-start gap-2 text-white/90"><Check className="w-5 h-5 text-[#E8A849] flex-shrink-0 mt-0.5" /><span className="text-[15px]">{p}</span></li>
                   ))}
                 </ul>
                 <a href={CHECKOUT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-shadow">Go VIP <Crown className="w-4 h-4" /></a>
