@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Star } from 'lucide-react'
+import { Crown } from 'lucide-react'
 
 // Teal-star VIP Bundle promo, pinned to the bottom of the Coaching/Events/Retreats dropdowns.
 function VipBundleItem({ onClick, mobile = false }: { onClick: () => void; mobile?: boolean }) {
@@ -16,7 +16,7 @@ function VipBundleItem({ onClick, mobile = false }: { onClick: () => void; mobil
           : 'flex items-center gap-2 px-4 py-2 mt-1 pt-2.5 border-t border-gray-100 text-sm font-bold text-[#0D9488] hover:bg-gray-50 transition-colors'
       }
     >
-      <Star className="w-4 h-4 fill-[#34c5c5] text-[#34c5c5]" />
+      <Crown className="w-4 h-4 fill-[#34c5c5] text-[#34c5c5]" />
       VIP Bundle
     </Link>
   )
