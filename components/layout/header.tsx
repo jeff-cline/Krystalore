@@ -2,6 +2,25 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { Star } from 'lucide-react'
+
+// Teal-star VIP Bundle promo, pinned to the bottom of the Coaching/Events/Retreats dropdowns.
+function VipBundleItem({ onClick, mobile = false }: { onClick: () => void; mobile?: boolean }) {
+  return (
+    <Link
+      href="/rise-and-thrive"
+      onClick={onClick}
+      className={
+        mobile
+          ? 'flex items-center gap-2 px-4 py-2 mt-1 pt-3 border-t border-gray-200 font-bold text-[#0D9488] hover:bg-teal-50 rounded-lg transition-colors'
+          : 'flex items-center gap-2 px-4 py-2 mt-1 pt-2.5 border-t border-gray-100 text-sm font-bold text-[#0D9488] hover:bg-gray-50 transition-colors'
+      }
+    >
+      <Star className="w-4 h-4 fill-[#34c5c5] text-[#34c5c5]" />
+      VIP Bundle
+    </Link>
+  )
+}
 
 const retreatLinks = [
   { href: '/retreat', label: 'All Retreat Options' },
@@ -117,6 +136,7 @@ export default function Header() {
                         {link.label}
                       </Link>
                     ))}
+                    <VipBundleItem onClick={() => setCoachingOpen(false)} />
                   </div>
                 </div>
               )}
@@ -153,6 +173,7 @@ export default function Header() {
                         {link.label}
                       </Link>
                     ))}
+                    <VipBundleItem onClick={() => setEventsOpen(false)} />
                   </div>
                 </div>
               )}
@@ -189,6 +210,7 @@ export default function Header() {
                         {link.label}
                       </Link>
                     ))}
+                    <VipBundleItem onClick={() => setRetreatsOpen(false)} />
                   </div>
                 </div>
               )}
@@ -290,6 +312,13 @@ export default function Header() {
                     {link.label}
                   </Link>
                 ))}
+                <VipBundleItem
+                  mobile
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    setMobileCoachingOpen(false)
+                  }}
+                />
               </div>
             )}
 
@@ -326,6 +355,13 @@ export default function Header() {
                     {link.label}
                   </Link>
                 ))}
+                <VipBundleItem
+                  mobile
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    setMobileEventsOpen(false)
+                  }}
+                />
               </div>
             )}
 
@@ -362,6 +398,13 @@ export default function Header() {
                     {link.label}
                   </Link>
                 ))}
+                <VipBundleItem
+                  mobile
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    setMobileRetreatsOpen(false)
+                  }}
+                />
               </div>
             )}
 
