@@ -376,36 +376,6 @@ export default function RiseAndThrive() {
           </div>
         </section>
 
-        {/* WHY THE RETREAT (Costa Rica) */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="grid grid-cols-2 gap-3">
-                {['cr-01', 'cr-03', 'cr-04', 'cr-06'].map((c, i) => (
-                  <div key={c} className={`relative rounded-2xl overflow-hidden shadow-lg ${i % 2 ? 'mt-6' : ''}`} style={{ aspectRatio: '3/4' }}>
-                    <Image src={`/images/retreat-destinations/${c}.jpg`} alt="Costa Rica celebration retreat" fill className="object-cover" sizes="(max-width: 1024px) 50vw, 25vw" />
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">Why the retreat changes everything</p>
-                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-5 leading-tight">Costa Rica isn&apos;t a vacation. It&apos;s a rebirth.</h2>
-                <p className="text-lg text-gray-600 font-light leading-relaxed mb-6">
-                  Most people attend a program. Few create a transformation. The retreat is where it becomes <b className="text-gray-900">embodied</b> —
-                  a celebration, a graduation, a declaration. A chance to step away from the noise and finally hear yourself again.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-7">
-                  {retreatExp.map((e) => <span key={e} className="bg-[#F4F1EC] text-gray-700 text-[13px] font-semibold px-3 py-1.5 rounded-full">{e}</span>)}
-                </div>
-                <p className="text-sm font-bold text-[#0D9488] uppercase tracking-wider mb-3">You arrive carrying stress — you leave with:</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {retreatGets.map((g) => <div key={g} className="flex items-center gap-2 text-gray-800"><Check className="w-5 h-5 text-[#34c5c5] flex-shrink-0" /><span className="text-[15px] font-medium">{g}</span></div>)}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* WHY BUNDLE */}
         <section className="py-16 md:py-24 bg-[#F6F8FA]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -456,6 +426,46 @@ export default function RiseAndThrive() {
               ))}
             </div>
           </div>
+        </section>
+
+        {/* WHY THE RETREAT (Costa Rica) */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="grid grid-cols-2 gap-3">
+                {['cr-01', 'cr-03', 'cr-04', 'cr-06'].map((c, i) => (
+                  <div key={c} className={`relative rounded-2xl overflow-hidden shadow-lg ${i % 2 ? 'mt-6' : ''}`} style={{ aspectRatio: '3/4' }}>
+                    <Image src={`/images/retreat-destinations/${c}.jpg`} alt="Costa Rica celebration retreat" fill className="object-cover" sizes="(max-width: 1024px) 50vw, 25vw" />
+                  </div>
+                ))}
+              </div>
+              <div>
+                <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">Why the retreat changes everything</p>
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-5 leading-tight">Costa Rica isn&apos;t a vacation. It&apos;s a rebirth.</h2>
+                <p className="text-lg text-gray-600 font-light leading-relaxed mb-6">
+                  Most people attend a program. Few create a transformation. The retreat is where it becomes <b className="text-gray-900">embodied</b> —
+                  a celebration, a graduation, a declaration. A chance to step away from the noise and finally hear yourself again.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-7">
+                  {retreatExp.map((e) => <span key={e} className="bg-[#F4F1EC] text-gray-700 text-[13px] font-semibold px-3 py-1.5 rounded-full">{e}</span>)}
+                </div>
+                <p className="text-sm font-bold text-[#0D9488] uppercase tracking-wider mb-3">You arrive carrying stress — you leave with:</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {retreatGets.map((g) => <div key={g} className="flex items-center gap-2 text-gray-800"><Check className="w-5 h-5 text-[#34c5c5] flex-shrink-0" /><span className="text-[15px] font-medium">{g}</span></div>)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* VIDEO TESTIMONIALS */}
+        <section className="py-16 md:py-24 bg-[#F6F8FA] overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
+            <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">Real women, real words</p>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900">Hear their transformations</h2>
+            <p className="text-lg text-gray-600 font-light mt-3">Tap any story to watch — right here, without leaving the page.</p>
+          </div>
+          <VideoTestimonials />
         </section>
 
         {/* THE OFFER */}
@@ -560,16 +570,6 @@ export default function RiseAndThrive() {
             <div className="text-center mb-10"><p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">Questions</p><h2 className="text-3xl md:text-4xl font-black text-gray-900">Everything you&apos;re wondering</h2></div>
             <div className="space-y-3">{faqs.map((f) => <FAQItem key={f.q} q={f.q} a={f.a} />)}</div>
           </div>
-        </section>
-
-        {/* VIDEO TESTIMONIALS */}
-        <section className="py-16 md:py-24 bg-[#F6F8FA] overflow-hidden">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
-            <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">Real women, real words</p>
-            <h2 className="text-3xl md:text-5xl font-black text-gray-900">Hear their transformations</h2>
-            <p className="text-lg text-gray-600 font-light mt-3">Tap any story to watch — right here, without leaving the page.</p>
-          </div>
-          <VideoTestimonials />
         </section>
 
         {/* FINAL CTA */}
