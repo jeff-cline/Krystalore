@@ -424,7 +424,7 @@ export default function RiseAndThrive() {
                 <div key={f.label} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col">
                   <div className="relative h-44">
                     <Image src={f.img} alt={f.label} fill className="object-cover" sizes="(max-width:640px) 100vw, 33vw" />
-                    <span className="absolute top-3 left-3 w-9 h-9 rounded-full bg-[#0D9488] text-white font-black flex items-center justify-center shadow-lg">{f.n}</span>
+                    <span className="absolute top-3 left-3 w-9 h-9 rounded-full bg-[#0D9488] text-white flex items-center justify-center shadow-lg"><Crown className="w-4 h-4" /></span>
                   </div>
                   <div className="p-5 flex flex-col flex-1">
                     <p className="text-[#34c5c5] font-bold uppercase tracking-wider text-[11px] mb-1">{f.sub}</p>
@@ -441,11 +441,11 @@ export default function RiseAndThrive() {
               <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm">Then you step into the full transformation package</p>
             </div>
             <div className="grid grid-cols-2 gap-6">
-              {components.map((c, i) => (
+              {components.map((c) => (
                 <div key={c.label} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
                   <div className="relative h-72 bg-[#F4F1EC]">
                     <Image src={c.img} alt={c.label} fill className="object-contain p-3" sizes="(max-width:768px) 100vw, 50vw" />
-                    <span className="absolute top-3 left-3 w-9 h-9 rounded-full bg-[#0D9488] text-white font-black flex items-center justify-center shadow-lg">{i + 4}</span>
+                    <span className="absolute top-3 left-3 w-9 h-9 rounded-full bg-[#0D9488] text-white flex items-center justify-center shadow-lg"><Crown className="w-4 h-4" /></span>
                   </div>
                   <div className="p-5">
                     <c.icon className="w-6 h-6 text-[#0D9488] mb-2" />
@@ -499,6 +499,13 @@ export default function RiseAndThrive() {
               </div>
             </div>
             <div className="flex items-center justify-center gap-2 mt-6 text-sm text-gray-500"><ShieldCheck className="w-4 h-4 text-[#0D9488]" /> Pay-in-full bonuses available · payment plans at checkout</div>
+
+            {/* HER NEXT MISSION — Veterans nonprofit */}
+            <div className="mt-10 border-t border-gray-100 pt-8 text-center">
+              <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-2">HER NEXT MISSION</p>
+              <p className="text-gray-600 font-light mb-4 max-w-xl mx-auto">Krystalore&apos;s nonprofit supporting women Veterans in their next chapter.</p>
+              <a href="https://hernextmission.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#0D9488] hover:bg-[#34c5c5] hover:text-white font-bold px-7 py-3.5 rounded-xl transition-colors">Get More Info <ArrowRight className="w-4 h-4" /></a>
+            </div>
           </div>
         </section>
 
