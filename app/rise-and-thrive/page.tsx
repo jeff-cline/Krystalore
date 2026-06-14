@@ -310,7 +310,7 @@ export default function RiseAndThrive() {
               <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">Most women try to change one piece. This changes the whole woman.</h2>
               <p className="text-lg text-gray-600 font-light">Separately, each of these is powerful. Together, they become life-changing.</p>
             </div>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-6">
               {components.map((c) => (
                 <div key={c.label} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
                   <div className="relative h-72 bg-[#F4F1EC]"><Image src={c.img} alt={c.label} fill className="object-contain p-3" sizes="(max-width:768px) 100vw, 50vw" /></div>
