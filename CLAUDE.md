@@ -147,13 +147,14 @@ Add to `next.config.js` → `redirects()` array. Use `permanent: true` (301) for
 
 ## 🚀 Deploy
 
-Jeff pushes live via **Hermes**. Workflow:
+**Pushing to `main` deploys live.** The repo auto-deploys to krystalore.com on push to `origin/main`, so a commit + `git push` is the deploy. Workflow:
 1. Claude edits files locally.
-2. Jeff says "tell me what to tell Hermes."
-3. Claude produces a Hermes brief: file list, commit message, smoke-check URLs.
-4. Jeff hands the brief to Hermes; Hermes pulls, commits, deploys.
+2. Claude commits and pushes to `main` when Jeff asks for the change to go live.
+3. Smoke-check the affected URL after the deploy finishes (~1–2 min).
 
-Claude does **not** push, force-push, or modify history without an explicit ask.
+Hermes is **deprecated** — Jeff no longer uses the Hermes brief workflow unless he explicitly asks for it (updated Jun 2026, confirmed by Jeff).
+
+Claude still does **not** force-push or modify pushed history without an explicit ask.
 
 ---
 
