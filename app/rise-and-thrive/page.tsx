@@ -7,7 +7,7 @@ import Footer from '@/components/layout/Footer'
 import {
   ArrowRight, Check, Calendar, MapPin, Sparkles, Crown, Star, Plus,
   Compass, HeartPulse, Brain, Users, Briefcase, ChevronDown, ChevronUp,
-  Sun, Map as MapIcon, Dumbbell, Heart, Quote, ShieldCheck,
+  Sun, Map as MapIcon, Dumbbell, Heart, Quote, ShieldCheck, Play, X,
 } from 'lucide-react'
 
 const CHECKOUT = 'https://www.krystalorecrews.com/rise-and-thrive-checkout'
@@ -153,6 +153,103 @@ function FAQItem({ q, a }: { q: string; a: string }) {
       </button>
       {open && <div className="px-5 pb-5 text-gray-600 leading-relaxed">{a}</div>}
     </div>
+  )
+}
+
+const videoTestimonials = [
+  { id: 'zkXELNVOVoI', title: 'Kelly — Beyond Limits Retreat' },
+  { id: 'jHE6rGalyVM', title: 'Sondra — Veteran Sponsor Recipient' },
+  { id: 'Hn2A3DD-G9E', title: 'Heather — Revival Retreat' },
+  { id: 'qZLf7-hx1Pc', title: 'Jen — Veteran & Military Spouse' },
+  { id: 'DcTkCcR716M', title: 'Debbie — Costa Rica Revival Retreat' },
+  { id: 'ebBQhmerkvo', title: 'Got Our Troops Foundation' },
+]
+
+// Auto-scrolling video testimonial library. Thumbnails open in an on-page modal
+// (youtube-nocookie embed, autoplay) so visitors watch inline and never leave for YouTube.
+function VideoTestimonials() {
+  const [active, setActive] = useState<string | null>(null)
+  const loop = [...videoTestimonials, ...videoTestimonials]
+
+  useEffect(() => {
+    if (!active) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setActive(null) }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [active])
+
+  return (
+    <>
+      <div className="relative overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+        <div className="flex w-max gap-5 rt-vmarquee hover:[animation-play-state:paused]">
+          {loop.map((v, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => setActive(v.id)}
+              aria-label={`Play video: ${v.title}`}
+              className="group relative w-[300px] md:w-[340px] flex-shrink-0 text-left rounded-2xl overflow-hidden bg-white shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow"
+            >
+              <div className="relative aspect-video bg-gray-900">
+                {/* plain img (remote YouTube thumb) avoids next/image remote-domain config */}
+                <img
+                  src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`}
+                  alt={v.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="w-16 h-16 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:bg-white transition-transform">
+                    <Play className="w-7 h-7 text-[#e07800] fill-[#e07800] ml-1" />
+                  </span>
+                </div>
+              </div>
+              <div className="p-4">
+                <p className="font-bold text-gray-900 leading-snug">{v.title}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+        <style>{`
+          @keyframes rt-vmarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+          .rt-vmarquee { animation: rt-vmarquee 55s linear infinite; }
+        `}</style>
+      </div>
+
+      {active && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setActive(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              onClick={() => setActive(null)}
+              aria-label="Close video"
+              className="absolute -top-11 right-0 flex items-center gap-1.5 text-white/90 hover:text-white font-semibold"
+            >
+              Close <X className="w-6 h-6" />
+            </button>
+            <div className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src={`https://www.youtube-nocookie.com/embed/${active}?autoplay=1&rel=0&modestbranding=1`}
+                title="Video testimonial"
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 
@@ -420,6 +517,16 @@ export default function RiseAndThrive() {
             <div className="text-center mb-10"><p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">Questions</p><h2 className="text-3xl md:text-4xl font-black text-gray-900">Everything you&apos;re wondering</h2></div>
             <div className="space-y-3">{faqs.map((f) => <FAQItem key={f.q} q={f.q} a={f.a} />)}</div>
           </div>
+        </section>
+
+        {/* VIDEO TESTIMONIALS */}
+        <section className="py-16 md:py-24 bg-[#F6F8FA] overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
+            <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">Real women, real words</p>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900">Hear their transformations</h2>
+            <p className="text-lg text-gray-600 font-light mt-3">Tap any story to watch — right here, without leaving the page.</p>
+          </div>
+          <VideoTestimonials />
         </section>
 
         {/* FINAL CTA */}
