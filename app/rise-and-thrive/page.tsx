@@ -304,16 +304,16 @@ export default function RiseAndThrive() {
 
         {/* WHY BUNDLE */}
         <section className="py-16 md:py-24 bg-[#F6F8FA]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">Why bundling matters</p>
               <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">Most women try to change one piece. This changes the whole woman.</h2>
               <p className="text-lg text-gray-600 font-light">Separately, each of these is powerful. Together, they become life-changing.</p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 gap-6">
               {components.map((c) => (
                 <div key={c.label} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
-                  <div className="relative h-60"><Image src={c.img} alt={c.label} fill className="object-cover object-top" sizes="(max-width:1024px) 50vw, 25vw" /></div>
+                  <div className="relative h-72 bg-[#F4F1EC]"><Image src={c.img} alt={c.label} fill className="object-contain p-3" sizes="(max-width:768px) 100vw, 50vw" /></div>
                   <div className="p-5">
                     <c.icon className="w-6 h-6 text-[#0D9488] mb-2" />
                     <h3 className="font-black text-gray-900 leading-tight">{c.label}</h3>
