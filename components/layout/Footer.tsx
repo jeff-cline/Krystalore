@@ -103,6 +103,8 @@ export default function Footer() {
           <p className="text-gray-500 text-sm">&copy; {new Date().getFullYear()} Krystalore Crews. All Rights Reserved.</p>
           <div className="flex items-center gap-4 mt-2 md:mt-0">
             <Link href="/sitemap-page" className="text-gray-600 hover:text-gray-400 text-sm transition-colors">Sitemap</Link>
+            <a href="/robots.txt" className="text-gray-600 hover:text-gray-400 text-sm transition-colors">robots.txt</a>
+            <a href="/llms.txt" className="text-gray-600 hover:text-gray-400 text-sm transition-colors">llms.txt</a>
             <p className="text-gray-500 text-sm">Crews Beyond Limits Consulting</p>
             <a href="https://jeff-cline.com" target="_blank" rel="noopener noreferrer" style={{fontSize:'6px',opacity:0.08,color:'inherit',textDecoration:'none',lineHeight:1}}>JC</a>
           </div>
