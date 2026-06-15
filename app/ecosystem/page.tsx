@@ -31,7 +31,7 @@ const CHECKOUT = 'https://www.krystalorecrews.com/rise-and-thrive-checkout'
 const JOURNEY = [
   { stage: 'Discover · Free', target: 'journey', items: ['Habit Tracker', 'Power Hour Coworking', 'Quizzes'] },
   { stage: 'Entry Events', target: 'journey', items: ['Vision Board Party', 'Bombshell Bootcamp', 'Rewrite Masterclass'] },
-  { stage: 'Core Programs', target: 'journey', items: ['Health Mastery', 'Beyond Limits Bootcamp', 'Million Dollar Body', 'Courses'] },
+  { stage: 'Core Programs', target: 'journey', items: ['Health Mastery', 'Beyond Limits Bootcamp', 'Million Dollar Body', 'Courses', 'Retreats'] },
   { stage: 'Premium · VIP', target: 'vip', highlight: true, items: ['★ Rise & Thrive Bundle', 'Costa Rica Retreat', 'Private Somatic Coaching'] },
 ]
 
@@ -208,7 +208,7 @@ const LADDER = [
     { label: 'Vision Board Party', href: '/vision-board' }, { label: 'Bombshell Bootcamp', href: '/bombshell-bootcamp' }, { label: 'Rewrite Masterclass', href: '/masterclass' },
   ] },
   { rung: 'Core Programs', note: 'Ongoing accountability + community. “You’ve built success. Now it’s time to feel like it.”', items: [
-    { label: 'Health Mastery', href: '/health-mastery' }, { label: 'Beyond Limits Bootcamp', href: '/bootcamp' }, { label: 'Million Dollar Body', href: '/million-dollar-body' }, { label: 'Courses', href: '/courses' },
+    { label: 'Health Mastery', href: '/health-mastery' }, { label: 'Beyond Limits Bootcamp', href: '/bootcamp' }, { label: 'Million Dollar Body', href: '/million-dollar-body' }, { label: 'Courses', href: '/courses' }, { label: 'Retreats', href: '/retreat' },
   ] },
   { rung: 'Premium · VIP', note: 'Whole-life reset + 1:1 depth — the journey’s destination. This is where the bundle math pays off.', items: [
     { label: 'Rise & Thrive (VIP Bundle)', href: '/rise-and-thrive' }, { label: 'Private Somatic Coaching', href: '/privatemindset' },
