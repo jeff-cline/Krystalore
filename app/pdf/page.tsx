@@ -1,0 +1,58 @@
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/Footer'
+import { FileText, Download, Crown } from 'lucide-react'
+
+const bios = [
+  { show: 'Thriving Women Talk', tag: 'Thriving vs. surviving — passion, purpose, and legacy. Retreats, leadership, Her Next Mission.', file: 'Krystalore-Crews-Thriving-Women-Talk.pdf', featured: true },
+  { show: 'Bookish Talk', tag: 'Writing your story · featured book: The Road to Resilience. Speaking, retreats, Activate4Impact.', file: 'Krystalore-Crews-Bookish-Talk.pdf' },
+  { show: 'Uncomfortable Conversations', tag: 'Divorce, grief & loss → a hook into the Rise & Thrive Bundle. Compassionate Inquiry, NEXT, Freedom Formula.', file: 'Krystalore-Crews-Uncomfortable-Conversations.pdf', vip: true },
+  { show: 'AMP Sports Talk', tag: 'Athlete mindset — NFL sideline to wheelchair to 50-mile ultra. Beyond Limits Bootcamp, high-performance coaching.', file: 'Krystalore-Crews-AMP-Sports-Talk.pdf' },
+  { show: 'Thrive Health & Wellness', tag: 'Holistic health, “health is wealth,” the 34-minute mindset, and the Freedom Formula.', file: 'Krystalore-Crews-Thrive-Health-and-Wellness.pdf' },
+]
+
+export default function PdfBios() {
+  return (
+    <>
+      <Header />
+      <main className="min-h-screen bg-white">
+        <section className="relative bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white pt-12 md:pt-16 pb-10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-[#0D9488] font-bold uppercase tracking-[0.2em] text-xs mb-3">Thriving Women Network · Enlighten · Encourage · Empower</p>
+            <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-3 leading-tight">Guest Bios — Krystalore Crews</h1>
+            <p className="text-lg text-gray-600 font-light">One-page, show-specific bios with provocative host talking points. Click to view or download.</p>
+          </div>
+        </section>
+
+        <section className="pb-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+            {bios.map((b) => (
+              <a
+                key={b.file}
+                href={`/pdf/${b.file}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 hover:shadow-md hover:border-[#34c5c5]/50 transition-all"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#34c5c5]/15 flex items-center justify-center flex-shrink-0">
+                  {b.vip ? <Crown className="w-6 h-6 text-[#0D9488]" /> : <FileText className="w-6 h-6 text-[#0D9488]" />}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h2 className="font-black text-gray-900 text-lg leading-tight">{b.show}</h2>
+                    {b.featured && <span className="text-[10px] font-bold uppercase tracking-wider bg-[#E8A849]/20 text-[#e07800] px-2 py-0.5 rounded-full">Top Show</span>}
+                    {b.vip && <span className="text-[10px] font-bold uppercase tracking-wider bg-[#0D9488]/15 text-[#0D9488] px-2 py-0.5 rounded-full">VIP Hook</span>}
+                  </div>
+                  <p className="text-sm text-gray-600 mt-1">{b.tag}</p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-[#0D9488] font-bold text-sm flex-shrink-0 group-hover:gap-2.5 transition-all">
+                  View PDF <Download className="w-4 h-4" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
+}
