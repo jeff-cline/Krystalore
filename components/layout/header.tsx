@@ -61,7 +61,7 @@ const navLinks: NavLink[] = [
 // "Missions" menu — replaces the old About link. Speaking also stays in Events.
 const missionsLinks: NavLink[] = [
   { href: '/about', label: 'About' },
-  { href: '/speaking', label: 'Speaking' },
+  { href: '/speaker', label: 'Speaking' },
   { href: '/books', label: 'Books' },
   { href: '/shop', label: 'Shop' },
   { href: '/deck', label: 'Explore' },
