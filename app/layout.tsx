@@ -58,6 +58,52 @@ export const metadata: Metadata = {
   },
 }
 
+const SAME_AS = [
+  'https://www.facebook.com/krystalore/',
+  'https://www.instagram.com/thecrewscoach/',
+  'https://www.linkedin.com/in/krystalore-crews/',
+  'https://www.tiktok.com/@thecrewscoach',
+  'https://www.youtube.com/user/krystalore',
+]
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://krystalore.com/#person',
+      name: 'Krystalore Crews',
+      jobTitle: 'International Speaker, Corporate Host & Wellness Consultant',
+      url: 'https://krystalore.com',
+      image: 'https://krystalore.com/images/go9/portrait.jpg',
+      description:
+        'Amazon best-selling author, 22-year retired U.S. Air Force Senior Master Sergeant, keynote speaker, and certified somatic coach who helps high-achieving women and teams stop surviving and start thriving.',
+      knowsAbout: [
+        'keynote speaking', 'corporate wellness', 'leadership training', 'emotional intelligence',
+        'somatic coaching', 'resilience', 'veteran transition', 'retreats', "women's empowerment",
+      ],
+      sameAs: SAME_AS,
+      worksFor: { '@id': 'https://krystalore.com/#org' },
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://krystalore.com/#org',
+      name: 'Krystalore Crews',
+      url: 'https://krystalore.com',
+      logo: 'https://krystalore.com/images/krystalore-crews-logo.png',
+      founder: { '@id': 'https://krystalore.com/#person' },
+      sameAs: SAME_AS,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://krystalore.com/#website',
+      url: 'https://krystalore.com',
+      name: 'Krystalore Crews',
+      publisher: { '@id': 'https://krystalore.com/#org' },
+    },
+  ],
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -67,6 +113,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://krystalore.com" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />

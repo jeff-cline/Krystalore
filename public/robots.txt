@@ -10,7 +10,13 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
+User-agent: GPTBot
+Allow: /
+
 User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
 Allow: /
 
 User-agent: PerplexityBot
@@ -25,4 +31,4 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://executive.krystalore.com/sitemap.xml
+Sitemap: https://krystalore.com/sitemap.xml
