@@ -52,13 +52,21 @@ type NavLink = { href: string; label: string; external?: boolean }
 
 const navLinks: NavLink[] = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
   { href: '/courses', label: 'Courses' },
   { href: '/quizzes', label: 'Quizzes' },
-  { href: '/books', label: 'Books' },
   { href: '/podcasts', label: 'Podcast' },
   { href: 'https://news.krystalore.com/', label: 'Blog', external: true },
+]
+
+// "Missions" menu — replaces the old About link. Speaking also stays in Events.
+const missionsLinks: NavLink[] = [
+  { href: '/about', label: 'About' },
+  { href: '/speaking', label: 'Speaking' },
+  { href: '/books', label: 'Books' },
   { href: '/shop', label: 'Shop' },
+  { href: '/deck', label: 'Explore' },
+  { href: 'https://activate4impact.com', label: 'Impact', external: true },
+  { href: 'https://hernextmission.org', label: 'Non-Profit', external: true },
 ]
 
 export default function Header() {
@@ -69,6 +77,8 @@ export default function Header() {
   const [mobileCoachingOpen, setMobileCoachingOpen] = useState(false)
   const [eventsOpen, setEventsOpen] = useState(false)
   const [mobileEventsOpen, setMobileEventsOpen] = useState(false)
+  const [missionsOpen, setMissionsOpen] = useState(false)
+  const [mobileMissionsOpen, setMobileMissionsOpen] = useState(false)
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 relative z-50">
@@ -211,6 +221,56 @@ export default function Header() {
                       </Link>
                     ))}
                     <VipBundleItem onClick={() => setRetreatsOpen(false)} />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Missions dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setMissionsOpen(true)}
+              onMouseLeave={() => setMissionsOpen(false)}
+            >
+              <button
+                type="button"
+                onClick={() => setMissionsOpen(o => !o)}
+                className="flex items-center gap-1 text-gray-700 hover:text-[#34c5c5] transition-colors"
+                aria-haspopup="true"
+                aria-expanded={missionsOpen}
+              >
+                Missions
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {missionsOpen && (
+                <div className="absolute right-0 top-full pt-2 w-56 z-50">
+                  <div className="bg-white rounded-md shadow-lg border border-gray-200 py-1">
+                    {missionsLinks.map(link =>
+                      link.external ? (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setMissionsOpen(false)}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:text-[#34c5c5] hover:bg-gray-50"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          onClick={() => setMissionsOpen(false)}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:text-[#34c5c5] hover:bg-gray-50"
+                        >
+                          {link.label}
+                        </Link>
+                      )
+                    )}
+                    <VipBundleItem onClick={() => setMissionsOpen(false)} />
                   </div>
                 </div>
               )}
@@ -403,6 +463,65 @@ export default function Header() {
                   onClick={() => {
                     setMobileMenuOpen(false)
                     setMobileRetreatsOpen(false)
+                  }}
+                />
+              </div>
+            )}
+
+            {/* Missions expandable */}
+            <button
+              type="button"
+              onClick={() => setMobileMissionsOpen(o => !o)}
+              className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-teal-50 hover:text-[#34c5c5] rounded-lg transition-colors text-lg"
+              aria-expanded={mobileMissionsOpen}
+            >
+              Missions
+              <svg
+                className={`h-5 w-5 transition-transform ${mobileMissionsOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {mobileMissionsOpen && (
+              <div className="pl-4 space-y-1">
+                {missionsLinks.map(link =>
+                  link.external ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        setMobileMenuOpen(false)
+                        setMobileMissionsOpen(false)
+                      }}
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-[#34c5c5] rounded-lg transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => {
+                        setMobileMenuOpen(false)
+                        setMobileMissionsOpen(false)
+                      }}
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-[#34c5c5] rounded-lg transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
+                <VipBundleItem
+                  mobile
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    setMobileMissionsOpen(false)
                   }}
                 />
               </div>
