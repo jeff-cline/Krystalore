@@ -1,6 +1,7 @@
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import { AlertTriangle, Flag, Cpu, ExternalLink, ArrowRight, ArrowLeft } from 'lucide-react'
+import AddToBucket from '@/components/AddToBucket'
 
 type Item = { label: string; href: string; ext?: boolean }
 
@@ -69,9 +70,14 @@ function Row({ it }: { it: Item }) {
       </span>
     </>
   )
-  return it.ext
-    ? <a href={it.href} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
-    : <a href={it.href} className={cls}>{inner}</a>
+  return (
+    <div className="flex items-center gap-2">
+      {it.ext
+        ? <a href={it.href} target="_blank" rel="noopener noreferrer" className={cls + ' flex-1 min-w-0'}>{inner}</a>
+        : <a href={it.href} className={cls + ' flex-1 min-w-0'}>{inner}</a>}
+      <AddToBucket label={it.label} href={it.href} ext={it.ext} />
+    </div>
+  )
 }
 
 function Card({ icon: Icon, title, sub, items, accent }: { icon: any; title: string; sub: string; items: Item[]; accent: string }) {
