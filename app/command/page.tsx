@@ -9,7 +9,7 @@ type Item = { label: string; href: string; ext?: boolean; orphan?: boolean }
 
 const tools: Item[] = [
   { label: 'Ecosystem Training Kit', href: '/ecosystem', orphan: true },
-  { label: 'Interactive Sales Deck', href: '/deck' },
+  { label: 'Interactive Sales Deck', href: '/start' },
   { label: 'Media Kit — PDF Bios', href: '/pdf', orphan: true },
   { label: 'Orphan Pages Dashboard', href: '/dash', orphan: true },
   { label: 'VIP Bundle (Rise & Thrive)', href: '/rise-and-thrive' },

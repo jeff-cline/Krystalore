@@ -64,7 +64,7 @@ const missionsLinks: NavLink[] = [
   { href: '/speaker', label: 'Speaking' },
   { href: '/books', label: 'Books' },
   { href: '/shop', label: 'Shop' },
-  { href: '/deck', label: 'Explore' },
+  { href: '/start', label: 'Explore' },
   { href: 'https://activate4impact.com', label: 'Impact', external: true },
   { href: 'https://hernextmission.org', label: 'Non-Profit', external: true },
 ]
