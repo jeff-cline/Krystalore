@@ -1,5 +1,6 @@
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
+import CommandBuckets from '@/components/CommandBuckets'
 import {
   LayoutDashboard, GraduationCap, Calendar, MapPin, Flag, Building2, Cpu, Share2,
   AlertTriangle, ExternalLink, ArrowRight, Wrench,
@@ -121,18 +122,11 @@ export default function CommandCenter() {
               <div className="grid sm:grid-cols-2 gap-x-6 gap-y-0.5">{tools.map((it) => <Row key={it.href} it={it} />)}</div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card icon={GraduationCap} title="Coaching" items={coaching} />
-              <Card icon={Calendar} title="Events" items={events} />
-              <Card icon={MapPin} title="Retreats" items={retreats} />
-              <Card icon={LayoutDashboard} title="About &amp; Missions" items={missions} />
-              <Card icon={AlertTriangle} title="Orphan / Unlinked Pages" items={orphans} accent="#e07800" />
-              <Card icon={Share2} title="External Properties" items={external} accent="#E8A849" />
-            </div>
+            <CommandBuckets />
 
             <p className="text-xs text-gray-400 mt-6 text-center">
-              “Orphan” = a page with no inbound links from the site nav. Add your own lists on the{' '}
-              <a href="/dash" className="text-[#0D9488] font-semibold">Orphan Dashboard</a>.
+              Need the unlinked-page audit? See the{' '}
+              <a href="/dash" className="text-[#0D9488] font-semibold">Orphan Dashboard</a> — and use “Add to a bucket” there to drop any page here.
             </p>
           </div>
         </section>
