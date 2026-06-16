@@ -17,6 +17,7 @@ const nextConfig = {
       // Existing redirects
       { source: '/rise-and-thrive-v2', destination: '/rise-and-thrive', permanent: true },
       { source: '/rise', destination: '/rise-and-thrive', permanent: true },
+      { source: '/invest', destination: '/retreat-center-investment-opportunity', permanent: true },
       { source: '/forgot-password', destination: '/auth/forgot-password', permanent: true },
       { source: '/privacy', destination: '/legal/privacy', permanent: true },
       { source: '/podcast', destination: '/podcasts', permanent: true },

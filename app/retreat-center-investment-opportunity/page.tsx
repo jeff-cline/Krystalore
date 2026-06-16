@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Header from '@/components/layout/header'
 import {
   Compass, FileText, Layers, Presentation, BarChart3, ScrollText, Download,
   ArrowRight, ArrowLeft, Building2, Cpu, HeartPulse, ShieldCheck, TrendingUp,
-  MapPin, Users, Sparkles, DollarSign, Crown, ChevronRight,
+  MapPin, Users, Sparkles, DollarSign, Crown, ChevronRight, Handshake, Lock, Gem,
 } from 'lucide-react'
 
 /* ----------------------------- DATA ----------------------------- */
@@ -86,6 +86,7 @@ const TABS: Record<string, { label: string; icon: any }> = {
   onepager: { label: 'One-Pager', icon: FileText },
   opportunity: { label: 'The Opportunity', icon: Compass },
   model: { label: 'The Model', icon: Layers },
+  owners: { label: 'Property Owners', icon: Handshake },
   deck: { label: 'The Deck', icon: Presentation },
   drilldown: { label: 'Drill-Down', icon: BarChart3 },
   summary: { label: 'Executive Summary', icon: ScrollText },
@@ -112,8 +113,25 @@ export default function InvestmentDashboard() {
   const [tab, setTab] = useState('onepager')
   const [slide, setSlide] = useState(0)
   const [doc, setDoc] = useState(DOCS[0])
+  const [unlocked, setUnlocked] = useState(false)
+  const [pw, setPw] = useState('')
+  const [err, setErr] = useState(false)
+
+  useEffect(() => {
+    try { if (sessionStorage.getItem('krys-invest') === '1') setUnlocked(true) } catch {}
+  }, [])
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (pw.trim().toUpperCase() === 'KRYSTALORE') {
+      setUnlocked(true)
+      try { sessionStorage.setItem('krys-invest', '1') } catch {}
+    } else { setErr(true) }
+  }
 
   const s = SLIDES[slide]
+
+  if (!unlocked) return <Gate pw={pw} setPw={setPw} err={err} onSubmit={submit} />
 
   return (
     <>
@@ -129,6 +147,9 @@ export default function InvestmentDashboard() {
                 <p className="text-[#E8A849] font-bold uppercase tracking-[0.2em] text-xs mb-3">Private · Investor Dashboard</p>
                 <h1 className="text-3xl md:text-5xl font-black text-white leading-[1.05] max-w-2xl">Activated Real Estate: The Retreat Investment Opportunity</h1>
                 <p className="text-white/90 text-base md:text-lg mt-4 max-w-xl font-light">Tech-enabled wellness & retreat real estate, backed by a proven brand — built to change millions of lives for women, veterans, and first responders.</p>
+                <button onClick={() => setTab('owners')} className="mt-5 inline-flex items-center gap-2 bg-[#E8A849] hover:bg-[#e07800] text-white font-bold px-5 py-2.5 rounded-xl shadow-lg transition-colors text-sm">
+                  <Handshake className="w-4 h-4" /> Property Owners — Activate Your Property
+                </button>
               </div>
             </div>
           </div>
@@ -162,6 +183,7 @@ export default function InvestmentDashboard() {
           {tab === 'onepager' && <OnePager setTab={setTab} />}
           {tab === 'opportunity' && <Opportunity />}
           {tab === 'model' && <Model />}
+          {tab === 'owners' && <PropertyOwners />}
           {tab === 'deck' && <Deck slide={slide} setSlide={setSlide} s={s} />}
           {tab === 'drilldown' && <DrillDown />}
           {tab === 'summary' && <Summary />}
@@ -242,6 +264,9 @@ function OnePager({ setTab }: { setTab: (t: string) => void }) {
         <a href={CONTACT} className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold px-5 py-3 rounded-xl">
           Request the data room <ArrowRight className="w-4 h-4" />
         </a>
+        <button onClick={() => setTab('owners')} className="w-full inline-flex items-center justify-center gap-2 border-2 border-[#E8A849] text-[#e07800] font-bold px-5 py-3 rounded-xl hover:bg-[#E8A849] hover:text-white transition-colors">
+          <Handshake className="w-4 h-4" /> Property owners — activate
+        </button>
       </div>
     </div>
   )
@@ -472,6 +497,88 @@ function Documents({ doc, setDoc }: { doc: typeof DOCS[number]; setDoc: (d: type
         <iframe key={doc.file} src={`${doc.file}#view=FitH`} title={doc.label} className="w-full h-[78vh]" />
       </div>
       <p className="text-xs text-gray-400 mt-3">Tip: use the document tabs above to switch between the Executive Summary and the One-Pager. Both are downloadable and printable.</p>
+    </div>
+  )
+}
+
+/* ----------------------------- TAB: PROPERTY OWNERS ----------------------------- */
+function PropertyOwners() {
+  const OWNER_MAIL = 'mailto:Krystalore@thecrewscoach.com?subject=Property%20Owner%20-%20Activate%20My%20Property&body=Property%20name%20%2F%20location%3A%0AType%20%26%20capacity%3A%0AName%3A%0APhone%3A%0AEmail%3A'
+  const steps = [
+    { n: '1', t: 'Partner your property', d: 'List or lease your retreat-ready property into our portfolio platform.' },
+    { n: '2', t: 'We activate it', d: 'Our brand, venture partners, and AI-enabled tech stack switch on all 14 revenue funnels.' },
+    { n: '3', t: 'You earn more', d: 'Fill your calendar with high-paying retreats and recurring revenue — with far less effort.' },
+  ]
+  const benefits = ['High-paying retreats fill your calendar', 'Access to the brand + venture-partner network', 'AI-run bookings, operations & marketing', 'Revenue share across all 14 funnels']
+  return (
+    <div className="space-y-8">
+      <div className="grid md:grid-cols-2 gap-6 items-center">
+        <div>
+          <p className="text-[#0D9488] font-bold uppercase tracking-wider text-xs mb-2">For property owners</p>
+          <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-3">Own a retreat-ready property? Activate it.</h2>
+          <p className="text-lg text-gray-600 font-light leading-relaxed mb-5">Leverage our technology and stack to drive more revenue through our <b className="text-gray-900">14 funnels</b> — straight into your property. We bring the demand, the brand, the partners, and the operations. You bring the real estate.</p>
+          <a href={OWNER_MAIL} className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold px-6 py-3 rounded-xl">
+            <Handshake className="w-5 h-5" /> Activate Your Property
+          </a>
+        </div>
+        <div className="relative h-64 rounded-2xl overflow-hidden">
+          <Image src="/images/corporate-retreat/wellness-retreat-roatan.jpeg" alt="Retreat-ready property" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" />
+        </div>
+      </div>
+      <div className="grid md:grid-cols-3 gap-4">
+        {steps.map((s) => (
+          <div key={s.n} className="bg-white rounded-2xl border border-gray-200 p-6">
+            <span className="w-9 h-9 rounded-full bg-[#0D9488] text-white font-black flex items-center justify-center mb-3">{s.n}</span>
+            <p className="font-black text-gray-900 mb-1">{s.t}</p>
+            <p className="text-sm text-gray-600 leading-relaxed">{s.d}</p>
+          </div>
+        ))}
+      </div>
+      <div className="bg-gradient-to-br from-[#0D9488] to-[#0a5d58] rounded-2xl p-6 md:p-8 text-white">
+        <h3 className="text-xl font-black mb-4">What activation brings your property</h3>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {benefits.map((b) => <div key={b} className="flex items-center gap-2 text-white/90"><ChevronRight className="w-4 h-4 text-[#E8A849] flex-shrink-0" /><span className="text-sm">{b}</span></div>)}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ----------------------------- ACCESS GATE ----------------------------- */
+function CrystalRain() {
+  const crystals = Array.from({ length: 50 }, (_, i) => ({
+    i,
+    left: (i * 41) % 100,
+    size: 8 + ((i * 17) % 40),
+    dur: 4 + ((i * 13) % 9),
+    delay: ((i * 7) % 60) / 10,
+    op: 0.45 + ((i * 23) % 5) / 10,
+  }))
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {crystals.map((c) => (
+        <Gem key={c.i} className="absolute krys-fall text-[#5eead4]" style={{ left: `${c.left}%`, width: c.size, height: c.size, top: '-50px', opacity: c.op, animationDuration: `${c.dur}s`, animationDelay: `${c.delay}s`, filter: 'drop-shadow(0 0 7px rgba(94,234,212,0.9))' }} />
+      ))}
+      <style>{`@keyframes krys-fall{0%{transform:translateY(-50px) rotate(0deg)}100%{transform:translateY(110vh) rotate(320deg)}}.krys-fall{animation-name:krys-fall;animation-timing-function:linear;animation-iteration-count:infinite}`}</style>
+    </div>
+  )
+}
+
+function Gate({ pw, setPw, err, onSubmit }: { pw: string; setPw: (v: string) => void; err: boolean; onSubmit: (e: React.FormEvent) => void }) {
+  return (
+    <div className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#33413f] via-[#0D5953] to-[#0D9488]">
+      <CrystalRain />
+      <form onSubmit={onSubmit} className="relative z-10 w-full max-w-sm text-center px-6">
+        <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur ring-1 ring-white/20 flex items-center justify-center mx-auto mb-5">
+          <Lock className="w-7 h-7 text-white" />
+        </div>
+        <h1 className="text-3xl font-black text-white tracking-[0.25em] mb-1">KRYSTALORE</h1>
+        <p className="text-white/70 text-sm mb-6">Private investor materials · enter access code</p>
+        <input type="password" value={pw} onChange={(e) => setPw(e.target.value)} placeholder="Access code" autoFocus
+          className="w-full px-4 py-3 rounded-xl bg-white/95 text-gray-900 font-semibold text-center outline-none focus:ring-2 focus:ring-[#5eead4] mb-3" />
+        <button type="submit" className="w-full px-4 py-3 rounded-xl bg-[#E8A849] hover:bg-[#e07800] text-white font-bold transition-colors">Enter</button>
+        {err && <p className="text-[#ffe0e0] text-sm mt-3">Incorrect access code. Try again.</p>}
+      </form>
     </div>
   )
 }
