@@ -45,7 +45,7 @@ const eventsLinks = [
   { href: '/retreats', label: 'Retreats' },
   { href: '/vision-board', label: 'Vision Board' },
   { href: '/masterclass', label: 'Masterclass' },
-  { href: '/speaking', label: 'Speaking' },
+  { href: '/speaker', label: 'Speaking' },
 ]
 
 type NavLink = { href: string; label: string; external?: boolean }

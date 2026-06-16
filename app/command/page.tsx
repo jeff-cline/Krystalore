@@ -29,7 +29,7 @@ const events: Item[] = [
   { label: 'Bombshell Bootcamp', href: '/bombshell-bootcamp' },
   { label: 'Vision Board Party', href: '/vision-board' },
   { label: 'Masterclass', href: '/masterclass' },
-  { label: 'Speaking', href: '/keynote-speaker' },
+  { label: 'Speaking', href: '/speaker' },
 ]
 const retreats: Item[] = [
   { label: 'All Retreats', href: '/retreat' },
