@@ -39,6 +39,7 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">Explore</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="/about" className="text-gray-400 hover:text-[#34c5c5] transition-colors">About Krystalore</Link></li>
+              <li><Link href="/infographic" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Your Journey (Freemium → Premium)</Link></li>
               <li><Link href="/services" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Services</Link></li>
               <li><Link href="/courses" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Courses</Link></li>
               <li><Link href="/books" className="text-gray-400 hover:text-[#34c5c5] transition-colors">Books</Link></li>

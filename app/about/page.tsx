@@ -324,7 +324,12 @@ export default function AboutPage() {
         {/* Cross-links */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-12">Explore the Crews Beyond Limits Ecosystem</h2>
+            <h2 className="text-3xl font-bold text-center mb-3">Explore the Ecosystem and choose your path</h2>
+            <Link href="/infographic" className="group block max-w-3xl mx-auto bg-gradient-to-r from-[#0D9488] to-[#34c5c5] text-white rounded-2xl p-6 md:p-8 mb-10 hover:shadow-xl transition-shadow text-center">
+              <p className="text-white/80 font-bold uppercase tracking-wider text-xs mb-1">Your pathway · Freemium → Premium</p>
+              <h3 className="text-2xl md:text-3xl font-black mb-1">From Freemium to Premium Journey</h3>
+              <p className="text-white/90 text-sm inline-flex items-center gap-1">See the full map and choose your path <ChevronRight className="w-4 h-4" /></p>
+            </Link>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { icon: Target, title: 'Executive Coaching', href: '/entrepreneur-coaching', desc: 'One-on-one leadership transformation' },
