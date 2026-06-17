@@ -2,32 +2,30 @@
 
 import { useState, useEffect } from 'react'
 import { Plus, Check } from 'lucide-react'
-import { DEFAULT_BUCKETS } from './CommandBuckets'
+import { loadState, saveState, newId } from './commandData'
 
-// Dropdown that pushes a page link into a Command Center bucket (shared localStorage).
+// Pushes a page link into a Command Center bucket (shared localStorage model).
 export default function AddToBucket({ label, href, ext }: { label: string; href: string; ext?: boolean }) {
   const [buckets, setBuckets] = useState<{ id: string; title: string }[]>([])
   const [sel, setSel] = useState('')
   const [added, setAdded] = useState(false)
 
   useEffect(() => {
-    const defaults = DEFAULT_BUCKETS.map((b) => ({ id: b.id, title: b.title }))
-    let custom: { id: string; title: string }[] = []
-    try { custom = JSON.parse(localStorage.getItem('cc-buckets-v1') || '[]') } catch {}
-    const all = [...defaults, ...custom]
-    setBuckets(all)
-    setSel(all[0]?.id || '')
+    const s = loadState()
+    const list = s.buckets.map((b) => ({ id: b.id, title: b.title }))
+    setBuckets(list)
+    setSel(list[0]?.id || '')
   }, [])
 
   const add = () => {
     if (!sel) return
-    try {
-      const links = JSON.parse(localStorage.getItem('cc-links-v1') || '{}')
-      links[sel] = [...(links[sel] || []), { label, href, ext }]
-      localStorage.setItem('cc-links-v1', JSON.stringify(links))
-      setAdded(true)
-      setTimeout(() => setAdded(false), 1500)
-    } catch {}
+    const s = loadState()
+    const i = s.buckets.findIndex((b) => b.id === sel)
+    if (i < 0) return
+    s.buckets[i].links = [...s.buckets[i].links, { id: newId(), label, href, ext }]
+    saveState(s)
+    setAdded(true)
+    setTimeout(() => setAdded(false), 1500)
   }
 
   return (
