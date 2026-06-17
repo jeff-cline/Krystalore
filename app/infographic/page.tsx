@@ -28,7 +28,7 @@ const STAGES: Stage[] = [
     { label: 'Courses', href: '/courses' },
     { label: 'Relationship & Emotional Resilience Workshops', href: '/relationship-coaching' },
   ] },
-  { n: 4, name: 'RISE', sub: 'Core Programs · Coaching · Bundles', time: 'Months 3–6', price: '$3,000–$5,000', color: '#E8A849', items: [
+  { n: 4, name: 'RISE', sub: 'Core Programs · Coaching · Bundles', time: 'Months 3–6', price: '$10,000', color: '#E8A849', items: [
     { label: 'Health Mastery', href: '/health-mastery' },
     { label: 'Beyond Limits Bootcamp', href: '/bootcamp' },
     { label: 'Courses', href: '/courses' },
@@ -36,7 +36,7 @@ const STAGES: Stage[] = [
     { label: 'Retreats', href: '/retreat' },
     { label: 'Rise & Thrive Bundle', href: '/rise-and-thrive' },
   ] },
-  { n: 5, name: 'Elevate', sub: 'Premium VIP · Events · Retreats · Private', time: 'Ongoing · Premium', price: 'TBD', color: '#e07800', items: [
+  { n: 5, name: 'Elevate', sub: 'Premium VIP · Events · Retreats · Private', time: 'Ongoing · Premium', price: 'Custom Pricing', color: '#e07800', items: [
     { label: 'Retreats', href: '/retreat' },
     { label: 'Retreats as a Service', href: '/retreat-center-investment-opportunity' },
     { label: 'Private Coaching', href: '/privatemindset' },
