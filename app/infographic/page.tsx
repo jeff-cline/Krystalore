@@ -20,21 +20,21 @@ const STAGES: Stage[] = [
     { label: 'Masterclass', href: '/masterclass' },
     { label: 'Live Workshops', href: '/workshops' },
   ] },
-  { n: 3, name: 'Build · ShYft', sub: 'Identity · Business · Fitness · Relationship Courses & Memberships', time: 'Months 1–3', price: '$1,500–$3,000', color: '#6366f1', items: [
-    { label: 'Business Bootcamp', href: '/business-bootcamp' },
-    { label: 'WorldChangers', href: 'https://www.worldchangers.ai', ext: true },
-    { label: 'ShYft Mastery', href: '/services' },
-    { label: 'Masterminds', href: '/services' },
-    { label: 'Courses', href: '/courses' },
-    { label: 'Relationship & Emotional Resilience Workshops', href: '/relationship-coaching' },
-  ] },
-  { n: 4, name: 'RISE', sub: 'Core Programs · Coaching · Bundles', time: 'Months 3–6', price: '$10,000', color: '#E8A849', items: [
+  { n: 3, name: 'RISE', sub: 'Core Programs · Coaching · Bundles', time: 'Months 3–6', price: '$3,000–$10,000', color: '#E8A849', items: [
     { label: 'Health Mastery', href: '/health-mastery' },
     { label: 'Beyond Limits Bootcamp', href: '/bootcamp' },
     { label: 'Courses', href: '/courses' },
     { label: 'Summits', href: '/events' },
     { label: 'Retreats', href: '/retreat' },
     { label: 'Rise & Thrive Bundle', href: '/rise-and-thrive' },
+  ] },
+  { n: 4, name: 'Build · ShYft', sub: 'Identity · Business · Fitness · Relationship Courses & Memberships', time: 'Months 1–3', price: '$1,500–$3,000', color: '#6366f1', items: [
+    { label: 'Business Bootcamp', href: '/business-bootcamp' },
+    { label: 'WorldChangers', href: 'https://www.worldchangers.ai', ext: true },
+    { label: 'ShYft Mastery', href: '/services' },
+    { label: 'Masterminds', href: '/services' },
+    { label: 'Courses', href: '/courses' },
+    { label: 'Relationship & Emotional Resilience Workshops', href: '/relationship-coaching' },
   ] },
   { n: 5, name: 'Elevate', sub: 'Premium VIP · Events · Retreats · Private', time: 'Ongoing · Premium', price: 'Custom Pricing', color: '#e07800', items: [
     { label: 'Retreats', href: '/retreat' },
@@ -66,10 +66,6 @@ function ItemLink({ i }: { i: Item }) {
 function Card({ s }: { s: Stage }) {
   return (
     <div className="rounded-2xl bg-white shadow-xl border border-gray-100 p-3.5">
-      <div className="flex items-center gap-2 mb-1">
-        <span className="w-7 h-7 rounded-full text-white font-black text-sm flex items-center justify-center flex-shrink-0" style={{ background: s.color }}>{s.n}</span>
-        <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ background: s.color + '22', color: s.color }}>{s.time}</span>
-      </div>
       <p className="font-black text-gray-900 text-[15px] leading-tight">{s.name}</p>
       <p className="text-[10px] text-gray-500 leading-snug mb-2">{s.sub}</p>
       <ul className="space-y-0.5">
