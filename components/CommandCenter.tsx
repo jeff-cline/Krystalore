@@ -7,6 +7,7 @@ import {
 } from 'lucide-react'
 import { CcState, CcBucket, CcLink, DEFAULT_STATE, PALETTE, loadState, saveState, newId } from './commandData'
 import CrystalRain from './CrystalRain'
+import Contacts from './Contacts'
 
 const VIEW_PW = 'TeamKrystalore'
 const EDIT_PW = 'Krystalore'
@@ -131,6 +132,8 @@ export default function CommandCenter() {
           <button onClick={addBucket} className="inline-flex items-center gap-2 border-2 border-dashed border-[#34c5c5]/60 text-[#0D9488] font-bold px-5 py-3 rounded-2xl hover:bg-[#34c5c5]/5"><FolderPlus className="w-5 h-5" /> Add bucket</button>
         </div>
       )}
+
+      {editing && <Contacts />}
 
       <p className="text-center text-xs text-gray-400 mt-6">
         {editing ? 'Editing on — your layout saves in this browser.' : 'Press Edit to rearrange (password protected).'}
