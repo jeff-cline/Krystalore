@@ -99,31 +99,30 @@ export default function Infographic() {
           </p>
         </section>
 
-        {/* DESKTOP — ascending mountain range */}
+        {/* DESKTOP — full-height ascending mountain range, prices at the base */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 hidden md:block">
-          <div className="relative">
-            {/* faint back range for depth */}
-            <svg viewBox="0 0 1000 220" preserveAspectRatio="none" className="absolute bottom-12 inset-x-0 w-full h-52">
-              <path d="M0,220 L130,95 L270,150 L430,80 L590,130 L760,55 L900,100 L1000,45 L1000,220 Z" fill="#34c5c5" opacity="0.10" />
+          <div className="relative flex gap-3 items-end">
+            {/* faint back range for depth, spanning to the base */}
+            <svg viewBox="0 0 1000 360" preserveAspectRatio="none" className="absolute bottom-0 inset-x-0 w-full" style={{ height: '70%' }}>
+              <path d="M0,360 L150,150 L300,230 L470,110 L640,190 L820,70 L1000,150 L1000,360 Z" fill="#34c5c5" opacity="0.10" />
             </svg>
-            <div className="relative flex gap-3 items-end">
-              {STAGES.map((s, i) => (
-                <div key={s.n} className="flex-1 min-w-0 flex flex-col">
-                  <Card s={s} />
-                  {/* mountain (light teal, orange glow at peak) */}
-                  <div className="relative w-full" style={{ height: `${42 + i * 40}px` }}>
-                    <div className="absolute inset-0" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)', background: 'linear-gradient(to top, rgba(52,197,197,0.08), rgba(52,197,197,0.40))' }} />
-                    <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full" style={{ background: 'radial-gradient(circle, rgba(224,120,0,0.9), rgba(224,120,0,0) 70%)', filter: 'blur(1px)' }} />
-                  </div>
-                  {/* price at the base */}
-                  <div className="text-center pt-1.5 border-t-2 border-[#34c5c5]/30">
-                    <span className="text-sm font-black text-[#0D9488]">{s.price}</span>
+            {STAGES.map((s, i) => (
+              <div key={s.n} className="relative flex-1 min-w-0 flex flex-col">
+                <Card s={s} />
+                {/* mountain rising to a peak under the card and descending to the base */}
+                <div className="relative w-full" style={{ height: `${190 + i * 46}px` }}>
+                  <div className="absolute inset-0" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)', background: 'linear-gradient(to top, rgba(52,197,197,0.06), rgba(52,197,197,0.42))' }} />
+                  {/* orange glow at the peak */}
+                  <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full" style={{ background: 'radial-gradient(circle, rgba(224,120,0,0.95), rgba(224,120,0,0) 70%)', filter: 'blur(1px)' }} />
+                  {/* price at the base of the mountain */}
+                  <div className="absolute bottom-2 inset-x-0 text-center">
+                    <span className="inline-block bg-white/90 rounded-full px-3 py-1 text-sm font-black text-[#0D9488] shadow-sm">{s.price}</span>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-          <div className="flex justify-between text-xs font-bold uppercase tracking-wider mt-3">
+          <div className="flex justify-between text-xs font-bold uppercase tracking-wider mt-2 border-t border-gray-200 pt-2">
             <span className="text-gray-400">Freemium</span>
             <span className="text-[#e07800]">Premium</span>
           </div>
