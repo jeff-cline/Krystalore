@@ -60,6 +60,11 @@ const nextConfig = {
       // Use the dedicated /just-breathe lander as the course page
       { source: '/courses/just-breathe', destination: '/just-breathe', permanent: true },
 
+      // Readiness check rebranded to Her Next Mission (/check -> /hnm).
+      // Note: redirect matching is case-insensitive, so /HNM resolves to /hnm
+      // already — do NOT add a /HNM rule or it self-loops.
+      { source: '/check', destination: '/hnm', permanent: true },
+
     ]
   },
 }

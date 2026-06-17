@@ -19,6 +19,7 @@ const NOTIFY_TO = process.env.LEAD_NOTIFY_EMAILS || 'krystalore@thecrewscoach.co
 
 const FUNNELS: Record<string, { name: string; url: string }> = {
   voice: { name: 'Vocal Wellness — Burnout & Stress Snapshot', url: 'https://krystalore.com/voice' },
+  hnm: { name: 'Her Next Mission — Resilience & Readiness Check', url: 'https://krystalore.com/hnm' },
   check: { name: 'Resilience & Readiness Check (Veterans & First Responders)', url: 'https://krystalore.com/check' },
 }
 
