@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import {
   Lock, Pencil, Check, Plus, X, ChevronUp, ChevronDown, ChevronLeft, ChevronRight,
-  Trash2, FolderPlus, ExternalLink, Maximize2, Minimize2,
+  Trash2, FolderPlus, ExternalLink, Maximize2, Minimize2, Users,
 } from 'lucide-react'
 import { CcState, CcBucket, CcLink, DEFAULT_STATE, PALETTE, loadState, saveState, newId } from './commandData'
 import CrystalRain from './CrystalRain'
@@ -20,6 +20,8 @@ export default function CommandCenter() {
   const [state, setState] = useState<CcState>(DEFAULT_STATE)
   const [vpw, setVpw] = useState(''); const [verr, setVerr] = useState(false)
   const [askEdit, setAskEdit] = useState(false); const [epw, setEpw] = useState(''); const [eerr, setEerr] = useState(false)
+  const [showContacts, setShowContacts] = useState(false)
+  const [pending, setPending] = useState<'edit' | 'contacts' | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -34,8 +36,16 @@ export default function CommandCenter() {
 
   /* gate handlers */
   const submitView = (e: React.FormEvent) => { e.preventDefault(); if (vpw.trim() === VIEW_PW) { setViewOk(true); try { localStorage.setItem('cc-view-ok', '1') } catch {} } else setVerr(true) }
-  const clickEdit = () => { if (editing) { setEditing(false); return } if (editOk) { setEditing(true) } else setAskEdit(true) }
-  const submitEdit = (e: React.FormEvent) => { e.preventDefault(); if (epw.trim() === EDIT_PW) { setEditOk(true); setEditing(true); setAskEdit(false); try { localStorage.setItem('cc-edit-ok', '1') } catch {} } else setEerr(true) }
+  const clickEdit = () => { if (editing) { setEditing(false); return } if (editOk) { setEditing(true) } else { setPending('edit'); setAskEdit(true) } }
+  const clickContacts = () => { if (editOk) { setShowContacts((s) => !s) } else { setPending('contacts'); setAskEdit(true) } }
+  const submitEdit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (epw.trim() === EDIT_PW) {
+      setEditOk(true); setAskEdit(false); try { localStorage.setItem('cc-edit-ok', '1') } catch {}
+      if (pending === 'contacts') setShowContacts(true); else setEditing(true)
+      setPending(null)
+    } else setEerr(true)
+  }
 
   /* mutations */
   const moveBucket = (i: number, d: number) => { const b = [...state.buckets]; const j = i + d; if (j < 0 || j >= b.length) return; [b[i], b[j]] = [b[j], b[i]]; update({ ...state, buckets: b }) }
@@ -68,9 +78,14 @@ export default function CommandCenter() {
       {/* top bar */}
       <div className="flex items-center justify-between mb-6">
         <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs">Org Chart · Directory</p>
-        <button onClick={clickEdit} className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-colors ${editing ? 'bg-[#0D9488] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-[#0D9488]'}`}>
-          {editing ? <><Check className="w-4 h-4" /> Done</> : <><Pencil className="w-4 h-4" /> Edit</>}
-        </button>
+        <div className="flex items-center gap-2">
+          <button onClick={clickContacts} className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-colors ${showContacts ? 'bg-[#0D9488] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-[#0D9488]'}`}>
+            <Users className="w-4 h-4" /> Contacts
+          </button>
+          <button onClick={clickEdit} className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-colors ${editing ? 'bg-[#0D9488] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-[#0D9488]'}`}>
+            {editing ? <><Check className="w-4 h-4" /> Done</> : <><Pencil className="w-4 h-4" /> Edit</>}
+          </button>
+        </div>
       </div>
 
       {/* MASTER node */}
@@ -133,7 +148,7 @@ export default function CommandCenter() {
         </div>
       )}
 
-      {editing && <Contacts />}
+      {showContacts && <Contacts />}
 
       <p className="text-center text-xs text-gray-400 mt-6">
         {editing ? 'Editing on — your layout saves in this browser.' : 'Press Edit to rearrange (password protected).'}
