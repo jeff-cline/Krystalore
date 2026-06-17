@@ -3,38 +3,40 @@ import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
 
-type Item = { label: string; href: string; ext?: boolean }
+type Item = { label: string; href: string; ext?: boolean; crystal?: boolean; badge?: string }
 type Stage = { n: number; name: string; sub: string; time: string; price: string; color: string; items: Item[] }
 
 const STAGES: Stage[] = [
   { n: 1, name: 'Discover', sub: 'Freemium', time: 'Day 1 · Free', price: 'Free', color: '#34c5c5', items: [
+    { label: '30-Second Voice Assessment', href: '/voice', crystal: true, badge: 'NEW' },
     { label: 'Habit Tracker', href: '/habittracker' },
     { label: 'Power Hour Coworking', href: '/coworking' },
     { label: 'Quizzes', href: '/quizzes' },
     { label: 'Thrive Facebook Community', href: 'https://www.facebook.com/groups/crewsbeyondlimits', ext: true },
     { label: 'Podcasts & Live Shows', href: '/podcasts' },
   ] },
-  { n: 2, name: 'Activate', sub: 'Foundation Workshops & Memberships', time: 'Weeks 1–4', price: '$497–$1,000', color: '#0D9488', items: [
+  { n: 2, name: 'Activate', sub: 'Foundation Workshops & Memberships', time: 'Weeks 1–4', price: '$1–$497', color: '#0D9488', items: [
+    { label: 'Beyond Limits Bootcamp', href: '/bootcamp' },
     { label: 'Vision Board Party', href: '/vision-board' },
     { label: 'Bombshell Bootcamp', href: '/bombshell-bootcamp' },
     { label: 'Masterclass', href: '/masterclass' },
     { label: 'Live Workshops', href: '/workshops' },
   ] },
-  { n: 3, name: 'RISE', sub: 'Core Programs · Coaching · Bundles', time: 'Months 3–6', price: '$1,500–$3,000', color: '#E8A849', items: [
+  { n: 3, name: 'RISE', sub: 'Core Programs · Coaching · Bundles', time: 'Months 3–6', price: '$497–$3,000', color: '#E8A849', items: [
     { label: 'Health Mastery', href: '/health-mastery' },
     { label: 'Beyond Limits Bootcamp', href: '/bootcamp' },
     { label: 'Courses', href: '/courses' },
     { label: 'Summits', href: '/events' },
     { label: 'Retreats', href: '/retreat' },
-    { label: 'Rise & Thrive Bundle', href: '/rise-and-thrive' },
+    { label: 'ShYft Mastery', href: 'https://shyftmastery.com', ext: true },
   ] },
   { n: 4, name: 'Build · ShYft', sub: 'Identity · Business · Fitness · Relationship Courses & Memberships', time: 'Months 1–3', price: '$3,000–$10,000', color: '#6366f1', items: [
     { label: 'Business Bootcamp', href: '/business-bootcamp' },
     { label: 'WorldChangers', href: 'https://www.worldchangers.ai', ext: true },
-    { label: 'ShYft Mastery', href: '/services' },
     { label: 'Masterminds', href: '/services' },
     { label: 'Courses', href: '/courses' },
     { label: 'Relationship & Emotional Resilience Workshops', href: '/relationship-coaching' },
+    { label: 'Rise & Thrive Bundle', href: '/rise-and-thrive' },
   ] },
   { n: 5, name: 'Elevate', sub: 'Premium VIP · Events · Retreats · Private', time: 'Ongoing · Premium', price: 'Custom Pricing', color: '#e07800', items: [
     { label: 'Retreats', href: '/retreat' },
@@ -44,7 +46,8 @@ const STAGES: Stage[] = [
     { label: 'Corporate Wellness', href: '/wellness' },
     { label: 'Corporate Retreats', href: '/corporate-retreat-planning' },
     { label: 'Business Scale & Exit', href: '/business-smart-start' },
-    { label: 'Private Retreats', href: '/retreat' },
+    { label: 'Corporate leadership & wellness workshops', href: '/leadership-training' },
+    { label: 'Speaking & Emcee', href: '/keynote-speaker' },
   ] },
 ]
 
@@ -57,10 +60,17 @@ const PILLARS: Item[] = [
 ]
 
 function ItemLink({ i }: { i: Item }) {
-  const cls = 'text-gray-600 hover:text-[#0D9488] hover:underline'
+  const cls = 'inline-flex items-center gap-1 align-middle text-gray-600 hover:text-[#0D9488] hover:underline'
+  const inner = (
+    <>
+      {i.crystal ? <img src="/favicon-192x192.png" alt="" className="w-3.5 h-3.5 inline-block" /> : <span aria-hidden>·</span>}
+      <span>{i.label}</span>
+      {i.badge && <span className="bg-[#e07800] text-white text-[7px] font-black px-1 py-[1px] rounded-full leading-none tracking-wide">{i.badge}</span>}
+    </>
+  )
   return i.ext
-    ? <a href={i.href} target="_blank" rel="noopener noreferrer" className={cls}>· {i.label}</a>
-    : <a href={i.href} className={cls}>· {i.label}</a>
+    ? <a href={i.href} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
+    : <a href={i.href} className={cls}>{inner}</a>
 }
 
 function Card({ s }: { s: Stage }) {
