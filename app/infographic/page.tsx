@@ -1,26 +1,26 @@
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
-import { Compass, ChevronRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 type Item = { label: string; href: string; ext?: boolean }
-type Stage = { n: number; name: string; sub: string; time: string; color: string; items: Item[] }
+type Stage = { n: number; name: string; sub: string; time: string; price: string; color: string; items: Item[] }
 
 const STAGES: Stage[] = [
-  { n: 1, name: 'Discover', sub: 'Freemium', time: 'Day 1 · Free', color: '#34c5c5', items: [
+  { n: 1, name: 'Discover', sub: 'Freemium', time: 'Day 1 · Free', price: 'Free', color: '#34c5c5', items: [
     { label: 'Habit Tracker', href: '/habittracker' },
     { label: 'Power Hour Coworking', href: '/coworking' },
     { label: 'Quizzes', href: '/quizzes' },
     { label: 'Thrive Facebook Community', href: 'https://www.facebook.com/groups/crewsbeyondlimits', ext: true },
     { label: 'Podcasts & Live Shows', href: '/podcasts' },
   ] },
-  { n: 2, name: 'Activate', sub: 'Foundation Workshops & Memberships', time: 'Weeks 1–4', color: '#0D9488', items: [
+  { n: 2, name: 'Activate', sub: 'Foundation Workshops & Memberships', time: 'Weeks 1–4', price: '$497–$1,000', color: '#0D9488', items: [
     { label: 'Vision Board Party', href: '/vision-board' },
     { label: 'Bombshell Bootcamp', href: '/bombshell-bootcamp' },
     { label: 'Masterclass', href: '/masterclass' },
     { label: 'Live Workshops', href: '/workshops' },
   ] },
-  { n: 3, name: 'Build · ShYft', sub: 'Identity · Business · Fitness · Relationship Courses & Memberships', time: 'Months 1–3', color: '#6366f1', items: [
+  { n: 3, name: 'Build · ShYft', sub: 'Identity · Business · Fitness · Relationship Courses & Memberships', time: 'Months 1–3', price: '$1,500–$3,000', color: '#6366f1', items: [
     { label: 'Business Bootcamp', href: '/business-bootcamp' },
     { label: 'WorldChangers', href: 'https://www.worldchangers.ai', ext: true },
     { label: 'ShYft Mastery', href: '/services' },
@@ -28,7 +28,7 @@ const STAGES: Stage[] = [
     { label: 'Courses', href: '/courses' },
     { label: 'Relationship & Emotional Resilience Workshops', href: '/relationship-coaching' },
   ] },
-  { n: 4, name: 'RISE', sub: 'Core Programs · Coaching · Bundles', time: 'Months 3–6', color: '#E8A849', items: [
+  { n: 4, name: 'RISE', sub: 'Core Programs · Coaching · Bundles', time: 'Months 3–6', price: '$3,000–$5,000', color: '#E8A849', items: [
     { label: 'Health Mastery', href: '/health-mastery' },
     { label: 'Beyond Limits Bootcamp', href: '/bootcamp' },
     { label: 'Courses', href: '/courses' },
@@ -36,7 +36,7 @@ const STAGES: Stage[] = [
     { label: 'Retreats', href: '/retreat' },
     { label: 'Rise & Thrive Bundle', href: '/rise-and-thrive' },
   ] },
-  { n: 5, name: 'Elevate', sub: 'Premium VIP · Events · Retreats · Private', time: 'Ongoing · Premium', color: '#e07800', items: [
+  { n: 5, name: 'Elevate', sub: 'Premium VIP · Events · Retreats · Private', time: 'Ongoing · Premium', price: 'TBD', color: '#e07800', items: [
     { label: 'Retreats', href: '/retreat' },
     { label: 'Retreats as a Service', href: '/retreat-center-investment-opportunity' },
     { label: 'Private Coaching', href: '/privatemindset' },
@@ -99,31 +99,37 @@ export default function Infographic() {
           </p>
         </section>
 
-        {/* DESKTOP — climbing journey */}
+        {/* DESKTOP — ascending mountain range */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 hidden md:block">
-          <div className="relative pt-2 pb-10">
-            <svg viewBox="0 0 1000 460" preserveAspectRatio="none" className="absolute inset-0 w-full h-full -z-0">
-              <line x1="30" y1="430" x2="970" y2="40" stroke="#0D9488" strokeWidth="6" strokeLinecap="round" opacity="0.5" />
-              <line x1="30" y1="430" x2="970" y2="40" stroke="#34c5c5" strokeWidth="2" strokeDasharray="10 12" strokeLinecap="round" opacity="0.9" />
+          <div className="relative">
+            {/* faint back range for depth */}
+            <svg viewBox="0 0 1000 220" preserveAspectRatio="none" className="absolute bottom-12 inset-x-0 w-full h-52">
+              <path d="M0,220 L130,95 L270,150 L430,80 L590,130 L760,55 L900,100 L1000,45 L1000,220 Z" fill="#34c5c5" opacity="0.10" />
             </svg>
-            <div className="relative flex gap-3 items-start">
+            <div className="relative flex gap-3 items-end">
               {STAGES.map((s, i) => (
-                <div key={s.n} className="flex-1 min-w-0" style={{ marginTop: `${(STAGES.length - 1 - i) * 50}px` }}>
+                <div key={s.n} className="flex-1 min-w-0 flex flex-col">
                   <Card s={s} />
+                  {/* mountain (light teal, orange glow at peak) */}
+                  <div className="relative w-full" style={{ height: `${42 + i * 40}px` }}>
+                    <div className="absolute inset-0" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)', background: 'linear-gradient(to top, rgba(52,197,197,0.08), rgba(52,197,197,0.40))' }} />
+                    <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full" style={{ background: 'radial-gradient(circle, rgba(224,120,0,0.9), rgba(224,120,0,0) 70%)', filter: 'blur(1px)' }} />
+                  </div>
+                  {/* price at the base */}
+                  <div className="text-center pt-1.5 border-t-2 border-[#34c5c5]/30">
+                    <span className="text-sm font-black text-[#0D9488]">{s.price}</span>
+                  </div>
                 </div>
               ))}
             </div>
-            <div className="absolute" style={{ left: '90%', top: '88%', transform: 'translate(-50%,-50%)' }}>
-              <div className="w-16 h-16 rounded-full bg-white shadow-lg ring-1 ring-black/5 flex items-center justify-center"><Compass className="w-9 h-9 text-[#0D9488]" /></div>
-            </div>
           </div>
-          <div className="flex justify-between text-xs font-bold uppercase tracking-wider">
+          <div className="flex justify-between text-xs font-bold uppercase tracking-wider mt-3">
             <span className="text-gray-400">Freemium</span>
             <span className="text-[#e07800]">Premium</span>
           </div>
         </section>
 
-        {/* MOBILE — stacked */}
+        {/* MOBILE — stacked with prices */}
         <section className="md:hidden px-4 pb-2">
           <div className="relative pl-6 space-y-4">
             <div className="absolute left-2 top-2 bottom-2 w-1 rounded bg-gradient-to-b from-[#34c5c5] to-[#e07800]" />
@@ -131,6 +137,7 @@ export default function Infographic() {
               <div key={s.n} className="relative">
                 <span className="absolute -left-[1.15rem] top-3 w-4 h-4 rounded-full ring-2 ring-white" style={{ background: s.color }} />
                 <Card s={s} />
+                <div className="mt-1 ml-1"><span className="text-xs font-black text-[#0D9488]">{s.price}</span></div>
               </div>
             ))}
           </div>
