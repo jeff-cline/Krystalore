@@ -4,10 +4,27 @@ import Image from 'next/image'
 import { Compass } from 'lucide-react'
 
 const STAGES = [
-  { n: 1, tier: 'Discover · Free', time: 'Day 1 · Free', items: ['Habit Tracker', 'Power Hour Coworking', 'Quizzes'], color: '#34c5c5', pos: { l: 8, t: 82 } },
-  { n: 2, tier: 'Entry Events', time: 'Weeks 1–4', items: ['Vision Board Party', 'Bombshell Bootcamp', 'Rewrite Masterclass'], color: '#0D9488', pos: { l: 35, t: 60 } },
-  { n: 3, tier: 'Core Programs', time: 'Months 1–3', items: ['Health Mastery', 'Beyond Limits Bootcamp', 'Courses'], color: '#E8A849', pos: { l: 63, t: 38 } },
-  { n: 4, tier: 'Premium · VIP', time: '90 Days · Premium', items: ['Rise & Thrive Bundle', 'Costa Rica Retreat', 'Private Coaching'], color: '#e07800', pos: { l: 86, t: 15 } },
+  { n: 1, tier: 'Discover · Free', time: 'Day 1 · Free', color: '#34c5c5', pos: { l: 8, t: 82 }, items: [
+    { label: 'Habit Tracker', href: '/habittracker' },
+    { label: 'Power Hour Coworking', href: '/coworking' },
+    { label: 'Quizzes', href: '/quizzes' },
+    { label: 'Thrive Facebook Community', href: 'https://www.facebook.com/groups/crewsbeyondlimits', ext: true },
+  ] },
+  { n: 2, tier: 'Entry Events', time: 'Weeks 1–4', color: '#0D9488', pos: { l: 35, t: 60 }, items: [
+    { label: 'Vision Board Party', href: '/vision-board' },
+    { label: 'Bombshell Bootcamp', href: '/bombshell-bootcamp' },
+    { label: 'Masterclass', href: '/masterclass' },
+  ] },
+  { n: 3, tier: 'Core Programs', time: 'Months 1–3', color: '#E8A849', pos: { l: 63, t: 38 }, items: [
+    { label: 'Health Mastery', href: '/health-mastery' },
+    { label: 'Beyond Limits Bootcamp', href: '/bootcamp' },
+    { label: 'Courses', href: '/courses' },
+  ] },
+  { n: 4, tier: 'Premium · VIP', time: '90 Days · Premium', color: '#e07800', pos: { l: 86, t: 15 }, items: [
+    { label: 'Rise & Thrive Bundle', href: '/rise-and-thrive' },
+    { label: 'Caribbean Retreats', href: '/retreat' },
+    { label: 'Private Coaching', href: '/privatemindset' },
+  ] },
 ]
 const PILLARS = ['Non-Profit · Her Next Mission', 'Corporate · Activate4Impact', 'Tech · R0cketship', 'Community · World Changers']
 
@@ -20,7 +37,13 @@ function Card({ s }: { s: typeof STAGES[number] }) {
       </div>
       <p className="font-black text-gray-900 text-sm leading-tight mb-1.5">{s.tier}</p>
       <ul className="space-y-0.5">
-        {s.items.map((i) => <li key={i} className="text-[11px] text-gray-600 leading-snug">· {i}</li>)}
+        {s.items.map((i) => (
+          <li key={i.label} className="text-[11px] leading-snug">
+            {(i as any).ext
+              ? <a href={i.href} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0D9488] hover:underline">· {i.label}</a>
+              : <a href={i.href} className="text-gray-600 hover:text-[#0D9488] hover:underline">· {i.label}</a>}
+          </li>
+        ))}
       </ul>
     </div>
   )
