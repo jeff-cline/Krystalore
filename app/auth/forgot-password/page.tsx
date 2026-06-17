@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import MainLayout from '@/components/layout/MainLayout'
+import CrystalRain from '@/components/CrystalRain'
 import Link from 'next/link'
 import { Mail, Loader2, ArrowLeft, CheckCircle } from 'lucide-react'
 
@@ -38,8 +39,9 @@ export default function ForgotPasswordPage() {
 
   return (
     <MainLayout>
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-md w-full">
+      <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+        <CrystalRain />
+        <div className="max-w-md w-full relative z-10">
           <div className="card">
             {sent ? (
               <div className="text-center py-4">

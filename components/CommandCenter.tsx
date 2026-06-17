@@ -6,6 +6,7 @@ import {
   Trash2, FolderPlus, ExternalLink, Maximize2, Minimize2,
 } from 'lucide-react'
 import { CcState, CcBucket, CcLink, DEFAULT_STATE, PALETTE, loadState, saveState, newId } from './commandData'
+import CrystalRain from './CrystalRain'
 
 const VIEW_PW = 'TeamKrystalore'
 const EDIT_PW = 'Krystalore'
@@ -47,8 +48,9 @@ export default function CommandCenter() {
   /* ---- VIEW GATE ---- */
   if (!viewOk) {
     return (
-      <div className="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-[#33413f] via-[#0D5953] to-[#0D9488] rounded-none">
-        <form onSubmit={submitView} className="w-full max-w-sm text-center px-6 py-16">
+      <div className="relative overflow-hidden min-h-[78vh] flex items-center justify-center bg-gradient-to-br from-[#33413f] via-[#0D5953] to-[#0D9488]">
+        <CrystalRain />
+        <form onSubmit={submitView} className="relative z-10 w-full max-w-sm text-center px-6 py-16">
           <div className="w-16 h-16 rounded-2xl bg-white/10 ring-1 ring-white/20 flex items-center justify-center mx-auto mb-5"><Lock className="w-7 h-7 text-white" /></div>
           <h1 className="text-2xl font-black text-white tracking-[0.2em] mb-1">COMMAND CENTER</h1>
           <p className="text-white/70 text-sm mb-6">Team access · enter password</p>

@@ -3,6 +3,7 @@
 import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import MainLayout from '@/components/layout/MainLayout'
+import CrystalRain from '@/components/CrystalRain'
 import Link from 'next/link'
 import { Lock, Loader2, ArrowLeft, CheckCircle, Eye, EyeOff } from 'lucide-react'
 
@@ -159,8 +160,9 @@ function ResetPasswordForm() {
 export default function ResetPasswordPage() {
   return (
     <MainLayout>
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-md w-full">
+      <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+        <CrystalRain />
+        <div className="max-w-md w-full relative z-10">
           <div className="card">
             <Suspense fallback={<div className="text-center py-4"><Loader2 className="h-8 w-8 animate-spin text-gray-400 mx-auto" /></div>}>
               <ResetPasswordForm />

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import MainLayout from '@/components/layout/MainLayout'
+import CrystalRain from '@/components/CrystalRain'
 import Link from 'next/link'
 import { Mail, Lock, Eye, Loader2 } from 'lucide-react'
 
@@ -44,8 +45,9 @@ export default function LoginPage() {
 
   return (
     <MainLayout>
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-md w-full">
+      <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+        <CrystalRain />
+        <div className="max-w-md w-full relative z-10">
           <div className="card">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
