@@ -38,6 +38,8 @@ const coachingLinks = [
   { href: '/leadership-training', label: 'Leadership Training' },
   { href: '/firechallenge', label: 'FIRE Challenge' },
   { href: '/health-mastery', label: 'Health Mastery' },
+  { href: '/bootcamp', label: 'Fitness Coaching' },
+  { href: 'https://shyftmaster.com/', label: 'ShYft Mastery' },
 ]
 
 const eventsLinks = [

@@ -7,30 +7,13 @@ import Footer from '@/components/layout/Footer'
 
 export default function FitnessPage() {
   const programs = [
-    {
-      title: 'HIIT Training',
-      description: 'High-intensity interval training for maximum results in minimum time',
-      icon: '🔥',
-      benefits: ['Burns calories for 24+ hours', 'Improves cardiovascular health', 'Builds lean muscle', 'Time-efficient workouts']
-    },
-    {
-      title: 'Kickboxing',
-      description: 'Powerful cardio and strength training with martial arts techniques',
-      icon: '🥊',
-      benefits: ['Full-body workout', 'Stress relief', 'Self-defense skills', 'Improved coordination']
-    },
-    {
-      title: 'Yoga & Mobility',
-      description: 'Flexibility, balance, and mindfulness for recovery and well-being',
-      icon: '🧘‍♀️',
-      benefits: ['Increased flexibility', 'Better balance', 'Stress reduction', 'Injury prevention']
-    },
-    {
-      title: 'Marathon Training',
-      description: 'Structured endurance programs based on 26 marathon completions',
-      icon: '🏃‍♀️',
-      benefits: ['Progressive training plans', 'Injury prevention', 'Mental toughness', 'Race day preparation']
-    }
+    { title: 'Bombshell Bootcamp', description: 'High-energy group transformation to build strength, confidence, and your bombshell body.', icon: '💪', href: '/bombshell-bootcamp', cta: 'Explore Bombshell' },
+    { title: 'Beyond Limits Bootcamp', description: '34 minutes a day, 3× a week — the signature program that takes you beyond every limit.', icon: '🔥', href: '/bootcamp', cta: 'Join the Bootcamp' },
+    { title: 'Health Mastery', description: 'A complete system for lasting energy, smart nutrition, and whole-body health.', icon: '🌿', href: '/health-mastery', cta: 'Master Your Health' },
+    { title: 'ShYft Mastery', description: 'The proprietary ShYft system to rebuild your body, mind, and momentum.', icon: '⚡', href: 'https://shyftmastery.com', ext: true, cta: 'Discover ShYft Mastery' },
+    { title: 'Private Fitness Coaching', description: 'One-on-one coaching tailored to your goals, your body, and your schedule.', icon: '🎯', href: '/privatemindset', cta: 'Go Private' },
+    { title: 'Running Coaching', description: 'From first mile to finish line — endurance plans built on 26 marathon completions.', icon: '🏃‍♀️', href: '/book', cta: 'Start Running' },
+    { title: 'Wellness Retreats', description: 'Reset and recharge with immersive retreats for body, mind, and spirit.', icon: '🏝️', href: '/retreat', cta: 'Find a Retreat' },
   ]
 
   const schedule = [
@@ -147,35 +130,30 @@ export default function FitnessPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Comprehensive Fitness Programs
+              Ways to Train with Krystalore
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Every program is designed to build strength, endurance, and confidence while fitting into your busy schedule.
+              From bootcamps to private coaching to wellness retreats — every path is built to take you beyond your limits. Pick where you want to start.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {programs.map((program, index) => (
-              <div key={index} className="bg-white rounded-xl p-8 shadow-lg">
-                <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">{program.icon}</span>
-                  <h3 className="text-xl font-semibold text-gray-900">
-                    {program.title}
-                  </h3>
-                </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  {program.description}
-                </p>
-                <ul className="space-y-2">
-                  {program.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex} className="flex items-center text-gray-700">
-                      <span className="text-teal-500 mr-3">•</span>
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {programs.map((program, index) => {
+              const cls = 'group bg-white rounded-xl p-8 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all flex flex-col'
+              const body = (
+                <>
+                  <div className="flex items-center mb-4">
+                    <span className="text-3xl mr-4">{program.icon}</span>
+                    <h3 className="text-xl font-semibold text-gray-900">{program.title}</h3>
+                  </div>
+                  <p className="text-gray-600 mb-6 leading-relaxed flex-1">{program.description}</p>
+                  <span className="inline-flex items-center gap-1.5 text-teal-600 font-semibold group-hover:gap-2.5 transition-all">{program.cta} →</span>
+                </>
+              )
+              return program.ext
+                ? <a key={index} href={program.href} target="_blank" rel="noopener noreferrer" className={cls}>{body}</a>
+                : <Link key={index} href={program.href} className={cls}>{body}</Link>
+            })}
           </div>
         </div>
       </section>
