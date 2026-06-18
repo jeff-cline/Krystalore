@@ -18,11 +18,12 @@ export default function FeatureImagesAdmin() {
   const [msg, setMsg] = useState('')
   const [newFolder, setNewFolder] = useState('')
   const [uploadingFolder, setUploadingFolder] = useState<string | null>(null)
+  const [fallback, setFallback] = useState(false)
 
   useEffect(() => {
     fetch('/api/admin/feature-images')
       .then(r => r.json())
-      .then(d => { if (d.error) setError(d.error); else setFolders((d.folders || []).sort((a: GFolder, b: GFolder) => a.order - b.order)) })
+      .then(d => { if (d.error) setError(d.error); else { setFolders((d.folders || []).sort((a: GFolder, b: GFolder) => a.order - b.order)); setFallback(!!d.fallback) } })
       .catch(() => setError('Failed to load'))
       .finally(() => setLoading(false))
   }, [])
@@ -104,6 +105,7 @@ export default function FeatureImagesAdmin() {
       </div>
       <p className="text-gray-500 text-sm mb-6">Create folders, upload images, drag order with ▲▼, and ⭐ the cover image. Saving publishes to <a href="/images" target="_blank" className="text-[#0D9488] underline">/images</a>.</p>
 
+      {fallback && <div className="mb-4 bg-amber-50 border border-amber-200 text-amber-800 rounded-lg px-4 py-3 text-sm">⚠️ Showing the saved snapshot of your folders. Live image storage isn’t reachable in this environment, so <strong>new uploads &amp; edits won’t save</strong> until <code>UPLOADTHING_TOKEN</code> is set in production. Your existing folders and images are safe.</div>}
       {error && <div className="mb-4 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-2 text-sm">{error}</div>}
       {msg && <div className="mb-4 bg-green-50 border border-green-200 text-green-700 rounded-lg px-4 py-2 text-sm">{msg}</div>}
 
