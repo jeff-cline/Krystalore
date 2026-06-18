@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { pushContactToGHL } from '@/lib/integrations/gohighlevel'
+import { captureLead } from '@/lib/leadSink'
 
 const subjectTagMap: Record<string, string[]> = {
   'Executive Coaching': ['contact-form', 'executive-coaching', 'website-lead'],
@@ -18,6 +19,9 @@ export async function POST(request: NextRequest) {
     }
 
     const tags = subjectTagMap[subject] || subjectTagMap['Other']
+
+    // Copy into ShYft Doctor CRM + email Krystalore & Jeff
+    await captureLead({ name, email, phone, message: `${subject}\n\n${message}`, source: 'contact' })
 
     const result = await pushContactToGHL({
       email,

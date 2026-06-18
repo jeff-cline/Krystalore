@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { PrismaClient } from '@prisma/client'
 import { authOptions } from '@/lib/auth'
+import { captureLead } from '@/lib/leadSink'
 
 const prisma = new PrismaClient()
 
@@ -120,6 +121,9 @@ export async function POST(request: NextRequest) {
 
     // Push to Jeff's CRM (The Vault)
     pushToJeffCRM(body)
+
+    // Copy into ShYft Doctor CRM + email Krystalore & Jeff
+    await captureLead({ name, email, phone, message: quizTitle ? `Quiz: ${quizTitle}` : 'Quiz / free-gift lead', source: 'quiz' })
 
     return NextResponse.json(lead, { status: 201 })
   } catch (error) {

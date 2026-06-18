@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { pushContactToGHL } from '@/lib/integrations/gohighlevel'
+import { captureLead } from '@/lib/leadSink'
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,6 +12,9 @@ export async function POST(request: NextRequest) {
     }
 
     const tags = ['private-mentorship', 'elite-application', 'website-lead']
+
+    // Copy into ShYft Doctor CRM + email Krystalore & Jeff
+    await captureLead({ name, email, phone, message: `Private mentorship application${role ? ` — ${role}` : ''}${whyNow ? `\nWhy now: ${whyNow}` : ''}`, source: 'private-application' })
 
     const result = await pushContactToGHL({
       email,

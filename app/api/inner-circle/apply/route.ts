@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import sgMail from '@sendgrid/mail'
 import { pushContactToGHL } from '@/lib/integrations/gohighlevel'
+import { captureLead } from '@/lib/leadSink'
 import prisma from '@/lib/db'
 
 const ADMIN_EMAIL = 'krystalore@crewsbeyondlimitsconsulting.com'
@@ -64,6 +65,9 @@ export async function POST(request: NextRequest) {
     } catch (ghlErr) {
       console.error('GHL push failed for inner circle app:', ghlErr)
     }
+
+    // Copy into ShYft Doctor CRM + email Krystalore & Jeff
+    await captureLead({ name: fullName, email, phone: data.phone, message: `${circleLabel} — ${profession}`, source: 'inner-circle' })
 
     // Send email notification
     if (process.env.SENDGRID_API_KEY && !process.env.SENDGRID_API_KEY.includes('PLACEHOLDER')) {
