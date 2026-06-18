@@ -18,7 +18,6 @@ export async function GET() {
   try {
     const grouped = await prisma.user.groupBy({
       by: ['membershipLevel'],
-      where: { email: { not: null } },
       _count: { _all: true },
     })
     const levels = grouped.map((x: any) => ({ level: x.membershipLevel || 'FREE', count: x._count._all }))
@@ -47,7 +46,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ test: true, ...r, total: 1 })
     }
 
-    const where: any = { email: { not: null } }
+    const where: any = {}
     if (audience && audience !== 'ALL') where.membershipLevel = audience
     const users = await prisma.user.findMany({ where, select: { email: true } })
     const recipients = users.map((u: any) => u.email).filter(Boolean)

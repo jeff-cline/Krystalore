@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     const name = (body?.name || '').trim()
     const email = (body?.email || '').toLowerCase().trim()
     const password = body?.password || ''
-    const newRole = body?.role || 'USER'
+    const newRole = body?.role || 'MEMBER'
     const membershipLevel = body?.membershipLevel || 'FREE'
 
     if (!email || !password) return NextResponse.json({ error: 'Email and password are required.' }, { status: 400 })

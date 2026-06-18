@@ -66,7 +66,7 @@ export default function PermissionsPage() {
   const [selectedUser, setSelectedUser] = useState<string>('')
   // add-user (create login)
   const [showAddUser, setShowAddUser] = useState(false)
-  const [newUser, setNewUser] = useState({ name: '', email: '', password: '', role: 'USER', membershipLevel: 'FREE' })
+  const [newUser, setNewUser] = useState({ name: '', email: '', password: '', role: 'MEMBER', membershipLevel: 'FREE' })
   const [addUserError, setAddUserError] = useState('')
   const [addUserOk, setAddUserOk] = useState('')
   const [userPermissions, setUserPermissions] = useState<UserPermissions | null>(null)
@@ -433,10 +433,10 @@ export default function PermissionsPage() {
                   <input value={newUser.email} onChange={e => setNewUser(p => ({ ...p, email: e.target.value }))} type="email" placeholder="Email *" className="form-input w-full" />
                   <input value={newUser.password} onChange={e => setNewUser(p => ({ ...p, password: e.target.value }))} type="text" placeholder="Password * (min 6)" className="form-input w-full" />
                   <select value={newUser.membershipLevel} onChange={e => setNewUser(p => ({ ...p, membershipLevel: e.target.value }))} className="form-input w-full">
-                    {['FREE', 'BASIC', 'PREMIUM', 'VIP', 'ELITE'].map(l => <option key={l} value={l}>{l}</option>)}
+                    {['FREE', 'BASIC', 'PREMIUM', 'VIP'].map(l => <option key={l} value={l}>{l}</option>)}
                   </select>
                   <select value={newUser.role} onChange={e => setNewUser(p => ({ ...p, role: e.target.value }))} className="form-input w-full">
-                    {['USER', 'ADMIN', 'GOD'].map(r => <option key={r} value={r}>{r}</option>)}
+                    {['MEMBER', 'ADMIN', 'GOD'].map(r => <option key={r} value={r}>{r}</option>)}
                   </select>
                 </div>
                 {addUserError && <p className="text-red-400 text-sm mt-2">{addUserError}</p>}
