@@ -71,6 +71,7 @@ export async function sendViaZapmail(msg: {
   subject: string
   html: string
   fromName?: string
+  bcc?: string
 }): Promise<boolean> {
   const key = process.env.ZAPMAIL_API_KEY
   if (!key) return false
@@ -86,6 +87,7 @@ export async function sendViaZapmail(msg: {
   await transport.sendMail({
     from: `"${msg.fromName || process.env.ZAPMAIL_FROM_NAME || 'Krystalore'}" <${mb.email}>`,
     to: msg.to,
+    bcc: msg.bcc,
     subject: msg.subject,
     html: msg.html,
   })
