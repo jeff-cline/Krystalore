@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 const title = 'Your Voice Knows — Free 30-Second Vocal Wellness Analysis | Krystalore'
 const description = 'Speak for 30 seconds and get an instant vocal-wellness snapshot — stress load, energy, resilience, clarity, and burnout risk read from the tone of your voice. Free.'
-const ogImage = 'https://krystalore.com/images/go9/portrait.jpg'
+const ogImage = 'https://krystalore.com/images/scraped/book-krystalore.jpg'
 
 export const metadata: Metadata = {
   title,

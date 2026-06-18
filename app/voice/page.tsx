@@ -5,7 +5,7 @@ import Header from '@/components/layout/header'
 import CrystalRain from '@/components/CrystalRain'
 import {
   Mic, Lock, ArrowRight, Activity, Brain, HeartPulse, Zap, ShieldCheck, Gauge as GaugeIcon,
-  Sparkles, AudioLines, TrendingUp, Waves,
+  Sparkles, AudioLines, TrendingUp, Waves, Phone,
 } from 'lucide-react'
 
 type Phase = 'intro' | 'recording' | 'processing' | 'gate' | 'dashboard'
@@ -379,7 +379,15 @@ export default function VoicePage() {
               <a href="https://shyftmaster.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black text-lg px-9 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow">
                 Get My ShYft Master Plan <ArrowRight className="w-5 h-5" />
               </a>
-              <div className="mt-4"><button onClick={() => { setPhase('intro'); setProfile(null) }} className="text-gray-400 text-sm font-semibold hover:text-[#0D9488]">Run another analysis</button></div>
+              <div className="mt-7 pt-7 border-t border-gray-100">
+                <h4 className="text-xl md:text-2xl font-black text-gray-900 mb-2">Are you ready to shift your energy?</h4>
+                <p className="text-gray-600 max-w-xl mx-auto mb-5">Contact Krystalore — the ShYft Master — today.</p>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <a href="/book" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#0D9488] text-white font-black px-7 py-3.5 rounded-2xl shadow-lg transition-colors"><Phone className="w-5 h-5" /> Book a Call</a>
+                  <a href="/start" className="inline-flex items-center gap-2 bg-white border-2 border-[#34c5c5]/50 text-[#0D9488] font-black px-7 py-3.5 rounded-2xl hover:bg-[#34c5c5]/5 transition-colors">Explore your journey <ArrowRight className="w-5 h-5" /></a>
+                </div>
+              </div>
+              <div className="mt-5"><button onClick={() => { setPhase('intro'); setProfile(null) }} className="text-gray-400 text-sm font-semibold hover:text-[#0D9488]">Run another analysis</button></div>
             </div>
 
             <p className="text-[11px] text-gray-400 mt-6 text-center max-w-2xl mx-auto">This vocal-wellness snapshot is for informational and educational purposes only and is not medical, psychological, or diagnostic advice. If you’re struggling, please reach out to a qualified professional.</p>

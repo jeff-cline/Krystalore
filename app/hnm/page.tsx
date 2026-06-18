@@ -202,7 +202,7 @@ export default function HnmPage() {
     e.preventDefault()
     if (!name.trim() || !email.trim()) { setErr(true); return }
     setSubmitting(true)
-    const lead = { name, email, phone, help, scores: profile, source: 'hnm', ts: Date.now() }
+    const lead = { name, email, phone, help, scores: profile, source: 'veteran-first-responder', ts: Date.now() }
     try { localStorage.setItem('hnm-lead-last', JSON.stringify(lead)) } catch {}
     try { await fetch('/api/voice-lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(lead) }) } catch {}
     setPhase('dashboard')
@@ -249,7 +249,7 @@ export default function HnmPage() {
               </div>
               <div className="relative">
                 <div className="overflow-hidden shadow-2xl" style={{ borderRadius: 28, border: `1px solid ${C.lineStrong}` }}>
-                  <img src="/images/hnm/hero-krystalore.jpg" alt="Woman Veteran — service reflected, future ahead" className="w-full h-full object-cover" style={{ aspectRatio: '4/5' }} />
+                  <img src="/images/scraped/leadership-event.jpg" alt="Women Veterans & first responders — leadership" className="w-full h-full object-cover" style={{ aspectRatio: '4/5' }} />
                 </div>
               </div>
             </div>

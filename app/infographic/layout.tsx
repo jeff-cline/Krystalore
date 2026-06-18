@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 const title = 'From Freemium to Premium Journey | Krystalore'
 const description = 'It’s not about the destination, it’s about the journey. We meet you where you’re at — Krystalore Crews is your Life, Fitness, and Business Guide and Mentor.'
-const ogImage = 'https://krystalore.com/images/go9/portrait.jpg'
+const ogImage = 'https://krystalore.com/images/infographic-og.png'
 
 export const metadata: Metadata = {
   title,
