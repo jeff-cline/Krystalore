@@ -64,6 +64,11 @@ export default function PermissionsPage() {
   // User Permissions
   const [users, setUsers] = useState<User[]>([])
   const [selectedUser, setSelectedUser] = useState<string>('')
+  // add-user (create login)
+  const [showAddUser, setShowAddUser] = useState(false)
+  const [newUser, setNewUser] = useState({ name: '', email: '', password: '', role: 'USER', membershipLevel: 'FREE' })
+  const [addUserError, setAddUserError] = useState('')
+  const [addUserOk, setAddUserOk] = useState('')
   const [userPermissions, setUserPermissions] = useState<UserPermissions | null>(null)
   
   // Import
@@ -187,6 +192,24 @@ export default function PermissionsPage() {
     } catch (error) {
       console.error('Error toggling user access:', error)
     }
+  }
+
+  const createUser = async () => {
+    setAddUserError(''); setAddUserOk('')
+    if (!newUser.email.trim() || !newUser.password.trim()) { setAddUserError('Email and password are required.'); return }
+    try {
+      const res = await fetch('/api/admin/users', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser),
+      })
+      const d = await res.json()
+      if (!res.ok) { setAddUserError(d.error || 'Failed to create user.'); return }
+      // refresh user list
+      try { const u = await (await fetch('/api/admin/users')).json(); setUsers(u?.users || []) } catch {}
+      setAddUserOk(`Created login for ${d.email}.`)
+      setNewUser({ name: '', email: '', password: '', role: 'USER', membershipLevel: 'FREE' })
+      setShowAddUser(false)
+    } catch (e: any) { setAddUserError(e?.message || 'Failed to create user.') }
   }
 
   const runImport = async () => {
@@ -394,6 +417,38 @@ export default function PermissionsPage() {
       {/* User Overrides Tab */}
       {activeTab === 'users' && (
         <div className="space-y-6">
+          {/* Add user / create login */}
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-white">Logins &amp; Users</h2>
+              <button onClick={() => { setShowAddUser(s => !s); setAddUserError(''); setAddUserOk('') }} className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0b7e74] text-white font-semibold px-4 py-2 rounded-lg text-sm">
+                <Plus className="w-4 h-4" /> {showAddUser ? 'Close' : 'Add User'}
+              </button>
+            </div>
+            {addUserOk && <div className="mb-3 bg-green-500/15 border border-green-500/40 text-green-300 rounded-lg px-4 py-2 text-sm">{addUserOk}</div>}
+            {showAddUser && (
+              <div className="card mb-4">
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <input value={newUser.name} onChange={e => setNewUser(p => ({ ...p, name: e.target.value }))} placeholder="Name" className="form-input w-full" />
+                  <input value={newUser.email} onChange={e => setNewUser(p => ({ ...p, email: e.target.value }))} type="email" placeholder="Email *" className="form-input w-full" />
+                  <input value={newUser.password} onChange={e => setNewUser(p => ({ ...p, password: e.target.value }))} type="text" placeholder="Password * (min 6)" className="form-input w-full" />
+                  <select value={newUser.membershipLevel} onChange={e => setNewUser(p => ({ ...p, membershipLevel: e.target.value }))} className="form-input w-full">
+                    {['FREE', 'BASIC', 'PREMIUM', 'VIP', 'ELITE'].map(l => <option key={l} value={l}>{l}</option>)}
+                  </select>
+                  <select value={newUser.role} onChange={e => setNewUser(p => ({ ...p, role: e.target.value }))} className="form-input w-full">
+                    {['USER', 'ADMIN', 'GOD'].map(r => <option key={r} value={r}>{r}</option>)}
+                  </select>
+                </div>
+                {addUserError && <p className="text-red-400 text-sm mt-2">{addUserError}</p>}
+                <div className="flex gap-2 mt-3">
+                  <button onClick={createUser} className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0b7e74] text-white font-bold px-5 py-2 rounded-lg text-sm"><Save className="w-4 h-4" /> Create login</button>
+                  <button onClick={() => setShowAddUser(false)} className="text-gray-400 text-sm px-3">Cancel</button>
+                </div>
+                <p className="text-xs text-gray-400 mt-2">Creates a working login (email + password) pre-verified, with the role &amp; membership you pick. Assign permission sets below.</p>
+              </div>
+            )}
+          </div>
+
           <div>
             <h2 className="text-xl font-bold text-white mb-4">User Permission Overrides</h2>
             <div className="card">

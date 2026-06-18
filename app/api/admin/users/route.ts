@@ -1,6 +1,41 @@
 import { NextResponse } from 'next/server'
+import bcrypt from 'bcryptjs'
 import prisma from '@/lib/db'
 import { getSession } from '@/lib/auth'
+
+// Create a new user / login (admin only)
+export async function POST(request: Request) {
+  try {
+    const session = await getSession()
+    if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const role = (session.user as any).role
+    if (!['GOD', 'ADMIN'].includes(role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+
+    const body = await request.json()
+    const name = (body?.name || '').trim()
+    const email = (body?.email || '').toLowerCase().trim()
+    const password = body?.password || ''
+    const newRole = body?.role || 'USER'
+    const membershipLevel = body?.membershipLevel || 'FREE'
+
+    if (!email || !password) return NextResponse.json({ error: 'Email and password are required.' }, { status: 400 })
+    if (password.length < 6) return NextResponse.json({ error: 'Password must be at least 6 characters.' }, { status: 400 })
+    if (role !== 'GOD' && newRole === 'GOD') return NextResponse.json({ error: 'Cannot create GOD accounts.' }, { status: 403 })
+
+    const existing = await prisma.user.findUnique({ where: { email } })
+    if (existing) return NextResponse.json({ error: 'A user with that email already exists.' }, { status: 409 })
+
+    const hashedPassword = await bcrypt.hash(password, 12)
+    const user = await prisma.user.create({
+      data: { name: name || null, email, hashedPassword, role: newRole, membershipLevel, emailVerified: new Date() },
+      select: { id: true, name: true, email: true, role: true, membershipLevel: true, createdAt: true },
+    })
+    return NextResponse.json(user, { status: 201 })
+  } catch (error) {
+    console.error('User create error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
 
 export async function GET(request: Request) {
   try {
