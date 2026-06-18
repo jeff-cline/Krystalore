@@ -117,6 +117,25 @@ export default function FeatureImagesAdmin() {
         </button>
       </div>
 
+      {/* Add to an existing folder — quick list so you don't make a new folder every time */}
+      {folders.length > 0 && (
+        <div className="mb-8 -mt-4">
+          <p className="text-sm font-semibold text-gray-700 mb-2">Or add images to an existing folder:</p>
+          <div className="flex flex-wrap gap-2">
+            {folders.map((fld) => (
+              <label key={fld.id} className={`inline-flex items-center gap-1.5 border rounded-full px-3.5 py-1.5 text-sm font-semibold cursor-pointer transition-colors ${uploadingFolder === fld.id ? 'border-[#0D9488] bg-[#0D9488]/5 text-[#0D9488]' : 'border-gray-300 text-gray-700 hover:border-[#0D9488] hover:text-[#0D9488] hover:bg-[#0D9488]/5'}`} title={`Add images to “${fld.title}”`}>
+                {uploadingFolder === fld.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <UploadCloud className="w-3.5 h-3.5" />}
+                {fld.title}
+                <span className="text-xs text-gray-400">({fld.images.length})</span>
+                <input type="file" accept="image/*" multiple className="hidden" disabled={uploadingFolder === fld.id}
+                  onChange={(e) => { onUpload(fld.id, e.target.files); e.currentTarget.value = '' }} />
+              </label>
+            ))}
+          </div>
+          <p className="text-xs text-gray-400 mt-2">Click a folder to upload straight into it — then hit <strong>Save &amp; Publish</strong>.</p>
+        </div>
+      )}
+
       {folders.length === 0 && <p className="text-gray-400">No folders yet. Add your first folder above.</p>}
 
       <div className="space-y-6">
