@@ -54,6 +54,7 @@ export default function CommandCenter() {
   const addBucket = () => update({ ...state, buckets: [...state.buckets, { id: newId(), title: 'New Bucket', color: '#0D9488', size: 'sm', links: [] }] })
   const moveLink = (bi: number, li: number, d: number) => { const b = [...state.buckets]; const ls = [...b[bi].links]; const j = li + d; if (j < 0 || j >= ls.length) return; [ls[li], ls[j]] = [ls[j], ls[li]]; b[bi] = { ...b[bi], links: ls }; update({ ...state, buckets: b }) }
   const delLink = (bi: number, li: number) => { const b = [...state.buckets]; b[bi] = { ...b[bi], links: b[bi].links.filter((_, k) => k !== li) }; update({ ...state, buckets: b }) }
+  const patchLink = (bi: number, li: number, p: Partial<CcLink>) => { const b = [...state.buckets]; const ls = [...b[bi].links]; const ext = p.href !== undefined ? /^https?:\/\//i.test(p.href) : ls[li].ext; ls[li] = { ...ls[li], ...p, ext }; b[bi] = { ...b[bi], links: ls }; update({ ...state, buckets: b }) }
   const addLink = (bi: number, label: string, href: string) => { const b = [...state.buckets]; b[bi] = { ...b[bi], links: [...b[bi].links, { id: newId(), label, href, ext: /^https?:\/\//i.test(href) }] }; update({ ...state, buckets: b }) }
 
   /* ---- VIEW GATE ---- */
@@ -130,9 +131,14 @@ export default function CommandCenter() {
                       <button onClick={() => moveLink(bi, li, 1)} className="text-gray-300 hover:text-gray-600"><ChevronDown className="w-3.5 h-3.5" /></button>
                     </span>
                   )}
-                  {it.ext
-                    ? <a href={it.href} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-0 flex items-center justify-between gap-2"><span className="font-semibold text-gray-800 text-sm truncate">{it.label}</span><ExternalLink className="w-3.5 h-3.5 text-[#0D9488] flex-shrink-0" /></a>
-                    : <a href={it.href} className="flex-1 min-w-0 flex items-center justify-between gap-2"><span className="font-semibold text-gray-800 text-sm truncate">{it.label}</span><span className="text-[11px] text-gray-400 flex-shrink-0">{it.href}</span></a>}
+                  {editing
+                    ? <div className="flex-1 min-w-0 grid grid-cols-2 gap-1">
+                        <input value={it.label} onChange={(e) => patchLink(bi, li, { label: e.target.value })} placeholder="Title" className="px-2 py-1 text-sm rounded-md border border-gray-200 outline-none focus:border-[#34c5c5]" />
+                        <input value={it.href} onChange={(e) => patchLink(bi, li, { href: e.target.value })} placeholder="URL or /path" className="px-2 py-1 text-[12px] rounded-md border border-gray-200 outline-none focus:border-[#34c5c5]" />
+                      </div>
+                    : it.ext
+                      ? <a href={it.href} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-0 flex items-center justify-between gap-2"><span className="font-semibold text-gray-800 text-sm truncate">{it.label}</span><ExternalLink className="w-3.5 h-3.5 text-[#0D9488] flex-shrink-0" /></a>
+                      : <a href={it.href} className="flex-1 min-w-0 flex items-center justify-between gap-2"><span className="font-semibold text-gray-800 text-sm truncate">{it.label}</span><span className="text-[11px] text-gray-400 flex-shrink-0">{it.href}</span></a>}
                   {editing && <button onClick={() => delLink(bi, li)} className="text-gray-300 hover:text-red-400"><X className="w-3.5 h-3.5" /></button>}
                 </div>
               ))}

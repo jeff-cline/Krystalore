@@ -6,8 +6,10 @@ import { Plus, X, Star, Send, Mail, MessageSquare, Linkedin, Facebook, Trash2, U
 type ChType = 'email' | 'sms' | 'linkedin' | 'facebook'
 type Channel = { type: ChType; value: string }
 type Contact = { id: string; first: string; last: string; channels: Channel[]; preferred: ChType }
+type Group = { id: string; name: string; memberIds: string[] }
 
 const KEY = 'cc-contacts-v1'
+const GKEY = 'cc-groups-v1'
 const CH_META: Record<ChType, { label: string; icon: any; ph: string }> = {
   email: { label: 'Email', icon: Mail, ph: 'name@email.com' },
   sms: { label: 'Text / Phone', icon: MessageSquare, ph: '+1 555 123 4567' },
@@ -29,9 +31,25 @@ export default function Contacts() {
   const [first, setFirst] = useState(''); const [last, setLast] = useState('')
   const [vals, setVals] = useState<Record<ChType, string>>({ email: '', sms: '', linkedin: '', facebook: '' })
   const [pref, setPref] = useState<ChType>('email')
+  // groups
+  const [groups, setGroups] = useState<Group[]>([])
+  const [groupAdding, setGroupAdding] = useState(false)
+  const [groupName, setGroupName] = useState('')
+  const [groupSel, setGroupSel] = useState<string[]>([])
 
-  useEffect(() => { try { setList(JSON.parse(localStorage.getItem(KEY) || '[]')) } catch {} }, [])
+  useEffect(() => {
+    try { setList(JSON.parse(localStorage.getItem(KEY) || '[]')) } catch {}
+    try { setGroups(JSON.parse(localStorage.getItem(GKEY) || '[]')) } catch {}
+  }, [])
   const save = (next: Contact[]) => { setList(next); try { localStorage.setItem(KEY, JSON.stringify(next)) } catch {} }
+  const saveGroups = (next: Group[]) => { setGroups(next); try { localStorage.setItem(GKEY, JSON.stringify(next)) } catch {} }
+  const toggleGroupSel = (id: string) => setGroupSel((s) => s.includes(id) ? s.filter((x) => x !== id) : [...s, id])
+  const saveGroup = () => {
+    if (!groupName.trim() || !groupSel.length) return
+    saveGroups([...groups, { id: 'g-' + Math.random().toString(36).slice(2, 9), name: groupName.trim(), memberIds: groupSel }])
+    setGroupName(''); setGroupSel([]); setGroupAdding(false)
+  }
+  const delGroup = (id: string) => saveGroups(groups.filter((g) => g.id !== id))
 
   const resetForm = () => { setFirst(''); setLast(''); setVals({ email: '', sms: '', linkedin: '', facebook: '' }); setPref('email'); setAdding(false) }
   const addContact = () => {
@@ -42,7 +60,7 @@ export default function Contacts() {
     save([...list, { id: rid(), first: first.trim(), last: last.trim(), channels, preferred }])
     resetForm()
   }
-  const del = (id: string) => save(list.filter((c) => c.id !== id))
+  const del = (id: string) => { save(list.filter((c) => c.id !== id)); saveGroups(groups.map((g) => ({ ...g, memberIds: g.memberIds.filter((m) => m !== id) }))) }
   const setPreferred = (id: string, t: ChType) => save(list.map((c) => c.id === id ? { ...c, preferred: t } : c))
 
   // sending
@@ -62,11 +80,18 @@ export default function Contacts() {
     if (emails.length) window.open(`mailto:?bcc=${emails.join(',')}&body=${encodeURIComponent(msg)}`, '_blank')
     if (sms.length) window.open(`sms:${sms.join(',')}?&body=${encodeURIComponent(msg)}`, '_blank')
   }
+  const sendGroup = (g: Group) => {
+    const members = list.filter((c) => g.memberIds.includes(c.id))
+    const emails = members.filter((c) => c.preferred === 'email').map((c) => preferredValue(c)).filter(Boolean)
+    const sms = members.filter((c) => c.preferred === 'sms').map((c) => preferredValue(c).replace(/[^+0-9]/g, '')).filter(Boolean)
+    if (emails.length) window.open(`mailto:?bcc=${emails.join(',')}&body=${encodeURIComponent(msg)}`, '_blank')
+    if (sms.length) window.open(`sms:${sms.join(',')}?&body=${encodeURIComponent(msg)}`, '_blank')
+  }
   const socialAll = list.filter((c) => c.preferred === 'linkedin' || c.preferred === 'facebook')
 
   const sorted = [...list].sort((a, b) => a.first.toLowerCase().localeCompare(b.first.toLowerCase()))
-  const groups: Record<string, Contact[]> = {}
-  for (const c of sorted) { const k = (c.first[0] || '#').toUpperCase(); (groups[k] ||= []).push(c) }
+  const byLetter: Record<string, Contact[]> = {}
+  for (const c of sorted) { const k = (c.first[0] || '#').toUpperCase(); (byLetter[k] ||= []).push(c) }
 
   return (
     <div className="mt-10 border-t border-gray-200 pt-8">
@@ -95,6 +120,45 @@ export default function Contacts() {
         {socialAll.length > 0 && (
           <p className="text-[11px] text-gray-400 mt-2">{socialAll.length} contact(s) prefer LinkedIn/Facebook — those can’t be auto-sent; use “Send to one” to open their profile (message copied to clipboard).</p>
         )}
+
+        {/* Groups — click a group name to send the message to everyone in it */}
+        <div className="mt-3 pt-3 border-t border-gray-100">
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-[#0D9488] font-bold uppercase tracking-wider text-[11px]">Groups — click to send to a whole group</p>
+            <button onClick={() => setGroupAdding((v) => !v)} className="inline-flex items-center gap-1 text-xs font-bold text-[#0D9488] border border-[#34c5c5]/40 rounded-lg px-2.5 py-1 hover:bg-[#34c5c5]/5"><Plus className="w-3.5 h-3.5" /> Make group</button>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {groups.map((g) => (
+              <span key={g.id} className="inline-flex items-center rounded-full overflow-hidden border border-[#0D9488]/30 bg-[#0D9488]/5">
+                <button onClick={() => sendGroup(g)} disabled={!msg.trim() || !g.memberIds.length} className="inline-flex items-center gap-1.5 text-[#0D9488] font-bold text-xs pl-3 pr-2 py-1.5 hover:bg-[#0D9488]/10 disabled:opacity-40">
+                  <Send className="w-3.5 h-3.5" /> {g.name} <span className="text-[10px] text-gray-400">({g.memberIds.length})</span>
+                </button>
+                <button onClick={() => delGroup(g.id)} title="Delete group" className="text-gray-300 hover:text-red-400 pr-2 pl-1"><X className="w-3.5 h-3.5" /></button>
+              </span>
+            ))}
+            {!groups.length && <span className="text-xs text-gray-400">No groups yet — make one to email several people at once.</span>}
+          </div>
+
+          {groupAdding && (
+            <div className="mt-3 bg-[#F6F8FA] rounded-xl p-3">
+              <input value={groupName} onChange={(e) => setGroupName(e.target.value)} placeholder="Group name * (e.g. VIP Clients)" className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm outline-none focus:border-[#34c5c5] mb-2" />
+              <p className="text-[11px] text-gray-500 mb-1.5">Select members:</p>
+              <div className="grid sm:grid-cols-2 gap-1 max-h-44 overflow-auto pr-1">
+                {sorted.map((c) => (
+                  <label key={c.id} className="flex items-center gap-2 text-sm text-gray-700 bg-white rounded-lg border border-gray-200 px-2.5 py-1.5 cursor-pointer">
+                    <input type="checkbox" checked={groupSel.includes(c.id)} onChange={() => toggleGroupSel(c.id)} className="accent-[#0D9488]" />
+                    {c.first} {c.last}
+                  </label>
+                ))}
+                {!list.length && <span className="text-xs text-gray-400">Add contacts first.</span>}
+              </div>
+              <div className="flex gap-2 mt-2">
+                <button onClick={saveGroup} disabled={!groupName.trim() || !groupSel.length} className="bg-[#0D9488] text-white font-bold text-sm px-4 py-2 rounded-lg disabled:opacity-40">Save group ({groupSel.length})</button>
+                <button onClick={() => { setGroupAdding(false); setGroupName(''); setGroupSel([]) }} className="text-gray-400 text-sm px-3">Cancel</button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Add contact */}
@@ -128,11 +192,11 @@ export default function Contacts() {
 
       {/* A–Z list */}
       <div className="space-y-4">
-        {Object.keys(groups).sort().map((letter) => (
+        {Object.keys(byLetter).sort().map((letter) => (
           <div key={letter}>
             <p className="text-[#0D9488] font-black text-sm mb-1.5">{letter}</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              {groups[letter].map((c) => (
+              {byLetter[letter].map((c) => (
                 <div key={c.id} className="bg-white rounded-xl border border-gray-200 p-3">
                   <div className="flex items-start justify-between">
                     <p className="font-bold text-gray-900 text-sm">{c.first} {c.last}</p>
