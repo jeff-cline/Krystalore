@@ -94,9 +94,6 @@ export default function Infographic() {
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-4">
           <div className="flex items-center gap-4 mb-5">
             <img src="/images/krystalore-crews-logo.png" alt="Krystalore" className="h-9 w-auto" />
-            <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-sm ring-1 ring-black/5 hidden sm:block">
-              <Image src="/images/go9/portrait.jpg" alt="Krystalore Crews" fill className="object-cover object-top" sizes="48px" />
-            </div>
           </div>
           <p className="text-[#0D9488] font-bold uppercase tracking-[0.2em] text-xs mb-2">The buyer pathway</p>
           <h1 className="text-3xl md:text-5xl font-black text-gray-900 leading-[1.05] mb-3">From Freemium to Premium Journey</h1>
