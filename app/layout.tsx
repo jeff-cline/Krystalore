@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import BookACallButton from '@/components/BookACallButton'
 import CommandLauncher from '@/components/CommandLauncher'
+import MailtoLeadCapture from '@/components/MailtoLeadCapture'
 import SessionProvider from '@/components/providers/SessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -123,6 +124,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-dark-50 text-gray-900 min-h-screen`}>
         <SessionProvider>
           {children}
+          <MailtoLeadCapture />
           <BookACallButton />
           <CommandLauncher />
         </SessionProvider>
