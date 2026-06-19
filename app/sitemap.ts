@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/workshops',
 
     // Fitness & Wellness
-    '/fitness', '/leg-workouts-from-home', '/virtual-hiit-camp-checkout',
+    '/fitness', '/34', '/leg-workouts-from-home', '/virtual-hiit-camp-checkout',
     '/vision-board', '/monday-motivation', '/monday-morning-motivation-quotes',
 
     // Content
