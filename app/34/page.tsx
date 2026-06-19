@@ -18,7 +18,7 @@ const STEPS: Step[] = [
   { n: 1, mins: 2, name: 'Arrive', tag: 'Meditate', icon: Wind, color: '#34c5c5',
     desc: 'Two minutes of mindful meditation — set your intention, name your goal, and drop into gratitude. You start the day on your own terms, before anyone else needs you.',
     items: ['Mindful meditation', 'Intention & goal setting', 'Gratitude practice'] },
-  { n: 2, mins: 30, name: 'Move', tag: 'Movement', icon: Activity, color: '#0D9488',
+  { n: 2, mins: 30, name: 'Move', tag: 'Movement', icon: Activity, color: '#34c5c5',
     desc: 'Thirty minutes of mindful movement — stretching, breath work, and nervous-system regulation — finishing with a cool-down and real rest and recovery.',
     items: ['Mindful movement & stretching', 'Breath work', 'Nervous-system regulation', 'Cool-down, rest & recovery'] },
   { n: 3, mins: 2, name: 'Reflect', tag: 'Celebrate', icon: Sparkles, color: '#E8A849',
@@ -80,7 +80,7 @@ export default function ThirtyFourPage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#0D9488] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
+                <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#34c5c5] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
                   <Heart className="w-3.5 h-3.5" /> The Ultimate Self-Love &amp; Self-Trust Practice
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-3 leading-[1.05]">The 34-Minute Mindful Method</h1>
@@ -89,7 +89,7 @@ export default function ThirtyFourPage() {
                   <a href="#method" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"><Play className="w-5 h-5" /> See the Method</a>
                   <a href="/voice" className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#84d7d7] text-white font-black px-7 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all"><Mic className="w-5 h-5" /> Free Voice Analyzer</a>
                 </div>
-                <p className="text-xs text-gray-400 mt-4 flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#0D9488]" /> You set the pace. Nothing is forced. This is for you.</p>
+                <p className="text-xs text-gray-400 mt-4 flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#34c5c5]" /> You set the pace. Nothing is forced. This is for you.</p>
               </div>
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5">
                 <Image src="https://66x17tzw9x.ufs.sh/f/WajS70ZPD48mbd5aZXEPMWOdI2tZTychSL6jHBKm47XinweF" alt="Krystalore Crews — the 34-Minute Mindful Method" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
@@ -99,7 +99,7 @@ export default function ThirtyFourPage() {
         </section>
 
         {/* 2% BAND */}
-        <section className="bg-gradient-to-br from-[#0D9488] to-[#0a5d58] py-14 text-white">
+        <section className="bg-[#34c5c5] py-14 text-white">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <p className="text-white/70 font-bold uppercase tracking-[0.2em] text-xs mb-2">The math of self-love</p>
             <h2 className="text-3xl md:text-4xl font-black mb-6">You have 1,440 minutes in a day.<br className="hidden sm:block" /> Give yourself 34.</h2>
@@ -107,14 +107,14 @@ export default function ThirtyFourPage() {
               <span className="text-5xl md:text-6xl font-black text-[#E8A849]">2%</span>
               <span className="text-left text-white/85 text-sm font-semibold">of your day —<br />the 2% that pours<br />back into you.</span>
             </div>
-            <p className="text-white/80 mt-6 max-w-xl mx-auto">It is the best, most impactful, most powerful 2% you can spend. The one practice that fills you, so you can keep filling everyone else.</p>
+            <p className="text-white/90 mt-6 max-w-xl mx-auto">The one practice for you that allows you to maximize your ability to pour into everyone else. The best 2% of your day should be invested in you — because you are your best investment.</p>
           </div>
         </section>
 
         {/* THE METHOD — 3 STEPS */}
         <section id="method" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs mb-2">The method</p>
+            <p className="text-[#34c5c5] font-bold uppercase tracking-[0.18em] text-xs mb-2">The method</p>
             <h2 className="text-3xl md:text-4xl font-black text-gray-900">Three steps. Thirty-four minutes.</h2>
             <p className="text-gray-600 mt-3">Meditate, move, reflect. A simple daily flow — <b className="text-gray-900">2 + 30 + 2</b> — designed for the busy person who needs it most.</p>
           </div>
@@ -122,7 +122,7 @@ export default function ThirtyFourPage() {
           {/* proportion bar */}
           <div className="flex rounded-full overflow-hidden mb-8 ring-1 ring-gray-200 h-3">
             <div style={{ width: '6%', background: '#34c5c5' }} title="2 min" />
-            <div style={{ width: '88%', background: '#0D9488' }} title="30 min" />
+            <div style={{ width: '88%', background: '#34c5c5' }} title="30 min" />
             <div style={{ width: '6%', background: '#E8A849' }} title="2 min" />
           </div>
 
@@ -157,7 +157,7 @@ export default function ThirtyFourPage() {
                 <Image src="/images/go9/community-hands.jpg" alt="A self-love and self-trust practice for busy people" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
               <div className="order-1 lg:order-2">
-                <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs mb-2">Who it&rsquo;s for</p>
+                <p className="text-[#34c5c5] font-bold uppercase tracking-[0.18em] text-xs mb-2">Who it&rsquo;s for</p>
                 <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">For the one who pours into everything else.</h2>
                 <p className="text-gray-600 mb-5">You give yourself to everyone and everything — and somewhere in there, you forgot you were on the list too. The 34-Minute Mindful Method is a <b className="text-gray-900">self-love and self-trust practice</b>: regulate your nervous system, rebuild your confidence, and meet your busy life with intention.</p>
                 <div className="flex flex-wrap gap-2 mb-5">
@@ -185,7 +185,7 @@ export default function ThirtyFourPage() {
         <section id="meditations" className="bg-[#F6F8FA] py-14">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs mb-2">Start your practice · Just Breathe</p>
+              <p className="text-[#34c5c5] font-bold uppercase tracking-[0.18em] text-xs mb-2">Start your practice · Just Breathe</p>
               <h2 className="text-3xl md:text-4xl font-black text-gray-900">A busy mind makes meditation hard. So we made it simple.</h2>
               <p className="text-gray-600 mt-3">When you first begin, sitting still is the hardest part. <b className="text-gray-900">Just Breathe</b> is a library of short, guided meditations — in series for high performers, for change, for athletes, and for veterans. The first is <b className="text-gray-900">free</b>; the rest open with one step below.</p>
             </div>
@@ -196,12 +196,12 @@ export default function ThirtyFourPage() {
                 return (
                   <div key={s.name} className={`rounded-2xl bg-white border p-6 ${accessible ? 'border-gray-200' : 'border-dashed border-[#34c5c5]/40'}`}>
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: accessible ? '#0D9488' : '#34c5c522' }}>
-                        <s.icon className="w-6 h-6" style={{ color: accessible ? '#fff' : '#0D9488' }} />
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: accessible ? '#34c5c5' : '#34c5c522' }}>
+                        <s.icon className="w-6 h-6" style={{ color: accessible ? '#fff' : '#34c5c5' }} />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-[11px] font-black uppercase tracking-wider text-[#0D9488]">{s.tag}</span>
+                          <span className="text-[11px] font-black uppercase tracking-wider text-[#34c5c5]">{s.tag}</span>
                           {s.free && <span className="text-[10px] font-black bg-[#E8A849] text-white px-2 py-0.5 rounded-full">FREE</span>}
                           {!accessible && <span className="inline-flex items-center gap-1 text-[10px] font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full"><Lock className="w-3 h-3" /> LOCKED</span>}
                         </div>
@@ -228,8 +228,8 @@ export default function ThirtyFourPage() {
             </div>
 
             {unlocked && (
-              <div className="mt-8 bg-white rounded-2xl border-2 border-[#0D9488]/30 p-6 md:p-7">
-                <p className="text-[#0D9488] font-black flex items-center gap-2 mb-3"><Check className="w-5 h-5" /> Every series is unlocked.</p>
+              <div className="mt-8 bg-white rounded-2xl border-2 border-[#34c5c5]/30 p-6 md:p-7">
+                <p className="text-[#34c5c5] font-black flex items-center gap-2 mb-3"><Check className="w-5 h-5" /> Every series is unlocked.</p>
                 <p className="text-gray-600 text-sm mb-4">Listen to the full Just Breathe library free, and Krystalore will email you the guided 34-minute sequence.</p>
                 <SpotifyPlayer />
               </div>
@@ -256,7 +256,7 @@ export default function ThirtyFourPage() {
         <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/50 p-4" onClick={() => setGateOpen(false)}>
           <form onSubmit={submitGate} onClick={(e) => e.stopPropagation()} className="bg-white rounded-3xl p-7 md:p-8 w-full max-w-md shadow-2xl relative">
             <button type="button" onClick={() => setGateOpen(false)} className="absolute top-4 right-4 text-gray-300 hover:text-gray-500"><X className="w-5 h-5" /></button>
-            <div className="w-14 h-14 rounded-2xl bg-[#0D9488]/10 flex items-center justify-center mx-auto mb-4"><Lock className="w-7 h-7 text-[#0D9488]" /></div>
+            <div className="w-14 h-14 rounded-2xl bg-[#34c5c5]/10 flex items-center justify-center mx-auto mb-4"><Lock className="w-7 h-7 text-[#34c5c5]" /></div>
             <h2 className="text-2xl font-black text-gray-900 text-center mb-1">Unlock every meditation series</h2>
             <p className="text-gray-500 text-center text-sm mb-5">Just Breathe is yours free. Tell me where to send the rest — Four Seasons of Change, Athletes, Veterans — and the full 34-minute sequence.</p>
             <div className="space-y-2.5">
