@@ -65,6 +65,9 @@ const nextConfig = {
       // already — do NOT add a /HNM rule or it self-loops.
       { source: '/check', destination: '/hnm', permanent: true },
 
+      // Zoom room shortcut
+      { source: '/zoom', destination: 'https://us06web.zoom.us/j/8312497139?pwd=NGFwYUx6dUR6cmpyK1hZSUgwc2Fodz09#success', permanent: true },
+
     ]
   },
 }
