@@ -87,7 +87,7 @@ export default function ThirtyFourPage() {
                 <p className="text-lg md:text-xl text-gray-600 font-light mb-7">For the one who runs on empty and still pours into everyone else. <b className="text-gray-900">Three steps. Thirty-four minutes.</b> Just <b className="text-gray-900">2% of your day</b> — and the most powerful 2% you will ever give yourself.</p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a href="#method" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"><Play className="w-5 h-5" /> See the Method</a>
-                  <a href="/voice" className="inline-flex items-center justify-center gap-2 bg-white border-2 border-[#34c5c5]/50 text-[#0D9488] font-black px-7 py-4 rounded-2xl hover:bg-[#34c5c5]/5 transition-colors"><Mic className="w-5 h-5" /> Free Voice Analyzer</a>
+                  <a href="/voice" className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#84d7d7] text-white font-black px-7 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all"><Mic className="w-5 h-5" /> Free Voice Analyzer</a>
                 </div>
                 <p className="text-xs text-gray-400 mt-4 flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#0D9488]" /> You set the pace. Nothing is forced. This is for you.</p>
               </div>
@@ -104,7 +104,7 @@ export default function ThirtyFourPage() {
             <p className="text-white/70 font-bold uppercase tracking-[0.2em] text-xs mb-2">The math of self-love</p>
             <h2 className="text-3xl md:text-4xl font-black mb-6">You have 1,440 minutes in a day.<br className="hidden sm:block" /> Give yourself 34.</h2>
             <div className="inline-flex items-baseline gap-3 bg-white/10 rounded-2xl px-8 py-5 ring-1 ring-white/20">
-              <span className="text-5xl md:text-6xl font-black text-[#F2D278]">2%</span>
+              <span className="text-5xl md:text-6xl font-black text-[#E8A849]">2%</span>
               <span className="text-left text-white/85 text-sm font-semibold">of your day —<br />the 2% that pours<br />back into you.</span>
             </div>
             <p className="text-white/80 mt-6 max-w-xl mx-auto">It is the best, most impactful, most powerful 2% you can spend. The one practice that fills you, so you can keep filling everyone else.</p>
@@ -213,7 +213,7 @@ export default function ThirtyFourPage() {
                       {s.free ? (
                         <SpotifyPlayer compact />
                       ) : accessible ? (
-                        <a href={`https://open.spotify.com/show/${SPOTIFY_SHOW_ID}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#0D9488] font-bold text-sm border border-[#34c5c5]/40 rounded-xl px-4 py-2 hover:bg-[#34c5c5]/5">
+                        <a href={`https://open.spotify.com/show/${SPOTIFY_SHOW_ID}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#84d7d7] text-white font-bold text-sm rounded-xl px-4 py-2 transition-colors">
                           <Headphones className="w-4 h-4" /> Listen in the library
                         </a>
                       ) : (
