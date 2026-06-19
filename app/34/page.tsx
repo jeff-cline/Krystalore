@@ -5,28 +5,39 @@ import Image from 'next/image'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import {
-  Wind, Anchor, Activity, Heart, Sparkles, Mountain, Lock, Play, ArrowRight,
-  Phone, ShieldCheck, Clock, Check, X, Headphones,
+  Wind, Activity, Sparkles, ShieldCheck, Lock, Play, ArrowRight,
+  Phone, Clock, Check, X, Headphones, Mic, Heart,
 } from 'lucide-react'
 
 const SPOTIFY_SHOW_ID = '6acctiaNwQqFy8HVuiXlN7'
 
-type Movement = { n: number; name: string; tag: string; mins: string; icon: any; desc: string; free?: boolean }
+type Step = { n: number; mins: number; name: string; tag: string; icon: any; color: string; desc: string; items: string[] }
+type Series = { name: string; tag: string; icon: any; desc: string; free?: boolean }
 
-const MOVEMENTS: Movement[] = [
-  { n: 1, name: 'Just Breathe', tag: 'Arrive', mins: '5 min', icon: Wind, free: true,
-    desc: 'Before anything changes, your body has to feel safe. We start with breath — slow, low, and yours — to tell your nervous system it can come down off high alert.' },
-  { n: 2, name: 'Anchor', tag: 'Your Inner Resource', mins: '6 min', icon: Anchor,
-    desc: 'Build a felt sense of safety you can return to anytime — a steady place inside you that the hardest day cannot reach.' },
-  { n: 3, name: 'Body Truth', tag: 'Somatic Sensing', mins: '6 min', icon: Activity,
-    desc: 'Your body keeps the score — and the wisdom. A gentle, choice-full scan that lets sensation speak without ever flooding you.' },
-  { n: 4, name: 'Welcome', tag: 'Feeling & Its Opposite', mins: '6 min', icon: Heart,
-    desc: 'Meet what is here — the tension and the ease, the grief and the relief — and feel your nervous system learn it can hold both at once.' },
-  { n: 5, name: 'Rewrite', tag: 'The Story Underneath', mins: '6 min', icon: Sparkles,
-    desc: 'The belief that has been running you — “I have to earn rest,” “I am too much” — meets its truer counter-story. This is where identity shifts.' },
-  { n: 6, name: 'Whole', tag: 'Rise & Integrate', mins: '5 min', icon: Mountain,
-    desc: 'Drop beneath the noise into the steady joy that was never gone — and carry it back into your real life: your work, your people, your mission.' },
+const STEPS: Step[] = [
+  { n: 1, mins: 2, name: 'Arrive', tag: 'Meditate', icon: Wind, color: '#34c5c5',
+    desc: 'Two minutes of mindful meditation — set your intention, name your goal, and drop into gratitude. You start the day on your own terms, before anyone else needs you.',
+    items: ['Mindful meditation', 'Intention & goal setting', 'Gratitude practice'] },
+  { n: 2, mins: 30, name: 'Move', tag: 'Movement', icon: Activity, color: '#0D9488',
+    desc: 'Thirty minutes of mindful movement — stretching, breath work, and nervous-system regulation — finishing with a cool-down and real rest and recovery.',
+    items: ['Mindful movement & stretching', 'Breath work', 'Nervous-system regulation', 'Cool-down, rest & recovery'] },
+  { n: 3, mins: 2, name: 'Reflect', tag: 'Celebrate', icon: Sparkles, color: '#E8A849',
+    desc: 'Two minutes of celebration and reflection — a feedback loop for your brain to register everything you accomplished, and a daily reflection to close the day strong.',
+    items: ['Celebrate the win', 'Daily reflection', 'Feedback loop for the brain'] },
 ]
+
+const SERIES: Series[] = [
+  { name: 'Just Breathe', tag: 'For the High Performer', icon: Wind, free: true,
+    desc: 'Short, powerful guided meditations to begin your practice — for the leader who needs peace in three minutes.' },
+  { name: 'Four Seasons of Change', tag: 'Healing & New Beginnings', icon: Sparkles,
+    desc: 'Meditations for identity shifts, healing, and stepping fully into your next chapter.' },
+  { name: 'For Athletes', tag: 'Power & Performance', icon: Activity,
+    desc: 'Focus, recovery, and mindset meditations for the body that performs.' },
+  { name: 'For Veterans', tag: 'Resilience & Reset', icon: ShieldCheck,
+    desc: 'Grounding and steadiness for those who have carried the most.' },
+]
+
+const POURS = ['Their family', 'Their fitness', 'Their business', 'Their community', 'Their job']
 
 function SpotifyPlayer({ compact = false }: { compact?: boolean }) {
   return (
@@ -57,7 +68,7 @@ export default function ThirtyFourPage() {
     try { await fetch('/api/voice-lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(lead) }) } catch {}
     try { localStorage.setItem('34-unlocked', '1') } catch {}
     setUnlocked(true); setSubmitting(false); setGateOpen(false)
-    setTimeout(() => { document.getElementById('movements')?.scrollIntoView({ behavior: 'smooth' }) }, 100)
+    setTimeout(() => { document.getElementById('meditations')?.scrollIntoView({ behavior: 'smooth' }) }, 100)
   }
 
   return (
@@ -70,15 +81,15 @@ export default function ThirtyFourPage() {
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div>
                 <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#0D9488] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
-                  <Clock className="w-3.5 h-3.5" /> Somatic · Trauma-Informed · 34 Minutes
+                  <Heart className="w-3.5 h-3.5" /> The Ultimate Self-Love &amp; Self-Trust Practice
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-3 leading-[1.05]">The 34-Minute Mindful Method</h1>
-                <p className="text-lg md:text-xl text-gray-600 font-light mb-7">Mind the mind. A somatic, trauma-informed nervous-system reset in <b className="text-gray-900">6 movements</b> and just <b className="text-gray-900">34 minutes</b> — built for the woman who carries everything. <span className="text-[#0D9488] font-semibold">Start free with Just Breathe.</span></p>
+                <p className="text-lg md:text-xl text-gray-600 font-light mb-7">For the one who runs on empty and still pours into everyone else. <b className="text-gray-900">Three steps. Thirty-four minutes.</b> Just <b className="text-gray-900">2% of your day</b> — and the most powerful 2% you will ever give yourself.</p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <a href="#movements" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"><Play className="w-5 h-5" /> Listen Free Now</a>
-                  <button onClick={() => setGateOpen(true)} className="inline-flex items-center justify-center gap-2 bg-white border-2 border-[#34c5c5]/50 text-[#0D9488] font-black px-7 py-4 rounded-2xl hover:bg-[#34c5c5]/5 transition-colors"><Lock className="w-5 h-5" /> Unlock the Full Method</button>
+                  <a href="#method" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"><Play className="w-5 h-5" /> See the Method</a>
+                  <a href="/voice" className="inline-flex items-center justify-center gap-2 bg-white border-2 border-[#34c5c5]/50 text-[#0D9488] font-black px-7 py-4 rounded-2xl hover:bg-[#34c5c5]/5 transition-colors"><Mic className="w-5 h-5" /> Free Voice Analyzer</a>
                 </div>
-                <p className="text-xs text-gray-400 mt-4 flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#0D9488]" /> You set the pace. Nothing is forced. Stop any time.</p>
+                <p className="text-xs text-gray-400 mt-4 flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#0D9488]" /> You set the pace. Nothing is forced. This is for you.</p>
               </div>
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5">
                 <Image src="/images/scraped/krystalore-coaching-headshot.jpg" alt="Krystalore Crews — somatic, trauma-informed mindfulness coach" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
@@ -87,66 +98,119 @@ export default function ThirtyFourPage() {
           </div>
         </section>
 
-        {/* TRUMPS THE 10-STEP */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs mb-2">Why this method</p>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900">The depth of a 10-step protocol. The time your life actually has.</h2>
-            <p className="text-gray-600 mt-3">The clinical protocols work — but 10 steps and 45 minutes weren&rsquo;t built for a woman running a company, a household, and a mission. So Krystalore took the same evidence-based bones — breath, body, emotion, belief, integration — made them somatic and trauma-informed, and gave them back to you in 34 minutes.</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            <div className="rounded-2xl border border-gray-200 p-6 bg-[#F6F8FA]">
-              <p className="font-black text-gray-500 mb-3">The old way</p>
-              <ul className="space-y-2 text-sm text-gray-500">
-                {['10 steps to remember', '45+ minutes you don’t have', 'Clinical, one-size language', 'Designed for a quiet room and no kids'].map((t) => (
-                  <li key={t} className="flex items-start gap-2"><X className="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-400" />{t}</li>
-                ))}
-              </ul>
+        {/* 2% BAND */}
+        <section className="bg-gradient-to-br from-[#0D9488] to-[#0a5d58] py-14 text-white">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <p className="text-white/70 font-bold uppercase tracking-[0.2em] text-xs mb-2">The math of self-love</p>
+            <h2 className="text-3xl md:text-4xl font-black mb-6">You have 1,440 minutes in a day.<br className="hidden sm:block" /> Give yourself 34.</h2>
+            <div className="inline-flex items-baseline gap-3 bg-white/10 rounded-2xl px-8 py-5 ring-1 ring-white/20">
+              <span className="text-5xl md:text-6xl font-black text-[#F2D278]">2%</span>
+              <span className="text-left text-white/85 text-sm font-semibold">of your day —<br />the 2% that pours<br />back into you.</span>
             </div>
-            <div className="rounded-2xl border-2 border-[#34c5c5]/40 p-6 bg-white shadow-sm">
-              <p className="font-black text-[#0D9488] mb-3">The 34-Minute Mindful Method</p>
-              <ul className="space-y-2 text-sm text-gray-700">
-                {['6 movements, one flow', '34 minutes — or one movement on a break', 'Somatic & trauma-informed: you stay in choice', 'Built for real, loud, beautiful lives'].map((t) => (
-                  <li key={t} className="flex items-start gap-2"><Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#0D9488]" />{t}</li>
-                ))}
-              </ul>
+            <p className="text-white/80 mt-6 max-w-xl mx-auto">It is the best, most impactful, most powerful 2% you can spend. The one practice that fills you, so you can keep filling everyone else.</p>
+          </div>
+        </section>
+
+        {/* THE METHOD — 3 STEPS */}
+        <section id="method" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs mb-2">The method</p>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900">Three steps. Thirty-four minutes.</h2>
+            <p className="text-gray-600 mt-3">Meditate, move, reflect. A simple daily flow — <b className="text-gray-900">2 + 30 + 2</b> — designed for the busy person who needs it most.</p>
+          </div>
+
+          {/* proportion bar */}
+          <div className="flex rounded-full overflow-hidden mb-8 ring-1 ring-gray-200 h-3">
+            <div style={{ width: '6%', background: '#34c5c5' }} title="2 min" />
+            <div style={{ width: '88%', background: '#0D9488' }} title="30 min" />
+            <div style={{ width: '6%', background: '#E8A849' }} title="2 min" />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {STEPS.map((s) => (
+              <div key={s.n} className="rounded-2xl bg-white border border-gray-200 p-6 shadow-sm flex flex-col">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: s.color }}>
+                    <s.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-black uppercase tracking-wider" style={{ color: s.color }}>Step {s.n} · {s.tag}</span>
+                    <p className="text-xl font-black text-gray-900 leading-tight">{s.name} <span className="text-gray-400 text-sm font-bold">{s.mins} min</span></p>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">{s.desc}</p>
+                <ul className="space-y-1.5 mt-auto">
+                  {s.items.map((it) => (
+                    <li key={it} className="flex items-center gap-2 text-sm text-gray-700"><Check className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />{it}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* WHO IT'S FOR */}
+        <section className="bg-[#F6F8FA] py-14">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl ring-1 ring-black/5 order-2 lg:order-1">
+                <Image src="/images/go9/community-hands.jpg" alt="A self-love and self-trust practice for busy people" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+              </div>
+              <div className="order-1 lg:order-2">
+                <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs mb-2">Who it&rsquo;s for</p>
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">For the one who pours into everything else.</h2>
+                <p className="text-gray-600 mb-5">You give yourself to everyone and everything — and somewhere in there, you forgot you were on the list too. The 34-Minute Mindful Method is a <b className="text-gray-900">self-love and self-trust practice</b>: regulate your nervous system, rebuild your confidence, and meet your busy life with intention.</p>
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {POURS.map((p) => (
+                    <span key={p} className="inline-flex items-center gap-1.5 bg-white border border-gray-200 rounded-full px-3 py-1.5 text-sm font-semibold text-gray-700"><Heart className="w-3.5 h-3.5 text-[#e07800]" /> {p}</span>
+                  ))}
+                </div>
+                <p className="text-gray-600">Become more intentional with <b className="text-gray-900">yourself</b>, the relationship you have with yourself, with others, in your fitness, your business, your relationships, your marriage — your whole life.</p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* THE MOVEMENTS */}
-        <section id="movements" className="bg-[#F6F8FA] py-14">
+        {/* VOICE ANALYZER / TECH */}
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          <div className="rounded-3xl bg-gradient-to-br from-[#34c5c5]/12 to-[#E8A849]/12 border border-[#34c5c5]/30 p-8 md:p-10 text-center">
+            <div className="inline-flex items-center gap-2 bg-[#e07800] text-white text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full mb-4"><Sparkles className="w-3.5 h-3.5" /> New · Tech for the busy mind</div>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-3">Not sure where to start? Let your voice tell you.</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-6">We leveraged technology for the busy person: a <b className="text-gray-900">30-second voice analyzer</b> that reads how stressed and burned out you really are — and hands you a real assessment and your very next step.</p>
+            <a href="/voice" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black text-lg px-9 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"><Mic className="w-5 h-5" /> Free Voice Analyzer</a>
+          </div>
+        </section>
+
+        {/* JUST BREATHE MEDITATIONS */}
+        <section id="meditations" className="bg-[#F6F8FA] py-14">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs mb-2">Six movements · 34 minutes</p>
-              <h2 className="text-3xl md:text-4xl font-black text-gray-900">One nervous-system reset, start to finish.</h2>
-              <p className="text-gray-600 mt-3">Movement 1 is <b className="text-gray-900">free — listen right now.</b> The other five open with one step below. Trauma-informed throughout: you choose how far you go, and you can stop at any breath.</p>
+              <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs mb-2">Start your practice · Just Breathe</p>
+              <h2 className="text-3xl md:text-4xl font-black text-gray-900">A busy mind makes meditation hard. So we made it simple.</h2>
+              <p className="text-gray-600 mt-3">When you first begin, sitting still is the hardest part. <b className="text-gray-900">Just Breathe</b> is a library of short, guided meditations — in series for high performers, for change, for athletes, and for veterans. The first is <b className="text-gray-900">free</b>; the rest open with one step below.</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-5">
-              {MOVEMENTS.map((m) => {
-                const accessible = m.free || unlocked
+              {SERIES.map((s) => {
+                const accessible = s.free || unlocked
                 return (
-                  <div key={m.n} className={`relative rounded-2xl bg-white border p-6 ${accessible ? 'border-gray-200' : 'border-dashed border-[#34c5c5]/40'}`}>
+                  <div key={s.name} className={`rounded-2xl bg-white border p-6 ${accessible ? 'border-gray-200' : 'border-dashed border-[#34c5c5]/40'}`}>
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: accessible ? '#0D9488' : '#34c5c522' }}>
-                        <m.icon className="w-6 h-6" style={{ color: accessible ? '#fff' : '#0D9488' }} />
+                        <s.icon className="w-6 h-6" style={{ color: accessible ? '#fff' : '#0D9488' }} />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-[11px] font-black uppercase tracking-wider text-[#0D9488]">Movement {m.n}</span>
-                          <span className="text-[11px] text-gray-400">· {m.mins}</span>
-                          {m.free && <span className="text-[10px] font-black bg-[#E8A849] text-white px-2 py-0.5 rounded-full">FREE</span>}
+                          <span className="text-[11px] font-black uppercase tracking-wider text-[#0D9488]">{s.tag}</span>
+                          {s.free && <span className="text-[10px] font-black bg-[#E8A849] text-white px-2 py-0.5 rounded-full">FREE</span>}
                           {!accessible && <span className="inline-flex items-center gap-1 text-[10px] font-black bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full"><Lock className="w-3 h-3" /> LOCKED</span>}
                         </div>
-                        <h3 className="text-xl font-black text-gray-900 mt-1">{m.name} <span className="text-gray-400 font-semibold text-base">— {m.tag}</span></h3>
-                        <p className="text-sm text-gray-600 mt-1.5 leading-relaxed">{m.desc}</p>
+                        <h3 className="text-xl font-black text-gray-900 mt-1">{s.name}</h3>
+                        <p className="text-sm text-gray-600 mt-1.5 leading-relaxed">{s.desc}</p>
                       </div>
                     </div>
-
-                    {/* access area */}
                     <div className="mt-4">
-                      {m.free ? (
+                      {s.free ? (
                         <SpotifyPlayer compact />
                       ) : accessible ? (
                         <a href={`https://open.spotify.com/show/${SPOTIFY_SHOW_ID}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#0D9488] font-bold text-sm border border-[#34c5c5]/40 rounded-xl px-4 py-2 hover:bg-[#34c5c5]/5">
@@ -165,40 +229,22 @@ export default function ThirtyFourPage() {
 
             {unlocked && (
               <div className="mt-8 bg-white rounded-2xl border-2 border-[#0D9488]/30 p-6 md:p-7">
-                <p className="text-[#0D9488] font-black flex items-center gap-2 mb-3"><Check className="w-5 h-5" /> Your full method is unlocked.</p>
-                <p className="text-gray-600 text-sm mb-4">Listen to every movement free in the Just Breathe library. Krystalore will also email you the guided 34-minute sequence in order.</p>
+                <p className="text-[#0D9488] font-black flex items-center gap-2 mb-3"><Check className="w-5 h-5" /> Every series is unlocked.</p>
+                <p className="text-gray-600 text-sm mb-4">Listen to the full Just Breathe library free, and Krystalore will email you the guided 34-minute sequence.</p>
                 <SpotifyPlayer />
               </div>
             )}
           </div>
         </section>
 
-        {/* TRAUMA-INFORMED CREDIBILITY */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl ring-1 ring-black/5">
-              <Image src="/images/go9/community-hands.jpg" alt="Somatic, trauma-informed mindfulness in community" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-            </div>
-            <div>
-              <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs mb-2">Why somatic &amp; trauma-informed</p>
-              <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Healing your body can feel without flooding it.</h2>
-              <div className="space-y-3 text-gray-600">
-                <p>You can&rsquo;t think your way out of a body stuck on high alert. The 34-Minute Mindful Method works <b className="text-gray-900">bottom-up</b> — breath and sensation first — so your nervous system actually believes it&rsquo;s safe.</p>
-                <p>Trauma-informed means you&rsquo;re never asked to relive anything. You titrate: small doses, your pace, always with an anchor to return to. That&rsquo;s the difference between feeling more and feeling <i>more in control.</i></p>
-              </div>
-              <p className="text-xs text-gray-400 mt-5">Wellness practice for self-regulation and reflection — not medical or psychological treatment. If you&rsquo;re in crisis, please reach out to a qualified professional.</p>
-            </div>
-          </div>
-        </section>
-
         {/* FINAL CTA */}
-        <section className="bg-gradient-to-br from-[#0D9488] to-[#0a5d58] py-16">
+        <section className="bg-gradient-to-br from-[#E8A849] to-[#e07800] py-16">
           <div className="max-w-3xl mx-auto px-4 text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-black mb-3">Ready to shift your energy?</h2>
-            <p className="text-white/85 mb-7 max-w-xl mx-auto">Start with Just Breathe today. When you&rsquo;re ready to go deeper, Krystalore — the ShYft Master — will meet you there.</p>
+            <h2 className="text-3xl md:text-4xl font-black mb-3">Give yourself the 2%.</h2>
+            <p className="text-white/90 mb-7 max-w-xl mx-auto">Start with your free voice analyzer and your first Just Breathe meditation today. When you&rsquo;re ready to go deeper, Krystalore will meet you there.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="/book" className="inline-flex items-center justify-center gap-2 bg-white text-[#0D9488] font-black px-7 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"><Phone className="w-5 h-5" /> Book a Call</a>
-              <a href="/start" className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/40 text-white font-black px-7 py-4 rounded-2xl hover:bg-white/20 transition-colors">Explore Your Journey <ArrowRight className="w-5 h-5" /></a>
+              <a href="/voice" className="inline-flex items-center justify-center gap-2 bg-white text-[#e07800] font-black px-7 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"><Mic className="w-5 h-5" /> Free Voice Analyzer</a>
+              <a href="/book" className="inline-flex items-center justify-center gap-2 bg-white/15 border border-white/50 text-white font-black px-7 py-4 rounded-2xl hover:bg-white/25 transition-colors"><Phone className="w-5 h-5" /> Book a Call</a>
             </div>
           </div>
         </section>
@@ -211,8 +257,8 @@ export default function ThirtyFourPage() {
           <form onSubmit={submitGate} onClick={(e) => e.stopPropagation()} className="bg-white rounded-3xl p-7 md:p-8 w-full max-w-md shadow-2xl relative">
             <button type="button" onClick={() => setGateOpen(false)} className="absolute top-4 right-4 text-gray-300 hover:text-gray-500"><X className="w-5 h-5" /></button>
             <div className="w-14 h-14 rounded-2xl bg-[#0D9488]/10 flex items-center justify-center mx-auto mb-4"><Lock className="w-7 h-7 text-[#0D9488]" /></div>
-            <h2 className="text-2xl font-black text-gray-900 text-center mb-1">Unlock all 6 movements</h2>
-            <p className="text-gray-500 text-center text-sm mb-5">Movement 1 is yours free. Tell me where to send the other five — and the full 34-minute sequence.</p>
+            <h2 className="text-2xl font-black text-gray-900 text-center mb-1">Unlock every meditation series</h2>
+            <p className="text-gray-500 text-center text-sm mb-5">Just Breathe is yours free. Tell me where to send the rest — Four Seasons of Change, Athletes, Veterans — and the full 34-minute sequence.</p>
             <div className="space-y-2.5">
               <input value={name} onChange={(e) => setName(e.target.value)} placeholder="First name *" className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-[#34c5c5]" />
               <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email *" className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-[#34c5c5]" />
@@ -221,7 +267,7 @@ export default function ThirtyFourPage() {
             </div>
             {err && <p className="text-red-400 text-sm mt-2">Please add your name and email.</p>}
             <button type="submit" disabled={submitting} className="w-full mt-4 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black py-3.5 rounded-xl disabled:opacity-60">
-              {submitting ? 'Unlocking…' : <>Unlock the full method <ArrowRight className="w-5 h-5" /></>}
+              {submitting ? 'Unlocking…' : <>Unlock the meditations <ArrowRight className="w-5 h-5" /></>}
             </button>
             <p className="text-[11px] text-gray-400 text-center mt-3">We respect your privacy. No spam — just your meditations and the occasional note from Krystalore.</p>
           </form>
