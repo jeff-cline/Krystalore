@@ -92,7 +92,7 @@ export default function ThirtyFourPage() {
                 <p className="text-xs text-gray-400 mt-4 flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#0D9488]" /> You set the pace. Nothing is forced. This is for you.</p>
               </div>
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5">
-                <Image src="/images/scraped/krystalore-coaching-headshot.jpg" alt="Krystalore Crews — somatic, trauma-informed mindfulness coach" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <Image src="https://66x17tzw9x.ufs.sh/f/WajS70ZPD48mbd5aZXEPMWOdI2tZTychSL6jHBKm47XinweF" alt="Krystalore Crews — the 34-Minute Mindful Method" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
               </div>
             </div>
           </div>
