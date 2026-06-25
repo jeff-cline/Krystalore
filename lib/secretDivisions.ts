@@ -494,7 +494,7 @@ export const DIVISIONS: Division[] = [
     label: 'Politicians',
     tag: 'Confidential · Executive-Level Political Advisory',
     programTitle: 'Strategic Political Advisory & Campaign Advancement',
-    programSubtitle: 'Confidential · Executive-Level Political Advisory',
+    programSubtitle: 'Win Elections · Raise Capital · Build a Legacy',
     icon: 'shield',
     intro:
       'We operate behind the scenes. Our role is to make the candidate more effective, more disciplined, more connected, better funded, and better positioned for every election cycle. We are not the public face. We are the trusted advisor behind the curtain.',
