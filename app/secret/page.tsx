@@ -185,12 +185,14 @@ function LockGate({ pw, setPw, error, onSubmit }: {
 }) {
   // Deterministic crystal field (no Math.random — keeps SSR/CSR consistent).
   const crystals = useMemo(
-    () => Array.from({ length: 18 }, (_, i) => ({
-      left: (i * 53) % 100,
-      size: 8 + ((i * 7) % 22),
-      delay: (i % 9) * 1.3,
-      duration: 9 + (i % 6) * 2,
-      opacity: 0.06 + (i % 5) * 0.04,
+    () => Array.from({ length: 22 }, (_, i) => ({
+      left: (i * 37 + (i % 3) * 11) % 100,
+      size: 16 + ((i * 9) % 34),
+      delay: (i % 11) * 1.1,
+      duration: 10 + (i % 7) * 2,
+      opacity: 0.4 + (i % 4) * 0.12,
+      blur: i % 5 === 0 ? 1.5 : 0,
+      spin: i % 2 === 0 ? 200 : -160,
     })),
     [],
   )
@@ -202,17 +204,19 @@ function LockGate({ pw, setPw, error, onSubmit }: {
         {crystals.map((c, i) => (
           <span
             key={i}
-            className="crystal absolute top-[-10%] block rotate-45 rounded-[3px]"
+            className="crystal absolute top-[-12%] block"
             style={{
               left: `${c.left}%`,
               width: `${c.size}px`,
-              height: `${c.size}px`,
               opacity: c.opacity,
-              background: 'linear-gradient(135deg,#34c5c5,#0D9488)',
+              filter: c.blur ? `blur(${c.blur}px)` : undefined,
               animationDelay: `${c.delay}s`,
               animationDuration: `${c.duration}s`,
+              ['--spin' as any]: `${c.spin}deg`,
             }}
-          />
+          >
+            <Gem />
+          </span>
         ))}
       </div>
 
@@ -261,13 +265,34 @@ function LockGate({ pw, setPw, error, onSubmit }: {
 
       <style>{`
         @keyframes kry-fall {
-          0%   { transform: translateY(-10vh) rotate(45deg); }
-          100% { transform: translateY(115vh) rotate(225deg); }
+          0%   { transform: translateY(-12vh) rotate(0deg); }
+          100% { transform: translateY(118vh) rotate(var(--spin, 180deg)); }
         }
-        .crystal { animation-name: kry-fall; animation-timing-function: linear; animation-iteration-count: infinite; }
+        .crystal { animation-name: kry-fall; animation-timing-function: linear; animation-iteration-count: infinite; will-change: transform; }
         @media (prefers-reduced-motion: reduce) { .crystal { animation: none; display: none; } }
       `}</style>
     </main>
+  )
+}
+
+/* Faceted teal diamond — matches the gem in the Krystalore Crews logo. */
+function Gem() {
+  return (
+    <svg viewBox="0 0 64 64" className="h-auto w-full drop-shadow-[0_2px_6px_rgba(13,148,136,0.25)]" aria-hidden>
+      {/* crown facets */}
+      <polygon points="20,8 4,24 32,24" fill="#34c5c5" />
+      <polygon points="20,8 32,24 44,8" fill="#6fd9d9" />
+      <polygon points="44,8 32,24 60,24" fill="#23b0b0" />
+      {/* pavilion facets */}
+      <polygon points="4,24 32,24 32,61" fill="#0D9488" />
+      <polygon points="60,24 32,24 32,61" fill="#076b62" />
+      {/* outline + facet edges for sparkle */}
+      <polygon points="20,8 44,8 60,24 32,61 4,24" fill="none" stroke="#ffffff" strokeOpacity="0.55" strokeWidth="1.1" strokeLinejoin="round" />
+      <line x1="4" y1="24" x2="60" y2="24" stroke="#ffffff" strokeOpacity="0.45" strokeWidth="0.9" />
+      <line x1="20" y1="8" x2="32" y2="24" stroke="#ffffff" strokeOpacity="0.3" strokeWidth="0.7" />
+      <line x1="44" y1="8" x2="32" y2="24" stroke="#ffffff" strokeOpacity="0.3" strokeWidth="0.7" />
+      <line x1="32" y1="24" x2="32" y2="61" stroke="#ffffff" strokeOpacity="0.25" strokeWidth="0.6" />
+    </svg>
   )
 }
 
