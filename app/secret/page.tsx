@@ -119,7 +119,7 @@ function money(n: number) {
   return '$' + n.toLocaleString('en-US')
 }
 
-function buildQuote(baseId: string, addArch: boolean, addAmplify: boolean) {
+function buildQuote(baseId: string, addArch: boolean, addAmplify: boolean, addCrisis: boolean, addImmersive: boolean) {
   const base = BASE_TIERS.find((t) => t.id === baseId) || BASE_TIERS[1]
   const parts: string[] = [base.name]
   let monthly: number = base.monthly
@@ -136,6 +136,21 @@ function buildQuote(baseId: string, addArch: boolean, addAmplify: boolean) {
     else if (baseId === 'inner-circle') monthly = 12500
     else { monthlyCustom = true; note = 'Amplify on this tier is scoped custom on your call.' }
   }
+
+  // High-stakes activations multiply the retainer. Crisis = 3×, Fully Immersive = 3×.
+  // Both together bundle at 4× (instead of stacking to 9×).
+  let multiplier = 1
+  if (addCrisis && addImmersive) { multiplier = 4; parts.push('Crisis + Fully Immersive') }
+  else if (addCrisis) { multiplier = 3; parts.push('Crisis Activation') }
+  else if (addImmersive) { multiplier = 3; parts.push('Fully Immersive') }
+
+  if (multiplier > 1) {
+    const which = addCrisis && addImmersive ? 'Crisis + Fully Immersive bundle' : addCrisis ? 'Crisis Activation' : 'Fully Immersive'
+    const mult = `${which} — ${multiplier}× the retainer.`
+    note = note ? `${note} ${mult}` : mult
+  }
+
+  if (!monthlyCustom) monthly = monthly * multiplier
 
   const oneTime = addArch ? 5000 : 0
 
@@ -164,7 +179,9 @@ function InnerCircle() {
   const [baseId, setBaseId] = useState<string>('inner-circle')
   const [addArch, setAddArch] = useState(false)
   const [addAmplify, setAddAmplify] = useState(false)
-  const quote = buildQuote(baseId, addArch, addAmplify)
+  const [addCrisis, setAddCrisis] = useState(false)
+  const [addImmersive, setAddImmersive] = useState(false)
+  const quote = buildQuote(baseId, addArch, addAmplify, addCrisis, addImmersive)
 
   const formRef = useRef<HTMLDivElement>(null)
   const [form, setForm] = useState({
@@ -441,6 +458,17 @@ function InnerCircle() {
               <Toggle label="Add Growth Architecture" detail="Dashboard + systems · $5,000 build" on={addArch} onClick={() => setAddArch((v) => !v)} />
               <Toggle label="Add Amplify" detail="Market amplification engine" on={addAmplify} onClick={() => setAddAmplify((v) => !v)} />
             </div>
+
+            <div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#e07800]">High-stakes activations</p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Toggle label="Crisis Activation" detail="On-call rapid response · 3× the retainer" on={addCrisis} onClick={() => setAddCrisis((v) => !v)} />
+                <Toggle label="Fully Immersive" detail="Embedded, all-access · 3× the retainer" on={addImmersive} onClick={() => setAddImmersive((v) => !v)} />
+              </div>
+              {addCrisis && addImmersive && (
+                <p className="mt-2 text-xs font-medium text-[#0D9488]">Both active — bundled at 4× the retainer (instead of stacking to 9×).</p>
+              )}
+            </div>
           </div>
 
           <div className="lg:col-span-2">
@@ -499,10 +527,10 @@ function InnerCircle() {
       <section className="bg-[#0D9488]/[0.04] py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto mb-12 max-w-2xl text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#0D9488]">The Secret Weapon · Specialized Divisions</p>
-            <h2 className="mt-3 font-serif text-3xl font-medium text-gray-900 md:text-4xl">For those who carry a different kind of weight</h2>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#0D9488]">The Secret Weapon</p>
+            <h2 className="mt-3 font-serif text-3xl font-medium text-gray-900 md:text-4xl">Specialty Add-Ons for High-Profile Clients</h2>
             <p className="mt-4 leading-relaxed text-gray-600">
-              Certain lives demand a specialized hand. Each division is an add-on activation — and each one carries
+              Certain lives demand a specialized hand. Each is an add-on activation — and each one carries
               unique, high-stakes scenarios we anticipate and stand ready for, long before they arrive.
             </p>
           </div>
