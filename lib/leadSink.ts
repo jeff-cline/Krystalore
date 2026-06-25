@@ -24,6 +24,7 @@ const FUNNEL_LABELS: Record<string, string> = {
   contact: 'Contact Form',
   'private-application': 'Private Coaching Application',
   'inner-circle': 'Inner Circle Application',
+  'secret-weapon': 'Secret Weapon · Inner Circle Application',
 }
 
 export type LeadInput = {
