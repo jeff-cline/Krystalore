@@ -1,8 +1,13 @@
 'use client'
 
 import { Phone, Rocket } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 export default function BookACallButton() {
+  const pathname = usePathname()
+  // Hide the floating CTA stack on the invite-only /secret page.
+  if (pathname?.startsWith('/secret')) return null
+
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
       {/* START — interactive deck */}

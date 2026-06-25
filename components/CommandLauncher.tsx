@@ -1,10 +1,15 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 // Discreet crystal-logo launcher pinned bottom-left on every page.
 // Opens Krystalore's Command Center (/command) — her private directory of all pages.
 export default function CommandLauncher() {
+  const pathname = usePathname()
+  // Hide on the invite-only /secret page to keep it bare and exclusive.
+  if (pathname?.startsWith('/secret')) return null
+
   return (
     <Link
       href="/command"
