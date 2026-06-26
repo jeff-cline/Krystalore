@@ -7,8 +7,7 @@ const STAGES = [
     { label: 'Habit Tracker', href: '/habittracker' },
     { label: 'Power Hour Coworking', href: '/coworking' },
     { label: 'Quizzes', href: '/quizzes' },
-    { label: 'Thrive', href: 'https://www.facebook.com/groups/crewsbeyondlimits', ext: true },
-    { label: 'Facebook Community', href: 'https://www.facebook.com/groups/crewsbeyondlimits', ext: true },
+    { label: 'Thrive Facebook Community', href: 'https://www.facebook.com/groups/crewsbeyondlimits', ext: true },
   ] },
   { n: 2, tier: 'Entry Events', time: 'Weeks 1–4', color: '#0D9488', pos: { l: 99, t: 50 }, items: [
     { label: 'Vision Board Party', href: '/vision-board' },
