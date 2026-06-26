@@ -3,12 +3,13 @@
 import { useState } from 'react'
 
 const INTERESTS = [
-  'The Inner Circle Retainer',
+  'The Advisor — $3,500/mo',
+  'The Strategist — $7,500/mo',
+  'The Executive Partner — $18,000/mo',
   'Growth Architecture',
-  'Amplify',
-  'The Half-Day Intensive',
-  'The 3-Day Immersion',
-  'The Full Command / Empire Package',
+  'Crisis Activation',
+  'Fully Immersive',
+  'The Secret Weapon — full engagement',
   'Not sure yet — advise me',
 ]
 
@@ -23,10 +24,14 @@ export default function ApplyForm() {
     e.preventDefault()
     setSubmitting(true)
     try {
-      const r = await fetch('/api/inner-circle-retainer/apply', {
+      const r = await fetch('/api/secret/apply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        // map to the /api/secret/apply contract (engagement + biggestPressure)
+        body: JSON.stringify({
+          name: form.name, email: form.email, phone: form.phone, company: form.company,
+          role: form.role, engagement: form.interest, biggestPressure: form.message,
+        }),
       })
       if (r.ok) setDone(true)
     } catch { /* silent */ }

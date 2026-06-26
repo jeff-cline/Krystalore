@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'The Inner Circle Retainer',
-  description: 'Private executive advisory by application only. Some men hire a coach. The ones who dominate hire a secret weapon. Led by Krystalore Crews — 22 years Air Force, certified coach, somatic & leadership advisor.',
-  keywords: ['inner circle retainer', 'private executive advisory', 'executive coaching', 'leadership coaching', 'growth architecture', 'Krystalore Crews'],
+  title: 'The Inner Circle',
+  description: 'The highest level of private 1:1 access to Krystalore Crews — fitness coaching, emotional intelligence & high-performance coaching, and The Secret Weapon premium partnership.',
+  keywords: ['inner circle', 'private coaching', 'fitness coaching', 'emotional intelligence coaching', 'high performance coaching', 'executive coaching', 'Krystalore Crews'],
   openGraph: {
-    title: 'The Inner Circle Retainer | Krystalore Crews',
-    description: 'Private executive advisory by application only. The man running the empire needs someone managing the man.',
+    title: 'The Inner Circle | Krystalore Crews',
+    description: 'The highest level of private 1:1 access to Krystalore Crews — three ways in, from physical foundation to full strategic partnership.',
     type: 'website',
     url: 'https://krystalore.com/inner-circle',
     images: [{ url: 'https://krystalore.com/images/krystalore-crews-logo.png' }],
