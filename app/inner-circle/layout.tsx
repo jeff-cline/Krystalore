@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'The Inner Circle Retainer | Krystalore Crews',
+  title: 'The Inner Circle Retainer',
   description: 'Private executive advisory by application only. Some men hire a coach. The ones who dominate hire a secret weapon. Led by Krystalore Crews — 22 years Air Force, certified coach, somatic & leadership advisor.',
   keywords: ['inner circle retainer', 'private executive advisory', 'executive coaching', 'leadership coaching', 'growth architecture', 'Krystalore Crews'],
   openGraph: {
