@@ -12,7 +12,7 @@ export default function FitnessPage() {
     { title: 'Health Mastery', description: 'A complete system for lasting energy, smart nutrition, and whole-body health.', icon: '🌿', href: '/health-mastery', cta: 'Master Your Health' },
     { title: 'ShYft Mastery', description: 'The proprietary ShYft system to rebuild your body, mind, and momentum.', icon: '⚡', href: 'https://shyftmastery.com', ext: true, cta: 'Discover ShYft Mastery' },
     { title: 'Private Fitness Coaching', description: 'One-on-one coaching tailored to your goals, your body, and your schedule.', icon: '🎯', href: '/privatemindset', cta: 'Go Private' },
-    { title: 'Running Coaching', description: 'From first mile to finish line — endurance plans built on 26 marathon completions.', icon: '🏃‍♀️', href: '/book', cta: 'Start Running' },
+    { title: 'Running Coaching', description: 'From first mile to finish line — endurance plans built on 28 marathon completions.', icon: '🏃‍♀️', href: '/book', cta: 'Start Running' },
     { title: 'Wellness Retreats', description: 'Reset and recharge with immersive retreats for body, mind, and spirit.', icon: '🏝️', href: '/retreat', cta: 'Find a Retreat' },
   ]
 

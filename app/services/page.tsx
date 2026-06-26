@@ -188,26 +188,41 @@ export default function ServicesPage() {
         </section>
 
         {/* ===== INNER CIRCLE ===== */}
-        <section className="py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+        <section id="inner-circle" className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-14">
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <Crown className="w-8 h-8 text-[#E8A849]" />
-                  <span className="text-sm font-semibold tracking-widest uppercase text-[#E8A849]">The Inner Circle</span>
+                  <span className="text-sm font-semibold tracking-widest uppercase text-[#0D9488]">The Inner Circle</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Exclusive Access. Accelerated Growth.</h2>
-                <p className="text-gray-300 text-lg mb-6">The Inner Circle is Krystalore&apos;s premium membership community. Get direct access to group coaching, exclusive content, accountability partnerships, and a network of high-performing women committed to leveling up in every area of life.</p>
-                <ul className="space-y-3 mb-8">
-                  {['Weekly group coaching calls', 'Exclusive content & resources', 'Accountability partnerships', 'Private community access', 'Priority event registration', 'Direct access to Krystalore'].map(item => (
-                    <li key={item} className="flex items-center gap-3 text-gray-300"><Star className="w-4 h-4 text-[#E8A849] flex-shrink-0" />{item}</li>
-                  ))}
-                </ul>
-                <Link href="/apply" className="bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform inline-block">Apply for Inner Circle</Link>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Private 1:1 with Krystalore</h2>
+                <p className="text-gray-600 text-lg mb-8">The highest level of access — private, 1:1, and built around you. Three ways in, from physical foundation to full strategic partnership.</p>
+                <Link href="/inner-circle" className="bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform inline-flex items-center gap-2">Explore The Inner Circle <ArrowRight className="w-4 h-4" /></Link>
               </div>
-              <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <Image src="/images/go9/group-sunset.jpg" alt="Inner Circle community" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                <Image src="/images/retreat/retreat-group-06.jpg" alt="Krystalore Crews with private clients" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
               </div>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { icon: Dumbbell, accent: '#34c5c5', eyebrow: 'Level 1 · Physical', title: 'Fitness Coaching', body: 'Private, results-driven fitness coaching built around your body and goals.', href: '/apply', cta: 'Explore Fitness' },
+                { icon: Heart, accent: '#0D9488', eyebrow: 'Level 2 · Mind + Body', title: 'Emotional Intelligence & High Performance', body: 'Trauma-informed EI and high-performance coaching, base-level physical fitness included.', href: '/private', cta: 'Explore Mindset' },
+                { icon: Crown, accent: '#E8A849', eyebrow: 'Level 3 · The Premium Offer', title: 'The Secret Weapon', body: 'People strategy, high performance, emotional & physical fitness, and a strategic partner.', href: '/secret', cta: 'Enter The Secret Weapon', featured: true },
+              ].map((p) => (
+                <div key={p.title} className={`flex flex-col rounded-3xl border bg-white p-7 shadow-sm transition hover:shadow-md ${p.featured ? 'border-[#E8A849] ring-1 ring-[#E8A849]/30' : 'border-gray-100'}`}>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl" style={{ background: `${p.accent}1A` }}>
+                    <p.icon className="h-6 w-6" style={{ color: p.accent }} />
+                  </div>
+                  <p className="mt-5 text-xs font-bold uppercase tracking-widest" style={{ color: p.accent }}>{p.eyebrow}</p>
+                  <h3 className="mt-2 text-xl font-black text-gray-900">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{p.body}</p>
+                  <div className="mt-6 flex-1" />
+                  <Link href={p.href} className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-bold uppercase tracking-widest text-white transition ${p.featured ? 'bg-gradient-to-r from-[#E8A849] to-[#e07800] hover:brightness-105' : 'bg-gray-900 hover:bg-black'}`}>
+                    {p.cta} <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </section>
