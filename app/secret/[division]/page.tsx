@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import { SecretGate } from '@/components/secret/gate'
 import { getDivision, type Division } from '@/lib/secretDivisions'
+import DivisionAssessment from './DivisionAssessment'
 
 const ICONS = { star: Star, crown: Crown, trophy: Trophy, shield: ShieldCheck }
 
@@ -174,6 +175,9 @@ function DivisionView({ d }: { d: Division }) {
           </div>
         </div>
       </section>
+
+      {/* SELF-ASSESSMENT → branded PDF report + lead capture */}
+      <DivisionAssessment division={d} />
 
       {/* CTA */}
       <section className="bg-gradient-to-br from-[#E8A849] to-[#e07800] py-16 text-center text-white md:py-20">

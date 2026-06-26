@@ -26,6 +26,7 @@ const FUNNEL_LABELS: Record<string, string> = {
   'inner-circle': 'Inner Circle Application',
   'secret-weapon': 'Secret Weapon · Inner Circle Application',
   'inner-circle-retainer': 'Inner Circle Retainer — Application',
+  'secret-weapon-assessment': 'Secret Weapon · Division Assessment',
 }
 
 export type LeadInput = {
