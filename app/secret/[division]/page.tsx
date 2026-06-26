@@ -94,26 +94,6 @@ function DivisionView({ d }: { d: Division }) {
         </ul>
       </Block>
 
-      {/* TIERS */}
-      <Block eyebrow="Engagement Tiers" title="Three levels of partnership" bg="#F6F8FA">
-        <div className="grid gap-6 lg:grid-cols-3">
-          {d.tiers.map((t, i) => (
-            <div key={t.name} className={`flex flex-col rounded-2xl border bg-white p-7 ${i === 2 ? 'border-[#E8A849] shadow-xl ring-1 ring-[#E8A849]/30' : 'border-gray-100 shadow-sm'}`}>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#0D9488]">{t.subtitle}</p>
-              <h3 className="mt-1 font-serif text-2xl font-medium text-gray-900">{t.name}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-gray-500">{t.intro}</p>
-              <ul className="mt-5 space-y-2.5">
-                {t.services.map((s) => (
-                  <li key={s} className="flex items-start gap-2.5 text-sm text-gray-700">
-                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#34c5c5]" /> {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </Block>
-
       {/* CRISIS */}
       <Block eyebrow="Crisis Management" title="When the moment turns" icon={AlertTriangle}>
         <p className="mx-auto mb-8 max-w-2xl text-center leading-relaxed text-gray-600">{d.crisis.intro}</p>

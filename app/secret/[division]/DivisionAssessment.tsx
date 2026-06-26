@@ -159,7 +159,7 @@ export default function DivisionAssessment({ division }: { division: Division })
         <div className="space-y-6">
           {division.tiers.map((t, ti) => (
             <div key={t.name} className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-              <p className="mb-4 text-xs font-bold uppercase tracking-widest text-[#0D9488]">{t.subtitle} · {t.name}</p>
+              <p className="mb-4 text-xs font-bold uppercase tracking-widest text-[#0D9488]">{['Foundation', 'Growth', 'Legacy'][ti] || t.name}</p>
               <div className="grid gap-2 sm:grid-cols-2">
                 {t.services.map((s, si) => {
                   const id = `${ti}-${si}`
