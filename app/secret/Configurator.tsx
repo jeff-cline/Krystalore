@@ -17,19 +17,10 @@ function buildQuote(baseId: string, addArch: boolean, addAmplify: boolean, addCr
   const base = BASE_TIERS.find((t) => t.id === baseId) || BASE_TIERS[1]
   const parts: string[] = [base.name]
   let monthly: number = base.monthly
-  let monthlyCustom = false
   let note = ''
 
-  if (addArch) {
-    parts.push('Growth Architecture')
-    monthly = baseId === 'strategist' ? 9500 : base.monthly + 2000
-  }
-  if (addAmplify) {
-    parts.push('Amplify')
-    if (baseId === 'strategist' && addArch) monthly = 18500
-    else if (baseId === 'strategist') monthly = 12500
-    else { monthlyCustom = true; note = 'Amplify on this tier is scoped custom on your call.' }
-  }
+  if (addArch) { parts.push('Growth Architecture'); monthly += 7500 }
+  if (addAmplify) { parts.push('Amplify'); monthly += 5000 }
 
   // High-stakes activations multiply the retainer. Crisis = 3×, Fully Immersive = 3×.
   // Both together bundle at 4× (instead of stacking to 9×).
@@ -44,13 +35,11 @@ function buildQuote(baseId: string, addArch: boolean, addAmplify: boolean, addCr
     note = note ? `${note} ${mult}` : mult
   }
 
-  if (!monthlyCustom) monthly = monthly * multiplier
-  const oneTime = addArch ? 5000 : 0
+  monthly = monthly * multiplier
 
   return {
     engagement: parts.join(' + '),
-    monthlyLabel: monthlyCustom ? 'Custom' : money(monthly) + '/mo',
-    oneTimeLabel: oneTime ? money(oneTime) + ' one-time' : '—',
+    monthlyLabel: money(monthly) + '/mo',
     note,
   }
 }
@@ -107,7 +96,7 @@ export default function Configurator() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              <Toggle label="Add Growth Architecture" detail="Dashboard + systems · $5,000 build" on={addArch} onClick={() => setAddArch((v) => !v)} />
+              <Toggle label="Add Growth Architecture" detail="Dashboard + systems · $7,500/mo" on={addArch} onClick={() => setAddArch((v) => !v)} />
               <Toggle label="Add Amplify" detail="Market amplification engine" on={addAmplify} onClick={() => setAddAmplify((v) => !v)} />
             </div>
 
@@ -131,10 +120,6 @@ export default function Configurator() {
                 <div className="flex items-baseline justify-between">
                   <span className="text-sm text-white/80">Monthly</span>
                   <span className="text-3xl font-medium" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{quote.monthlyLabel}</span>
-                </div>
-                <div className="mt-3 flex items-baseline justify-between">
-                  <span className="text-sm text-white/80">One-time</span>
-                  <span className="text-lg font-semibold">{quote.oneTimeLabel}</span>
                 </div>
               </div>
               {quote.note && <p className="mt-4 text-xs leading-relaxed text-white/70">{quote.note}</p>}
