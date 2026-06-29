@@ -34,11 +34,13 @@ const retreatLinks = [
 
 const coachingLinks = [
   { href: '/services', label: 'All Coaching' },
+  { href: '/inner-circle', label: 'Private Coaching' },
+  { href: '/business-bootcamp', label: 'Business Coaching' },
   { href: '/wellness', label: 'Corporate Wellness' },
   { href: '/leadership-training', label: 'Leadership Training' },
   { href: '/firechallenge', label: 'FIRE Challenge' },
   { href: '/health-mastery', label: 'Health Mastery' },
-  { href: '/bootcamp', label: 'Fitness Coaching' },
+  { href: '/fitness', label: 'Fitness Coaching' },
   { href: 'https://shyftmaster.com/', label: 'ShYft Mastery' },
 ]
 
@@ -63,6 +65,7 @@ const navLinks: NavLink[] = [
 // "Missions" menu — replaces the old About link. Speaking also stays in Events.
 const missionsLinks: NavLink[] = [
   { href: '/about', label: 'About' },
+  { href: '/34', label: '34 Minute Method' },
   { href: '/speaker', label: 'Speaking' },
   { href: '/books', label: 'Books' },
   { href: '/shop', label: 'Shop' },
