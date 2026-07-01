@@ -60,6 +60,36 @@ export default function SuperHostessPage() {
           </div>
         </section>
 
+        {/* MEET YOUR HOST */}
+        <section className="py-14 md:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-xl">
+                <Image src="/images/corporate-retreat/krystal-crews-185.jpg" alt="Krystalore Crews" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#0D9488]">Meet Your Host</p>
+                <h2 className="mt-2 text-3xl font-black text-gray-900 md:text-4xl">Krystalore Crews</h2>
+                <p className="mt-4 leading-relaxed text-gray-600">
+                  A 22-year U.S. Air Force veteran, certified coach, keynote speaker, and 28-time marathoner,
+                  Krystalore has trained more than 200,000 people and hosted experiences around the world. She
+                  brings military-grade precision and genuine warmth to every moment — reading the room, holding
+                  the energy, and making sure your guests feel completely taken care of.
+                </p>
+                <p className="mt-3 leading-relaxed text-gray-600">
+                  As your super hostess, she doesn&apos;t just run the schedule. She makes people feel something
+                  they remember long after they check out.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {['22-Yr Air Force Veteran', 'Certified Coach', 'Keynote Speaker', '28× Marathoner', 'Somatic & Trauma-Informed'].map((c) => (
+                    <span key={c} className="rounded-full bg-[#34c5c5]/10 px-4 py-2 text-sm font-medium text-[#0D9488]">{c}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* EXPERIENCES (client — cards + booking modal) */}
         <SuperHostessExperiences />
 

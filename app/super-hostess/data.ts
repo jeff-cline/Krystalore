@@ -55,7 +55,7 @@ export const GROUPS: Group[] = [
   {
     key: 'brides',
     label: 'For Brides & Bridal Parties',
-    eyebrow: 'Themed to her colors & vibe',
+    eyebrow: 'For the bride & her crew',
     items: [
       { title: 'Bridal Boot Camp', image: '/images/bombshell-bootcamp/bombshell-workout.png',
         blurb: 'A themed, all-levels boot camp for the bride and her crew — sweat, laughs, and that pre-wedding glow, styled to match her colors and vibe. The most fun she will have getting ready.' },
