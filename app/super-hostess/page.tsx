@@ -12,7 +12,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'The Super Hostess — Concierge Experiences by Krystalore Crews',
     description: 'Upgrade any stay with turn-key experiences hosted by Krystalore Crews.',
-    images: [{ url: 'https://krystalore.com/images/corporate-retreat/img-retreat-portrait.jpg' }],
+    type: 'website',
+    url: 'https://krystalore.com/super-hostess',
+    images: [{ url: 'https://krystalore.com/og/super-hostess.jpg', width: 927, height: 1200, alt: 'The Super Hostess — concierge experiences menu' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The Super Hostess — Concierge Experiences by Krystalore Crews',
+    description: 'Upgrade any stay with turn-key experiences hosted by Krystalore Crews.',
+    images: ['https://krystalore.com/og/super-hostess.jpg'],
   },
 }
 
