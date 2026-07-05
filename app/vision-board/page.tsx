@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import FAQSection from '@/components/FAQSection'
-import { DynamicHero } from '@/components/DynamicDate'
+import { DynamicHero, DynamicText } from '@/components/DynamicDate'
 import {
   Sparkles,
   Target,
@@ -153,7 +153,7 @@ export default function VisionBoardPage() {
               {/* Next event card */}
               <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-5 mb-8 max-w-md">
                 <p className="text-xs font-bold tracking-widest uppercase text-[#0D9488] mb-2">Next Session</p>
-                <p className="text-xl font-bold text-gray-900 mb-1">{nextDateLabel}</p>
+                <p className="text-xl font-bold text-gray-900 mb-1"><DynamicText slug="vision-board" field="date" fallback={nextDateLabel} /></p>
                 <div className="flex items-center gap-4 text-sm text-gray-600">
                   <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4 text-[#e07800]" /> {nextTimeLabel}</span>
                   <span className="inline-flex items-center gap-1.5"><Video className="w-4 h-4 text-[#34c5c5]" /> Live on Zoom · Replay Included</span>
