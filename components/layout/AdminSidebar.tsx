@@ -27,6 +27,7 @@ export default function AdminSidebar() {
     { href: '/admin/clients', icon: Users, label: 'Clients' },
     { href: '/admin/leads', icon: UserPlus, label: 'Leads' },
     { href: '/admin/reports', icon: BarChart3, label: 'Reports' },
+    { href: '/admin/dynamic-dates', icon: Calendar, label: 'Dynamic Dates' },
     { href: '/admin/content', icon: FileText, label: 'Content' },
     { href: '/admin/feature-images', icon: Images, label: 'Feature Images' },
     { href: '/admin/videos', icon: Video, label: 'Video Management' },

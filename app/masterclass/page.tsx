@@ -3,6 +3,7 @@ import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, MapPin, Play, Check, Star, ArrowRight, Zap, Heart, Users, Target, Flame, Shield } from 'lucide-react'
+import { DynamicHero } from '@/components/DynamicDate'
 
 export default function RewritePage() {
   const jsonLd = {
@@ -29,7 +30,7 @@ export default function RewritePage() {
       {/* HERO */}
       <section className="relative rounded-2xl overflow-hidden mb-0">
         <div className="relative h-[500px] sm:h-[600px]">
-          <Image src="/images/go9/speaking-event.jpg" alt="Krystalore Crews — Rewrite in Real Time Masterclass" fill className="object-cover object-top" sizes="100vw" priority />
+          <DynamicHero slug="masterclass-hero" fallbackSrc="/images/go9/speaking-event.jpg" alt="Krystalore Crews — Rewrite in Real Time Masterclass" className="object-cover object-top" sizes="100vw" priority />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
           <div className="absolute inset-0 flex items-end">
             <div className="max-w-3xl px-6 sm:px-12 pb-10 sm:pb-14">
