@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { DynamicHero } from '@/components/DynamicDate'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 
@@ -62,7 +63,7 @@ export default function ProductsPage() {
       
       {/* Hero Image */}
       <div className="relative h-64 md:h-80 w-full overflow-hidden">
-        <Image src="/images/go9/group-evening.webp" alt="Krystalore Crews products and lifestyle offerings" fill className="object-cover" sizes="100vw" />
+        <DynamicHero slug="products" fallbackSrc="/images/go9/group-evening.webp" alt="Krystalore Crews products and lifestyle offerings" className="object-cover" sizes="100vw" />
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

@@ -58,6 +58,24 @@ export function DynamicDate({
 }
 
 /**
+ * Inline text swap that keeps the page's own styling. Use to make a single field
+ * (date / title / description) editable without imposing any markup:
+ *   <DynamicText slug="masterclass" field="date" fallback="June 13, 2026" />
+ */
+export function DynamicText({
+  slug, field, fallback, className,
+}: {
+  slug: string
+  field: 'date' | 'title' | 'description'
+  fallback: string
+  className?: string
+}) {
+  const dd = useDynamicDate(slug)
+  const v = (dd?.[field] as string | undefined) || fallback
+  return <span className={className} data-dyn={`${slug}.${field}`}>{v}</span>
+}
+
+/**
  * Swappable hero image. Drop-in replacement for a next/image hero — pass the current
  * src as fallbackSrc; the admin can swap the hero for this slug without a redeploy.
  */

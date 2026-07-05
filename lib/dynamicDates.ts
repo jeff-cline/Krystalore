@@ -1,4 +1,5 @@
 import prisma from '@/lib/db'
+import { DYNAMIC_DATE_REGISTRY, REGISTRY_BY_SLUG } from '@/lib/dynamicDatesRegistry'
 
 // Dynamic Dates store — a lightweight CMS for editable dates/titles/CTAs/hero images
 // across pages. Persisted in the existing DashboardItem table (type='dynamic-date',
@@ -56,25 +57,30 @@ async function systemUserId(): Promise<string | null> {
   }
 }
 
+// A saved DB entry (full override) wins; otherwise the registry default is returned.
 export async function getDynamicDate(slug: string): Promise<DynamicDate | null> {
+  let db: DynamicDate | null = null
   try {
     const row = await prisma.dashboardItem.findFirst({ where: { type: TYPE, title: slug } })
-    return row ? fromRow(row as any) : null
-  } catch {
-    return null
-  }
+    db = row ? fromRow(row as any) : null
+  } catch { /* DB unavailable — fall back to registry */ }
+  return db || REGISTRY_BY_SLUG.get(slug) || null
 }
 
+// Every registered page shows up pre-populated; DB overrides replace the default.
 export async function listDynamicDates(search?: string): Promise<DynamicDate[]> {
+  let dbBySlug = new Map<string, DynamicDate>()
   try {
     const rows = await prisma.dashboardItem.findMany({ where: { type: TYPE }, orderBy: { updatedAt: 'desc' } })
-    let items = rows.map((r) => fromRow(r as any))
-    const q = (search || '').trim().toLowerCase()
-    if (q) items = items.filter((d) => [d.slug, d.label, d.pageUrl, d.title].join(' ').toLowerCase().includes(q))
-    return items
-  } catch {
-    return []
-  }
+    dbBySlug = new Map(rows.map((r) => { const d = fromRow(r as any); return [d.slug, d] }))
+  } catch { /* DB unavailable — show registry only */ }
+
+  const merged: DynamicDate[] = DYNAMIC_DATE_REGISTRY.map((r) => dbBySlug.get(r.slug) || r)
+  Array.from(dbBySlug.values()).forEach((d) => { if (!REGISTRY_BY_SLUG.has(d.slug)) merged.push(d) }) // DB-only extras
+
+  const q = (search || '').trim().toLowerCase()
+  const items = q ? merged.filter((d) => [d.slug, d.label, d.pageUrl, d.title].join(' ').toLowerCase().includes(q)) : merged
+  return items
 }
 
 export async function upsertDynamicDate(input: DynamicDate): Promise<DynamicDate | null> {

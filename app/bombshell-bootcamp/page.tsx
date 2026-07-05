@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import { DynamicHero } from '@/components/DynamicDate'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
@@ -54,7 +55,7 @@ export default function BombshellBootcampPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[90vh] flex items-center">
-        <Image src="/images/go9/fitness.jpg" alt="Bombshell Bootcamp -- Activate Your Freedom Formula" fill className="object-cover" priority sizes="100vw" />
+        <DynamicHero slug="bombshell-bootcamp" fallbackSrc="/images/go9/fitness.jpg" alt="Bombshell Bootcamp -- Activate Your Freedom Formula" className="object-cover" priority sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-[1]" />
         <div className="container mx-auto px-4 relative z-10 py-20">
           <p className="text-[#E8A849] font-semibold tracking-widest uppercase text-sm mb-4">Your Glow Up Season Is Here</p>

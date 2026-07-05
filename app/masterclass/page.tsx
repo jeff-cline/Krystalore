@@ -3,7 +3,7 @@ import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, MapPin, Play, Check, Star, ArrowRight, Zap, Heart, Users, Target, Flame, Shield } from 'lucide-react'
-import { DynamicHero } from '@/components/DynamicDate'
+import { DynamicHero, DynamicText } from '@/components/DynamicDate'
 
 export default function RewritePage() {
   const jsonLd = {
@@ -30,11 +30,11 @@ export default function RewritePage() {
       {/* HERO */}
       <section className="relative rounded-2xl overflow-hidden mb-0">
         <div className="relative h-[500px] sm:h-[600px]">
-          <DynamicHero slug="masterclass-hero" fallbackSrc="/images/go9/speaking-event.jpg" alt="Krystalore Crews — Rewrite in Real Time Masterclass" className="object-cover object-top" sizes="100vw" priority />
+          <DynamicHero slug="masterclass" fallbackSrc="/images/go9/speaking-event.jpg" alt="Krystalore Crews — Rewrite in Real Time Masterclass" className="object-cover object-top" sizes="100vw" priority />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
           <div className="absolute inset-0 flex items-end">
             <div className="max-w-3xl px-6 sm:px-12 pb-10 sm:pb-14">
-              <p className="text-[#E8A849] font-bold text-sm sm:text-base uppercase tracking-widest mb-3">Live Masterclass &middot; June 13, 2026</p>
+              <p className="text-[#E8A849] font-bold text-sm sm:text-base uppercase tracking-widest mb-3">Live Masterclass &middot; <DynamicText slug="masterclass" field="date" fallback="June 13, 2026" /></p>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-[1.1]">
                 Rewrite in Real Time
               </h1>

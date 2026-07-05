@@ -5,6 +5,7 @@ import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
 import Link from 'next/link'
+import { DynamicHero, DynamicText } from '@/components/DynamicDate'
 import {
   ChevronLeft,
   ChevronRight,
@@ -76,10 +77,10 @@ export default function PuertoRicoRetreatPage() {
 
       {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative min-h-[95vh] flex items-center overflow-hidden">
-        <Image
-          src="/images/retreat/retreat-group-03.jpg"
+        <DynamicHero
+          slug="pr-retreat"
+          fallbackSrc="/images/retreat/retreat-group-03.jpg"
           alt="Women celebrating at sunset on the Puerto Rico oceanview retreat estate"
-          fill
           className="object-cover"
           priority
           sizes="100vw"
@@ -98,7 +99,7 @@ export default function PuertoRicoRetreatPage() {
             A 7-Day Luxury Wellness Retreat for High-Achieving Women Ready to Reset, Reflect, and Rise
           </p>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
-            Puerto Rico &middot; March 28&ndash;April 3, 2027
+            Puerto Rico &middot; <DynamicText slug="pr-retreat" field="date" fallback="March 28–April 3, 2027" />
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

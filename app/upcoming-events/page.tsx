@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
+import { DynamicHero } from '@/components/DynamicDate'
 import MainLayout from '@/components/layout/MainLayout'
 import { ArrowRight, Calendar, MapPin, Video, Users } from 'lucide-react'
 
@@ -31,7 +32,7 @@ export default function UpcomingEventsPage() {
 
       {/* Hero Image */}
       <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl mb-8">
-        <Image src="/images/go9/keynote.jpg" alt="Krystalore Crews upcoming events and speaking engagements" fill className="object-cover" sizes="100vw" />
+        <DynamicHero slug="upcoming-events" fallbackSrc="/images/go9/keynote.jpg" alt="Krystalore Crews upcoming events and speaking engagements" className="object-cover" sizes="100vw" />
       </div>
 
       <section className="py-20 px-4">

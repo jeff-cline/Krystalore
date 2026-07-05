@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { DynamicHero } from '@/components/DynamicDate'
 
 const CHECKOUT_URL = 'https://krystalorecrews.com/healthmasterycheckout'
 
@@ -77,14 +78,7 @@ export default function HealthMasteryPage() {
 
       <section className="rounded-2xl overflow-hidden mb-8 sm:mb-10">
         <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
-          <Image
-            src="/images/health-mastery/hero.webp"
-            alt="Krystalore Crews — Health Mastery Group Coaching for entrepreneurs and leaders"
-            fill
-            className="object-cover object-top"
-            priority
-            sizes="100vw"
-          />
+          <DynamicHero slug="health-mastery" fallbackSrc="/images/health-mastery/hero.webp" alt="Krystalore Crews — Health Mastery Group Coaching for entrepreneurs and leaders" className="object-cover object-top" priority sizes="100vw" />
         </div>
       </section>
 

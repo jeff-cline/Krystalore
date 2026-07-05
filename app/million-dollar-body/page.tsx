@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import { DynamicHero } from '@/components/DynamicDate'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
@@ -39,7 +40,7 @@ export default function MillionDollarBodyPage() {
       <JsonLd />
       <Header />
       <section className="relative overflow-hidden min-h-screen flex items-center">
-        <Image src="/images/go9/fitness.jpg" alt="Million Dollar Body" fill className="object-cover" priority sizes="100vw" />
+        <DynamicHero slug="million-dollar-body" fallbackSrc="/images/go9/fitness.jpg" alt="Million Dollar Body" className="object-cover" priority sizes="100vw" />
         <div className="container mx-auto px-4 relative z-10 py-20 md:py-28">
           <h1 className="text-4xl md:text-6xl font-black text-white mb-6">Million Dollar Body</h1>
           <p className="text-lg text-gray-200 mb-8 max-w-2xl">The premium fitness and mindset program designed to build a body and life that commands respect.</p>

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import FAQSection from '@/components/FAQSection'
+import { DynamicHero } from '@/components/DynamicDate'
 import {
   Sparkles,
   Target,
@@ -179,10 +180,10 @@ export default function VisionBoardPage() {
             </div>
 
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-              <Image
-                src="/images/krystalore/REM08628.jpg"
+              <DynamicHero
+                slug="vision-board"
+                fallbackSrc="/images/krystalore/REM08628.jpg"
                 alt="Krystalore Crews hosting the quarterly Vision Board Party — live on Zoom"
-                fill
                 priority
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
