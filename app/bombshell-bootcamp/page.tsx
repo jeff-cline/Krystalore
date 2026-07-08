@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { DynamicHero } from '@/components/DynamicDate'
+import { DynamicHero, DynamicText } from '@/components/DynamicDate'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
@@ -62,8 +62,11 @@ export default function BombshellBootcampPage() {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-4 max-w-3xl leading-tight">Bombshell Bootcamp</h1>
           <p className="text-2xl md:text-3xl font-bold text-[#34c5c5] mb-6">Activate Your Freedom Formula</p>
           <p className="text-lg text-gray-200 mb-4 max-w-2xl">5 days to go from burned-out, running-on-fumes high achiever to a vibrant, grounded leader who commands energy, balance, and unstoppable momentum.</p>
+          <p className="inline-flex items-center gap-2 bg-[#E8A849]/20 border border-[#E8A849]/40 rounded-full px-4 py-1.5 text-[#E8A849] font-bold text-sm mb-6">
+            <Clock className="w-4 h-4" /> <DynamicText slug="bombshell-bootcamp" field="date" fallback="Enrolling now" />
+          </p>
           <div className="flex flex-wrap items-center gap-4 text-gray-300 text-sm mb-8">
-            <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> 5 Days | 12-12:30 PM EST | Replays Available</span>
+            <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> Replays Available</span>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
             <a href={BOMBSHELL_CHECKOUT_URL} className="bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white rounded-full px-10 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg text-lg">JOIN NOW</a>

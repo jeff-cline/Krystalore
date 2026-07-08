@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { DynamicHero } from '@/components/DynamicDate'
+import { DynamicHero, DynamicText } from '@/components/DynamicDate'
 
 const CHECKOUT_URL = 'https://krystalorecrews.com/healthmasterycheckout'
 
@@ -88,6 +88,7 @@ export default function HealthMasteryPage() {
           You&apos;ve Built Success...<br />
           <span className="text-teal">Now It&apos;s Time to Feel Like It</span>
         </h1>
+          <p className="mt-1 mb-5 inline-block rounded-full border border-[#E8A849]/40 bg-[#E8A849]/20 px-4 py-1.5 text-sm font-bold text-[#E8A849]"><DynamicText slug="health-mastery" field="date" fallback="Enrolling now" /></p>
         <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
           Health Mastery is a high-level group coaching experience for entrepreneurs and leaders ready to reclaim energy,
           rebuild consistency, and lead from the inside out.

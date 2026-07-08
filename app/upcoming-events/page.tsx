@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
-import { DynamicHero } from '@/components/DynamicDate'
+import { DynamicHero, DynamicText } from '@/components/DynamicDate'
 import MainLayout from '@/components/layout/MainLayout'
 import { ArrowRight, Calendar, MapPin, Video, Users } from 'lucide-react'
 
@@ -26,6 +26,7 @@ export default function UpcomingEventsPage() {
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <Calendar className="h-16 w-16 text-[#84d7d7] mx-auto mb-6" />
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white">Upcoming Events & <span className="text-[#84d7d7]">Experiences</span></h1>
+          <p className="mt-1 mb-5 inline-block rounded-full border border-[#E8A849]/40 bg-[#E8A849]/20 px-4 py-1.5 text-sm font-bold text-[#E8A849]"><DynamicText slug="upcoming-events" field="date" fallback="Enrolling now" /></p>
           <p className="text-lg text-gray-300 max-w-3xl mx-auto">In-person, live, and virtual events to keep you connected, growing, and moving forward.</p>
         </div>
       </section>

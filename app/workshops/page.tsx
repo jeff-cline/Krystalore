@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
-import { DynamicHero } from '@/components/DynamicDate'
+import { DynamicHero, DynamicText } from '@/components/DynamicDate'
 
 export default function WorkshopsPage() {
   const upcomingWorkshops = [
@@ -49,6 +49,7 @@ export default function WorkshopsPage() {
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             Upcoming Workshops
           </h1>
+          <p className="mt-1 mb-5 inline-block rounded-full border border-[#E8A849]/40 bg-[#E8A849]/20 px-4 py-1.5 text-sm font-bold text-[#E8A849]"><DynamicText slug="workshops" field="date" fallback="Enrolling now" /></p>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Intensive learning experiences designed to accelerate your growth and provide practical tools for immediate implementation.
           </p>
