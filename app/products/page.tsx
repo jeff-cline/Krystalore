@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { DynamicHero } from '@/components/DynamicDate'
+import { DynamicHero, DynamicText } from '@/components/DynamicDate'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 
@@ -72,6 +72,7 @@ export default function ProductsPage() {
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             Transform Your Life
           </h1>
+          <p className="mt-1 mb-5 inline-block rounded-full border border-[#E8A849]/40 bg-[#E8A849]/20 px-4 py-1.5 text-sm font-bold text-[#E8A849]"><DynamicText slug="products" field="date" fallback="New drops all year" /></p>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Discover powerful tools, resources, and courses designed to help you crews beyond your limits and achieve extraordinary results.
           </p>
