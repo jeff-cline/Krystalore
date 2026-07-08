@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import ProgramLander from '@/components/ProgramLander'
 
 export const metadata: Metadata = {
-  title: 'Relationship Remodel | Krystalore Crews',
+  title: 'Relationship Remodel',
   description: 'Rebuild and strengthen your personal and professional relationships with proven strategies.',
 }
 

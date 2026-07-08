@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import ProgramLander from '@/components/ProgramLander'
 
 export const metadata: Metadata = {
-  title: 'Business Vital | Krystalore Crews',
+  title: 'Business Vital',
   description: 'Make your business healthy, profitable, and built to last — strong systems, clear strategy, and a healthy team.',
 }
 

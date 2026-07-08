@@ -5,11 +5,12 @@ import { useEffect, useState, useCallback } from 'react'
 type CTA = { enabled: boolean; title: string; link: string; color: string }
 type DD = {
   slug: string; label: string; pageUrl: string; title: string; description: string
-  date: string; heroImage: string; cta: CTA; updatedAt?: string
+  date: string; heroImage: string; socialImage: string; cta: CTA; updatedAt?: string
 }
+type PageImage = { url: string; name: string }
 
 const blank = (): DD => ({
-  slug: '', label: '', pageUrl: '', title: '', description: '', date: '', heroImage: '',
+  slug: '', label: '', pageUrl: '', title: '', description: '', date: '', heroImage: '', socialImage: '',
   cta: { enabled: false, title: '', link: '', color: '#E8A849' },
 })
 
@@ -23,6 +24,10 @@ export default function DynamicDatesAdmin() {
   const [scanUrl, setScanUrl] = useState('')
   const [scan, setScan] = useState<{ dates: string[]; count: number; error?: string } | null>(null)
   const [scanning, setScanning] = useState(false)
+  const [uploadingSocial, setUploadingSocial] = useState(false)
+  const [pageImages, setPageImages] = useState<PageImage[] | null>(null)
+  const [loadingImages, setLoadingImages] = useState(false)
+  const [preview, setPreview] = useState<string | null>(null) // iPhone-preview image url
 
   const load = useCallback(async (query = '') => {
     const r = await fetch(`/api/admin/dynamic-dates?q=${encodeURIComponent(query)}`)
@@ -49,12 +54,22 @@ export default function DynamicDatesAdmin() {
     await fetch(`/api/admin/dynamic-dates?slug=${encodeURIComponent(slug)}`, { method: 'DELETE' })
     setEditing(null); load(q)
   }
-  const uploadHero = async (file: File) => {
-    setUploading(true)
-    const fd = new FormData(); fd.append('file', file); fd.append('folder', 'hero-images')
+  const uploadImage = async (file: File, field: 'heroImage' | 'socialImage') => {
+    const setBusy = field === 'heroImage' ? setUploading : setUploadingSocial
+    setBusy(true)
+    const fd = new FormData(); fd.append('file', file); fd.append('folder', field === 'heroImage' ? 'hero-images' : 'social-images')
     const r = await fetch('/api/admin/upload', { method: 'POST', body: fd })
-    setUploading(false)
-    if (r.ok) { const d = await r.json(); if (d.url) set('heroImage', d.url) } else alert('Upload failed')
+    setBusy(false)
+    if (r.ok) { const d = await r.json(); if (d.url) set(field, d.url) } else alert('Upload failed')
+  }
+  const loadPageImages = async () => {
+    if (!editing?.pageUrl) { alert('Set the Page URL first.'); return }
+    setLoadingImages(true); setPageImages(null)
+    const r = await fetch('/api/admin/dynamic-dates/images', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url: editing.pageUrl }),
+    })
+    setLoadingImages(false)
+    setPageImages(r.ok ? (await r.json()).images || [] : [])
   }
   const doScan = async () => {
     setScanning(true); setScan(null)
@@ -136,11 +151,45 @@ export default function DynamicDatesAdmin() {
                   <input className={inp + ' flex-1'} value={editing.heroImage} onChange={(e) => set('heroImage', e.target.value)} placeholder="/images/… or upload →" />
                   <label className="cursor-pointer rounded-lg bg-gray-900 px-3 py-2 text-xs font-bold text-white">
                     {uploading ? 'Uploading…' : 'Upload'}
-                    <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && uploadHero(e.target.files[0])} />
+                    <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && uploadImage(e.target.files[0], 'heroImage')} />
                   </label>
                 </div>
                 {editing.heroImage && <img src={editing.heroImage} alt="" className="mt-2 h-24 w-full rounded object-cover" />}
               </Row>
+
+              {/* SOCIAL SHARE IMAGE — upload OR pick from the page; drives og:image */}
+              <div className="rounded-xl border border-gray-200 p-3">
+                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-gray-500">Social share image</p>
+                <p className="mb-2 text-xs text-gray-400">Shown when the link is shared (with the title + description above). Falls back to the hero image if empty.</p>
+                <div className="flex flex-wrap items-center gap-2">
+                  <input className={inp + ' flex-1'} value={editing.socialImage} onChange={(e) => set('socialImage', e.target.value)} placeholder="/images/… , upload, or pick →" />
+                  <label className="cursor-pointer rounded-lg bg-gray-900 px-3 py-2 text-xs font-bold text-white">
+                    {uploadingSocial ? 'Uploading…' : 'Upload'}
+                    <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && uploadImage(e.target.files[0], 'socialImage')} />
+                  </label>
+                  <button type="button" onClick={loadPageImages} className="rounded-lg bg-[#0D9488] px-3 py-2 text-xs font-bold text-white">{loadingImages ? 'Loading…' : 'Pick from page'}</button>
+                  {(editing.socialImage || editing.heroImage) && (
+                    <button type="button" onClick={() => setPreview(editing.socialImage || editing.heroImage)} className="rounded-lg border border-gray-300 px-3 py-2 text-xs font-bold">Preview</button>
+                  )}
+                </div>
+                {editing.socialImage && <img src={editing.socialImage} alt="" className="mt-2 h-24 w-full rounded object-cover" />}
+                {pageImages && (
+                  <div className="mt-3">
+                    <p className="mb-2 text-xs text-gray-500">{pageImages.length} image{pageImages.length === 1 ? '' : 's'} on this page — click to use, eye to preview:</p>
+                    {pageImages.length === 0 ? <p className="text-xs text-gray-400">None found (or the page couldn&apos;t be fetched).</p> : (
+                      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+                        {pageImages.map((img) => (
+                          <div key={img.url} className={`group relative overflow-hidden rounded-lg border-2 ${editing.socialImage === img.url ? 'border-[#0D9488]' : 'border-transparent'}`}>
+                            <img src={img.url} alt={img.name} title={img.name} onClick={() => set('socialImage', img.url)} className="aspect-video w-full cursor-pointer object-cover" />
+                            <span className="absolute inset-x-0 bottom-0 truncate bg-black/55 px-1 py-0.5 text-[9px] text-white">{img.name}</span>
+                            <button type="button" onClick={() => setPreview(img.url)} className="absolute right-1 top-1 rounded bg-white/90 px-1.5 py-0.5 text-[10px] font-bold">👁</button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
 
               <div className="rounded-xl border border-gray-200 p-3">
                 <label className="flex items-center gap-2 text-sm font-bold">
@@ -163,6 +212,27 @@ export default function DynamicDatesAdmin() {
                 <button onClick={save} disabled={saving || !editing.slug} className="rounded-lg bg-[#0D9488] px-4 py-2 text-sm font-bold text-white disabled:opacity-50">{saving ? 'Saving…' : 'Save'}</button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* iPhone / iMessage-style social preview */}
+      {preview && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4" onClick={() => setPreview(null)}>
+          <div className="w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+            <p className="mb-3 text-center text-xs font-bold uppercase tracking-widest text-white/80">How it looks when shared</p>
+            <div className="overflow-hidden rounded-[26px] border border-white/15 bg-[#e9e9eb] p-3 shadow-2xl">
+              {/* imessage bubble with a link-preview card */}
+              <div className="ml-auto max-w-[86%] overflow-hidden rounded-2xl bg-white shadow">
+                <img src={preview} alt="" className="aspect-[1.91/1] w-full object-cover" />
+                <div className="px-3 py-2">
+                  <p className="line-clamp-2 text-sm font-semibold text-gray-900">{editing?.title || 'Page title'}</p>
+                  {editing?.description ? <p className="mt-0.5 line-clamp-2 text-xs text-gray-500">{editing.description}</p> : null}
+                  <p className="mt-1 text-[11px] uppercase text-gray-400">krystalore.com</p>
+                </div>
+              </div>
+            </div>
+            <button onClick={() => setPreview(null)} className="mx-auto mt-4 block rounded-full bg-white px-5 py-2 text-sm font-bold text-gray-900">Close</button>
           </div>
         </div>
       )}

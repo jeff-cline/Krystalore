@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import ProgramLander from '@/components/ProgramLander'
 
 export const metadata: Metadata = {
-  title: 'ShYft Mastery | Krystalore Crews',
+  title: 'ShYft Mastery',
   description: 'The proprietary ShYft system — rebuild your body, mind, and momentum.',
 }
 
