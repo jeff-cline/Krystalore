@@ -12,6 +12,12 @@ const nextConfig = {
     domains: ['localhost'],
     unoptimized: true,
   },
+  async rewrites() {
+    return [
+      // Serve the Secret Weapon one-pager at a clean /pdf URL
+      { source: '/pdf', destination: '/the-secret-weapon-flyer.pdf' },
+    ]
+  },
   async redirects() {
     return [
       // Existing redirects
