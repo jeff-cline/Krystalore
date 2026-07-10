@@ -23,6 +23,34 @@ export default function PdfBios() {
           </div>
         </section>
 
+        {/* Featured: The Secret Weapon one-pager (links to the flyer; guest bios below untouched) */}
+        <section className="pb-4">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a
+              href="/the-secret-weapon-flyer.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block overflow-hidden rounded-2xl bg-[#0D0D0D] ring-1 ring-[#C9A84C]/40 hover:ring-[#C9A84C] transition-all"
+            >
+              <div className="flex items-center gap-4 p-5 sm:p-6">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#177A7A] to-[#0D9488] flex items-center justify-center flex-shrink-0">
+                  <Crown className="w-7 h-7 text-[#C9A84C]" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h2 className="font-black text-white text-lg leading-tight">The Secret Weapon</h2>
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-[#C9A84C]/20 text-[#C9A84C] px-2 py-0.5 rounded-full">One-Pager</span>
+                  </div>
+                  <p className="text-sm text-white/70 mt-1">Private executive advisory at a glance — the invite-only Secret Weapon program. By application only.</p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-[#34C5C5] font-bold text-sm flex-shrink-0 group-hover:gap-2.5 transition-all">
+                  View PDF <Download className="w-4 h-4" />
+                </span>
+              </div>
+            </a>
+          </div>
+        </section>
+
         <section className="pb-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
             {bios.map((b) => (
