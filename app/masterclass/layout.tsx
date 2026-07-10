@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCmsMeta } from '@/lib/cms-meta';
+import { dynamicMetadata } from '@/lib/dynamicMetadata';
 
 const defaults: Metadata = {
   title: "Rewrite in Real Time — Live Masterclass with Krystalore Crews | May 20, 2026",
@@ -24,7 +25,9 @@ const defaults: Metadata = {
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/masterclass', defaults);
+  const base = await getCmsMeta('/masterclass', defaults);
+  const dyn = await dynamicMetadata('masterclass');
+  return { ...base, openGraph: { ...base.openGraph, ...dyn.openGraph }, twitter: { ...base.twitter, ...dyn.twitter } };
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

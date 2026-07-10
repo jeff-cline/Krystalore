@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCmsMeta } from '@/lib/cms-meta';
+import { dynamicMetadata } from '@/lib/dynamicMetadata';
 
 const defaults: Metadata = {
   title: "Health Mastery Group Coaching — Krystalore Crews | Executive Wellness & Leadership",
@@ -33,7 +34,9 @@ const defaults: Metadata = {
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  return getCmsMeta('/health-mastery', defaults);
+  const base = await getCmsMeta('/health-mastery', defaults);
+  const dyn = await dynamicMetadata('health-mastery');
+  return { ...base, openGraph: { ...base.openGraph, ...dyn.openGraph }, twitter: { ...base.twitter, ...dyn.twitter } };
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
