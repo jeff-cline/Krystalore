@@ -45,7 +45,7 @@ export const retreatOptions: RetreatOption[] = [
     dates: 'Fall 2027 — dates TBD',
     description: 'A future fall reset in the Tennessee hills for restoration, clarity, connection, and powerful next-season planning.',
     href: '/tn-retreat',
-    image: '/images/retreat-destinations/tn-03.png',
+    image: '/images/retreat-destinations/tn-airbnb/tn-lake-01.png',
     cta: 'Explore Tennessee',
   },
 ]
