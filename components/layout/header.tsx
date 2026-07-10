@@ -45,6 +45,7 @@ const coachingLinks = [
 ]
 
 const eventsLinks = [
+  { href: '/coworking', label: 'Weekly Coworking' },
   { href: '/bombshell', label: 'Bombshell' },
   { href: '/retreats', label: 'Retreats' },
   { href: '/vision-board', label: 'Vision Board' },
