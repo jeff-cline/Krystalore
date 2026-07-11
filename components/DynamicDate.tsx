@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 type CTA = { enabled: boolean; title: string; link: string; color: string }
-type DD = { title?: string; description?: string; date?: string; heroImage?: string; cta?: CTA }
+type DD = { title?: string; description?: string; date?: string; time?: string; heroImage?: string; cta?: CTA }
 
 // Shared fetch — components render their fallback instantly, then override if an
 // admin-managed entry exists. Safe: any error keeps the fallback (page never breaks).
