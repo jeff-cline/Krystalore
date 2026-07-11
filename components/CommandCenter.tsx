@@ -45,6 +45,24 @@ export default function CommandCenter() {
     })
   }, [])
 
+  // Live-ish sync: while just viewing (not mid-edit), pull the shared board every
+  // 30s so a change Darlin makes shows up for Krystalore without a manual refresh.
+  useEffect(() => {
+    if (!viewOk || editing) return
+    const id = setInterval(() => {
+      fetchState().then((server) => {
+        if (!server) return
+        setState((cur) => {
+          const next = JSON.stringify(server)
+          if (next === JSON.stringify(cur)) return cur // unchanged — no re-render
+          saveState(server)
+          return server
+        })
+      })
+    }, 30000)
+    return () => clearInterval(id)
+  }, [viewOk, editing])
+
   // Every edit updates this browser AND the shared server board (best-effort).
   const update = (next: CcState) => {
     setState(next); saveState(next)
