@@ -155,6 +155,7 @@ export default function VisionBoardPage() {
                 <p className="text-xs font-bold tracking-widest uppercase text-[#0D9488] mb-2">Next Session</p>
                 <p className="text-xl font-bold text-gray-900 mb-1"><DynamicText slug="vision-board" field="date" fallback={nextDateLabel} /></p>
                 <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4 text-[#e07800]" /> <DynamicText slug="vision-board" field="time" fallback={nextTimeLabel} /></span>
                   <span className="inline-flex items-center gap-1.5"><Video className="w-4 h-4 text-[#34c5c5]" /> Live on Zoom · Replay Included</span>
                 </div>
               </div>
@@ -313,7 +314,7 @@ export default function VisionBoardPage() {
           <p className="text-xl text-orange-50 mb-3">
             Reserve your seat for the {nextDateLabel} Vision Board Party.
           </p>
-          <p className="text-orange-100 mb-8">Live on Zoom · Replay Included</p>
+          <p className="text-orange-100 mb-8"><DynamicText slug="vision-board" field="time" fallback={nextTimeLabel} /> · Live on Zoom · Replay Included</p>
           <a
             href={MASTERCLASS_CHECKOUT_URL}
             target="_blank"

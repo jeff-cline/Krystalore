@@ -5,12 +5,12 @@ import { useEffect, useState, useCallback } from 'react'
 type CTA = { enabled: boolean; title: string; link: string; color: string }
 type DD = {
   slug: string; label: string; pageUrl: string; title: string; description: string
-  date: string; heroImage: string; socialImage: string; cta: CTA; updatedAt?: string
+  date: string; time: string; heroImage: string; socialImage: string; cta: CTA; updatedAt?: string
 }
 type PageImage = { url: string; name: string }
 
 const blank = (): DD => ({
-  slug: '', label: '', pageUrl: '', title: '', description: '', date: '', heroImage: '', socialImage: '',
+  slug: '', label: '', pageUrl: '', title: '', description: '', date: '', time: '', heroImage: '', socialImage: '',
   cta: { enabled: false, title: '', link: '', color: '#E8A849' },
 })
 
@@ -146,6 +146,7 @@ export default function DynamicDatesAdmin() {
               <Row label="H2 Title"><input className={inp} value={editing.title} onChange={(e) => set('title', e.target.value)} /></Row>
               <Row label="Description"><textarea className={inp} rows={2} value={editing.description} onChange={(e) => set('description', e.target.value)} /></Row>
               <Row label="H3 Date"><input className={inp} value={editing.date} onChange={(e) => set('date', e.target.value)} placeholder="August 15, 2026" /></Row>
+              <Row label="Time (optional)"><input className={inp} value={editing.time} onChange={(e) => set('time', e.target.value)} placeholder="5:00 – 7:00 PM EST" /></Row>
               <Row label="Hero image">
                 <div className="flex flex-wrap items-center gap-2">
                   <input className={inp + ' flex-1'} value={editing.heroImage} onChange={(e) => set('heroImage', e.target.value)} placeholder="/images/… or upload →" />

@@ -66,7 +66,7 @@ export function DynamicText({
   slug, field, fallback, className,
 }: {
   slug: string
-  field: 'date' | 'title' | 'description'
+  field: 'date' | 'title' | 'description' | 'time'
   fallback: string
   className?: string
 }) {

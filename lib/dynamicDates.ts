@@ -19,6 +19,7 @@ export type DynamicDate = {
   title: string         // H2 title
   description: string    // supporting copy under the title
   date: string          // the date text (kept as typed, so styling/format is preserved)
+  time?: string         // optional separately-editable time line
   heroImage: string     // optional hero image override (path or uploadthing url)
   socialImage?: string  // og:image for link shares (falls back to heroImage)
   cta: DynamicDateCTA
@@ -40,6 +41,7 @@ function fromRow(row: { title: string; content: unknown; updatedAt?: Date }): Dy
     title: c.title || '',
     description: c.description || '',
     date: c.date || '',
+    time: c.time || '',
     heroImage: c.heroImage || '',
     socialImage: c.socialImage || '',
     cta: { ...emptyCta(), ...(c.cta || {}) },
@@ -94,6 +96,7 @@ export async function upsertDynamicDate(input: DynamicDate): Promise<DynamicDate
     title: input.title || '',
     description: input.description || '',
     date: input.date || '',
+    time: input.time || '',
     heroImage: input.heroImage || '',
     socialImage: input.socialImage || '',
     cta: { ...emptyCta(), ...(input.cta || {}) },
