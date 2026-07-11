@@ -39,6 +39,8 @@ export const DEFAULT_STATE: CcState = {
   ],
 }
 
+// Local cache (this browser). Used for instant paint and as the seed source the
+// first time this board is published to the shared server store.
 export function loadState(): CcState {
   if (typeof window === 'undefined') return DEFAULT_STATE
   try {
@@ -52,4 +54,36 @@ export function loadState(): CcState {
 }
 export function saveState(s: CcState) {
   try { localStorage.setItem(CC_KEY, JSON.stringify(s)) } catch {}
+}
+
+// ---- Shared server store (so everyone sees the same board) --------------------
+const EDIT_PW = 'Krystalore'
+
+export function isDefaultState(s: CcState): boolean {
+  try { return JSON.stringify(s) === JSON.stringify(DEFAULT_STATE) } catch { return false }
+}
+
+// Fetch the shared board. Returns null if the server has nothing saved yet or is
+// unreachable — callers fall back to the local cache in that case.
+export async function fetchState(): Promise<CcState | null> {
+  try {
+    const r = await fetch('/api/command?key=org', { cache: 'no-store' })
+    if (!r.ok) return null
+    const j = await r.json()
+    const s = j?.data
+    if (s && Array.isArray(s.buckets)) return s as CcState
+  } catch {}
+  return null
+}
+
+// Push the board to the shared store so every device sees it. Best-effort.
+export async function pushState(s: CcState): Promise<boolean> {
+  try {
+    const r = await fetch('/api/command', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: 'org', data: s, pw: EDIT_PW }),
+    })
+    return r.ok
+  } catch { return false }
 }

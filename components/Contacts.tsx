@@ -10,6 +10,24 @@ type Group = { id: string; name: string; memberIds: string[] }
 
 const KEY = 'cc-contacts-v1'
 const GKEY = 'cc-groups-v1'
+const EDIT_PW = 'Krystalore'
+
+// Shared store so contacts/groups are the same on every device (not per-browser).
+async function pushBlob(key: 'contacts' | 'groups', data: any) {
+  try {
+    await fetch('/api/command', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key, data, pw: EDIT_PW }),
+    })
+  } catch {}
+}
+async function fetchBlob(key: 'contacts' | 'groups'): Promise<any | null> {
+  try {
+    const r = await fetch(`/api/command?key=${key}`, { cache: 'no-store' })
+    if (!r.ok) return null
+    return (await r.json())?.data ?? null
+  } catch { return null }
+}
 const CH_META: Record<ChType, { label: string; icon: any; ph: string }> = {
   email: { label: 'Email', icon: Mail, ph: 'name@email.com' },
   sms: { label: 'Text / Phone', icon: MessageSquare, ph: '+1 555 123 4567' },
@@ -38,11 +56,23 @@ export default function Contacts() {
   const [groupSel, setGroupSel] = useState<string[]>([])
 
   useEffect(() => {
-    try { setList(JSON.parse(localStorage.getItem(KEY) || '[]')) } catch {}
-    try { setGroups(JSON.parse(localStorage.getItem(GKEY) || '[]')) } catch {}
+    let localList: Contact[] = []; let localGroups: Group[] = []
+    try { localList = JSON.parse(localStorage.getItem(KEY) || '[]') } catch {}
+    try { localGroups = JSON.parse(localStorage.getItem(GKEY) || '[]') } catch {}
+    setList(localList); setGroups(localGroups) // instant paint from this browser
+    // Reconcile with the shared team store: server copy wins; if the server has
+    // nothing yet but this device has data, seed it so everyone gets it.
+    fetchBlob('contacts').then((s) => {
+      if (Array.isArray(s)) { setList(s); try { localStorage.setItem(KEY, JSON.stringify(s)) } catch {} }
+      else if (localList.length) pushBlob('contacts', localList)
+    })
+    fetchBlob('groups').then((s) => {
+      if (Array.isArray(s)) { setGroups(s); try { localStorage.setItem(GKEY, JSON.stringify(s)) } catch {} }
+      else if (localGroups.length) pushBlob('groups', localGroups)
+    })
   }, [])
-  const save = (next: Contact[]) => { setList(next); try { localStorage.setItem(KEY, JSON.stringify(next)) } catch {} }
-  const saveGroups = (next: Group[]) => { setGroups(next); try { localStorage.setItem(GKEY, JSON.stringify(next)) } catch {} }
+  const save = (next: Contact[]) => { setList(next); try { localStorage.setItem(KEY, JSON.stringify(next)) } catch {}; pushBlob('contacts', next) }
+  const saveGroups = (next: Group[]) => { setGroups(next); try { localStorage.setItem(GKEY, JSON.stringify(next)) } catch {}; pushBlob('groups', next) }
   const toggleGroupSel = (id: string) => setGroupSel((s) => s.includes(id) ? s.filter((x) => x !== id) : [...s, id])
   const saveGroup = () => {
     if (!groupName.trim() || !groupSel.length) return

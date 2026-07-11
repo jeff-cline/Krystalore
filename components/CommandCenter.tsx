@@ -5,7 +5,7 @@ import {
   Lock, Pencil, Check, Plus, X, ChevronUp, ChevronDown, ChevronLeft, ChevronRight,
   Trash2, FolderPlus, ExternalLink, Maximize2, Minimize2, Users,
 } from 'lucide-react'
-import { CcState, CcBucket, CcLink, DEFAULT_STATE, PALETTE, loadState, saveState, newId } from './commandData'
+import { CcState, CcBucket, CcLink, DEFAULT_STATE, PALETTE, loadState, saveState, newId, fetchState, pushState, isDefaultState } from './commandData'
 import CrystalRain from './CrystalRain'
 import Contacts from './Contacts'
 
@@ -22,17 +22,41 @@ export default function CommandCenter() {
   const [askEdit, setAskEdit] = useState(false); const [epw, setEpw] = useState(''); const [eerr, setEerr] = useState(false)
   const [showContacts, setShowContacts] = useState(false)
   const [pending, setPending] = useState<'edit' | 'contacts' | null>(null)
+  const [sync, setSync] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
 
   useEffect(() => {
     setMounted(true)
-    setState(loadState())
+    const local = loadState()
+    setState(local) // instant paint from this browser's cache
     try {
       if (localStorage.getItem('cc-view-ok') === '1') setViewOk(true)
       if (localStorage.getItem('cc-edit-ok') === '1') setEditOk(true)
     } catch {}
+    // Then reconcile with the SHARED board so every device shows the same thing.
+    fetchState().then((server) => {
+      if (server) {
+        setState(server); saveState(server) // shared copy wins; refresh local cache
+      } else if (!isDefaultState(local)) {
+        // Nothing saved on the server yet, but this device has a real board —
+        // seed the shared store from it (this is the device that has yesterday's
+        // buckets/links). Other devices will pick it up on their next visit.
+        pushState(local)
+      }
+    })
   }, [])
 
-  const update = (next: CcState) => { setState(next); saveState(next) }
+  // Every edit updates this browser AND the shared server board (best-effort).
+  const update = (next: CcState) => {
+    setState(next); saveState(next)
+    setSync('saving')
+    pushState(next).then((ok) => setSync(ok ? 'saved' : 'error'))
+  }
+
+  // Force this device's board to become the shared team board.
+  const publish = () => {
+    setSync('saving')
+    pushState(state).then((ok) => setSync(ok ? 'saved' : 'error'))
+  }
 
   /* gate handlers */
   const submitView = (e: React.FormEvent) => { e.preventDefault(); if (vpw.trim() === VIEW_PW) { setViewOk(true); try { localStorage.setItem('cc-view-ok', '1') } catch {} } else setVerr(true) }
@@ -149,15 +173,21 @@ export default function CommandCenter() {
       </div>
 
       {editing && (
-        <div className="flex justify-center mt-6">
+        <div className="flex flex-col items-center gap-3 mt-6">
           <button onClick={addBucket} className="inline-flex items-center gap-2 border-2 border-dashed border-[#34c5c5]/60 text-[#0D9488] font-bold px-5 py-3 rounded-2xl hover:bg-[#34c5c5]/5"><FolderPlus className="w-5 h-5" /> Add bucket</button>
+          <button onClick={publish} className="inline-flex items-center gap-2 bg-[#0D9488] text-white font-bold px-5 py-2.5 rounded-2xl hover:bg-[#0a5d58]">
+            <Check className="w-4 h-4" /> Publish this board to the whole team
+          </button>
+          <p className="text-xs text-gray-400">
+            {sync === 'saving' ? 'Syncing to the team…' : sync === 'saved' ? '✓ Saved — everyone sees this board.' : sync === 'error' ? 'Could not reach the server — try Publish again.' : 'Changes save to the shared team board automatically.'}
+          </p>
         </div>
       )}
 
       {showContacts && <Contacts />}
 
       <p className="text-center text-xs text-gray-400 mt-6">
-        {editing ? 'Editing on — your layout saves in this browser.' : 'Press Edit to rearrange (password protected).'}
+        {editing ? 'Editing on — changes save to the shared team board.' : 'Press Edit to rearrange (password protected).'}
         {mounted && <a href="/dash" className="text-[#0D9488] font-semibold ml-1">Add pages from the Orphan Dashboard →</a>}
       </p>
 
