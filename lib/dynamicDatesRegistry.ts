@@ -44,6 +44,7 @@ export const DYNAMIC_DATE_REGISTRY: DynamicDate[] = [
     title: 'Vision Board Party',
     description: 'Quarterly. Leave the date blank to auto-advance; type a date here to override what shows on the page.',
     date: '',
+    time: '5–7 PM EST',
     heroImage: '/images/krystalore/REM08628.jpg',
     cta: { ...off },
   },

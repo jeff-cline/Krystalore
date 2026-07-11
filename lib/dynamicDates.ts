@@ -61,14 +61,35 @@ async function systemUserId(): Promise<string | null> {
   }
 }
 
-// A saved DB entry (full override) wins; otherwise the registry default is returned.
+// Field-level merge: a non-empty DB value overrides; anything the admin hasn't set
+// falls back to the registry default. So editing one field never blanks the rest.
+function mergeRegistry(db: DynamicDate | null, reg?: DynamicDate): DynamicDate | null {
+  if (!db && !reg) return null
+  if (!db) return reg!
+  if (!reg) return db
+  const s = (a?: string, b?: string) => (a && a.trim() ? a : (b || ''))
+  return {
+    slug: db.slug,
+    label: db.label || reg.label,
+    pageUrl: db.pageUrl || reg.pageUrl,
+    title: s(db.title, reg.title),
+    description: s(db.description, reg.description),
+    date: s(db.date, reg.date),
+    time: s(db.time, reg.time),
+    heroImage: s(db.heroImage, reg.heroImage),
+    socialImage: db.socialImage || reg.socialImage || '',
+    cta: db.cta && (db.cta.enabled || db.cta.title || db.cta.link) ? db.cta : reg.cta || db.cta,
+    updatedAt: db.updatedAt,
+  }
+}
+
 export async function getDynamicDate(slug: string): Promise<DynamicDate | null> {
   let db: DynamicDate | null = null
   try {
     const row = await prisma.dashboardItem.findFirst({ where: { type: TYPE, title: slug } })
     db = row ? fromRow(row as any) : null
   } catch { /* DB unavailable — fall back to registry */ }
-  return db || REGISTRY_BY_SLUG.get(slug) || null
+  return mergeRegistry(db, REGISTRY_BY_SLUG.get(slug))
 }
 
 // Every registered page shows up pre-populated; DB overrides replace the default.
@@ -79,7 +100,7 @@ export async function listDynamicDates(search?: string): Promise<DynamicDate[]> 
     dbBySlug = new Map(rows.map((r) => { const d = fromRow(r as any); return [d.slug, d] }))
   } catch { /* DB unavailable — show registry only */ }
 
-  const merged: DynamicDate[] = DYNAMIC_DATE_REGISTRY.map((r) => dbBySlug.get(r.slug) || r)
+  const merged: DynamicDate[] = DYNAMIC_DATE_REGISTRY.map((r) => mergeRegistry(dbBySlug.get(r.slug) || null, r) as DynamicDate)
   Array.from(dbBySlug.values()).forEach((d) => { if (!REGISTRY_BY_SLUG.has(d.slug)) merged.push(d) }) // DB-only extras
 
   const q = (search || '').trim().toLowerCase()
