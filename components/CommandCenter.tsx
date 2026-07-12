@@ -33,13 +33,21 @@ export default function CommandCenter() {
       if (localStorage.getItem('cc-edit-ok') === '1') setEditOk(true)
     } catch {}
     // Then reconcile with the SHARED board so every device shows the same thing.
+    // IMPORTANT (data-safety during migration): a device that still holds a RICHER
+    // board than the server — e.g. Krystalore's admin browser with all the links
+    // she added before there was any server copy — must NOT be clobbered by a
+    // thinner server board. Richer local wins and re-publishes; otherwise the
+    // shared server copy wins.
     fetchState().then((server) => {
+      const linkCount = (s: CcState | null) => (s?.buckets || []).reduce((n, b) => n + (b.links?.length || 0), 0)
       if (server) {
-        setState(server); saveState(server) // shared copy wins; refresh local cache
+        if (!isDefaultState(local) && linkCount(local) > linkCount(server)) {
+          setState(local); pushState(local) // keep this device's richer board, publish it
+        } else {
+          setState(server); saveState(server) // shared copy wins; refresh local cache
+        }
       } else if (!isDefaultState(local)) {
-        // Nothing saved on the server yet, but this device has a real board —
-        // seed the shared store from it (this is the device that has yesterday's
-        // buckets/links). Other devices will pick it up on their next visit.
+        // Nothing saved on the server yet, but this device has a real board — seed it.
         pushState(local)
       }
     })
@@ -53,8 +61,10 @@ export default function CommandCenter() {
       fetchState().then((server) => {
         if (!server) return
         setState((cur) => {
-          const next = JSON.stringify(server)
-          if (next === JSON.stringify(cur)) return cur // unchanged — no re-render
+          if (JSON.stringify(server) === JSON.stringify(cur)) return cur // unchanged
+          // Don't let a thinner server copy wipe a richer board being viewed here.
+          const links = (s: CcState) => (s.buckets || []).reduce((n, b) => n + (b.links?.length || 0), 0)
+          if (links(server) < links(cur)) return cur
           saveState(server)
           return server
         })
