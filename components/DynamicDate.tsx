@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import Image from 'next/image'
+import { Calendar } from 'lucide-react'
 
 type CTA = { enabled: boolean; title: string; link: string; color: string }
 type DD = { title?: string; description?: string; date?: string; time?: string; heroImage?: string; cta?: CTA }
@@ -73,6 +74,54 @@ export function DynamicText({
   const dd = useDynamicDate(slug)
   const v = (dd?.[field] as string | undefined) || fallback
   return <span className={className} data-dyn={`${slug}.${field}`}>{v}</span>
+}
+
+/**
+ * Full dynamic header for a dynamic-date page. The featured image sits ALONE at the
+ * top (full width, never any text over it); the dynamic title (H1), description and
+ * date render BELOW it, and everything is editable from the Dynamic Dates admin. Pass
+ * the current hardcoded values as fallbacks; page-specific extras (CTAs, badges) go in
+ * `children` and render under the dynamic text.
+ */
+export function DynamicHeader({
+  slug, fallbackTitle, fallbackDescription, fallbackDate, fallbackImage, eyebrow, alt, children,
+}: {
+  slug: string
+  fallbackTitle: string
+  fallbackDescription?: string
+  fallbackDate?: string
+  fallbackImage: string
+  eyebrow?: string
+  alt?: string
+  children?: ReactNode
+}) {
+  const dd = useDynamicDate(slug)
+  const img = dd?.heroImage || fallbackImage
+  const title = dd?.title || fallbackTitle
+  const desc = (dd?.description ?? fallbackDescription) || ''
+  const date = dd?.date || fallbackDate || ''
+  return (
+    <section data-dynamic-header={slug}>
+      {/* Featured image — full width, on its own, no text over it */}
+      <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-[#F6F8FA]">
+        <Image src={img} alt={alt || title} fill priority className="object-cover" sizes="100vw" />
+      </div>
+      {/* Dynamic text, below the image */}
+      <div className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
+          {eyebrow ? <p className="text-[#0D9488] font-bold uppercase tracking-widest text-xs md:text-sm mb-4" data-dyn={`${slug}.eyebrow`}>{eyebrow}</p> : null}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.05] mb-5" data-dyn={`${slug}.title`}>{title}</h1>
+          {desc ? <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6 whitespace-pre-line" data-dyn={`${slug}.description`}>{desc}</p> : null}
+          {date ? (
+            <p className="inline-flex items-center gap-2 rounded-full bg-[#34c5c5]/15 text-[#0D9488] px-4 py-1.5 text-sm font-bold" data-dyn={`${slug}.date`}>
+              <Calendar className="w-4 h-4" /> {date}
+            </p>
+          ) : null}
+          {children ? <div className="mt-8">{children}</div> : null}
+        </div>
+      </div>
+    </section>
+  )
 }
 
 /**

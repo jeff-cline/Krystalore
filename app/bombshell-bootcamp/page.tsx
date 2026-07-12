@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { DynamicHero, DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
@@ -53,30 +53,25 @@ export default function BombshellBootcampPage() {
       <JsonLd />
       <Header />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden min-h-[90vh] flex items-center">
-        <DynamicHero slug="bombshell-bootcamp" fallbackSrc="/images/go9/fitness.jpg" alt="Bombshell Bootcamp -- Activate Your Freedom Formula" className="object-cover" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-[1]" />
-        <div className="container mx-auto px-4 relative z-10 py-20">
-          <p className="text-[#E8A849] font-semibold tracking-widest uppercase text-sm mb-4">Your Glow Up Season Is Here</p>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-4 max-w-3xl leading-tight">Bombshell Bootcamp</h1>
-          <p className="text-2xl md:text-3xl font-bold text-[#34c5c5] mb-6">Activate Your Freedom Formula</p>
-          <p className="text-lg text-gray-200 mb-4 max-w-2xl">5 days to go from burned-out, running-on-fumes high achiever to a vibrant, grounded leader who commands energy, balance, and unstoppable momentum.</p>
-          <p className="inline-flex items-center gap-2 bg-[#E8A849]/20 border border-[#E8A849]/40 rounded-full px-4 py-1.5 text-[#E8A849] font-bold text-sm mb-6">
-            <Clock className="w-4 h-4" /> <DynamicText slug="bombshell-bootcamp" field="date" fallback="Enrolling now" />
-          </p>
-          <div className="flex flex-wrap items-center gap-4 text-gray-300 text-sm mb-8">
-            <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> Replays Available</span>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href={BOMBSHELL_CHECKOUT_URL} className="bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white rounded-full px-10 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg text-lg">JOIN NOW</a>
-            <a href="#formula" className="border-2 border-white/60 text-white rounded-full px-10 py-4 font-bold hover:bg-white/10 transition-colors text-center" onClick={e => { e.preventDefault(); document.getElementById('formula')?.scrollIntoView({ behavior: 'smooth' }) }}>See the 5-Day Formula</a>
-          </div>
-          <div className="mt-6 inline-block bg-[#0D9488]/20 border border-[#0D9488]/40 rounded-xl px-6 py-3">
-            <p className="text-[#34c5c5] font-bold">BONUS: $250 Retreat Credit for all registered guests!</p>
-          </div>
+      {/* Hero — featured image alone on top, dynamic text below (all admin-editable) */}
+      <DynamicHeader
+        slug="bombshell-bootcamp"
+        eyebrow="Your Glow Up Season Is Here"
+        fallbackTitle="Bombshell Bootcamp"
+        fallbackDescription="5 days to go from burned-out, running-on-fumes high achiever to a vibrant, grounded leader who commands energy, balance, and unstoppable momentum."
+        fallbackDate="Enrolling now"
+        fallbackImage="/images/go9/fitness.jpg"
+        alt="Bombshell Bootcamp -- Activate Your Freedom Formula"
+      >
+        <p className="text-xl md:text-2xl font-bold text-[#34c5c5] mb-6">Activate Your Freedom Formula</p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={BOMBSHELL_CHECKOUT_URL} className="bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white rounded-full px-10 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg text-lg">JOIN NOW</a>
+          <a href="#formula" className="border-2 border-[#0D9488] text-[#0D9488] rounded-full px-10 py-4 font-bold hover:bg-[#0D9488]/5 transition-colors text-center" onClick={e => { e.preventDefault(); document.getElementById('formula')?.scrollIntoView({ behavior: 'smooth' }) }}>See the 5-Day Formula</a>
         </div>
-      </section>
+        <div className="mt-6 inline-block bg-[#0D9488]/10 border border-[#0D9488]/30 rounded-xl px-6 py-3">
+          <p className="text-[#0D9488] font-bold">BONUS: $250 Retreat Credit for all registered guests!</p>
+        </div>
+      </DynamicHeader>
 
       {/* What It Is */}
       <section className="py-20 bg-white">

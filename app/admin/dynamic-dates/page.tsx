@@ -28,6 +28,7 @@ export default function DynamicDatesAdmin() {
   const [pageImages, setPageImages] = useState<PageImage[] | null>(null)
   const [loadingImages, setLoadingImages] = useState(false)
   const [preview, setPreview] = useState<string | null>(null) // iPhone-preview image url
+  const [askSocial, setAskSocial] = useState<string | null>(null) // hero url just uploaded → offer as social
 
   const load = useCallback(async (query = '') => {
     const r = await fetch(`/api/admin/dynamic-dates?q=${encodeURIComponent(query)}`)
@@ -60,7 +61,15 @@ export default function DynamicDatesAdmin() {
     const fd = new FormData(); fd.append('file', file); fd.append('folder', field === 'heroImage' ? 'hero-images' : 'social-images')
     const r = await fetch('/api/admin/upload', { method: 'POST', body: fd })
     setBusy(false)
-    if (r.ok) { const d = await r.json(); if (d.url) set(field, d.url); return }
+    if (r.ok) {
+      const d = await r.json()
+      if (d.url) {
+        set(field, d.url)
+        // After a hero upload, offer to reuse it as the social share image (default yes).
+        if (field === 'heroImage') setAskSocial(d.url)
+      }
+      return
+    }
     let msg = 'Upload failed'
     try { const e = await r.json(); if (e?.error) msg = `Upload failed: ${e.error}` } catch {}
     alert(msg)
@@ -237,6 +246,33 @@ export default function DynamicDatesAdmin() {
               </div>
             </div>
             <button onClick={() => setPreview(null)} className="mx-auto mt-4 block rounded-full bg-white px-5 py-2 text-sm font-bold text-gray-900">Close</button>
+          </div>
+        </div>
+      )}
+
+      {/* After a hero upload: offer to reuse it as the social share image (default yes) */}
+      {askSocial && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-sm rounded-2xl bg-white p-6 text-center shadow-2xl">
+            <div className="mx-auto mb-3 h-28 w-full overflow-hidden rounded-xl">
+              <img src={askSocial} alt="" className="h-full w-full object-cover" />
+            </div>
+            <h3 className="mb-1 text-lg font-black text-gray-900">Use this as the social share image too?</h3>
+            <p className="mb-5 text-sm text-gray-500">This is what shows when the page link is shared. Recommended.</p>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => { set('socialImage', askSocial); setAskSocial(null) }}
+                className="w-full rounded-full bg-[#0D9488] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#0a5d58]"
+              >
+                Yes, use it for social too
+              </button>
+              <button
+                onClick={() => setAskSocial(null)}
+                className="w-full rounded-full border border-gray-300 px-5 py-2.5 text-sm font-bold text-gray-600 hover:bg-gray-50"
+              >
+                No, I&apos;ll upload a separate one
+              </button>
+            </div>
           </div>
         </div>
       )}
