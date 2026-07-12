@@ -357,46 +357,37 @@ export default function BusinessSmartStartPage() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <Image
-          src="/images/go9/hero.jpg"
-          alt="Business Smart Start - Mind Body Business Transformation"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 max-w-7xl mx-auto py-20 lg:py-32">
-            <div className="flex-1 text-center lg:text-left">
-              <h1 className="text-5xl md:text-7xl font-black text-white mb-6">
+      {/* Hero Section — light split layout so the text stays readable */}
+      <section className="relative bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white pt-12 md:pt-20 pb-16 md:pb-24 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            <div className="text-center lg:text-left">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-5 leading-[1.05]">
                 Business <span className="bg-gradient-to-r from-[#0D9488] to-[#F97316] bg-clip-text text-transparent">Smart Start</span>
               </h1>
-              <p className="text-2xl md:text-3xl text-gray-200 mb-4 font-light">
+              <p className="text-2xl md:text-3xl text-gray-700 mb-4 font-light">
                 Because Shift Happens
               </p>
-              <p className="text-lg text-gray-300 mt-6 mb-8 max-w-2xl leading-relaxed">
+              <p className="text-lg text-gray-600 mt-6 mb-8 max-w-2xl leading-relaxed">
                 The only program that transforms your mind, body, AND business simultaneously. When you're stuck, going through a shift, or need to level up—you need the right team.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mt-10 justify-center lg:justify-start">
-                <a 
-                  href="/book" 
+                <a
+                  href="/book"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-10 py-5 font-bold hover:scale-105 transition-transform duration-300 text-center shadow-2xl text-lg"
                 >
                   Book a Breakthrough Call
                 </a>
-                <a 
-                  href="#quiz" 
-                  className="border-2 border-white/60 text-white rounded-full px-10 py-5 font-bold hover:bg-white/10 transition-colors duration-300 text-center text-lg"
+                <a
+                  href="#quiz"
+                  className="border-2 border-[#0D9488] text-[#0D9488] rounded-full px-10 py-5 font-bold hover:bg-[#0D9488]/5 transition-colors duration-300 text-center text-lg"
                 >
                   Take the Smart Start Quiz
                 </a>
               </div>
-              <div className="flex items-center gap-6 mt-12 justify-center lg:justify-start text-sm text-gray-400">
+              <div className="flex items-center gap-6 mt-12 justify-center lg:justify-start text-sm text-gray-500">
                 <div className="flex items-center gap-2">
                   <Trophy className="h-5 w-5 text-[#F97316]" />
                   <span>4 Exits • $500M+ Revenue</span>
@@ -407,17 +398,15 @@ export default function BusinessSmartStartPage() {
                 </div>
               </div>
             </div>
-            <div className="flex-shrink-0 hidden lg:block">
-              <div className="relative w-[400px] h-[500px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
-                <Image
-                  src="/images/go9/corporate.jpg"
-                  alt="Business Smart Start Program"
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="400px"
-                />
-              </div>
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/go9/hero.jpg"
+                alt="Krystalore Crews — Business Smart Start"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
@@ -483,10 +472,10 @@ export default function BusinessSmartStartPage() {
                 <div className="relative">
                   <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">
                     <Image
-                      src="/images/go9/portrait.jpg"
+                      src="/images/go9/corporate.jpg"
                       alt="Krystalore Crews - Executive Coach, Author, Speaker"
                       fill
-                      className="object-cover"
+                      className="object-cover object-[30%_center]"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   </div>
