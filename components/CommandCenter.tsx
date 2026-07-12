@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   Lock, Pencil, Check, Plus, X, ChevronUp, ChevronDown, ChevronLeft, ChevronRight,
   Trash2, FolderPlus, ExternalLink, Maximize2, Minimize2, Users,
@@ -26,7 +26,7 @@ export default function CommandCenter() {
   const [sync, setSync] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
 
   // Identity (from the login session, if any). Drives personal boards + God toggle.
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const myEmail = (session?.user?.email || '').toLowerCase()
   const role = (session?.user as any)?.role || ''
   const isGod = role === 'GOD'
@@ -36,19 +36,33 @@ export default function CommandCenter() {
   const [activeKey, setActiveKey] = useState('org')
   const [boards, setBoards] = useState<BoardRef[]>([]) // God's list of admin boards
 
+  // This browser's board captured BEFORE any sync mutates it, so a personal board
+  // is seeded from exactly what the owner had — nothing rearranged or dropped.
+  const originalBoardRef = useRef<CcState | null>(null)
+  const didInitActive = useRef(false)
+
   const isTeam = activeKey === 'org'
   const isOwnBoard = !!myEmail && activeKey === `user:${myEmail}`
   const viewingOther = activeKey.startsWith('user:') && !isOwnBoard
-  const canEdit = isTeam ? editOk : isOwnBoard // own board: session-authorized; others: read-only
   const activeName = viewingOther ? (boards.find((b) => `user:${b.email}` === activeKey)?.name || activeKey.slice(5)) : ''
 
   useEffect(() => {
     setMounted(true)
+    originalBoardRef.current = loadState() // capture the pristine board on this device now
     try {
       if (localStorage.getItem('cc-view-ok') === '1') setViewOk(true)
       if (localStorage.getItem('cc-edit-ok') === '1') setEditOk(true)
     } catch {}
   }, [])
+
+  // The seed for a first-time personal board: the owner's own board PLUS any links
+  // on the shared board they don't already have — the MAXIMUM set of links, kept in
+  // the owner's own arrangement, so nothing has to be moved by hand.
+  const computeSeed = async (): Promise<CcState> => {
+    const localBoard = originalBoardRef.current || loadState()
+    const team = await fetchState('org')
+    return team ? mergeBoards(localBoard, team) : localBoard
+  }
 
   // Load the SHARED team board: union-merge this browser's board with the server so
   // no one's links are ever lost, then publish the union back.
@@ -65,12 +79,12 @@ export default function CommandCenter() {
     })
   }
 
-  // Load a personal board. If it's mine and none exists yet, seed it from my current
-  // board so it reflects exactly what I have. Someone else's is view-only.
+  // Load a personal board. If it already exists, show it EXACTLY as last saved. If
+  // it's mine and none exists yet, seed it once with the maximum board (see above).
   const loadPersonalBoard = (key: string) => {
-    fetchState(key).then((server) => {
-      if (server) { setState(server); return }
-      if (key === `user:${myEmail}`) { const seed = loadState(); setState(seed); pushState(seed, key) }
+    fetchState(key).then(async (server) => {
+      if (server) { setState(server); return } // exactly as they left it
+      if (key === `user:${myEmail}`) { const seed = await computeSeed(); setState(seed); pushState(seed, key) }
       else setState({ master: `${activeName || 'This admin'} hasn't set up a board yet`, buckets: [] })
     })
   }
@@ -83,12 +97,15 @@ export default function CommandCenter() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeKey, myEmail])
 
-  // Once logged in, make sure my personal board exists (seeded from my current board)
-  // so a God account can see it in the toggle even before I open it myself.
+  // When an admin logs in, land them on THEIR OWN board so it looks just the way they
+  // left it (this also seeds it on first visit). God stays on the team board and uses
+  // the switcher to view any admin. Runs once, after the session resolves.
   useEffect(() => {
-    if (!loggedIn || !myEmail) return
-    fetchState(`user:${myEmail}`).then((existing) => { if (!existing) pushState(loadState(), `user:${myEmail}`) })
-  }, [loggedIn, myEmail])
+    if (didInitActive.current || status === 'loading') return
+    didInitActive.current = true
+    if (status === 'authenticated' && myEmail && !isGod) setActiveKey(`user:${myEmail}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, myEmail, isGod])
 
   // God: fetch the list of admin boards to toggle through.
   useEffect(() => {
