@@ -8,8 +8,9 @@ import {
   Shield, Users, Brain, Target, Compass, Flame,
   CheckCircle, ChevronDown, ChevronUp, Star, BookOpen,
   Heart, Mountain, Crown, Sun, Award, Flag,
-  TreePine, Briefcase, PartyPopper
+  TreePine, Briefcase, PartyPopper, Calendar
 } from 'lucide-react'
+import { DynamicText } from '@/components/DynamicDate'
 
 function VeteranRetreatsJsonLd() {
   const jsonLd = {
@@ -187,6 +188,12 @@ export default function VeteranRetreatsPage() {
           <div className="flex flex-col sm:flex-row gap-4">
             <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
             <Link href="#content" className="border-2 border-white/60 text-white rounded-full px-8 py-4 font-bold hover:bg-white/10 transition-colors text-center">Explore More</Link>
+          </div>
+          <div className="mt-6">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/15 ring-1 ring-white/25 text-white px-4 py-2 text-sm font-bold backdrop-blur-sm">
+              <Calendar className="w-4 h-4" />
+              <DynamicText slug="veteran-retreats" field="date" fallback="Dates TBA" />
+            </span>
           </div>
         </div>
       </section>

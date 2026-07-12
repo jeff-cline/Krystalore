@@ -32,6 +32,7 @@ import {
   Home,
   Wind,
 } from 'lucide-react'
+import { DynamicText } from '@/components/DynamicDate'
 import type { Metadata } from 'next'
 
 /* ─── Carousel Images ─── */
@@ -111,6 +112,12 @@ export default function CostaRicaRetreatPage() {
             >
               Join Waitlist
             </a>
+          </div>
+          <div className="mt-6 flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/15 ring-1 ring-white/25 text-white px-4 py-2 text-sm font-bold backdrop-blur-sm">
+              <Calendar className="w-4 h-4" />
+              <DynamicText slug="cr-retreat" field="date" fallback="October 18–25, 2026" />
+            </span>
           </div>
         </div>
       </section>

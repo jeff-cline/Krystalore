@@ -9,6 +9,7 @@ import {
   Compass, HeartPulse, Brain, Users, Briefcase, ChevronDown, ChevronUp,
   Sun, Map as MapIcon, Dumbbell, Heart, Quote, ShieldCheck, Play, X,
 } from 'lucide-react'
+import { DynamicText } from '@/components/DynamicDate'
 
 const CHECKOUT = 'https://www.krystalorecrews.com/rise-and-thrive-checkout'
 
@@ -290,7 +291,7 @@ export default function RiseAndThrive() {
                   </a>
                 </div>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-7 text-sm text-gray-500">
-                  <span className="inline-flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#e07800]" /> Starts July 27</span>
+                  <span className="inline-flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#e07800]" /> Starts <DynamicText slug="rise-and-thrive" field="date" fallback="July 27" /></span>
                   <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#e07800]" /> Costa Rica · Oct 21–26</span>
                   <span className="inline-flex items-center gap-1.5"><Sun className="w-4 h-4 text-[#e07800]" /> 90-day journey</span>
                 </div>

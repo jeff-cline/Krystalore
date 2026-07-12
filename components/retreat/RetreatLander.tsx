@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, Calendar, Check, Heart, Mail, MapPin, Sparkles, Users } from 'lucide-react'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
+import { DynamicText } from '@/components/DynamicDate'
 
 export const WAITLIST_URL = 'https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout'
 export const PRIVATE_RETREAT_URL = 'https://www.krystalorecrews.com/costa-rica-retreat-private-request-page'
@@ -88,6 +89,12 @@ export function RetreatHubPage() {
                   One main retreat home for every current and future option: Costa Rica, Puerto Rico, Tennessee, private retreats, waitlist updates, and event collaborations.
                 </p>
                 <RetreatCTAButtons />
+                <div className="mt-6">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-[#34c5c5]/15 text-[#0D9488] px-4 py-2 text-sm font-bold">
+                    <Calendar className="w-4 h-4" />
+                    <DynamicText slug="retreat" field="date" fallback="Dates TBA" />
+                  </span>
+                </div>
               </div>
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                 <Image src="/images/retreat-destinations/cr-01.jpg" alt="Costa Rica retreat property with tropical views" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
