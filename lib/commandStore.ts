@@ -31,6 +31,19 @@ export async function getBlob(key: string): Promise<any | null> {
   }
 }
 
+// Emails that currently have a saved personal board ('user:<email>' rows).
+export async function listUserBoardEmails(): Promise<string[]> {
+  try {
+    const rows = await prisma.dashboardItem.findMany({
+      where: { type: TYPE, title: { startsWith: 'user:' } },
+      select: { title: true },
+    })
+    return rows.map((r) => r.title.slice(5)).filter(Boolean)
+  } catch {
+    return []
+  }
+}
+
 export async function setBlob(key: string, data: any): Promise<boolean> {
   try {
     const existing = await prisma.dashboardItem.findFirst({ where: { type: TYPE, title: key }, select: { id: true } })

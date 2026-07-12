@@ -5,7 +5,8 @@ import {
   Lock, Pencil, Check, Plus, X, ChevronUp, ChevronDown, ChevronLeft, ChevronRight,
   Trash2, FolderPlus, ExternalLink, Maximize2, Minimize2, Users,
 } from 'lucide-react'
-import { CcState, CcBucket, CcLink, DEFAULT_STATE, PALETTE, loadState, saveState, newId, fetchState, pushState, isDefaultState, mergeBoards } from './commandData'
+import { useSession } from 'next-auth/react'
+import { CcState, CcBucket, CcLink, DEFAULT_STATE, PALETTE, loadState, saveState, newId, fetchState, pushState, isDefaultState, mergeBoards, fetchBoards, BoardRef } from './commandData'
 import CrystalRain from './CrystalRain'
 import Contacts from './Contacts'
 
@@ -24,71 +25,122 @@ export default function CommandCenter() {
   const [pending, setPending] = useState<'edit' | 'contacts' | null>(null)
   const [sync, setSync] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
 
+  // Identity (from the login session, if any). Drives personal boards + God toggle.
+  const { data: session } = useSession()
+  const myEmail = (session?.user?.email || '').toLowerCase()
+  const role = (session?.user as any)?.role || ''
+  const isGod = role === 'GOD'
+  const loggedIn = !!session?.user
+
+  // Which board is on screen: 'org' = shared team board, 'user:<email>' = personal.
+  const [activeKey, setActiveKey] = useState('org')
+  const [boards, setBoards] = useState<BoardRef[]>([]) // God's list of admin boards
+
+  const isTeam = activeKey === 'org'
+  const isOwnBoard = !!myEmail && activeKey === `user:${myEmail}`
+  const viewingOther = activeKey.startsWith('user:') && !isOwnBoard
+  const canEdit = isTeam ? editOk : isOwnBoard // own board: session-authorized; others: read-only
+  const activeName = viewingOther ? (boards.find((b) => `user:${b.email}` === activeKey)?.name || activeKey.slice(5)) : ''
+
   useEffect(() => {
     setMounted(true)
-    const local = loadState()
-    setState(local) // instant paint from this browser's cache
     try {
       if (localStorage.getItem('cc-view-ok') === '1') setViewOk(true)
       if (localStorage.getItem('cc-edit-ok') === '1') setEditOk(true)
     } catch {}
-    // Then reconcile with the SHARED board. SAFETY: never lose anyone's links.
-    // If this device has its own board (e.g. Krystalore's admin browser with all
-    // the links she added before any server copy existed), UNION-merge it with the
-    // server so every link from both survives, then publish the union back. A plain
-    // default board contributes nothing, so it just adopts the shared copy.
-    fetchState().then((server) => {
-      if (!server) {
-        if (!isDefaultState(local)) pushState(local) // seed the shared store
-        return
-      }
-      if (isDefaultState(local)) {
-        setState(server); saveState(server) // no unique links here — take the shared board
-        return
-      }
-      const merged = mergeBoards(server, local) // server structure + this device's extra links
-      const mj = JSON.stringify(merged)
-      if (mj !== JSON.stringify(local)) { setState(merged); saveState(merged) }
-      if (mj !== JSON.stringify(server)) pushState(merged) // contribute this device's links back
-    })
   }, [])
 
-  // Live-ish sync: while just viewing (not mid-edit), pull the shared board every
-  // 30s so a change Darlin makes shows up for Krystalore without a manual refresh.
+  // Load the SHARED team board: union-merge this browser's board with the server so
+  // no one's links are ever lost, then publish the union back.
+  const loadTeamBoard = () => {
+    const local = loadState()
+    setState(local) // instant paint
+    fetchState('org').then((server) => {
+      if (!server) { if (!isDefaultState(local)) pushState(local, 'org'); return }
+      if (isDefaultState(local)) { setState(server); saveState(server); return }
+      const merged = mergeBoards(server, local)
+      const mj = JSON.stringify(merged)
+      if (mj !== JSON.stringify(local)) { setState(merged); saveState(merged) }
+      if (mj !== JSON.stringify(server)) pushState(merged, 'org')
+    })
+  }
+
+  // Load a personal board. If it's mine and none exists yet, seed it from my current
+  // board so it reflects exactly what I have. Someone else's is view-only.
+  const loadPersonalBoard = (key: string) => {
+    fetchState(key).then((server) => {
+      if (server) { setState(server); return }
+      if (key === `user:${myEmail}`) { const seed = loadState(); setState(seed); pushState(seed, key) }
+      else setState({ master: `${activeName || 'This admin'} hasn't set up a board yet`, buckets: [] })
+    })
+  }
+
+  // (Re)load whenever the active board changes.
+  useEffect(() => {
+    if (activeKey === 'org') loadTeamBoard()
+    else loadPersonalBoard(activeKey)
+    setEditing(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeKey, myEmail])
+
+  // Once logged in, make sure my personal board exists (seeded from my current board)
+  // so a God account can see it in the toggle even before I open it myself.
+  useEffect(() => {
+    if (!loggedIn || !myEmail) return
+    fetchState(`user:${myEmail}`).then((existing) => { if (!existing) pushState(loadState(), `user:${myEmail}`) })
+  }, [loggedIn, myEmail])
+
+  // God: fetch the list of admin boards to toggle through.
+  useEffect(() => {
+    if (isGod) fetchBoards().then(setBoards)
+  }, [isGod])
+
+  // Live-ish sync: while just viewing (not mid-edit), refresh the active board every
+  // 30s so others' changes appear without a manual reload.
   useEffect(() => {
     if (!viewOk || editing) return
     const id = setInterval(() => {
-      fetchState().then((server) => {
+      fetchState(activeKey).then((server) => {
         if (!server) return
         setState((cur) => {
-          // Union-merge: pick up others' new links without ever dropping what's here.
-          const merged = mergeBoards(server, cur)
-          if (JSON.stringify(merged) === JSON.stringify(cur)) return cur // nothing new
-          saveState(merged)
-          if (JSON.stringify(merged) !== JSON.stringify(server)) pushState(merged)
-          return merged
+          if (activeKey === 'org') {
+            const merged = mergeBoards(server, cur) // never drop links from the team board
+            if (JSON.stringify(merged) === JSON.stringify(cur)) return cur
+            saveState(merged)
+            if (JSON.stringify(merged) !== JSON.stringify(server)) pushState(merged, 'org')
+            return merged
+          }
+          return JSON.stringify(server) === JSON.stringify(cur) ? cur : server
         })
       })
     }, 30000)
     return () => clearInterval(id)
-  }, [viewOk, editing])
+  }, [viewOk, editing, activeKey])
 
-  // Every edit updates this browser AND the shared server board (best-effort).
+  // Every edit saves to the ACTIVE board. Team board → shared 'org' (+ local cache);
+  // my personal board → 'user:<email>'. Someone else's board is read-only (no writes).
   const update = (next: CcState) => {
-    setState(next); saveState(next)
+    if (viewingOther) return // safety: never write to another admin's board
+    setState(next)
     setSync('saving')
-    pushState(next).then((ok) => setSync(ok ? 'saved' : 'error'))
+    if (isTeam) { saveState(next); pushState(next, 'org').then((ok) => setSync(ok ? 'saved' : 'error')) }
+    else pushState(next, activeKey).then((ok) => setSync(ok ? 'saved' : 'error'))
   }
 
-  // Force this device's board to become the shared team board.
+  // Force this device's board to become the shared team board (team board only).
   const publish = () => {
     setSync('saving')
-    pushState(state).then((ok) => setSync(ok ? 'saved' : 'error'))
+    pushState(state, 'org').then((ok) => setSync(ok ? 'saved' : 'error'))
   }
 
   /* gate handlers */
   const submitView = (e: React.FormEvent) => { e.preventDefault(); if (vpw.trim() === VIEW_PW) { setViewOk(true); try { localStorage.setItem('cc-view-ok', '1') } catch {} } else setVerr(true) }
-  const clickEdit = () => { if (editing) { setEditing(false); return } if (editOk) { setEditing(true) } else { setPending('edit'); setAskEdit(true) } }
+  const clickEdit = () => {
+    if (editing) { setEditing(false); return }
+    if (viewingOther) return // read-only
+    if (isOwnBoard) { setEditing(true); return } // my board: session already authorizes
+    if (editOk) { setEditing(true) } else { setPending('edit'); setAskEdit(true) } // team board: password
+  }
   const clickContacts = () => { if (editOk) { setShowContacts((s) => !s) } else { setPending('contacts'); setAskEdit(true) } }
   const submitEdit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -109,6 +161,12 @@ export default function CommandCenter() {
   const patchLink = (bi: number, li: number, p: Partial<CcLink>) => { const b = [...state.buckets]; const ls = [...b[bi].links]; const ext = p.href !== undefined ? /^https?:\/\//i.test(p.href) : ls[li].ext; ls[li] = { ...ls[li], ...p, ext }; b[bi] = { ...b[bi], links: ls }; update({ ...state, buckets: b }) }
   const addLink = (bi: number, label: string, href: string) => { const b = [...state.buckets]; b[bi] = { ...b[bi], links: [...b[bi].links, { id: newId(), label, href, ext: /^https?:\/\//i.test(href) }] }; update({ ...state, buckets: b }) }
 
+  // Board switcher options: Shared Team always; My Board when logged in; and for a
+  // God account, every other admin's board so it can be viewed exactly as it is.
+  const boardOptions: { key: string; label: string }[] = [{ key: 'org', label: 'Shared Team' }]
+  if (loggedIn && myEmail) boardOptions.push({ key: `user:${myEmail}`, label: 'My Board' })
+  if (isGod) boards.filter((b) => b.email && b.email !== myEmail).forEach((b) => boardOptions.push({ key: `user:${b.email}`, label: b.name || b.email }))
+
   /* ---- VIEW GATE ---- */
   if (!viewOk) {
     return (
@@ -128,16 +186,42 @@ export default function CommandCenter() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* board switcher — only shows when you're logged in (personal / God views) */}
+      {boardOptions.length > 1 && (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mr-1">
+            {isGod ? 'God view · pick a board' : 'Your boards'}
+          </span>
+          {boardOptions.map((o) => (
+            <button key={o.key} onClick={() => setActiveKey(o.key)}
+              className={`px-3.5 py-1.5 rounded-full text-sm font-bold transition-colors ${activeKey === o.key ? 'bg-[#0D9488] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-[#0D9488]'}`}>
+              {o.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* read-only banner when a God account is viewing another admin's board */}
+      {viewingOther && (
+        <div className="mb-4 rounded-xl bg-[#34c5c5]/10 border border-[#34c5c5]/30 px-4 py-2.5 text-sm text-[#0D9488] font-semibold">
+          Viewing <span className="font-black">{activeName}</span>’s board — read-only (exactly as they have it).
+        </div>
+      )}
+
       {/* top bar */}
       <div className="flex items-center justify-between mb-6">
         <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-xs">Org Chart · Directory</p>
         <div className="flex items-center gap-2">
-          <button onClick={clickContacts} className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-colors ${showContacts ? 'bg-[#0D9488] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-[#0D9488]'}`}>
-            <Users className="w-4 h-4" /> Contacts
-          </button>
-          <button onClick={clickEdit} className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-colors ${editing ? 'bg-[#0D9488] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-[#0D9488]'}`}>
-            {editing ? <><Check className="w-4 h-4" /> Done</> : <><Pencil className="w-4 h-4" /> Edit</>}
-          </button>
+          {isTeam && (
+            <button onClick={clickContacts} className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-colors ${showContacts ? 'bg-[#0D9488] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-[#0D9488]'}`}>
+              <Users className="w-4 h-4" /> Contacts
+            </button>
+          )}
+          {!viewingOther && (
+            <button onClick={clickEdit} className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-colors ${editing ? 'bg-[#0D9488] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:text-[#0D9488]'}`}>
+              {editing ? <><Check className="w-4 h-4" /> Done</> : <><Pencil className="w-4 h-4" /> Edit</>}
+            </button>
+          )}
         </div>
       </div>
 
@@ -203,19 +287,21 @@ export default function CommandCenter() {
       {editing && (
         <div className="flex flex-col items-center gap-3 mt-6">
           <button onClick={addBucket} className="inline-flex items-center gap-2 border-2 border-dashed border-[#34c5c5]/60 text-[#0D9488] font-bold px-5 py-3 rounded-2xl hover:bg-[#34c5c5]/5"><FolderPlus className="w-5 h-5" /> Add bucket</button>
-          <button onClick={publish} className="inline-flex items-center gap-2 bg-[#0D9488] text-white font-bold px-5 py-2.5 rounded-2xl hover:bg-[#0a5d58]">
-            <Check className="w-4 h-4" /> Publish this board to the whole team
-          </button>
+          {isTeam && (
+            <button onClick={publish} className="inline-flex items-center gap-2 bg-[#0D9488] text-white font-bold px-5 py-2.5 rounded-2xl hover:bg-[#0a5d58]">
+              <Check className="w-4 h-4" /> Publish this board to the whole team
+            </button>
+          )}
           <p className="text-xs text-gray-400">
-            {sync === 'saving' ? 'Syncing to the team…' : sync === 'saved' ? '✓ Saved — everyone sees this board.' : sync === 'error' ? 'Could not reach the server — try Publish again.' : 'Changes save to the shared team board automatically.'}
+            {sync === 'saving' ? 'Saving…' : sync === 'saved' ? (isTeam ? '✓ Saved — everyone sees this board.' : '✓ Saved to your board.') : sync === 'error' ? 'Could not reach the server — try again.' : isTeam ? 'Changes save to the shared team board automatically.' : 'Changes save to your personal board automatically.'}
           </p>
         </div>
       )}
 
-      {showContacts && <Contacts />}
+      {showContacts && isTeam && <Contacts />}
 
       <p className="text-center text-xs text-gray-400 mt-6">
-        {editing ? 'Editing on — changes save to the shared team board.' : 'Press Edit to rearrange (password protected).'}
+        {viewingOther ? `Read-only view of ${activeName}’s board.` : editing ? (isTeam ? 'Editing on — changes save to the shared team board.' : 'Editing your personal board.') : 'Press Edit to rearrange.'}
         {mounted && <a href="/dash" className="text-[#0D9488] font-semibold ml-1">Add pages from the Orphan Dashboard →</a>}
       </p>
 

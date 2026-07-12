@@ -92,11 +92,12 @@ export function mergeBoards(base: CcState, extra: CcState): CcState {
   return { master: base.master || extra.master, buckets }
 }
 
-// Fetch the shared board. Returns null if the server has nothing saved yet or is
-// unreachable — callers fall back to the local cache in that case.
-export async function fetchState(): Promise<CcState | null> {
+// Fetch a board by key ('org' shared team board, or 'user:<email>' personal).
+// Returns null if nothing is saved yet, access is denied, or the server is down —
+// callers fall back to the local cache in that case.
+export async function fetchState(key = 'org'): Promise<CcState | null> {
   try {
-    const r = await fetch('/api/command?key=org', { cache: 'no-store' })
+    const r = await fetch(`/api/command?key=${encodeURIComponent(key)}`, { cache: 'no-store' })
     if (!r.ok) return null
     const j = await r.json()
     const s = j?.data
@@ -105,14 +106,29 @@ export async function fetchState(): Promise<CcState | null> {
   return null
 }
 
-// Push the board to the shared store so every device sees it. Best-effort.
-export async function pushState(s: CcState): Promise<boolean> {
+// Push a board to the store. Team board uses the editor password; personal
+// boards ('user:<email>') are authorized by the login session. Best-effort.
+export async function pushState(s: CcState, key = 'org'): Promise<boolean> {
   try {
+    const body: any = { key, data: s }
+    if (!key.startsWith('user:')) body.pw = EDIT_PW
     const r = await fetch('/api/command', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key: 'org', data: s, pw: EDIT_PW }),
+      body: JSON.stringify(body),
     })
     return r.ok
   } catch { return false }
+}
+
+export type BoardRef = { email: string; name: string; role: string; hasBoard: boolean }
+
+// GOD-only: the list of admin accounts whose boards can be toggled through.
+export async function fetchBoards(): Promise<BoardRef[]> {
+  try {
+    const r = await fetch('/api/command/boards', { cache: 'no-store' })
+    if (!r.ok) return []
+    const j = await r.json()
+    return Array.isArray(j?.boards) ? j.boards : []
+  } catch { return [] }
 }
