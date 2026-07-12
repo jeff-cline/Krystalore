@@ -7,10 +7,17 @@ export const runtime = 'nodejs'
 export const maxDuration = 60
 
 function makeApi(): UTApi {
-  const token = process.env.UPLOADTHING_TOKEN || process.env.UPLOADTHING_SECRET || process.env.UPLOADTHING_API_KEY
-  if (!token) {
+  const raw = process.env.UPLOADTHING_TOKEN || process.env.UPLOADTHING_SECRET || process.env.UPLOADTHING_API_KEY
+  if (!raw) {
     throw new Error('UploadThing not configured: set UPLOADTHING_TOKEN, UPLOADTHING_SECRET, or UPLOADTHING_API_KEY')
   }
+  // v7 UTApi needs a base64 token. If the env holds a legacy sk_ secret key, wrap it
+  // into the v7 token format (same approach as lib/feature-images.ts) so uploads work
+  // whether the env has the sk_ key OR an already-encoded base64 token.
+  const appId = process.env.UPLOADTHING_APP_ID || '66x17tzw9x'
+  const token = raw.startsWith('sk_')
+    ? Buffer.from(JSON.stringify({ apiKey: raw, appId, regions: ['sea1'] })).toString('base64')
+    : raw
   return new UTApi({ token })
 }
 

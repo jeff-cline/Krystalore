@@ -60,7 +60,10 @@ export default function DynamicDatesAdmin() {
     const fd = new FormData(); fd.append('file', file); fd.append('folder', field === 'heroImage' ? 'hero-images' : 'social-images')
     const r = await fetch('/api/admin/upload', { method: 'POST', body: fd })
     setBusy(false)
-    if (r.ok) { const d = await r.json(); if (d.url) set(field, d.url) } else alert('Upload failed')
+    if (r.ok) { const d = await r.json(); if (d.url) set(field, d.url); return }
+    let msg = 'Upload failed'
+    try { const e = await r.json(); if (e?.error) msg = `Upload failed: ${e.error}` } catch {}
+    alert(msg)
   }
   const loadPageImages = async () => {
     if (!editing?.pageUrl) { alert('Set the Page URL first.'); return }
