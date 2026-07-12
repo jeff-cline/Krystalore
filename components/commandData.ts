@@ -63,6 +63,35 @@ export function isDefaultState(s: CcState): boolean {
   try { return JSON.stringify(s) === JSON.stringify(DEFAULT_STATE) } catch { return false }
 }
 
+const normTitle = (t?: string) => (t || '').trim().toLowerCase()
+const normHref = (h?: string) => (h || '').trim().toLowerCase().replace(/\/+$/, '')
+const linkKey = (l: CcLink) => normHref(l.href) + '|' + normTitle(l.label)
+
+// Union merge: return a board that contains EVERY bucket and EVERY link from both
+// `base` and `extra`, de-duplicated. Used during migration so that no matter which
+// device syncs when, nobody's links are ever lost — they only accumulate.
+// `base` supplies the structure/order; `extra`'s unique links are appended.
+export function mergeBoards(base: CcState, extra: CcState): CcState {
+  const buckets: CcBucket[] = base.buckets.map((b) => ({ ...b, links: [...b.links] }))
+  const idxByTitle = new Map<string, number>()
+  buckets.forEach((b, i) => idxByTitle.set(normTitle(b.title), i))
+  for (const eb of extra.buckets) {
+    const key = normTitle(eb.title)
+    const i = idxByTitle.get(key)
+    if (i === undefined) {
+      buckets.push({ ...eb, links: [...eb.links] })
+      idxByTitle.set(key, buckets.length - 1)
+      continue
+    }
+    const target = buckets[i]
+    const seen = new Set(target.links.map(linkKey))
+    for (const l of eb.links) {
+      if (!seen.has(linkKey(l))) { target.links.push(l); seen.add(linkKey(l)) }
+    }
+  }
+  return { master: base.master || extra.master, buckets }
+}
+
 // Fetch the shared board. Returns null if the server has nothing saved yet or is
 // unreachable — callers fall back to the local cache in that case.
 export async function fetchState(): Promise<CcState | null> {

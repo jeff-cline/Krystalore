@@ -5,7 +5,7 @@ import {
   Lock, Pencil, Check, Plus, X, ChevronUp, ChevronDown, ChevronLeft, ChevronRight,
   Trash2, FolderPlus, ExternalLink, Maximize2, Minimize2, Users,
 } from 'lucide-react'
-import { CcState, CcBucket, CcLink, DEFAULT_STATE, PALETTE, loadState, saveState, newId, fetchState, pushState, isDefaultState } from './commandData'
+import { CcState, CcBucket, CcLink, DEFAULT_STATE, PALETTE, loadState, saveState, newId, fetchState, pushState, isDefaultState, mergeBoards } from './commandData'
 import CrystalRain from './CrystalRain'
 import Contacts from './Contacts'
 
@@ -32,24 +32,24 @@ export default function CommandCenter() {
       if (localStorage.getItem('cc-view-ok') === '1') setViewOk(true)
       if (localStorage.getItem('cc-edit-ok') === '1') setEditOk(true)
     } catch {}
-    // Then reconcile with the SHARED board so every device shows the same thing.
-    // IMPORTANT (data-safety during migration): a device that still holds a RICHER
-    // board than the server — e.g. Krystalore's admin browser with all the links
-    // she added before there was any server copy — must NOT be clobbered by a
-    // thinner server board. Richer local wins and re-publishes; otherwise the
-    // shared server copy wins.
+    // Then reconcile with the SHARED board. SAFETY: never lose anyone's links.
+    // If this device has its own board (e.g. Krystalore's admin browser with all
+    // the links she added before any server copy existed), UNION-merge it with the
+    // server so every link from both survives, then publish the union back. A plain
+    // default board contributes nothing, so it just adopts the shared copy.
     fetchState().then((server) => {
-      const linkCount = (s: CcState | null) => (s?.buckets || []).reduce((n, b) => n + (b.links?.length || 0), 0)
-      if (server) {
-        if (!isDefaultState(local) && linkCount(local) > linkCount(server)) {
-          setState(local); pushState(local) // keep this device's richer board, publish it
-        } else {
-          setState(server); saveState(server) // shared copy wins; refresh local cache
-        }
-      } else if (!isDefaultState(local)) {
-        // Nothing saved on the server yet, but this device has a real board — seed it.
-        pushState(local)
+      if (!server) {
+        if (!isDefaultState(local)) pushState(local) // seed the shared store
+        return
       }
+      if (isDefaultState(local)) {
+        setState(server); saveState(server) // no unique links here — take the shared board
+        return
+      }
+      const merged = mergeBoards(server, local) // server structure + this device's extra links
+      const mj = JSON.stringify(merged)
+      if (mj !== JSON.stringify(local)) { setState(merged); saveState(merged) }
+      if (mj !== JSON.stringify(server)) pushState(merged) // contribute this device's links back
     })
   }, [])
 
@@ -61,12 +61,12 @@ export default function CommandCenter() {
       fetchState().then((server) => {
         if (!server) return
         setState((cur) => {
-          if (JSON.stringify(server) === JSON.stringify(cur)) return cur // unchanged
-          // Don't let a thinner server copy wipe a richer board being viewed here.
-          const links = (s: CcState) => (s.buckets || []).reduce((n, b) => n + (b.links?.length || 0), 0)
-          if (links(server) < links(cur)) return cur
-          saveState(server)
-          return server
+          // Union-merge: pick up others' new links without ever dropping what's here.
+          const merged = mergeBoards(server, cur)
+          if (JSON.stringify(merged) === JSON.stringify(cur)) return cur // nothing new
+          saveState(merged)
+          if (JSON.stringify(merged) !== JSON.stringify(server)) pushState(merged)
+          return merged
         })
       })
     }, 30000)
