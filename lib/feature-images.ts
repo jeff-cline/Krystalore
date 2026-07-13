@@ -3,11 +3,11 @@ import { UTApi, UTFile } from 'uploadthing/server'
 // uploadthing app id is public (appears in file URLs). Token is derived from the
 // secret key so it works whether the env holds the sk_ key OR a base64 token.
 const APP_ID = process.env.UPLOADTHING_APP_ID || '66x17tzw9x'
-// v2 identity: the original `krystalore-gallery-index` customId got into a
-// permanently-locked phantom state on uploadthing's side (409 on re-save, stale
-// copy served to the edge). v2 escapes it cleanly.
-const INDEX_ID = 'krystalore-gallery-index-v2'
-const INDEX_NAME = 'krystalore-gallery-index-v2.json'
+// The gallery index is a JSON file stored in uploadthing, located by NAME only.
+// Earlier versions pinned a fixed `customId`, which got into a permanently-locked
+// phantom state on uploadthing's side (409 "Failed to upload file" on re-save).
+// Saving name-only (no customId) avoids the lock entirely; -v3 escapes locked -v2.
+const INDEX_NAME = 'krystalore-gallery-index-v3.json'
 
 function buildToken(): string {
   const raw = process.env.UPLOADTHING_TOKEN || process.env.UPLOADTHING_SECRET || process.env.UPLOADTHING_API_KEY || ''
@@ -36,7 +36,7 @@ async function findIndexKeys(a: UTApi): Promise<string[]> {
   for (let i = 0; i < 30; i++) {
     const res: any = await a.listFiles({ limit: 500, offset })
     const files: any[] = res?.files || []
-    for (const f of files) if (f.customId === INDEX_ID || f.name === INDEX_NAME) keys.push(f.key)
+    for (const f of files) if (f.name === INDEX_NAME) keys.push(f.key)
     if (!res?.hasMore || files.length === 0) break
     offset += files.length
   }
@@ -69,7 +69,7 @@ export async function saveIndex(data: GalleryIndex): Promise<void> {
   const a = api()
   const old = await findIndexKeys(a)
   if (old.length) await a.deleteFiles(old)
-  const f = new UTFile([Buffer.from(JSON.stringify(data))], INDEX_NAME, { type: 'application/json', customId: INDEX_ID })
+  const f = new UTFile([Buffer.from(JSON.stringify(data))], INDEX_NAME, { type: 'application/json' })
   const res: any = await a.uploadFiles(f)
   if (res?.error) throw new Error(res.error.message || 'Failed to save gallery index')
 }
