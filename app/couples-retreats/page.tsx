@@ -250,7 +250,7 @@ export default function CouplesRetreatsPage() {
         fallbackTitle="Couples Retreats"
         fallbackDescription="Reconnect, rebuild, and reignite your relationship through immersive couples retreat experiences."
         fallbackDate="Dates TBA"
-        fallbackImage="/images/go9/group-sunset.jpg"
+        fallbackImage="/images/retreat/retreat-01.jpg"
         alt="Couples Retreats"
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

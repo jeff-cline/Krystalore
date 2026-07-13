@@ -181,6 +181,7 @@ export default function VeteranRetreatsPage() {
         fallbackDescription="Retreat experiences built for veterans — healing, connection, and the next mission."
         fallbackDate="Dates TBA"
         fallbackImage="/images/go9/veteran.jpg"
+        imgClassName="object-cover object-top"
         alt="Veteran Retreats"
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

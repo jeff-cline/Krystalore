@@ -185,7 +185,7 @@ export const DYNAMIC_DATE_REGISTRY: DynamicDate[] = [
     title: 'Couples Retreats',
     description: 'Reconnect and strengthen your relationship, together.',
     date: 'Dates TBA',
-    heroImage: '/images/go9/group-sunset.jpg',
+    heroImage: '/images/retreat/retreat-01.jpg',
     cta: { ...off },
   },
 ]

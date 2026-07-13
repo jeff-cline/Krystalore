@@ -84,7 +84,7 @@ export function DynamicText({
  * `children` and render under the dynamic text.
  */
 export function DynamicHeader({
-  slug, fallbackTitle, fallbackDescription, fallbackDate, fallbackImage, eyebrow, alt, children,
+  slug, fallbackTitle, fallbackDescription, fallbackDate, fallbackImage, eyebrow, alt, imgClassName, children,
 }: {
   slug: string
   fallbackTitle: string
@@ -93,6 +93,7 @@ export function DynamicHeader({
   fallbackImage: string
   eyebrow?: string
   alt?: string
+  imgClassName?: string // override the image crop, e.g. 'object-cover object-top'
   children?: ReactNode
 }) {
   const dd = useDynamicDate(slug)
@@ -104,13 +105,17 @@ export function DynamicHeader({
     <section data-dynamic-header={slug}>
       {/* Featured image — full width, on its own, no text over it */}
       <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-[#F6F8FA]">
-        <Image src={img} alt={alt || title} fill priority className="object-cover" sizes="100vw" />
+        <Image src={img} alt={alt || title} fill priority className={imgClassName || 'object-cover'} sizes="100vw" />
       </div>
       {/* Dynamic text, below the image */}
       <div className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
           {eyebrow ? <p className="text-[#0D9488] font-bold uppercase tracking-widest text-xs md:text-sm mb-4" data-dyn={`${slug}.eyebrow`}>{eyebrow}</p> : null}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.05] mb-5" data-dyn={`${slug}.title`}>{title}</h1>
+          <h1
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.05] mb-5"
+            style={{ textShadow: '0 0 2px #e07800, 0 0 9px rgba(224,120,0,0.75), 0 0 20px rgba(224,120,0,0.45)' }}
+            data-dyn={`${slug}.title`}
+          >{title}</h1>
           {desc ? <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6 whitespace-pre-line" data-dyn={`${slug}.description`}>{desc}</p> : null}
           {date ? (
             <p className="inline-flex items-center gap-2 rounded-full bg-[#34c5c5]/15 text-[#0D9488] px-4 py-1.5 text-sm font-bold" data-dyn={`${slug}.date`}>

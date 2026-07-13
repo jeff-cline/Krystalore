@@ -814,14 +814,14 @@ export default function BusinessSmartStartPage() {
       </section>
 
       {/* Technology Arsenal Section */}
-      <section className="py-20 bg-gradient-to-br from-[#37a6a6] to-[#0D9488]">
+      <section className="py-20 bg-[#F6F8FA]">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Technology <span className="text-[#14B8A6]">Arsenal</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Technology <span className="text-[#0D9488]">Arsenal</span>
               </h2>
-              <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Jeff's 7 proprietary tools give you an unfair advantage in the market.
               </p>
             </div>
@@ -871,15 +871,15 @@ export default function BusinessSmartStartPage() {
                   icon: Globe
                 }
               ].map((tool, index) => (
-                <div key={index} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:bg-white/15 transition-colors">
+                <div key={index} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-[#14B8A6] to-[#F97316] rounded-lg flex items-center justify-center flex-shrink-0">
                       <tool.icon className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">{tool.name}</h3>
-                      <p className="text-[#14B8A6] font-semibold mb-2">{tool.desc}</p>
-                      <p className="text-gray-300 text-sm">{tool.detail}</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">{tool.name}</h3>
+                      <p className="text-[#0D9488] font-semibold mb-2">{tool.desc}</p>
+                      <p className="text-gray-600 text-sm">{tool.detail}</p>
                     </div>
                   </div>
                 </div>
@@ -887,8 +887,8 @@ export default function BusinessSmartStartPage() {
             </div>
 
             <div className="text-center mt-12">
-              <p className="text-xl text-gray-200 mb-6">
-                Combined value: <span className="text-[#14B8A6] font-bold">$50,000+/year</span> • Included in all packages
+              <p className="text-xl text-gray-700 mb-6">
+                Combined value: <span className="text-[#0D9488] font-bold">$50,000+/year</span> • Included in all packages
               </p>
               <a 
                 href="/book" 
