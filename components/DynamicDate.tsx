@@ -86,7 +86,7 @@ export function DynamicText({
  * `children` and render under the dynamic text.
  */
 export function DynamicHeader({
-  slug, fallbackTitle, fallbackDescription, fallbackDate, fallbackImage, eyebrow, alt, imgClassName, imgAspect, layout = 'stacked', children,
+  slug, fallbackTitle, fallbackDescription, fallbackDate, fallbackImage, eyebrow, alt, imgClassName, imgAspect, fallbackCta, layout = 'stacked', children,
 }: {
   slug: string
   fallbackTitle: string
@@ -97,6 +97,7 @@ export function DynamicHeader({
   alt?: string
   imgClassName?: string // override the image fit/crop, e.g. 'object-cover object-top' or 'object-contain'
   imgAspect?: string // override the stacked image box ratio, e.g. 'aspect-[16/9]' to show the full image uncropped
+  fallbackCta?: CTA // default CTA button shown until an admin edits it in Dynamic Dates
   layout?: 'stacked' | 'split' // 'stacked' = image on top; 'split' = whole image beside the text
   children?: ReactNode
 }) {
@@ -105,6 +106,7 @@ export function DynamicHeader({
   const title = dd?.title || fallbackTitle
   const desc = (dd?.description ?? fallbackDescription) || ''
   const date = dd?.date || fallbackDate || ''
+  const cta = dd?.cta ?? fallbackCta
 
   const textBlock = (align: 'center' | 'left') => (
     <div className={align === 'center' ? 'text-center' : 'text-center lg:text-left'}>
@@ -120,6 +122,19 @@ export function DynamicHeader({
           <Calendar className="w-4 h-4" /> {date}
         </p>
       ) : null}
+      {cta?.enabled && cta.title ? (
+        <div className={`mt-8 ${align === 'center' ? 'flex justify-center' : ''}`}>
+          <a
+            href={cta.link || '#'}
+            {...(/^https?:\/\//.test(cta.link || '') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold uppercase tracking-widest text-white shadow-lg transition hover:brightness-105"
+            style={{ backgroundColor: cta.color || '#E8A849' }}
+            data-dyn={`${slug}.cta`}
+          >
+            {cta.title}
+          </a>
+        </div>
+      ) : null}
       {children ? <div className="mt-8">{children}</div> : null}
     </div>
   )
@@ -130,8 +145,10 @@ export function DynamicHeader({
       <section data-dynamic-header={slug} className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            <div className="relative w-full aspect-[3/4] max-h-[560px] overflow-hidden rounded-3xl bg-[#F6F8FA] shadow-xl">
-              <Image src={img} alt={alt || title} fill priority className={imgClassName || 'object-contain'} sizes="(max-width: 1024px) 100vw, 50vw" />
+            {/* Natural image — shown in its original format, no background box or crop */}
+            <div className="w-full overflow-hidden rounded-3xl shadow-xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={img} alt={alt || title} className={`block h-auto w-full ${imgClassName || ''}`} />
             </div>
             {textBlock('left')}
           </div>

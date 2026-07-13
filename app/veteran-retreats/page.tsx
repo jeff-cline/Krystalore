@@ -174,7 +174,7 @@ export default function VeteranRetreatsPage() {
       <VeteranRetreatsJsonLd />
       <Header />
 
-      {/* Hero — featured image alone on top, dynamic text below (all admin-editable) */}
+      {/* Hero — image + dynamic title/date/CTA, all editable in Dynamic Dates admin */}
       <DynamicHeader
         slug="veteran-retreats"
         fallbackTitle="Veteran Retreats"
@@ -183,12 +183,7 @@ export default function VeteranRetreatsPage() {
         fallbackImage="/images/go9/veteran.jpg"
         layout="split"
         alt="Veteran Retreats"
-      >
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
-          <Link href="#content" className="border-2 border-[#0D9488] text-[#0D9488] rounded-full px-8 py-4 font-bold hover:bg-[#0D9488]/5 transition-colors text-center">Explore More</Link>
-        </div>
-      </DynamicHeader>
+      />
 
       {/* What Is a Veteran Retreat - AEO */}
       <section className="py-20 bg-white">
