@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/db'
 import { getSession } from '@/lib/auth'
 import { UTApi, UTFile } from 'uploadthing/server'
+import { loadIndex, saveIndex } from '@/lib/feature-images'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -48,6 +49,7 @@ export async function POST(req: NextRequest) {
 
     const data = (result as any).data
     const url: string = data?.ufsUrl || data?.url
+    const key: string = data?.key || ''
     if (!url) return NextResponse.json({ error: 'Upload returned no URL' }, { status: 502 })
 
     const isImage = (file.type || '').startsWith('image/')
@@ -63,6 +65,25 @@ export async function POST(req: NextRequest) {
           data: { url, name: safeName, type: isImage ? 'image' : 'video', folder, size: file.size || 0 },
         })
       } catch { item = null }
+    }
+
+    // Also surface the image in the public /images gallery (uploadthing index),
+    // under an "Uploads" folder. Best-effort: never fail the upload if this errors.
+    if (isImage && key) {
+      try {
+        const index = await loadIndex()
+        let gallery = index.folders.find((f) => f.slug === 'uploads')
+        if (!gallery) {
+          const maxOrder = index.folders.reduce((m, f) => Math.max(m, f.order || 0), 0)
+          gallery = { id: 'uploads', title: 'Uploads', slug: 'uploads', order: maxOrder + 1, images: [] }
+          index.folders.push(gallery)
+        }
+        if (!gallery.images.some((im) => im.key === key || im.url === url)) {
+          gallery.images.unshift({ key, url, order: 0 })
+          gallery.images.forEach((im, i) => { im.order = i })
+          await saveIndex(index)
+        }
+      } catch { /* gallery indexing is best-effort — the upload already succeeded */ }
     }
 
     return NextResponse.json({ url, name: safeName, size: file.size, type: file.type, item })
