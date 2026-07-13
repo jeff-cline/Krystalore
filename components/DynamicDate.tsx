@@ -86,7 +86,7 @@ export function DynamicText({
  * `children` and render under the dynamic text.
  */
 export function DynamicHeader({
-  slug, fallbackTitle, fallbackDescription, fallbackDate, fallbackImage, eyebrow, alt, imgClassName, layout = 'stacked', children,
+  slug, fallbackTitle, fallbackDescription, fallbackDate, fallbackImage, eyebrow, alt, imgClassName, imgAspect, layout = 'stacked', children,
 }: {
   slug: string
   fallbackTitle: string
@@ -96,6 +96,7 @@ export function DynamicHeader({
   eyebrow?: string
   alt?: string
   imgClassName?: string // override the image fit/crop, e.g. 'object-cover object-top' or 'object-contain'
+  imgAspect?: string // override the stacked image box ratio, e.g. 'aspect-[16/9]' to show the full image uncropped
   layout?: 'stacked' | 'split' // 'stacked' = image on top; 'split' = whole image beside the text
   children?: ReactNode
 }) {
@@ -142,7 +143,7 @@ export function DynamicHeader({
   // Stacked (default): featured image full-width on top, dynamic text below.
   return (
     <section data-dynamic-header={slug}>
-      <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-[#F6F8FA]">
+      <div className={`relative w-full ${imgAspect || 'aspect-[16/9] md:aspect-[21/9]'} bg-[#F6F8FA]`}>
         <Image src={img} alt={alt || title} fill priority className={imgClassName || 'object-cover'} sizes="100vw" />
       </div>
       <div className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
