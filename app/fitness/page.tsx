@@ -16,15 +16,6 @@ export default function FitnessPage() {
     { title: 'Wellness Retreats', description: 'Reset and recharge with immersive retreats for body, mind, and spirit.', icon: '🏝️', href: '/retreat', cta: 'Find a Retreat' },
   ]
 
-  const schedule = [
-    { day: 'Monday', time: '6:00 AM', type: 'HIIT Boot Camp', duration: '45 min' },
-    { day: 'Monday', time: '6:00 PM', type: 'Kickboxing', duration: '45 min' },
-    { day: 'Wednesday', time: '6:00 AM', type: 'Functional Fitness', duration: '45 min' },
-    { day: 'Wednesday', time: '6:00 PM', type: 'Yoga & Recovery', duration: '60 min' },
-    { day: 'Friday', time: '6:00 AM', type: 'HIIT Boot Camp', duration: '45 min' },
-    { day: 'Friday', time: '6:00 PM', type: 'Marathon Prep', duration: '60 min' }
-  ]
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -42,10 +33,10 @@ export default function FitnessPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Link
-                  href="/go"
+                  href="/bootcamp"
                   className="bg-[#34c5c5] hover:bg-[#37a6a6] text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200"
                 >
-                  Join Boot Camp - $99/mo
+                  Join the Bootcamp
                 </Link>
                 <Link
                   href="/book"
@@ -54,18 +45,14 @@ export default function FitnessPage() {
                   Book a Call
                 </Link>
               </div>
-              <div className="text-teal-100">
-                <p className="font-semibold">Monday • Wednesday • Friday</p>
-                <p>6:00 AM & 6:00 PM Sessions Available</p>
-              </div>
             </div>
             <div className="relative">
               <div className="bg-white rounded-2xl p-8 shadow-2xl">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">$99/month includes:</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Your membership includes:</h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-center">
                     <span className="text-green-500 mr-3">✓</span>
-                    3 live sessions per week (Mon/Wed/Fri)
+                    3 live sessions per week
                   </li>
                   <li className="flex items-center">
                     <span className="text-green-500 mr-3">✓</span>
@@ -158,46 +145,6 @@ export default function FitnessPage() {
         </div>
       </section>
 
-      {/* Schedule */}
-      <section className="py-16 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Weekly Schedule
-            </h2>
-            <p className="text-xl text-gray-600">
-              Choose morning or evening sessions that fit your schedule.
-            </p>
-          </div>
-          
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            {schedule.map((session, index) => (
-              <div 
-                key={index} 
-                className={`flex items-center justify-between p-6 ${
-                  index !== schedule.length - 1 ? 'border-b border-gray-200' : ''
-                }`}
-              >
-                <div className="flex items-center">
-                  <div className="w-24 text-lg font-semibold text-gray-900">
-                    {session.day}
-                  </div>
-                  <div className="mx-8 text-teal-600 font-semibold">
-                    {session.time}
-                  </div>
-                  <div className="text-gray-700">
-                    {session.type}
-                  </div>
-                </div>
-                <div className="text-gray-500 text-sm">
-                  {session.duration}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Success Stories */}
       <section className="py-16 lg:py-24 bg-teal-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -237,10 +184,10 @@ export default function FitnessPage() {
             Join Beyond Limits Boot Camp today and discover what you're truly capable of achieving.
           </p>
           <Link
-            href="/go"
+            href="/bootcamp"
             className="inline-block bg-white text-orange-500 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
           >
-            Join Boot Camp - $99/mo
+            Join the Bootcamp
           </Link>
         </div>
       </section>

@@ -151,7 +151,7 @@ export default function ServicesPage() {
               {[
                 { title: 'Bombshell Boot Camp', image: '/images/scraped/fitness-class-1.jpg', desc: 'High-energy group fitness combining HIIT, kickboxing, and strength training. Transform your body and mindset in an empowering community environment.', href: '/bombshell-bootcamp', accent: '#E8A849' },
                 { title: 'Million Dollar Body Academy', image: '/images/scraped/section-bg-3-opt.jpg', desc: 'Premium fitness and wellness transformation program. Build the body, mindset, and lifestyle of a champion with Krystalore\'s proven frameworks.', href: '/million-dollar-body', accent: '#34c5c5' },
-                { title: 'Beyond Limits Boot Camp', image: '/images/go9/fitness-alt.jpg', desc: 'Live virtual fitness Mon/Wed/Fri with 24/7 replay access. HIIT, kickboxing, and accountability. Join from anywhere in the world.', href: '/bootcamp', accent: '#E8A849' },
+                { title: 'Beyond Limits Boot Camp', image: '/images/go9/fitness-alt.jpg', desc: 'Live virtual fitness with 24/7 replay access. HIIT, kickboxing, and accountability. Join from anywhere in the world.', href: '/bootcamp', accent: '#E8A849' },
               ].map(program => (
                 <div key={program.title} className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
                   <div className="relative aspect-[4/3] overflow-hidden">

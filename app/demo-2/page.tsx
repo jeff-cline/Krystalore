@@ -212,7 +212,7 @@ export default function Demo2Page() {
                   <h3 className="text-xl font-bold text-gray-900">Fitness & Boot Camp</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  Beyond Limits Boot Camp. Mon/Wed/Fri. HIIT, Kickboxing, Yoga. The 34-Minute Mindset.
+                  Beyond Limits Boot Camp. HIIT, Kickboxing, Yoga. The 34-Minute Mindset.
                 </p>
                 <Link 
                   href="/fitness"

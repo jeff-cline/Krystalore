@@ -23,7 +23,7 @@ const faqs = [
   { question: 'What is the 34-minute protocol?', answer: 'The 34-minute protocol is Krystalore\'s signature workout format: a structured combination of warm-up, high-intensity circuits, strength work, and cool-down compressed into exactly 34 minutes. Every second is programmed for maximum efficiency and results.' },
   { question: 'Do I need to be fit to join?', answer: 'No. Group fitness sessions are designed with modifications for every level. Whether you haven\'t worked out in years or you\'re a seasoned athlete, Krystalore and the crew will meet you where you are and push you to your next level.' },
   { question: 'Are sessions virtual or in-person?', answer: 'Both. Virtual sessions are available via video call, making group fitness accessible from anywhere. In-person sessions are available at select locations. The community and accountability work the same regardless of format.' },
-  { question: 'How much does group fitness cost?', answer: 'Group fitness membership is $99/month and includes 3 live sessions per week, community access, accountability tracking, and nutrition guidance. This is the most affordable way to train with Krystalore and the Crews Beyond Limits community.' },
+  { question: 'What does group fitness include?', answer: 'Group fitness membership includes 3 live sessions per week, community access, accountability tracking, and nutrition guidance. This is the most affordable way to train with Krystalore and the Crews Beyond Limits community.' },
   { question: 'What days and times are sessions?', answer: 'Sessions run Monday, Wednesday, and Friday with morning and evening options. Check the current schedule for exact times. Sessions are also recorded for replay if you miss a live class.' },
 ]
 
@@ -93,9 +93,9 @@ export default function GroupFitnessPage() {
             </div>
           </div>
           <div className="mt-12 bg-white rounded-2xl p-8 shadow-lg">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">$99/month includes:</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Your membership includes:</h3>
             <div className="grid md:grid-cols-2 gap-3">
-              {['3 live sessions per week (Mon/Wed/Fri)', 'Morning and evening time slots', 'Community access & support', 'Personal accountability tracking', 'Nutrition guidance', 'Monthly progress assessments', 'Workout replays for missed sessions', 'Access to Crews Beyond Limits app'].map((item) => (
+              {['3 live sessions per week', 'Community access & support', 'Personal accountability tracking', 'Nutrition guidance', 'Monthly progress assessments', 'Workout replays for missed sessions', 'Access to Crews Beyond Limits app'].map((item) => (
                 <div key={item} className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#34c5c5] flex-shrink-0" /><span className="text-gray-700">{item}</span></div>
               ))}
             </div>
@@ -109,7 +109,7 @@ export default function GroupFitnessPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Join the Crew. Change Your Body.</h2>
           <p className="text-xl text-orange-50 max-w-2xl mx-auto mb-8">34 minutes, 3 times a week. That&apos;s all it takes to transform when you&apos;ve got the right crew behind you.</p>
-          <Link href="/go" className="inline-block bg-white text-orange-600 font-bold rounded-xl px-10 py-5 text-lg hover:bg-gray-100 transition-all">Join Now — $99/mo</Link>
+          <Link href="/go" className="inline-block bg-white text-orange-600 font-bold rounded-xl px-10 py-5 text-lg hover:bg-gray-100 transition-all">Join Now</Link>
           <div className="flex flex-wrap gap-6 justify-center mt-8 text-orange-100 text-sm">
             <Link href="/fitness" className="hover:text-white">Beyond Limits</Link>
             <Link href="/bootcamp" className="hover:text-white">Boot Camp</Link>

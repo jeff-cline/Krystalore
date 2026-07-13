@@ -11,7 +11,7 @@ import {
 } from 'lucide-react'
 
 const GHL_PAGE = '/group-fitness'
-const CHECKOUT_URL = '/virtual-hiit-camp-checkout'
+const CHECKOUT_URL = 'https://www.krystalorecrews.com/virtual-hiit-camp-checkout-page'
 
 export default function BootcampPage() {
   return (
@@ -179,42 +179,32 @@ export default function BootcampPage() {
         </section>
 
         {/* Pricing */}
-        <section className="py-20 bg-gradient-to-r from-gray-900 to-black text-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Choose Your Plan</h2>
-            <p className="text-center text-gray-400 mb-12">All plans include full access to Beyond Limits Bootcamp</p>
+        <section className="py-16 px-4 bg-[#F4F1EC]">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">Choose Your Plan</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { name: 'Best Value!!!', period: '12 Month', label: 'Package', highlight: true },
-                { name: 'Veteran', period: '12 Month', label: 'Package', highlight: false },
-                { name: 'Month to Month', period: '', label: 'Package', highlight: false },
-                { name: '6 Month', period: '', label: 'Package', highlight: false },
-              ].map((plan) => (
-                <div
-                  key={plan.name}
-                  className={`rounded-2xl p-8 text-center transition-transform hover:scale-105 ${
-                    plan.highlight
-                      ? 'bg-gradient-to-br from-[#E8A849] to-[#d4943d] text-white ring-4 ring-[#E8A849]/50'
-                      : 'bg-white/10 backdrop-blur border border-white/20'
-                  }`}
-                >
-                  {plan.highlight && (
-                    <div className="text-xs font-bold uppercase tracking-wider mb-2 bg-white/20 rounded-full px-3 py-1 inline-block">
-                      Most Popular
-                    </div>
+                { name: 'Month to Month', price: '$109', period: '/mo', desc: 'No commitment. Cancel anytime.', accent: '#0D9488' },
+                { name: '6-Month Contract', price: '$99', period: '/mo', desc: 'Save $60 over 6 months.', accent: '#14B8A6' },
+                { name: '12-Month Contract', price: '$89', period: '/mo', desc: 'Best value. Save $240/year.', accent: '#F97316', popular: true },
+                { name: 'Veteran/MilSpouse', price: '$69', period: '/mo', desc: 'Thank you for your service.', accent: '#37a6a6' },
+              ].map(({ name, price, period, desc, accent, popular }, i) => (
+                <div key={i} className={`bg-white rounded-2xl p-6 text-center shadow-md relative ${popular ? 'ring-2 ring-[#F97316]' : ''}`}>
+                  {popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#F97316] text-white text-xs font-bold px-3 py-1 rounded-full">Best Value</div>
                   )}
-                  <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
-                  {plan.period && <p className="text-lg font-semibold">{plan.period}</p>}
-                  <p className="text-sm opacity-80 mb-6">{plan.label}</p>
+                  <h3 className="font-bold text-gray-800 text-sm mb-3">{name}</h3>
+                  <div className="mb-3">
+                    <span className="text-3xl font-black" style={{ color: accent }}>{price}</span>
+                    <span className="text-gray-500 text-sm">{period}</span>
+                  </div>
+                  <p className="text-gray-600 text-xs mb-4">{desc}</p>
                   <a
                     href={CHECKOUT_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-block font-bold px-8 py-3 rounded-full transition-colors ${
-                      plan.highlight
-                        ? 'bg-white text-[#E8A849] hover:bg-gray-100'
-                        : 'bg-[#34c5c5] text-white hover:bg-[#37a6a6]'
-                    }`}
+                    className="block w-full py-2.5 rounded-full text-white font-bold text-sm hover:scale-105 transition-transform"
+                    style={{ backgroundColor: accent }}
                   >
                     Select Plan
                   </a>

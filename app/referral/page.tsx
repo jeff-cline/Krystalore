@@ -127,8 +127,8 @@ export default function ReferralPage() {
             <div className="text-center">
               <div className="text-3xl font-bold text-teal-600 mb-2">20%</div>
               <div className="font-semibold text-gray-900 mb-2">Boot Camp Referrals</div>
-              <div className="text-gray-600">$99/month membership</div>
-              <div className="text-sm text-teal-600 mt-2">Earn $19.80/month per referral</div>
+              <div className="text-gray-600">Boot Camp membership</div>
+              <div className="text-sm text-teal-600 mt-2">Earn 20% recurring per referral</div>
             </div>
             
             <div className="text-center">

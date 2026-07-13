@@ -72,7 +72,7 @@ export default function GoPage() {
     {
       title: 'Bootcamp',
       image: '/images/scraped/fitness-class-1.jpg',
-      desc: 'Beyond Limits Bootcamp — live virtual fitness Mon/Wed/Fri with 24/7 replay access.',
+      desc: 'Beyond Limits Bootcamp — live virtual fitness with 24/7 replay access.',
       link: '/bootcamp'
     },
     {

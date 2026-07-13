@@ -195,7 +195,7 @@ export default function HomePage() {
               {
                 title: "Fitness & Boot Camp",
                 image: "/images/scraped/krystalore-fitness.webp",
-                description: "Beyond Limits Boot Camp. Mon/Wed/Fri. HIIT, Kickboxing, Yoga. The 34-Minute Mindset.",
+                description: "Beyond Limits Boot Camp. HIIT, Kickboxing, Yoga. The 34-Minute Mindset.",
                 link: "/fitness"
               },
               {

@@ -13,7 +13,7 @@ export default function UpcomingEventsPage() {
   const events = [
     { type: 'Virtual', title: 'Monday Motivation LIVE', schedule: 'Every Monday', desc: 'Start your week with fire. Mindset, motivation, and accountability.', link: '/go-live', color: '#84d7d7' },
     { type: 'Virtual', title: 'Freedom Friday LIVE', schedule: 'Every Friday', desc: 'Celebrate wins, release what doesn\'t serve you, and step into the weekend free.', link: '/go-live', color: '#E8A849' },
-    { type: 'Virtual', title: 'Beyond Limits Bootcamp', schedule: 'Mon/Wed/Fri', desc: '30-minute HIIT, kickboxing, and functional fitness. All levels welcome.', link: '/bootcamp', color: '#34c5c5' },
+    { type: 'Virtual', title: 'Beyond Limits Bootcamp', schedule: '3x per week', desc: '30-minute HIIT, kickboxing, and functional fitness. All levels welcome.', link: '/bootcamp', color: '#34c5c5' },
     { type: 'Virtual', title: 'Co-Working Power Hour', schedule: 'Weekly', desc: 'Free co-working sessions on Zoom. Show up, focus up, get it done.', link: '/coworking', color: '#84d7d7' },
     { type: 'In-Person', title: 'Vision Board Workshop', schedule: 'Quarterly / By Request', desc: 'Strategic planning, goal setting, and action taking with accountability.', link: '/vision-board', color: '#B8A9D4' },
     { type: 'In-Person', title: 'Caribbean Retreat', schedule: 'Coming Soon', desc: 'Immersive transformation retreat on a Caribbean island. Small cohort, total immersion.', link: '/retreat', color: '#84d7d7' },

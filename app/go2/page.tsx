@@ -79,7 +79,7 @@ const productivityTools = [
 
 const memberships = [
   { name: 'Thrive Network', price: 'FREE', priceNote: '', desc: 'Free community access. Connect, grow, and find your tribe.', link: '/inner-circle', cta: 'Join Free', accent: '#84d7d7' },
-  { name: 'Beyond Limits', price: '$99', priceNote: '/mo', desc: 'Boot camp fitness + accountability. Mon/Wed/Fri live sessions.', link: '/bootcamp', cta: 'Get Started', accent: '#84d7d7' },
+  { name: 'Beyond Limits', price: 'See Plans', priceNote: '', desc: 'Boot camp fitness + accountability. Live virtual sessions.', link: '/bootcamp', cta: 'Get Started', accent: '#84d7d7' },
   { name: 'Health Mastery', price: '$199', priceNote: '/mo', desc: 'Complete wellness transformation. Nutrition, fitness, and somatic healing.', link: '/fitness', cta: 'Transform', accent: '#E8A849' },
   { name: 'Inner Circle', price: 'Apply', priceNote: '', desc: 'Direct access, group coaching, and exclusive resources.', link: '/inner-circle', cta: 'Apply Now', accent: '#B8A9D4' },
   { name: 'S.M.A.R.T.', price: '$3,000', priceNote: '/mo', desc: 'Full private client experience with S.M.A.R.T. technology integration.', link: '/apply', cta: 'Apply', accent: '#37a6a6' },

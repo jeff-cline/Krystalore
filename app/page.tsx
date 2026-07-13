@@ -72,7 +72,7 @@ export default function HomePage() {
     { title: "Courses", image: "/images/go9/meditation.webp", desc: "Self-paced and live courses on leadership, emotional intelligence, and wellness.", link: "/courses" },
     { title: "Veteran Programs", image: "/images/go9/veteran.jpg", desc: "Specialized coaching and fitness programs honoring those who served.", link: "/veteran-coaching" },
     { title: "Gypsy Tours", image: "/images/go9/group-sunset.jpg", desc: "Curated travel experiences that combine adventure, wellness, and transformation.", link: "/gypsy-tours" },
-    { title: "Beyond Limits Boot Camp", image: "/images/go9/fitness-alt.jpg", desc: "Live virtual fitness Mon/Wed/Fri with 24/7 replay access. HIIT, kickboxing, and accountability.", link: "/bootcamp" },
+    { title: "Beyond Limits Boot Camp", image: "/images/go9/fitness-alt.jpg", desc: "Live virtual fitness with 24/7 replay access. HIIT, kickboxing, and accountability.", link: "/bootcamp" },
     { title: "Corporate Wellness & Leadership", image: "/images/go9/corporate.jpg", desc: "Elevate your team's performance with customized corporate wellness and leadership development programs.", link: "/corporate-wellness" },
     { title: "Coworking Power Hour", image: "/images/go9/coaching.jpg", desc: "Free weekly co-working sessions on Zoom. Show up, get focused, get it done.", link: "/coworking" },
     { title: "Retreats", image: "/images/go9/retreat-costa-rica.jpg", desc: "Transformative retreat experiences for women, veterans, entrepreneurs, and couples.", link: "/retreat" },

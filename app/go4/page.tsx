@@ -71,7 +71,7 @@ export default function Go4Page() {
     { title: "Courses", image: "/images/logos/01-entrepreneur.png", desc: "Self-paced and live courses on leadership, emotional intelligence, and wellness.", link: "/courses" },
     { title: "Veteran Programs", image: "/images/logos/09-military.png", desc: "Specialized coaching and fitness programs honoring those who served.", link: "/veteran-coaching" },
     { title: "Gypsy Tours", image: "/images/logos/00-gypsy-tours-original.png", desc: "Curated travel experiences that combine adventure, wellness, and transformation.", link: "/gypsy-tours" },
-    { title: "Beyond Limits Boot Camp", image: "/images/logos/17-exercise-pushups.png", desc: "Live virtual fitness Mon/Wed/Fri with 24/7 replay access. HIIT, kickboxing, and accountability.", link: "/bootcamp" },
+    { title: "Beyond Limits Boot Camp", image: "/images/logos/17-exercise-pushups.png", desc: "Live virtual fitness with 24/7 replay access. HIIT, kickboxing, and accountability.", link: "/bootcamp" },
     { title: "Corporate Wellness & Leadership", image: "/images/generated/corporate-wellness-leadership.png", desc: "Elevate your team's performance with customized corporate wellness and leadership development programs.", link: "/corporate-wellness" },
     { title: "Coworking Power Hour", image: "/images/generated/coworking-power-hour.png", desc: "Free weekly co-working sessions on Zoom. Show up, get focused, get it done.", link: "/coworking" },
     { title: "Retreats", image: "/images/logos/07-retreat-meditation.png", desc: "Transformative retreat experiences for women, veterans, entrepreneurs, and couples.", link: "/retreat" },
