@@ -155,20 +155,32 @@ export default function VeteranCoachingPage() {
       <VeteranCoachingJsonLd />
       <Header />
 
-      {/* Hero Image */}
-      <div className="relative h-64 md:h-80 w-full overflow-hidden">
-        <Image src="/images/go9/veteran.jpg" alt="Krystalore Crews veteran coaching and military support" fill className="object-cover" sizes="100vw" />
-      </div>
-
-      {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-screen flex items-center">
-        <Image src="/images/go9/veteran.jpg" alt="Veteran Coaching" fill className="object-cover" priority sizes="100vw" />
-        <div className="container mx-auto px-4 relative z-10 py-20 md:py-28">
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6">Veteran Coaching</h1>
-          <p className="text-lg text-gray-200 mb-8 max-w-2xl">Coaching designed for veterans navigating transition, building new purpose, and leveraging military experience for civilian success.</p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
-            <Link href="#content" className="border-2 border-white/60 text-white rounded-full px-8 py-4 font-bold hover:bg-white/10 transition-colors text-center">Explore More</Link>
+      {/* Hero — one full image (left) + orange-glow H1 (right) */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            {/* Left: one full image, shown in its natural format */}
+            <div className="w-full overflow-hidden rounded-3xl shadow-2xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/go9/veteran.jpg" alt="Krystalore Crews veteran coaching and military support" className="block h-auto w-full" />
+            </div>
+            {/* Right: orange-glow H1 + subhead + CTAs */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#0D9488] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
+                For Those Who Served
+              </div>
+              <h1
+                className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.05] mb-6"
+                style={{ textShadow: '0 0 2px #e07800, 0 0 9px rgba(224,120,0,0.75), 0 0 20px rgba(224,120,0,0.45)' }}
+              >
+                Veteran Coaching
+              </h1>
+              <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">Coaching designed for veterans navigating transition, building new purpose, and leveraging military experience for civilian success.</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
+                <Link href="#content" className="border-2 border-[#0D9488] text-[#0D9488] rounded-full px-8 py-4 font-bold hover:bg-[#0D9488]/5 transition-colors text-center">Explore More</Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
