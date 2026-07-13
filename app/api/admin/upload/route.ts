@@ -52,15 +52,18 @@ export async function POST(req: NextRequest) {
 
     const isImage = (file.type || '').startsWith('image/')
 
-    const item = await prisma.mediaItem.create({
-      data: {
-        url,
-        name: safeName,
-        type: isImage ? 'image' : 'video',
-        folder,
-        size: file.size || 0,
-      },
-    }).catch(() => null)
+    // Optionally log the upload to a media table IF that model exists in the
+    // deployed Prisma client. The upload's real store is uploadthing (the URL
+    // above), so a missing/unavailable table must never fail the request.
+    let item = null
+    const mediaModel = (prisma as any)?.mediaItem
+    if (mediaModel?.create) {
+      try {
+        item = await mediaModel.create({
+          data: { url, name: safeName, type: isImage ? 'image' : 'video', folder, size: file.size || 0 },
+        })
+      } catch { item = null }
+    }
 
     return NextResponse.json({ url, name: safeName, size: file.size, type: file.type, item })
   } catch (error: any) {
