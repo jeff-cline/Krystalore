@@ -29,17 +29,21 @@ async function guard() {
 export async function GET() {
   const g = await guard()
   if (!g.ok) return NextResponse.json({ error: g.msg }, { status: g.status })
-  try {
-    const index = await loadIndex()
-    if (index?.folders?.length) return NextResponse.json(index)
-    // uploadthing unreachable or empty → show the committed snapshot (read-only safety net)
-    const seed = await committedFolders()
-    return NextResponse.json({ folders: seed, fallback: seed.length > 0 })
-  } catch (e: any) {
-    const seed = await committedFolders()
-    if (seed.length) return NextResponse.json({ folders: seed, fallback: true })
-    return NextResponse.json({ error: e?.message || 'Failed to load' }, { status: 500 })
+  const seed = await committedFolders()
+  let managed: any[] = []
+  let managedOk = false
+  try { managed = (await loadIndex()).folders || []; managedOk = true } catch { /* uploadthing unreachable */ }
+  // Merge like the public route: committed seed is the baseline; managed (uploadthing)
+  // folders override/extend by slug. This keeps the curated seed folders visible even
+  // once a managed index exists (e.g. after an image is uploaded into an "Uploads" folder).
+  const bySlug = new Map<string, any>()
+  for (const f of seed) bySlug.set(f.slug, f)
+  for (const f of managed) bySlug.set(f.slug, f)
+  const folders = [...bySlug.values()].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  if (!folders.length && !managedOk) {
+    return NextResponse.json({ error: 'Failed to load gallery' }, { status: 500 })
   }
+  return NextResponse.json({ folders, fallback: managed.length === 0 && seed.length > 0 })
 }
 
 export async function PUT(req: NextRequest) {
