@@ -3,7 +3,7 @@ import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, MapPin, Play, Check, Star, ArrowRight, Zap, Heart, Users, Target, Flame, Shield } from 'lucide-react'
-import { DynamicHero, DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 
 export default function RewritePage() {
   const jsonLd = {
@@ -27,35 +27,26 @@ export default function RewritePage() {
       <Header />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* HERO */}
-      <section className="relative rounded-2xl overflow-hidden mb-0">
-        <div className="relative h-[500px] sm:h-[600px]">
-          <DynamicHero slug="masterclass" fallbackSrc="/images/go9/speaking-event.jpg" alt="Krystalore Crews — Rewrite in Real Time Masterclass" className="object-cover object-top" sizes="100vw" priority />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
-          <div className="absolute inset-0 flex items-end">
-            <div className="max-w-3xl px-6 sm:px-12 pb-10 sm:pb-14">
-              <p className="text-[#E8A849] font-bold text-sm sm:text-base uppercase tracking-widest mb-3">Live Masterclass &middot; <DynamicText slug="masterclass" field="date" fallback="June 13, 2026" /></p>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-[1.1]">
-                Rewrite in Real Time
-              </h1>
-              <p className="text-xl sm:text-2xl text-teal font-semibold mb-6">
-                Mastering the Messy Middle of Your Transformation
-              </p>
-              <p className="text-gray-300 text-base sm:text-lg max-w-xl mb-8">
-                How to stay consistent, confident, and in motion while everything in your life is changing.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a href="https://krystalorecrews.com/masterclass-checkout" className="bg-[#E8A849] hover:bg-[#d4963f] text-white font-bold py-4 px-8 rounded-xl transition-colors text-center text-lg shadow-lg shadow-[#E8A849]/30">
-                  Join the Masterclass
-                </a>
-                <a href="#details" className="bg-white/10 hover:bg-white/20 text-white font-medium py-4 px-8 rounded-xl transition-colors text-center backdrop-blur-sm border border-white/20">
-                  Learn More
-                </a>
-              </div>
-            </div>
-          </div>
+      {/* HERO — featured image alone on top, dynamic text below (all admin-editable) */}
+      <DynamicHeader
+        slug="masterclass"
+        eyebrow="Live Masterclass"
+        fallbackTitle="Rewrite in Real Time"
+        fallbackDescription="How to stay consistent, confident, and in motion while everything in your life is changing."
+        fallbackDate="June 13, 2026"
+        fallbackImage="/images/go9/speaking-event.jpg"
+        alt="Krystalore Crews — Rewrite in Real Time Masterclass"
+      >
+        <p className="text-xl sm:text-2xl text-teal font-semibold mb-6">Mastering the Messy Middle of Your Transformation</p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://krystalorecrews.com/masterclass-checkout" className="bg-[#E8A849] hover:bg-[#d4963f] text-white font-bold py-4 px-8 rounded-xl transition-colors text-center text-lg shadow-lg shadow-[#E8A849]/30">
+            Join the Masterclass
+          </a>
+          <a href="#details" className="border-2 border-[#0D9488] text-[#0D9488] hover:bg-[#0D9488]/5 font-medium py-4 px-8 rounded-xl transition-colors text-center">
+            Learn More
+          </a>
         </div>
-      </section>
+      </DynamicHeader>
 
       {/* THE MESSY MIDDLE */}
       <section className="py-16 sm:py-20">

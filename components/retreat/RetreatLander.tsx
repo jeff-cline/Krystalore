@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, Calendar, Check, Heart, Mail, MapPin, Sparkles, Users } from 'lucide-react'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
-import { DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 
 export const WAITLIST_URL = 'https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout'
 export const PRIVATE_RETREAT_URL = 'https://www.krystalorecrews.com/costa-rica-retreat-private-request-page'
@@ -75,33 +75,19 @@ export function RetreatHubPage() {
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
       <main>
-        <section className="relative bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white pt-12 md:pt-20 pb-16 md:pb-24 overflow-hidden">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#0D9488] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
-                  <Sparkles className="h-3.5 w-3.5" /> Revive & Thrive Retreats
-                </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-5 leading-[1.05]">
-                  Choose Your Next Beyond Limits Retreat Experience
-                </h1>
-                <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
-                  One main retreat home for every current and future option: Costa Rica, Puerto Rico, Tennessee, private retreats, waitlist updates, and event collaborations.
-                </p>
-                <RetreatCTAButtons />
-                <div className="mt-6">
-                  <span className="inline-flex items-center gap-2 rounded-full bg-[#34c5c5]/15 text-[#0D9488] px-4 py-2 text-sm font-bold">
-                    <Calendar className="w-4 h-4" />
-                    <DynamicText slug="retreat" field="date" fallback="Dates TBA" />
-                  </span>
-                </div>
-              </div>
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-                <Image src="/images/retreat-destinations/cr-01.jpg" alt="Costa Rica retreat property with tropical views" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-              </div>
-            </div>
+        <DynamicHeader
+          slug="retreat"
+          eyebrow="Revive & Thrive Retreats"
+          fallbackTitle="Choose Your Next Beyond Limits Retreat Experience"
+          fallbackDescription="One main retreat home for every current and future option: Costa Rica, Puerto Rico, Tennessee, private retreats, waitlist updates, and event collaborations."
+          fallbackDate="Dates TBA"
+          fallbackImage="/images/retreat-destinations/cr-01.jpg"
+          alt="Costa Rica retreat property with tropical views"
+        >
+          <div className="flex justify-center">
+            <RetreatCTAButtons />
           </div>
-        </section>
+        </DynamicHeader>
 
         <section className="py-16 md:py-24 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

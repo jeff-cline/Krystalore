@@ -5,7 +5,7 @@ import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
 import Link from 'next/link'
-import { DynamicHero, DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 import {
   ChevronLeft,
   ChevronRight,
@@ -76,47 +76,30 @@ export default function PuertoRicoRetreatPage() {
       <Header />
 
       {/* ═══════════════ HERO ═══════════════ */}
-      <section className="relative min-h-[95vh] flex items-center overflow-hidden">
-        <DynamicHero
-          slug="pr-retreat"
-          fallbackSrc="/images/retreat/retreat-group-03.jpg"
-          alt="Women celebrating at sunset on the Puerto Rico oceanview retreat estate"
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
-        <div
-          className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white"
-          style={{ textShadow: '0 2px 8px rgba(0,0,0,0.95), 0 0 18px rgba(0,0,0,0.7)' }}
-        >
-          <p className="text-primary font-semibold tracking-[0.3em] uppercase text-sm mb-4">
-            Revive &amp; Thrive Retreat Experience
-          </p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            You Deserve to Be <span className="text-primary">Treated Like a Queen</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed mb-4">
-            A 7-Day Luxury Wellness Retreat for High-Achieving Women Ready to Reset, Reflect, and Rise
-          </p>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
-            Puerto Rico &middot; <DynamicText slug="pr-retreat" field="date" fallback="March 28–April 3, 2027" />
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
-              className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 hover:shadow-teal/40 transition-all duration-300 transform hover:scale-105"
-            >
-              Book Now <ArrowRight className="w-5 h-5" />
-            </a>
-            <a
-              href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist"
-              className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-semibold text-lg px-10 py-4 rounded-full hover:bg-white/10 transition-all duration-300"
-            >
-              Join Waitlist
-            </a>
-          </div>
+      <DynamicHeader
+        slug="pr-retreat"
+        eyebrow="Revive & Thrive Retreat Experience"
+        fallbackTitle="You Deserve to Be Treated Like a Queen"
+        fallbackDescription="A 7-Day Luxury Wellness Retreat for High-Achieving Women Ready to Reset, Reflect, and Rise"
+        fallbackDate="Puerto Rico · March 28–April 3, 2027"
+        fallbackImage="/images/retreat/retreat-group-03.jpg"
+        alt="Women celebrating at sunset on the Puerto Rico oceanview retreat estate"
+      >
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
+            className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 hover:shadow-teal/40 transition-all duration-300 transform hover:scale-105"
+          >
+            Book Now <ArrowRight className="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist"
+            className="inline-flex items-center justify-center gap-2 border-2 border-[#0D9488] text-[#0D9488] font-semibold text-lg px-10 py-4 rounded-full hover:bg-[#0D9488]/5 transition-all duration-300"
+          >
+            Join Waitlist
+          </a>
         </div>
-      </section>
+      </DynamicHeader>
 
 
       {/* ═══════════════ UPCOMING & PRIVATE RETREATS ═══════════════ */}

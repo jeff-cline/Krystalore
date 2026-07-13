@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
-import { DynamicHero, DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 
@@ -61,23 +60,17 @@ export default function ProductsPage() {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Hero Image */}
-      <div className="relative h-64 md:h-80 w-full overflow-hidden">
-        <DynamicHero slug="products" fallbackSrc="/images/go9/group-evening.webp" alt="Krystalore Crews products and lifestyle offerings" className="object-cover" sizes="100vw" />
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Page Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Transform Your Life
-          </h1>
-          <p className="mt-1 mb-5 inline-block rounded-full border border-[#E8A849]/40 bg-[#E8A849]/20 px-4 py-1.5 text-sm font-bold text-[#E8A849]"><DynamicText slug="products" field="date" fallback="New drops all year" /></p>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover powerful tools, resources, and courses designed to help you crews beyond your limits and achieve extraordinary results.
-          </p>
-        </div>
+      {/* Hero */}
+      <DynamicHeader
+        slug="products"
+        fallbackTitle="Transform Your Life"
+        fallbackDescription="Discover powerful tools, resources, and courses designed to help you crews beyond your limits and achieve extraordinary results."
+        fallbackDate="New drops all year"
+        fallbackImage="/images/go9/group-evening.webp"
+        alt="Krystalore Crews products and lifestyle offerings"
+      />
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {products.map((product, index) => (

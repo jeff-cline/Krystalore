@@ -9,7 +9,7 @@ import {
   Compass, HeartPulse, Brain, Users, Briefcase, ChevronDown, ChevronUp,
   Sun, Map as MapIcon, Dumbbell, Heart, Quote, ShieldCheck, Play, X,
 } from 'lucide-react'
-import { DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 
 const CHECKOUT = 'https://www.krystalorecrews.com/rise-and-thrive-checkout'
 
@@ -267,41 +267,29 @@ export default function RiseAndThrive() {
       <Header />
       <main className="min-h-screen bg-white">
 
-        {/* HERO */}
-        <section className="relative bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white pt-14 md:pt-24 pb-16 md:pb-28 overflow-hidden">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#0D9488] rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-7">
-                  <Sparkles className="w-3.5 h-3.5" /> Rise &amp; Thrive · Academy + Costa Rica Retreat
-                </div>
-                <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-black text-gray-900 mb-6 leading-[1.06]">
-                  This is so much bigger than a fitness program. It&apos;s your <span className="text-[#0D9488]">next chapter</span>.
-                </h1>
-                <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-9 max-w-xl font-light">
-                  For the woman who&apos;s successful on paper but secretly knows she&apos;s been surviving instead of thriving.
-                  A 90-day transformation to reclaim your confidence, health, identity, and purpose.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a href={CHECKOUT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold text-lg px-9 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-                    Claim Your Spot <ArrowRight className="w-5 h-5" />
-                  </a>
-                  <a href="#offer" className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#0D9488] font-bold text-lg px-9 py-4 rounded-2xl hover:bg-[#34c5c5] hover:text-white transition-colors">
-                    See the Full Offer
-                  </a>
-                </div>
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-7 text-sm text-gray-500">
-                  <span className="inline-flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#e07800]" /> Starts <DynamicText slug="rise-and-thrive" field="date" fallback="July 27" /></span>
-                  <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#e07800]" /> Costa Rica · Oct 21–26</span>
-                  <span className="inline-flex items-center gap-1.5"><Sun className="w-4 h-4 text-[#e07800]" /> 90-day journey</span>
-                </div>
-              </div>
-              <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl">
-                <Image src="/images/go6/tropical-porch-dress.jpg" alt="Rise & Thrive — your next chapter" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-              </div>
-            </div>
+        {/* HERO — featured image alone on top, dynamic text below (all admin-editable) */}
+        <DynamicHeader
+          slug="rise-and-thrive"
+          eyebrow="Rise & Thrive · Academy + Costa Rica Retreat"
+          fallbackTitle="This is so much bigger than a fitness program. It's your next chapter."
+          fallbackDescription="For the woman who's successful on paper but secretly knows she's been surviving instead of thriving. A 90-day transformation to reclaim your confidence, health, identity, and purpose."
+          fallbackDate="July 27"
+          fallbackImage="/images/go6/tropical-porch-dress.jpg"
+          alt="Rise & Thrive — your next chapter"
+        >
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href={CHECKOUT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold text-lg px-9 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              Claim Your Spot <ArrowRight className="w-5 h-5" />
+            </a>
+            <a href="#offer" className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#0D9488] font-bold text-lg px-9 py-4 rounded-2xl hover:bg-[#34c5c5] hover:text-white transition-colors">
+              See the Full Offer
+            </a>
           </div>
-        </section>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-7 text-sm text-gray-500">
+            <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#e07800]" /> Costa Rica · Oct 21–26</span>
+            <span className="inline-flex items-center gap-1.5"><Sun className="w-4 h-4 text-[#e07800]" /> 90-day journey</span>
+          </div>
+        </DynamicHeader>
 
         {/* WHO / TRUTH */}
         <section className="py-16 md:py-24 bg-white">

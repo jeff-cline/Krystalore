@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import FAQSection from '@/components/FAQSection'
-import { DynamicHero, DynamicText } from '@/components/DynamicDate'
+import { DynamicText, DynamicHeader } from '@/components/DynamicDate'
 import {
   Sparkles,
   Target,
@@ -132,66 +132,39 @@ export default function VisionBoardPage() {
       <JsonLd next={next} />
       <Header />
 
-      {/* Hero — light, photo-led, no cartoons */}
-      <section className="relative bg-gradient-to-b from-[#F6F8FA] to-white pt-12 md:pt-20 pb-16 md:pb-24 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-[#34c5c5]/10 text-[#0D9488] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
-                <Calendar className="w-3.5 h-3.5" /> Quarterly · 2-Hour Virtual Experience
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4 leading-[1.05]">
-                Vision Board Party
-              </h1>
-              <p className="text-xl md:text-2xl text-[#e07800] font-medium mb-3">
-                Craft Your Vision. Embrace the Chaos.
-              </p>
-              <p className="text-lg text-gray-600 mb-8 max-w-xl leading-relaxed">
-                Two hours, live on Zoom with Krystalore Crews — guided visualization, intention setting, and a real plan to design the life and business you keep telling yourself you’ll start &ldquo;next quarter.&rdquo; Replay included.
-              </p>
-
-              {/* Next event card */}
-              <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-5 mb-8 max-w-md">
-                <p className="text-xs font-bold tracking-widest uppercase text-[#0D9488] mb-2">Next Session</p>
-                <p className="text-xl font-bold text-gray-900 mb-1"><DynamicText slug="vision-board" field="date" fallback={nextDateLabel} /></p>
-                <div className="flex items-center gap-4 text-sm text-gray-600">
-                  <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4 text-[#e07800]" /> <DynamicText slug="vision-board" field="time" fallback={nextTimeLabel} /></span>
-                  <span className="inline-flex items-center gap-1.5"><Video className="w-4 h-4 text-[#34c5c5]" /> Live on Zoom · Replay Included</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href={MASTERCLASS_CHECKOUT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-lg"
-                >
-                  REGISTER NOW <ArrowRight className="w-5 h-5" />
-                </a>
-                <Link
-                  href="#what-youll-walk-away-with"
-                  className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#0D9488] font-bold px-8 py-4 rounded-full hover:bg-[#34c5c5]/5 transition-colors"
-                >
-                  What You’ll Get
-                </Link>
-              </div>
-              <p className="text-xs text-gray-500 mt-4">Secure registration on krystalorecrews.com — limited seats to keep the room intimate.</p>
-            </div>
-
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-              <DynamicHero
-                slug="vision-board"
-                fallbackSrc="/images/krystalore/REM08628.jpg"
-                alt="Krystalore Crews hosting the quarterly Vision Board Party — live on Zoom"
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-          </div>
+      {/* Hero — featured image alone on top, dynamic text below */}
+      <DynamicHeader
+        slug="vision-board"
+        eyebrow="Quarterly · 2-Hour Virtual Experience"
+        fallbackTitle="Vision Board Party"
+        fallbackDescription="Two hours, live on Zoom with Krystalore Crews — guided visualization, intention setting, and a real plan to design the life and business you keep telling yourself you’ll start “next quarter.” Replay included."
+        fallbackDate={nextDateLabel}
+        fallbackImage="/images/krystalore/REM08628.jpg"
+        alt="Krystalore Crews hosting the quarterly Vision Board Party — live on Zoom"
+      >
+        <p className="text-xl md:text-2xl text-[#e07800] font-medium mb-4">Craft Your Vision. Embrace the Chaos.</p>
+        <p className="mb-6 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600">
+          <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4 text-[#e07800]" /> <DynamicText slug="vision-board" field="time" fallback={nextTimeLabel} /></span>
+          <span className="inline-flex items-center gap-1.5"><Video className="w-4 h-4 text-[#34c5c5]" /> Live on Zoom · Replay Included</span>
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={MASTERCLASS_CHECKOUT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-lg"
+          >
+            REGISTER NOW <ArrowRight className="w-5 h-5" />
+          </a>
+          <Link
+            href="#what-youll-walk-away-with"
+            className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#0D9488] font-bold px-8 py-4 rounded-full hover:bg-[#34c5c5]/5 transition-colors"
+          >
+            What You’ll Get
+          </Link>
         </div>
-      </section>
+        <p className="text-xs text-gray-500 mt-4">Secure registration on krystalorecrews.com — limited seats to keep the room intimate.</p>
+      </DynamicHeader>
 
       {/* Why Attend */}
       <section className="py-20 bg-white">

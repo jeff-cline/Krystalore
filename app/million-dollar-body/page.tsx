@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { DynamicHero, DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
@@ -39,18 +39,17 @@ export default function MillionDollarBodyPage() {
     <>
       <JsonLd />
       <Header />
-      <section className="relative overflow-hidden min-h-screen flex items-center">
-        <DynamicHero slug="million-dollar-body" fallbackSrc="/images/go9/fitness.jpg" alt="Million Dollar Body" className="object-cover" priority sizes="100vw" />
-        <div className="container mx-auto px-4 relative z-10 py-20 md:py-28">
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6">Million Dollar Body</h1>
-          <p className="mt-1 mb-5 inline-block rounded-full border border-[#E8A849]/40 bg-[#E8A849]/20 px-4 py-1.5 text-sm font-bold text-[#E8A849]"><DynamicText slug="million-dollar-body" field="date" fallback="Enrolling now" /></p>
-          <p className="text-lg text-gray-200 mb-8 max-w-2xl">The premium fitness and mindset program designed to build a body and life that commands respect.</p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
-            <Link href="#content" className="border-2 border-white/60 text-white rounded-full px-8 py-4 font-bold hover:bg-white/10 transition-colors text-center">Explore More</Link>
-          </div>
+      <DynamicHeader slug="million-dollar-body"
+        fallbackTitle="Million Dollar Body"
+        fallbackDescription="The premium fitness and mindset program designed to build a body and life that commands respect."
+        fallbackDate="Enrolling now"
+        fallbackImage="/images/go9/fitness.jpg"
+        alt="Million Dollar Body">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
+          <Link href="#content" className="border-2 border-[#0D9488] text-[#0D9488] rounded-full px-8 py-4 font-bold hover:bg-[#0D9488]/5 transition-colors text-center">Explore More</Link>
         </div>
-      </section>
+      </DynamicHeader>
 
       <CharacterShowcase />
 

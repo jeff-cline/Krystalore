@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
-import { DynamicHero, DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 import MainLayout from '@/components/layout/MainLayout'
 import { ArrowRight, Calendar, MapPin, Video, Users } from 'lucide-react'
 
@@ -21,20 +21,15 @@ export default function UpcomingEventsPage() {
 
   return (
     <MainLayout>
-      <section className="relative py-32 md:py-40 px-4 overflow-hidden min-h-[50vh] flex items-center">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#37a6a6] via-[#37a6a6] to-teal-900" />
-        <div className="max-w-5xl mx-auto text-center relative z-10">
-          <Calendar className="h-16 w-16 text-[#84d7d7] mx-auto mb-6" />
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white">Upcoming Events & <span className="text-[#84d7d7]">Experiences</span></h1>
-          <p className="mt-1 mb-5 inline-block rounded-full border border-[#E8A849]/40 bg-[#E8A849]/20 px-4 py-1.5 text-sm font-bold text-[#E8A849]"><DynamicText slug="upcoming-events" field="date" fallback="Enrolling now" /></p>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">In-person, live, and virtual events to keep you connected, growing, and moving forward.</p>
-        </div>
-      </section>
-
-      {/* Hero Image */}
-      <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl mb-8">
-        <DynamicHero slug="upcoming-events" fallbackSrc="/images/go9/keynote.jpg" alt="Krystalore Crews upcoming events and speaking engagements" className="object-cover" sizes="100vw" />
-      </div>
+      {/* Hero — featured image alone on top, dynamic text below (all admin-editable) */}
+      <DynamicHeader
+        slug="upcoming-events"
+        fallbackTitle="Upcoming Events & Experiences"
+        fallbackDescription="In-person, live, and virtual events to keep you connected, growing, and moving forward."
+        fallbackDate="Enrolling now"
+        fallbackImage="/images/go9/keynote.jpg"
+        alt="Krystalore Crews upcoming events and speaking engagements"
+      />
 
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">

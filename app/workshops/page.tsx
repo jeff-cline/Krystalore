@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
-import { DynamicHero, DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 
 export default function WorkshopsPage() {
   const upcomingWorkshops = [
@@ -38,23 +38,17 @@ export default function WorkshopsPage() {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Hero Image */}
-      <div className="relative h-64 md:h-80 w-full overflow-hidden">
-        <DynamicHero slug="workshops" fallbackSrc="/images/go9/corporate.jpg" alt="Krystalore Crews workshops and corporate training" className="object-cover" sizes="100vw" />
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Page Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Upcoming Workshops
-          </h1>
-          <p className="mt-1 mb-5 inline-block rounded-full border border-[#E8A849]/40 bg-[#E8A849]/20 px-4 py-1.5 text-sm font-bold text-[#E8A849]"><DynamicText slug="workshops" field="date" fallback="Enrolling now" /></p>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Intensive learning experiences designed to accelerate your growth and provide practical tools for immediate implementation.
-          </p>
-        </div>
+      {/* Hero — featured image alone on top, dynamic text below (all admin-editable) */}
+      <DynamicHeader
+        slug="workshops"
+        fallbackTitle="Upcoming Workshops"
+        fallbackDescription="Intensive learning experiences designed to accelerate your growth and provide practical tools for immediate implementation."
+        fallbackDate="Enrolling now"
+        fallbackImage="/images/go9/corporate.jpg"
+        alt="Krystalore Crews workshops and corporate training"
+      />
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Upcoming Workshops */}
         <section className="mb-20">
           <div className="grid gap-8">

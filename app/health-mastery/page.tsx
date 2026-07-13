@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { DynamicHero, DynamicText } from '@/components/DynamicDate'
+import { DynamicHeader } from '@/components/DynamicDate'
 
 const CHECKOUT_URL = 'https://krystalorecrews.com/healthmasterycheckout'
 
@@ -76,24 +76,15 @@ export default function HealthMasteryPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
 
-      <section className="rounded-2xl overflow-hidden mb-8 sm:mb-10">
-        <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
-          <DynamicHero slug="health-mastery" fallbackSrc="/images/health-mastery/hero.webp" alt="Krystalore Crews — Health Mastery Group Coaching for entrepreneurs and leaders" className="object-cover object-top" priority sizes="100vw" />
-        </div>
-      </section>
-
-      <section className="mb-12 sm:mb-16 text-center max-w-4xl mx-auto px-4">
-        <p className="text-teal font-semibold text-sm sm:text-base uppercase tracking-wider mb-3">Beyond Limits • Health Mastery</p>
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
-          You&apos;ve Built Success...<br />
-          <span className="text-teal">Now It&apos;s Time to Feel Like It</span>
-        </h1>
-          <p className="mt-1 mb-5 inline-block rounded-full border border-[#E8A849]/40 bg-[#E8A849]/20 px-4 py-1.5 text-sm font-bold text-[#E8A849]"><DynamicText slug="health-mastery" field="date" fallback="Enrolling now" /></p>
-        <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
-          Health Mastery is a high-level group coaching experience for entrepreneurs and leaders ready to reclaim energy,
-          rebuild consistency, and lead from the inside out.
-        </p>
-
+      <DynamicHeader
+        slug="health-mastery"
+        eyebrow="Beyond Limits • Health Mastery"
+        fallbackTitle="You've Built Success... Now It's Time to Feel Like It"
+        fallbackDescription="Health Mastery is a high-level group coaching experience for entrepreneurs and leaders ready to reclaim energy, rebuild consistency, and lead from the inside out."
+        fallbackDate="Enrolling now"
+        fallbackImage="/images/health-mastery/hero.webp"
+        alt="Krystalore Crews — Health Mastery Group Coaching for entrepreneurs and leaders"
+      >
         <div className="bg-teal/5 border border-teal/20 rounded-xl p-4 sm:p-5 max-w-2xl mx-auto mb-7">
           <p className="text-sm sm:text-base text-gray-800 font-medium">
             <strong className="text-teal">VIP Members:</strong> Special pricing available.
@@ -114,7 +105,7 @@ export default function HealthMasteryPage() {
             Book a Discovery Call
           </Link>
         </div>
-      </section>
+      </DynamicHeader>
 
       <section className="mb-12 sm:mb-16 max-w-5xl mx-auto px-4">
         <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-black">
