@@ -56,6 +56,11 @@ export default function BusinessBootcampClient() {
                     Schedule a Free Consultation <ArrowRight className="h-4 w-4" />
                   </button>
                 </div>
+                <div className="mt-4">
+                  <a href="/compare-business-options" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#0D9488] hover:text-[#e07800] transition-colors">
+                    Compare Options <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
               </div>
               <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-2xl">
                 <Image src="/images/go9/corporate.jpg" alt="Krystalore Crews — Business Boot Camp" fill priority className="object-cover" style={{ objectPosition: '22% 18%' }} sizes="(max-width: 1024px) 100vw, 50vw" />

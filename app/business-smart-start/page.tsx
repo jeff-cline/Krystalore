@@ -387,6 +387,11 @@ export default function BusinessSmartStartPage() {
                   Take the Smart Start Quiz
                 </a>
               </div>
+              <div className="mt-5 text-center lg:text-left">
+                <a href="/compare-business-options" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#0D9488] hover:text-[#e07800] transition-colors">
+                  Compare Options <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
               <div className="flex items-center gap-6 mt-12 justify-center lg:justify-start text-sm text-gray-500">
                 <div className="flex items-center gap-2">
                   <Trophy className="h-5 w-5 text-[#F97316]" />
