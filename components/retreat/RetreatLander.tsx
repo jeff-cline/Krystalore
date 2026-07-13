@@ -57,12 +57,12 @@ export function buildEventMailto() {
   return `mailto:krystalore@thecrewscoach.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 }
 
-export function RetreatCTAButtons({ checkoutUrl = WAITLIST_URL }: { checkoutUrl?: string }) {
+export function RetreatCTAButtons() {
   return (
     <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-      <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-full hover:scale-105 transition-transform shadow-lg">
+      <Link href="/waitlist" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-full hover:scale-105 transition-transform shadow-lg">
         Wait List & Updates <ArrowRight className="h-5 w-5" />
-      </a>
+      </Link>
       <a href={PRIVATE_RETREAT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border-2 border-[#0D9488] text-[#0D9488] font-black px-7 py-4 rounded-full hover:bg-[#0D9488]/5 transition-colors">
         Book Private Retreat
       </a>
@@ -123,12 +123,12 @@ export function RetreatHubPage() {
               <p className="text-gray-600 mb-5">Create a custom retreat for your team, organization, circle, or private group.</p>
               <span className="font-black text-[#0D9488] inline-flex items-center gap-2">Request Details <ArrowRight className="h-4 w-4" /></span>
             </a>
-            <a href={WAITLIST_URL} target="_blank" rel="noopener noreferrer" className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-shadow">
+            <Link href="/waitlist" className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-shadow">
               <Heart className="h-10 w-10 text-[#E8A849] mb-4" />
               <h3 className="text-2xl font-black mb-3">Waitlist</h3>
               <p className="text-gray-600 mb-5">Get updates for open rooms, future dates, checkout windows, and upcoming retreat announcements.</p>
               <span className="font-black text-[#0D9488] inline-flex items-center gap-2">Join Updates <ArrowRight className="h-4 w-4" /></span>
-            </a>
+            </Link>
             <a href={buildEventMailto()} className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-shadow">
               <Mail className="h-10 w-10 text-[#0D9488] mb-4" />
               <h3 className="text-2xl font-black mb-3">Book Krystalore to Speak or Collab</h3>

@@ -47,7 +47,7 @@ export default function BootcampPage() {
               <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                 <div className="relative aspect-square w-full max-w-[18rem] md:max-w-[22rem]">
                   <Image
-                    src="/images/bootcamp/beyond-limits-logo.png"
+                    src="/images/bootcamp/beyond-limits-bootcamp-logo.png"
                     alt="Beyond Limits Bootcamp"
                     fill
                     priority

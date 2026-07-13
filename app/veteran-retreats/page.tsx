@@ -271,7 +271,7 @@ export default function VeteranRetreatsPage() {
                     ))}
                   </ul>
                   <a
-                    href="https://krystalore.com/corporate-retreat-planning/"
+                    href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist" target="_blank" rel="noopener noreferrer"
                     className={`block text-center font-bold rounded-xl px-6 py-4 transition-all hover:scale-105 ${pkg.popular ? 'bg-[#34c5c5] hover:bg-[#37a6a6] text-white shadow-lg shadow-orange-900/20' : 'bg-gray-100 hover:bg-gray-200 text-gray-900'}`}
                   >
                     Reserve Now
@@ -380,7 +380,7 @@ export default function VeteranRetreatsPage() {
             You&apos;ve served your country. Now it&apos;s time to serve yourself. Join fellow veterans for an experience that honors your past and builds your future.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://krystalore.com/corporate-retreat-planning/" className="bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold rounded-xl shadow-lg shadow-teal-900/30 px-8 py-4 text-lg transition-all hover:scale-105">
+            <a href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist" target="_blank" rel="noopener noreferrer" className="bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold rounded-xl shadow-lg shadow-teal-900/30 px-8 py-4 text-lg transition-all hover:scale-105">
               Reserve Your Spot
             </a>
             <Link href="/veteran-coaching" className="border-2 border-white/80 text-white font-bold rounded-xl px-8 py-4 text-lg hover:bg-white/10 transition-all">
