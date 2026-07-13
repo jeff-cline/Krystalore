@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Fragment } from 'react'
 import Link from 'next/link'
-import { Check, Minus, Phone, Mail, Globe, MapPin, ArrowRight } from 'lucide-react'
+import { Check, Minus, Globe, ArrowRight } from 'lucide-react'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 
@@ -295,13 +295,13 @@ export default function CompareBusinessOptionsPage() {
                 <p className="text-xs font-bold uppercase tracking-widest text-white/70">Jeff Cline — R0cketShip</p>
                 <ul className="mt-3 space-y-2 text-sm text-white/90">
                   <li className="flex items-center gap-2"><Globe className="h-4 w-4 flex-shrink-0 text-[#E8A849]" /> R0cketShip.com · PredictiveData.org · Jeff-cline.com</li>
-                  <li className="flex items-center gap-2"><Mail className="h-4 w-4 flex-shrink-0 text-[#E8A849]" /> <a href="mailto:jeff.cline@me.com" className="hover:underline">jeff.cline@me.com</a></li>
-                  <li className="flex items-center gap-2"><Phone className="h-4 w-4 flex-shrink-0 text-[#E8A849]" /> <a href="tel:+19728006670" className="hover:underline">972-800-6670</a></li>
-                  <li className="flex items-center gap-2"><MapPin className="h-4 w-4 flex-shrink-0 text-[#E8A849]" /> 5 Cowboys Way, Frisco, Texas 75032</li>
                 </ul>
                 <p className="mt-5 text-xs font-bold uppercase tracking-widest text-white/70">Krystalore</p>
                 <p className="mt-2 text-sm text-white/90">Immersive · Personal Brand · Performance</p>
-                <a href="mailto:krystalore@thecrewscoach.com" className="mt-1 inline-block text-sm text-white/90 hover:underline">krystalore@thecrewscoach.com</a>
+                <a href={CONTACT_MAILTO} className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-[#0D9488] transition hover:bg-white/90">
+                  Get More Info <ArrowRight className="h-4 w-4" />
+                </a>
+                <p className="mt-3 text-xs text-white/60">Prefer to reach out directly? Use the form above and we&apos;ll come to you.</p>
               </div>
             </div>
           </div>
