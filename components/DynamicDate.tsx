@@ -84,7 +84,7 @@ export function DynamicText({
  * `children` and render under the dynamic text.
  */
 export function DynamicHeader({
-  slug, fallbackTitle, fallbackDescription, fallbackDate, fallbackImage, eyebrow, alt, imgClassName, children,
+  slug, fallbackTitle, fallbackDescription, fallbackDate, fallbackImage, eyebrow, alt, imgClassName, layout = 'stacked', children,
 }: {
   slug: string
   fallbackTitle: string
@@ -93,7 +93,8 @@ export function DynamicHeader({
   fallbackImage: string
   eyebrow?: string
   alt?: string
-  imgClassName?: string // override the image crop, e.g. 'object-cover object-top'
+  imgClassName?: string // override the image fit/crop, e.g. 'object-cover object-top' or 'object-contain'
+  layout?: 'stacked' | 'split' // 'stacked' = image on top; 'split' = whole image beside the text
   children?: ReactNode
 }) {
   const dd = useDynamicDate(slug)
@@ -101,28 +102,50 @@ export function DynamicHeader({
   const title = dd?.title || fallbackTitle
   const desc = (dd?.description ?? fallbackDescription) || ''
   const date = dd?.date || fallbackDate || ''
+
+  const textBlock = (align: 'center' | 'left') => (
+    <div className={align === 'center' ? 'text-center' : 'text-center lg:text-left'}>
+      {eyebrow ? <p className="text-[#0D9488] font-bold uppercase tracking-widest text-xs md:text-sm mb-4" data-dyn={`${slug}.eyebrow`}>{eyebrow}</p> : null}
+      <h1
+        className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.05] mb-5"
+        style={{ textShadow: '0 0 2px #e07800, 0 0 9px rgba(224,120,0,0.75), 0 0 20px rgba(224,120,0,0.45)' }}
+        data-dyn={`${slug}.title`}
+      >{title}</h1>
+      {desc ? <p className={`text-lg text-gray-600 leading-relaxed mb-6 whitespace-pre-line ${align === 'center' ? 'max-w-2xl mx-auto' : ''}`} data-dyn={`${slug}.description`}>{desc}</p> : null}
+      {date ? (
+        <p className="inline-flex items-center gap-2 rounded-full bg-[#34c5c5]/15 text-[#0D9488] px-4 py-1.5 text-sm font-bold" data-dyn={`${slug}.date`}>
+          <Calendar className="w-4 h-4" /> {date}
+        </p>
+      ) : null}
+      {children ? <div className="mt-8">{children}</div> : null}
+    </div>
+  )
+
+  // Split: the whole image (never cropped) on one side, the dynamic text adjacent.
+  if (layout === 'split') {
+    return (
+      <section data-dynamic-header={slug} className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div className="relative w-full aspect-[3/4] max-h-[560px] overflow-hidden rounded-3xl bg-[#F6F8FA] shadow-xl">
+              <Image src={img} alt={alt || title} fill priority className={imgClassName || 'object-contain'} sizes="(max-width: 1024px) 100vw, 50vw" />
+            </div>
+            {textBlock('left')}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // Stacked (default): featured image full-width on top, dynamic text below.
   return (
     <section data-dynamic-header={slug}>
-      {/* Featured image — full width, on its own, no text over it */}
       <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-[#F6F8FA]">
         <Image src={img} alt={alt || title} fill priority className={imgClassName || 'object-cover'} sizes="100vw" />
       </div>
-      {/* Dynamic text, below the image */}
       <div className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
-          {eyebrow ? <p className="text-[#0D9488] font-bold uppercase tracking-widest text-xs md:text-sm mb-4" data-dyn={`${slug}.eyebrow`}>{eyebrow}</p> : null}
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.05] mb-5"
-            style={{ textShadow: '0 0 2px #e07800, 0 0 9px rgba(224,120,0,0.75), 0 0 20px rgba(224,120,0,0.45)' }}
-            data-dyn={`${slug}.title`}
-          >{title}</h1>
-          {desc ? <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6 whitespace-pre-line" data-dyn={`${slug}.description`}>{desc}</p> : null}
-          {date ? (
-            <p className="inline-flex items-center gap-2 rounded-full bg-[#34c5c5]/15 text-[#0D9488] px-4 py-1.5 text-sm font-bold" data-dyn={`${slug}.date`}>
-              <Calendar className="w-4 h-4" /> {date}
-            </p>
-          ) : null}
-          {children ? <div className="mt-8">{children}</div> : null}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          {textBlock('center')}
         </div>
       </div>
     </section>
