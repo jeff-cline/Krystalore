@@ -49,7 +49,9 @@ export function DynamicDate({
       {d ? <p className="mt-3 text-lg leading-relaxed text-gray-600">{d}</p> : null}
       <h3 className="mt-4 text-xl font-bold uppercase tracking-widest text-[#0D9488] md:text-2xl">{dt}</h3>
       {c?.enabled && c.title ? (
-        <a href={c.link || '#'} className="mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition hover:brightness-105"
+        <a href={c.link || '#'}
+          {...(/^https?:\/\//.test(c.link || '') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          className="mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition hover:brightness-105"
           style={{ backgroundColor: c.color || '#E8A849' }}>
           {c.title}
         </a>

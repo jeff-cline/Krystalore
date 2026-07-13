@@ -4,6 +4,7 @@ import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
+import { DynamicDate } from '@/components/DynamicDate'
 import {
   Dumbbell, ChevronRight, Flame, Brain, Timer, Zap,
   CheckCircle, Target, Users, ArrowRight, Star, Heart,
@@ -26,27 +27,44 @@ export default function BootcampPage() {
           </nav>
         </div>
 
-        {/* Hero Image */}
-        <div className="relative h-80 md:h-[28rem] lg:h-[32rem] w-full overflow-hidden">
-          <Image src="/images/go9/fitness-alt.jpg" alt="Krystalore Crews bootcamp fitness training and strength" fill className="object-cover object-center" sizes="100vw" priority />
-        </div>
+        {/* Hero — Krystalore's beach photo (left) + logo & editable date block (right) */}
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+            <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+              {/* Left: Krystalore live-training photo */}
+              <div className="relative w-full aspect-[3/4] max-h-[600px] overflow-hidden rounded-3xl bg-[#F6F8FA] shadow-2xl">
+                <Image
+                  src="/images/bootcamp/krystalore-beach-ringlight.jpg"
+                  alt="Krystalore Crews coaching a live Beyond Limits Bootcamp session on the beach"
+                  fill
+                  priority
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
 
-        {/* Hero */}
-        <section className="relative bg-gradient-to-br from-[#E8A849] via-orange-600 to-red-700 text-white py-20 lg:py-28">
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">Welcome to Beyond Limits Bootcamp</h1>
-            <p className="text-xl md:text-2xl text-orange-100 max-w-3xl mx-auto mb-4">
-              Transform Your Life in Just 34 Minutes a Day &mdash; All From Your Living Room!
-            </p>
-            <p className="text-lg text-orange-200 font-semibold mb-8">Where Leaders Train</p>
-            <a
-              href={CHECKOUT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-white text-[#34c5c5] font-bold text-xl px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              Click to Sign Up
-            </a>
+              {/* Right: logo on top, dynamic date picker below */}
+              <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+                <div className="relative aspect-square w-full max-w-[18rem] md:max-w-[22rem]">
+                  <Image
+                    src="/images/bootcamp/beyond-limits-logo.png"
+                    alt="Beyond Limits Bootcamp"
+                    fill
+                    priority
+                    className="object-contain"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                </div>
+                <DynamicDate
+                  slug="bootcamp"
+                  className="mt-2 w-full"
+                  title="Train Live From Anywhere"
+                  description="34 minutes a day of live virtual HIIT, kickboxing, and strength — with the accountability to actually show up. #NoMatterWhat"
+                  date="Enrolling now"
+                  cta={{ enabled: true, title: 'Click to Sign Up', link: CHECKOUT_URL, color: '#E8A849' }}
+                />
+              </div>
+            </div>
           </div>
         </section>
 
