@@ -178,7 +178,7 @@ export default function VeteranCoachingPage() {
               <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">Coaching designed for veterans navigating transition, building new purpose, and leveraging military experience for civilian success.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
-                <Link href="#content" className="border-2 border-[#0D9488] text-[#0D9488] rounded-full px-8 py-4 font-bold hover:bg-[#0D9488]/5 transition-colors text-center">Explore More</Link>
+                <a href="#free-assessment" className="border-2 border-[#0D9488] text-[#0D9488] rounded-full px-8 py-4 font-bold hover:bg-[#0D9488]/5 transition-colors text-center">Free Assessment</a>
               </div>
             </div>
           </div>
@@ -376,7 +376,7 @@ export default function VeteranCoachingPage() {
       </section>
 
       {/* Quizzes */}
-      <section className="py-20 bg-white">
+      <section id="free-assessment" className="scroll-mt-24 py-20 bg-white">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Free Assessments for Veterans</h2>
