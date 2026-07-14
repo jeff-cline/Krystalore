@@ -83,7 +83,6 @@ export default function HealthMasteryPage() {
         fallbackDescription="Health Mastery is a high-level group coaching experience for entrepreneurs and leaders ready to reclaim energy, rebuild consistency, and lead from the inside out."
         fallbackDate="Enrolling now"
         fallbackImage="/images/health-mastery/hero.webp"
-        imgAspect="aspect-[16/9]"
         alt="Krystalore Crews — Health Mastery Group Coaching for entrepreneurs and leaders"
       >
         <div className="bg-teal/5 border border-teal/20 rounded-xl p-4 sm:p-5 max-w-2xl mx-auto mb-7">

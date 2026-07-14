@@ -160,9 +160,16 @@ export function DynamicHeader({
   // Stacked (default): featured image full-width on top, dynamic text below.
   return (
     <section data-dynamic-header={slug}>
-      <div className={`relative w-full ${imgAspect || 'aspect-[16/9] md:aspect-[21/9]'} bg-[#F6F8FA]`}>
-        <Image src={img} alt={alt || title} fill priority className={imgClassName || 'object-cover'} sizes="100vw" />
-      </div>
+      {imgAspect ? (
+        // Opt-in fixed-ratio crop (pass imgAspect, e.g. 'aspect-[16/9]')
+        <div className={`relative w-full ${imgAspect} bg-[#F6F8FA]`}>
+          <Image src={img} alt={alt || title} fill priority className={imgClassName || 'object-cover'} sizes="100vw" />
+        </div>
+      ) : (
+        // Default: show the FULL uploaded image at its natural size — never cropped, no box.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={img} alt={alt || title} className={`block w-full h-auto ${imgClassName || ''}`} />
+      )}
       <div className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
           {textBlock('center')}
