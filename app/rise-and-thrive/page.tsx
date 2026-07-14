@@ -59,7 +59,7 @@ const faqs = [
   { q: 'Who is Rise & Thrive really for?', a: 'High-achieving women in a season of change — veterans, entrepreneurs, executives, and caretakers — who are successful on paper but secretly know they’ve been surviving instead of thriving, and are ready to come home to themselves.' },
   { q: 'Do I have to be a veteran?', a: 'Not at all. Krystalore’s military background shapes the discipline and heart of the work, but Rise & Thrive is for any woman ready for her next chapter.' },
   { q: 'What if I’m not “in shape” right now?', a: 'Perfect starting point. Everything meets you exactly where you are — all abilities, all ages — and builds sustainable consistency without shame.' },
-  { q: 'When does it start, and how long is it?', a: 'It’s a 90-day journey beginning July 27, with 12 weeks of the Rise & Thrive Academy, culminating in the Costa Rica Celebration Retreat October 21–26.' },
+  { q: 'How long is it?', a: 'It’s a 90-day journey — 12 weeks of the Rise & Thrive Academy, culminating in the Costa Rica Celebration Retreat.' },
   { q: 'Is the Costa Rica retreat included?', a: 'Yes — the retreat is part of the bundle. It’s where the transformation becomes embodied: a celebration, a graduation, and a rebirth, away from the noise.' },
   { q: 'Is it virtual or in person?', a: 'The Academy and weekly coaching are virtual (live + on-demand). The retreat is in person in Costa Rica. VIP adds private 1:1 sessions with Krystalore.' },
   { q: 'How much time will it take each week?', a: 'It’s built for busy women — focused, efficient, and flexible, so it fits a real life full of responsibilities.' },
@@ -286,7 +286,7 @@ export default function RiseAndThrive() {
             </a>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-7 text-sm text-gray-500">
-            <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#e07800]" /> Costa Rica · Oct 21–26</span>
+            <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#e07800]" /> Costa Rica</span>
             <span className="inline-flex items-center gap-1.5"><Sun className="w-4 h-4 text-[#e07800]" /> 90-day journey</span>
           </div>
         </DynamicHeader>
@@ -472,7 +472,7 @@ export default function RiseAndThrive() {
                 <p className="text-gray-500 mb-6">The complete 90-day experience.</p>
                 <p className="text-xs font-bold text-[#0D9488] uppercase tracking-wider mb-2">Included</p>
                 <ul className="space-y-2.5 mb-5">
-                  {['12 Weeks of Rise & Thrive Academy', 'Weekly Coaching & Training', 'Identity & Confidence Coaching', 'Self-Love & Self-Trust Framework', 'Goal Setting & Life Alignment', 'Costa Rica Celebration Retreat (Oct 21–26)'].map((p) => (
+                  {['12 Weeks of Rise & Thrive Academy', 'Weekly Coaching & Training', 'Identity & Confidence Coaching', 'Self-Love & Self-Trust Framework', 'Goal Setting & Life Alignment', 'Costa Rica Celebration Retreat'].map((p) => (
                     <li key={p} className="flex items-start gap-2 text-gray-700"><Check className="w-5 h-5 text-[#34c5c5] flex-shrink-0 mt-0.5" /><span className="text-[15px]">{p}</span></li>
                   ))}
                 </ul>
@@ -513,7 +513,7 @@ export default function RiseAndThrive() {
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-white/80 font-bold uppercase tracking-[0.18em] text-sm mb-4">Why now</p>
             <h2 className="text-3xl md:text-4xl font-black mb-6 leading-tight">A year from now you&apos;ll either be celebrating the woman you became… or wishing you had started.</h2>
-            <p className="text-lg text-white/90 font-light leading-relaxed mb-3">July 27 isn&apos;t just the start of a program — it&apos;s the start of a new chapter. And on October 26, you&apos;ll be standing in Costa Rica, celebrating the woman who chose herself, followed through, and proved her best chapter is still ahead.</p>
+            <p className="text-lg text-white/90 font-light leading-relaxed mb-3">This isn&apos;t just the start of a program — it&apos;s the start of a new chapter. And you&apos;ll be standing in Costa Rica, celebrating the woman who chose herself, followed through, and proved her best chapter is still ahead.</p>
             <p className="text-lg text-white font-semibold mb-9">You don&apos;t need more information. You need immersion, accountability, community, and action.</p>
             <a href={CHECKOUT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-white text-[#0D9488] font-black text-lg px-10 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow">Start Your Next Chapter <ArrowRight className="w-5 h-5" /></a>
           </div>
@@ -568,7 +568,7 @@ export default function RiseAndThrive() {
             <h2 className="text-3xl md:text-5xl font-black mb-6 leading-tight">This is your opportunity to stop waiting and start becoming.</h2>
             <p className="text-lg md:text-xl text-white/90 mb-10 font-light">Your best chapter is still ahead — and it gets to be this good, or even better.</p>
             <a href={CHECKOUT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-white text-[#e07800] font-black text-lg md:text-xl px-12 py-5 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow">Claim Your Spot <ArrowRight className="w-6 h-6" /></a>
-            <p className="text-white/80 text-sm mt-5">Starts July 27 · Costa Rica Celebration Retreat Oct 21–26</p>
+            <p className="text-white/80 text-sm mt-5">Includes the Costa Rica Celebration Retreat</p>
           </div>
         </section>
 

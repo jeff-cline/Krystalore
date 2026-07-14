@@ -105,14 +105,14 @@ export default function CostaRicaRetreatPage() {
             <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Costa Rica Retreat Options</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Costa Rica Revive & Thrive Retreat</h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-              Reserve or request updates for the October 2026 Costa Rica retreat, or book a private retreat experience for your own group.
+              Reserve or request updates for the Costa Rica retreat, or book a private retreat experience for your own group.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
               <p className="text-teal font-bold uppercase tracking-widest text-xs mb-2">Featured Retreat</p>
               <h3 className="text-2xl font-bold mb-3">Costa Rica Retreat</h3>
-              <p className="text-gray-600 mb-5">October 18&ndash;25, 2026. A tropical revival retreat for women ready to reset, reconnect, and rise.</p>
+              <p className="text-gray-600 mb-5">A tropical revival retreat for women ready to reset, reconnect, and rise.</p>
               <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
                 Book Now <ArrowRight className="w-4 h-4" />
               </a>
@@ -498,7 +498,7 @@ export default function CostaRicaRetreatPage() {
             Waitlist & Updates
           </h2>
           <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            Want updates for the Costa Rica October 2026 retreat experience? Join the updates list and be first to know when rooms, details, and checkout options open.
+            Want updates for the Costa Rica retreat experience? Join the updates list and be first to know when rooms, details, and checkout options open.
           </p>
           <p className="text-gray-600 text-lg leading-relaxed mb-8">
             Use the waitlist for retreat announcements, room releases, and next-step details.

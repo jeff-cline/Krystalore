@@ -107,14 +107,14 @@ export default function TennesseeRetreatPage() {
             <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Tennessee Norris Lake Retreat Options</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Tennessee Norris Lake Revive & Thrive Retreat</h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-              Join updates for the Fall 2027 Norris Lake retreat at a modern lake cottage in LaFollette, Tennessee — or book a private retreat experience for your own group.
+              Join updates for the Norris Lake retreat at a modern lake cottage in LaFollette, Tennessee — or book a private retreat experience for your own group.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
               <p className="text-teal font-bold uppercase tracking-widest text-xs mb-2">Featured Retreat</p>
               <h3 className="text-2xl font-bold mb-3">Tennessee Lake Retreat</h3>
-              <p className="text-gray-600 mb-5">Fall 2027, dates TBD. A modern Norris Lake reset for women ready to revive, reconnect, and rise.</p>
+              <p className="text-gray-600 mb-5">A modern Norris Lake reset for women ready to revive, reconnect, and rise.</p>
               <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
                 Book Now <ArrowRight className="w-4 h-4" />
               </a>
@@ -500,7 +500,7 @@ export default function TennesseeRetreatPage() {
             Waitlist & Updates
           </h2>
           <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            Want updates for the Tennessee Norris Lake Fall 2027 retreat experience? Join the updates list and be first to know when dates, rooms, and checkout options open.
+            Want updates for the Tennessee Norris Lake retreat experience? Join the updates list and be first to know when dates, rooms, and checkout options open.
           </p>
           <p className="text-gray-600 text-lg leading-relaxed mb-8">
             Use the waitlist for retreat announcements, room releases, and next-step details.
@@ -536,7 +536,7 @@ export default function TennesseeRetreatPage() {
               { q: 'What\'s included in the retreat?', a: 'Everything is designed as a hosted retreat experience once you arrive: lake-cottage lodging, nourishing meals, daily coaching sessions, movement, reflection, sisterhood, and curated lake/nature reset time. Flights are not included.' },
               { q: 'Do I need to be extremely fit to attend?', a: 'Not at all. Our daily movement sessions are designed for all fitness levels. Whether you\'re a marathon runner or haven\'t worked out in months, everything is adaptable. The goal is to reconnect with your body, not compete.' },
               { q: 'Is this a business retreat or a wellness retreat?', a: 'It\'s both. Our Revive & Thrive experience weaves together wellness, personal development, and strategic life/business coaching. You\'ll gain clarity not just about your health but about your next bold move — whether that\'s in your career, relationships, or personal goals.' },
-              { q: 'What airport should I fly into?', a: 'Final flight and transportation guidance for LaFollette / Norris Lake will be shared when Fall 2027 registration details open.' },
+              { q: 'What airport should I fly into?', a: 'Final flight and transportation guidance for LaFollette / Norris Lake will be shared when registration details open.' },
               { q: 'Are payment plans available?', a: 'Yes. We offer flexible payment plans so you can secure your spot and pay over time. We also have limited scholarship spots available for each retreat. Contact us through the booking form to discuss options.' },
               { q: 'Can I book a private retreat for my group?', a: 'Absolutely. We offer private retreat experiences for friend groups, families, corporate teams, and organizations. We also offer co-ed retreats focused on book writing and business planning. Contact us to design your custom experience.' },
               { q: 'What makes this different from other women\'s retreats?', a: 'This isn\'t a vacation with a couple of workshops tacked on. Every single day is intentionally designed with coaching, movement, adventure, and luxury service. You\'ll be treated like royalty while doing deep, transformational inner work. Our retreats consistently produce breakthroughs that women carry with them for years.' },
@@ -596,7 +596,7 @@ export default function TennesseeRetreatPage() {
             '@context': 'https://schema.org',
             '@type': 'Event',
             name: 'Revive & Thrive Women\'s Wellness Retreat',
-            description: 'A future Fall 2027 Tennessee Norris Lake wellness retreat for high-achieving women at a modern 6-bedroom lake cottage in LaFollette. Includes transformational coaching, movement, rest, sisterhood, nature, and next-season clarity.',
+            description: 'A Tennessee Norris Lake wellness retreat for high-achieving women at a modern 6-bedroom lake cottage in LaFollette. Includes transformational coaching, movement, rest, sisterhood, nature, and next-season clarity.',
             url: 'https://krystalore.com/tn-retreat',
             eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
             eventStatus: 'https://schema.org/EventScheduled',

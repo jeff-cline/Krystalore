@@ -24,7 +24,7 @@ export const retreatOptions: RetreatOption[] = [
   {
     title: 'Costa Rica Revival Retreat',
     location: 'Costa Rica',
-    dates: 'October 18–25, 2026',
+    dates: '',
     description: 'A tropical revival experience for women ready to reset, reconnect, move their bodies, and rise into a bolder next chapter.',
     href: '/cr-retreat',
     image: '/images/retreat-destinations/cr-01.jpg',
@@ -34,7 +34,7 @@ export const retreatOptions: RetreatOption[] = [
   {
     title: 'Puerto Rico Revive & Thrive Retreat',
     location: 'Ceiba, Puerto Rico',
-    dates: 'March 28–April 3, 2027',
+    dates: '',
     description: 'A Caribbean wellness and transformation retreat with ocean views, rainforest energy, coaching, movement, and sisterhood.',
     href: '/pr-retreat',
     image: '/images/retreat/retreat-06.jpg',
@@ -43,7 +43,7 @@ export const retreatOptions: RetreatOption[] = [
   {
     title: 'Tennessee Fall Retreat',
     location: 'Tennessee',
-    dates: 'Fall 2027 — dates TBD',
+    dates: '',
     description: 'A future fall reset in the Tennessee hills for restoration, clarity, connection, and powerful next-season planning.',
     href: '/tn-retreat',
     image: '/images/retreat-destinations/tn-airbnb/tn-lake-01.png',
@@ -105,7 +105,6 @@ export function RetreatHubPage() {
                   <div className="p-6">
                     <p className="text-sm text-[#0D9488] font-bold mb-2"><MapPin className="inline h-4 w-4 mr-1" />{retreat.location}</p>
                     <h3 className="text-2xl font-black mb-2">{retreat.title}</h3>
-                    <p className="text-gray-500 font-semibold mb-3"><Calendar className="inline h-4 w-4 mr-1" />{retreat.dates}</p>
                     <p className="text-gray-600 leading-relaxed mb-5">{retreat.description}</p>
                     <span className="inline-flex items-center gap-2 text-[#0D9488] font-black">{retreat.cta ?? 'Learn More'} <ArrowRight className="h-4 w-4" /></span>
                   </div>

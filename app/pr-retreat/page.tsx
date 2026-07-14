@@ -109,22 +109,22 @@ export default function PuertoRicoRetreatPage() {
             <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Puerto Rico Retreat Options</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Puerto Rico Revive & Thrive Retreat</h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-              Reserve the March 2027 Puerto Rico retreat, join the waitlist for future 2027 events, or book a private retreat experience.
+              Reserve the Puerto Rico retreat, join the waitlist for future events, or book a private retreat experience.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
               <p className="text-teal font-bold uppercase tracking-widest text-xs mb-2">Featured Retreat</p>
               <h3 className="text-2xl font-bold mb-3">Puerto Rico Retreat</h3>
-              <p className="text-gray-600 mb-5">March 28&ndash;April 3, 2027. A Caribbean reset for women ready to revive, reconnect, and rise.</p>
+              <p className="text-gray-600 mb-5">A Caribbean reset for women ready to revive, reconnect, and rise.</p>
               <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
                 Book Now <ArrowRight className="w-4 h-4" />
               </a>
             </div>
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
               <p className="text-primary font-bold uppercase tracking-widest text-xs mb-2">Next Experience</p>
-              <h3 className="text-2xl font-bold mb-3">2027 Retreat Waitlist</h3>
-              <p className="text-gray-600 mb-5">Get first notice for future 2027 retreat dates, rooms, and updates.</p>
+              <h3 className="text-2xl font-bold mb-3">Retreat Waitlist</h3>
+              <p className="text-gray-600 mb-5">Get first notice for future retreat dates, rooms, and updates.</p>
               <div className="flex flex-col gap-3 items-start">
                 <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
                   Book Now <ArrowRight className="w-4 h-4" />
@@ -502,7 +502,7 @@ export default function PuertoRicoRetreatPage() {
             Waitlist & Updates
           </h2>
           <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            Want updates for Puerto Rico and future 2027 retreat experiences? Join the waitlist and be first to know when rooms, dates, and checkout options open.
+            Want updates for Puerto Rico and future retreat experiences? Join the waitlist and be first to know when rooms, dates, and checkout options open.
           </p>
           <p className="text-gray-600 text-lg leading-relaxed mb-8">
             Use the waitlist for retreat announcements, room releases, and next-step details.
