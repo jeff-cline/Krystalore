@@ -40,7 +40,7 @@ const components = [
   { icon: Brain, label: 'The Academy', gives: 'The roadmap', img: '/images/million-dollar-body/mdb-hero.png' },
   { icon: Dumbbell, label: 'Beyond Limits Bootcamp', gives: 'The accountability', img: '/images/go6/beach-fitness-live.png' },
   { icon: Crown, label: 'Private Coaching (VIP)', gives: 'Personalized support', img: '/images/go9/coaching.jpg' },
-  { icon: MapPin, label: 'Costa Rica Retreat', gives: 'Integration & transformation', img: '/images/retreat-destinations/cr-01.jpg' },
+  { icon: MapPin, label: 'Includes an Upcoming Retreat (Client’s Choice)', gives: 'Integration & transformation', img: '/images/retreat-destinations/cr-01.jpg' },
 ]
 
 const retreatGets = ['Clarity', 'Confidence', 'Friendships', 'Momentum', 'A real plan', 'A stronger relationship with yourself']
@@ -49,7 +49,7 @@ const retreatExp = ['Deep reflection', 'Community', 'Adventure', 'Movement', 'Co
 const credentials = ['22-Year Retired SMSgt, U.S. Air Force', 'Amazon Best-Selling Author', '28-Time Marathoner · 50-Mile Ultra Finisher', 'Cancer Survivor', 'Certified Life & Somatic Coach', 'Executive & Wellness Coach']
 
 const testimonials = [
-  { quote: 'I came in exhausted and invisible. I left Costa Rica clear, strong, and finally living for me. This was the turning point I’d waited years for.', name: 'Academy + Retreat Graduate' },
+  { quote: 'I came in exhausted and invisible. I left Paradise clear, strong, and finally living for me. This was the turning point I’d waited years for.', name: 'Academy + Retreat Graduate' },
   { quote: 'I’ve done programs before. This was different — it rebuilt my confidence and my body, and gave me a sisterhood I still lean on.', name: 'Rise & Thrive Member' },
   { quote: 'I stopped surviving and started thriving. I trust myself again. Worth every single penny.', name: 'VIP Member' },
 ]
@@ -59,11 +59,11 @@ const faqs = [
   { q: 'Who is Rise & Thrive really for?', a: 'High-achieving women in a season of change — veterans, entrepreneurs, executives, and caretakers — who are successful on paper but secretly know they’ve been surviving instead of thriving, and are ready to come home to themselves.' },
   { q: 'Do I have to be a veteran?', a: 'Not at all. Krystalore’s military background shapes the discipline and heart of the work, but Rise & Thrive is for any woman ready for her next chapter.' },
   { q: 'What if I’m not “in shape” right now?', a: 'Perfect starting point. Everything meets you exactly where you are — all abilities, all ages — and builds sustainable consistency without shame.' },
-  { q: 'How long is it?', a: 'It’s a 90-day journey — 12 weeks of the Rise & Thrive Academy, culminating in the Costa Rica Celebration Retreat.' },
-  { q: 'Is the Costa Rica retreat included?', a: 'Yes — the retreat is part of the bundle. It’s where the transformation becomes embodied: a celebration, a graduation, and a rebirth, away from the noise.' },
-  { q: 'Is it virtual or in person?', a: 'The Academy and weekly coaching are virtual (live + on-demand). The retreat is in person in Costa Rica. VIP adds private 1:1 sessions with Krystalore.' },
+  { q: 'How long is it?', a: 'It’s a 90-day journey — 12 weeks of the Rise & Thrive Academy, culminating in the Paradise Celebration Retreat.' },
+  { q: 'Is a Retreat Included?', a: 'YES! You pick a retreat of your choice based on availability for this package up to $5,000.00.' },
+  { q: 'Is it virtual or in person?', a: 'The Academy and weekly coaching are virtual (live + on-demand). The retreat is in person in Paradise. VIP adds private 1:1 sessions with Krystalore.' },
   { q: 'How much time will it take each week?', a: 'It’s built for busy women — focused, efficient, and flexible, so it fits a real life full of responsibilities.' },
-  { q: 'What’s the difference between the Bundle and VIP?', a: 'The Bundle includes the Academy, Bootcamp, and the Costa Rica retreat. VIP adds private coaching sessions with Krystalore, a customized success plan, and direct-access support.' },
+  { q: 'What’s the difference between the Bundle and VIP?', a: 'The Bundle includes the Academy, Bootcamp, and the retreat. VIP adds private coaching sessions with Krystalore, a customized success plan, and direct-access support.' },
   { q: 'Are there payment options?', a: 'Yes — pay in full to unlock bonus value, or choose a payment plan. All options are on the checkout page.' },
   { q: 'What results can I expect?', a: 'More energy, confidence, and clarity; consistency that finally sticks; deeper relationships; and a concrete plan for your next chapter — plus the embodied belief that your best chapter is still ahead.' },
 ]
@@ -169,7 +169,7 @@ const videoTestimonials = [
   { id: 'jHE6rGalyVM', title: 'Sondra — Veteran Sponsor Recipient' },
   { id: 'Hn2A3DD-G9E', title: 'Heather — Revival Retreat' },
   { id: 'qZLf7-hx1Pc', title: 'Jen — Veteran & Military Spouse' },
-  { id: 'DcTkCcR716M', title: 'Debbie — Costa Rica Revival Retreat' },
+  { id: 'DcTkCcR716M', title: 'Debbie — Paradise Revival Retreat' },
   { id: 'ebBQhmerkvo', title: 'Got Our Troops Foundation' },
 ]
 
@@ -270,7 +270,7 @@ export default function RiseAndThrive() {
         {/* HERO — featured image alone on top, dynamic text below (all admin-editable) */}
         <DynamicHeader
           slug="rise-and-thrive"
-          eyebrow="Rise & Thrive · Academy + Costa Rica Retreat"
+          eyebrow="Rise & Thrive · Academy + Retreat"
           fallbackTitle="This is so much bigger than a fitness program. It's your next chapter."
           fallbackDescription="For the woman who's successful on paper but secretly knows she's been surviving instead of thriving. A 90-day transformation to reclaim your confidence, health, identity, and purpose."
           fallbackDate="July 27"
@@ -286,7 +286,7 @@ export default function RiseAndThrive() {
             </a>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-7 text-sm text-gray-500">
-            <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#e07800]" /> Costa Rica</span>
+            <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#e07800]" /> Paradise</span>
             <span className="inline-flex items-center gap-1.5"><Sun className="w-4 h-4 text-[#e07800]" /> 90-day journey</span>
           </div>
         </DynamicHeader>
@@ -417,20 +417,20 @@ export default function RiseAndThrive() {
           </div>
         </section>
 
-        {/* WHY THE RETREAT (Costa Rica) */}
+        {/* WHY THE RETREAT (Paradise) */}
         <section className="py-16 md:py-24 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="grid grid-cols-2 gap-3">
                 {['cr-01', 'cr-03', 'cr-04', 'cr-06'].map((c, i) => (
                   <div key={c} className={`relative rounded-2xl overflow-hidden shadow-lg ${i % 2 ? 'mt-6' : ''}`} style={{ aspectRatio: '3/4' }}>
-                    <Image src={`/images/retreat-destinations/${c}.jpg`} alt="Costa Rica celebration retreat" fill className="object-cover" sizes="(max-width: 1024px) 50vw, 25vw" />
+                    <Image src={`/images/retreat-destinations/${c}.jpg`} alt="Paradise celebration retreat" fill className="object-cover" sizes="(max-width: 1024px) 50vw, 25vw" />
                   </div>
                 ))}
               </div>
               <div>
                 <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">Why the retreat changes everything</p>
-                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-5 leading-tight">Costa Rica isn&apos;t a vacation. It&apos;s a rebirth.</h2>
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-5 leading-tight">Paradise isn&apos;t a vacation. It&apos;s a vacation with a purpose.</h2>
                 <p className="text-lg text-gray-600 font-light leading-relaxed mb-6">
                   Most people attend a program. Few create a transformation. The retreat is where it becomes <b className="text-gray-900">embodied</b> —
                   a celebration, a graduation, a declaration. A chance to step away from the noise and finally hear yourself again.
@@ -462,7 +462,7 @@ export default function RiseAndThrive() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <p className="text-[#0D9488] font-bold uppercase tracking-[0.18em] text-sm mb-3">The offer</p>
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-3">Rise &amp; Thrive Academy + Costa Rica Retreat</h2>
+              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-3">Rise &amp; Thrive Academy + Retreat</h2>
               <p className="text-lg text-gray-600 font-light">A 90-day transformational journey for women ready to reclaim confidence, health, identity, and purpose.</p>
             </div>
             <div className="grid md:grid-cols-2 gap-7 items-stretch">
@@ -472,7 +472,7 @@ export default function RiseAndThrive() {
                 <p className="text-gray-500 mb-6">The complete 90-day experience.</p>
                 <p className="text-xs font-bold text-[#0D9488] uppercase tracking-wider mb-2">Included</p>
                 <ul className="space-y-2.5 mb-5">
-                  {['12 Weeks of Rise & Thrive Academy', 'Weekly Coaching & Training', 'Identity & Confidence Coaching', 'Self-Love & Self-Trust Framework', 'Goal Setting & Life Alignment', 'Costa Rica Celebration Retreat'].map((p) => (
+                  {['12 Weeks of Rise & Thrive Academy', 'Weekly Coaching & Training', 'Identity & Confidence Coaching', 'Self-Love & Self-Trust Framework', 'Goal Setting & Life Alignment', 'Upcoming Retreat of Choice'].map((p) => (
                     <li key={p} className="flex items-start gap-2 text-gray-700"><Check className="w-5 h-5 text-[#34c5c5] flex-shrink-0 mt-0.5" /><span className="text-[15px]">{p}</span></li>
                   ))}
                 </ul>
@@ -513,7 +513,7 @@ export default function RiseAndThrive() {
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-white/80 font-bold uppercase tracking-[0.18em] text-sm mb-4">Why now</p>
             <h2 className="text-3xl md:text-4xl font-black mb-6 leading-tight">A year from now you&apos;ll either be celebrating the woman you became… or wishing you had started.</h2>
-            <p className="text-lg text-white/90 font-light leading-relaxed mb-3">This isn&apos;t just the start of a program — it&apos;s the start of a new chapter. And you&apos;ll be standing in Costa Rica, celebrating the woman who chose herself, followed through, and proved her best chapter is still ahead.</p>
+            <p className="text-lg text-white/90 font-light leading-relaxed mb-3">This isn&apos;t just the start of a program — it&apos;s the start of a new chapter. And you&apos;ll be standing in Paradise, celebrating the woman who chose herself, followed through, and proved her best chapter is still ahead.</p>
             <p className="text-lg text-white font-semibold mb-9">You don&apos;t need more information. You need immersion, accountability, community, and action.</p>
             <a href={CHECKOUT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-white text-[#0D9488] font-black text-lg px-10 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow">Start Your Next Chapter <ArrowRight className="w-5 h-5" /></a>
           </div>
@@ -568,7 +568,7 @@ export default function RiseAndThrive() {
             <h2 className="text-3xl md:text-5xl font-black mb-6 leading-tight">This is your opportunity to stop waiting and start becoming.</h2>
             <p className="text-lg md:text-xl text-white/90 mb-10 font-light">Your best chapter is still ahead — and it gets to be this good, or even better.</p>
             <a href={CHECKOUT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-white text-[#e07800] font-black text-lg md:text-xl px-12 py-5 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow">Claim Your Spot <ArrowRight className="w-6 h-6" /></a>
-            <p className="text-white/80 text-sm mt-5">Includes the Costa Rica Celebration Retreat</p>
+            <p className="text-white/80 text-sm mt-5">Includes an Upcoming Retreat of Choice</p>
           </div>
         </section>
 
