@@ -111,8 +111,8 @@ export default function BootcampPage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
             <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
               <div>
-                <div className="relative h-14 w-56 mb-6">
-                  <Image src="/images/bootcamp/beyond-limits-bootcamp-logo.png" alt="Beyond Limits Bootcamp" fill priority className="object-contain object-left" sizes="224px" />
+                <div className="relative aspect-square w-[70%] -ml-2 mb-2">
+                  <Image src="/images/bootcamp/beyond-limits-bootcamp-logo.png" alt="Beyond Limits Bootcamp" fill priority className="object-contain object-left" sizes="(max-width: 1024px) 70vw, 35vw" />
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.02] tracking-tight mb-6">
                   Train Like Your Life Depends on It.<br />
