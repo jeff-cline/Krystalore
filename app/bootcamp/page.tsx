@@ -206,7 +206,7 @@ export default function BootcampPage() {
                   ))}
                 </ul>
               </div>
-              <div className="rounded-3xl bg-gray-900/[0.03] border border-gray-100 p-8 md:p-10">
+              <div className="rounded-3xl bg-gray-50 border border-gray-100 p-8 md:p-10">
                 <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-6">What We Don&apos;t Believe</h2>
                 <ul className="space-y-4">
                   {DONT_BELIEVE.map((b) => (
