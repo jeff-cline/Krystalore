@@ -12,6 +12,9 @@ import {
 
 const CHECKOUT_URL = 'https://www.krystalorecrews.com/virtual-hiit-camp-checkout-page'
 
+// Orange glow applied to section headings so they stand out against the light page
+const GLOW = { textShadow: '0 0 2px #e07800, 0 0 9px rgba(224,120,0,0.75), 0 0 20px rgba(224,120,0,0.45)' }
+
 const STRONG_IS = [
   'Strong is having energy at 3 PM.',
   'Strong is feeling confident in your clothes.',
@@ -143,7 +146,7 @@ export default function BootcampPage() {
         {/* STRONG ISN'T A LOOK */}
         <section className="py-20 md:py-28 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight mb-10">
+            <h2 style={GLOW} className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight mb-10">
               Strong isn&apos;t a look.
             </h2>
             <div className="space-y-4">
@@ -160,7 +163,7 @@ export default function BootcampPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14">
               <p className="text-[#0D9488] font-bold uppercase tracking-[0.2em] text-sm mb-3">The System</p>
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">The 34-Minute Method</h2>
+              <h2 style={GLOW} className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">The 34-Minute Method</h2>
               <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">A complete 30-minute workout — warm-up and cool-down included — bookended by intention and celebration.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
@@ -228,7 +231,7 @@ export default function BootcampPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <p className="text-[#0D9488] font-bold uppercase tracking-[0.2em] text-sm mb-3">The Outcome</p>
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight">You&apos;ll Build</h2>
+              <h2 style={GLOW} className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight">You&apos;ll Build</h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {BUILD.map(({ icon: Icon, label }) => (
@@ -250,7 +253,7 @@ export default function BootcampPage() {
               </div>
               <div>
                 <p className="text-[#0D9488] font-bold uppercase tracking-[0.2em] text-sm mb-3">Your Coach</p>
-                <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-5">Led by a proven high performer.</h2>
+                <h2 style={GLOW} className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-5">Led by a proven high performer.</h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-6">
                   Krystalore Crews built her life on the same standard she teaches: show up, do the work, and never trade your health for success. She&apos;s the performance edge behind leaders who refuse to put themselves last.
                 </p>
@@ -276,12 +279,12 @@ export default function BootcampPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <p className="text-[#0D9488] font-bold uppercase tracking-[0.2em] text-sm mb-3">Why Beyond Limits</p>
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight">Beyond Limits vs Traditional Fitness</h2>
+              <h2 style={GLOW} className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight">Beyond Limits vs Traditional Fitness</h2>
             </div>
             <div className="overflow-hidden rounded-3xl border border-gray-100 shadow-sm bg-white">
-              <div className="grid grid-cols-2 bg-gray-900 text-white">
-                <div className="px-5 py-4 font-bold text-white/70 text-sm uppercase tracking-widest">Traditional Fitness</div>
-                <div className="px-5 py-4 font-black text-sm uppercase tracking-widest bg-gradient-to-r from-[#E8A849] to-[#e07800]">Beyond Limits</div>
+              <div className="grid grid-cols-2">
+                <div className="px-5 py-4 font-bold text-gray-400 text-sm uppercase tracking-widest bg-gray-100">Traditional Fitness</div>
+                <div className="px-5 py-4 font-black text-white text-sm uppercase tracking-widest bg-gradient-to-r from-[#E8A849] to-[#e07800]">Beyond Limits</div>
               </div>
               {COMPARE.map(([trad, bl], i) => (
                 <div key={trad} className={`grid grid-cols-2 ${i % 2 ? 'bg-[#F6F8FA]' : 'bg-white'}`}>
@@ -302,7 +305,7 @@ export default function BootcampPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <p className="text-[#0D9488] font-bold uppercase tracking-[0.2em] text-sm mb-3">Who This Is For</p>
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">Built for people ready to lead themselves first.</h2>
+              <h2 style={GLOW} className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">Built for people ready to lead themselves first.</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-4 mb-10">
               {FOR_LIST.map((f) => (
@@ -325,7 +328,7 @@ export default function BootcampPage() {
         <section className="py-20 md:py-24 bg-[#F4F1EC]">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight">This is NOT for you if…</h2>
+              <h2 style={GLOW} className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight">This is NOT for you if…</h2>
             </div>
             <ul className="space-y-4">
               {NOT_FOR.map((n) => (
@@ -359,7 +362,7 @@ export default function BootcampPage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <p className="text-[#0D9488] font-bold uppercase tracking-[0.2em] text-sm mb-3">Membership</p>
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight">Choose Your Plan</h2>
+              <h2 style={GLOW} className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight">Choose Your Plan</h2>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
@@ -396,7 +399,7 @@ export default function BootcampPage() {
         {/* FINAL CTA */}
         <section className="py-20 md:py-28 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tight mb-5">Lead Yourself First.</h2>
+            <h2 style={GLOW} className="text-4xl md:text-6xl font-black text-gray-900 tracking-tight mb-5">Lead Yourself First.</h2>
             <p className="text-lg md:text-xl text-gray-600 mb-9">
               Thirty minutes. Anywhere. No matter what. This is where high performers stop putting their health last.
             </p>
