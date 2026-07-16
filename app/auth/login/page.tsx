@@ -3,10 +3,9 @@
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import MainLayout from '@/components/layout/MainLayout'
-import CrystalRain from '@/components/CrystalRain'
+import Header from '@/components/layout/header'
 import Link from 'next/link'
-import { Mail, Lock, Eye, Loader2 } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -44,29 +43,28 @@ export default function LoginPage() {
   }
 
   return (
-    <MainLayout>
-      <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-        <CrystalRain />
-        <div className="max-w-md w-full relative z-10">
-          <div className="card">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
-              <p className="text-gray-400 mt-2">Sign in to your Executive account</p>
+    <div className="min-h-screen bg-white">
+      <Header />
+      <div className="flex items-center justify-center px-4 py-14 md:py-20">
+        <div className="w-full max-w-md">
+          <div className="overflow-hidden rounded-3xl border border-[#34c5c5]/30 bg-white shadow-xl">
+            {/* teal login box header */}
+            <div className="bg-gradient-to-r from-[#34c5c5] to-[#0D9488] px-8 py-7 text-center">
+              <h1 className="text-2xl font-black text-white">Welcome Back</h1>
+              <p className="mt-1 text-sm text-white/90">Sign in to your account</p>
             </div>
 
-            {error && (
-              <div className="mb-6 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
-                {error}
-              </div>
-            )}
+            <form onSubmit={handleSubmit} className="space-y-5 p-8" autoComplete="on">
+              {error && (
+                <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-center text-sm text-red-600">
+                  {error}
+                </div>
+              )}
 
-            <form onSubmit={handleSubmit} className="space-y-6" autoComplete="on">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                  Email Address
-                </label>
+                <label htmlFor="email" className="mb-1.5 block text-sm font-semibold text-gray-700">Email Address</label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Mail className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#34c5c5]" />
                   <input
                     id="email"
                     name="email"
@@ -75,18 +73,16 @@ export default function LoginPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="form-input pl-10 w-full"
+                    className="w-full rounded-lg border border-gray-300 py-2.5 pl-10 pr-3 text-gray-900 placeholder-gray-400 focus:border-[#34c5c5] focus:outline-none focus:ring-2 focus:ring-[#34c5c5]/30"
                     placeholder="Enter your email"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
-                  Password
-                </label>
+                <label htmlFor="password" className="mb-1.5 block text-sm font-semibold text-gray-700">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Lock className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#34c5c5]" />
                   <input
                     id="password"
                     name="password"
@@ -95,55 +91,53 @@ export default function LoginPage() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="form-input pl-10 pr-10 w-full"
+                    className="w-full rounded-lg border border-gray-300 py-2.5 pl-10 pr-10 text-gray-900 placeholder-gray-400 focus:border-[#34c5c5] focus:outline-none focus:ring-2 focus:ring-[#34c5c5]/30"
                     placeholder="Enter your password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0D9488]"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
-                    <Eye className="h-5 w-5" />
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
                 </div>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center">
+                <label className="flex items-center gap-2 text-sm text-gray-700">
                   <input
-                    id="remember"
-                    name="remember"
                     type="checkbox"
                     checked={remember}
                     onChange={(e) => setRemember(e.target.checked)}
-                    className="h-4 w-4 text-primary focus:ring-primary border-secondary-600 rounded"
+                    className="h-4 w-4 rounded border-gray-300 text-[#0D9488] focus:ring-[#34c5c5]"
                   />
-                  <label htmlFor="remember" className="ml-2 block text-sm text-gray-300">
-                    Remember me
-                  </label>
-                </div>
-
-                <Link href="/auth/forgot-password" className="text-sm text-primary hover:underline">
+                  Remember me
+                </label>
+                <Link href="/auth/forgot-password" className="text-sm font-semibold text-[#0D9488] hover:underline">
                   Forgot password?
                 </Link>
               </div>
 
-              <button type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center">
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#34c5c5] to-[#0D9488] py-3 font-bold text-white transition hover:brightness-105 disabled:opacity-50"
+              >
                 {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Sign In'}
               </button>
             </form>
 
-            <div className="mt-6 text-center">
-              <p className="text-gray-400">
-                Don&apos;t have an account?{' '}
-                <Link href="/auth/signup" className="text-primary hover:underline">
-                  Sign up here
-                </Link>
-              </p>
+            <div className="px-8 pb-8 text-center text-sm text-gray-500">
+              Don&apos;t have an account?{' '}
+              <Link href="/auth/signup" className="font-semibold text-[#0D9488] hover:underline">
+                Sign up here
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    </MainLayout>
+    </div>
   )
 }
