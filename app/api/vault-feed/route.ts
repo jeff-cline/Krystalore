@@ -50,8 +50,11 @@ export async function GET(request: Request) {
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count)
 
+  // Never CDN-cache: this is keyed, and a public cache keyed by URL would
+  // serve an authorized response to a keyless request. Consumers cache
+  // server-side instead (Beyond Limits revalidates its own fetch).
   return NextResponse.json(
     { categories, videos: rows, count: rows.length },
-    { headers: { 'Cache-Control': 'public, max-age=60, s-maxage=300' } },
+    { headers: { 'Cache-Control': 'private, no-store' } },
   )
 }
