@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 
 const IMG = 'https://66x17tzw9x.ufs.sh/f'
-const HERO = `${IMG}/WajS70ZPD48m8DleTTrOso4uWCTxVKfAc17pbUaziyhIwgn3`
+const HERO = `${IMG}/WajS70ZPD48mH4cqkxRuYCwSLZs97vAgI4WO12VQxXUcNf68`
 const SHE_SERVED = `${IMG}/WajS70ZPD48mfXpLgkWG8hTPIm5zZj0XcladFr1kUsWiRqCe`
 const GALLERY = [
   'WajS70ZPD48mTs3D4zSYidyLHsjD7NEmqZovMrPhn34aQ0tb',

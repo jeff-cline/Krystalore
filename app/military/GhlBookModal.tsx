@@ -53,21 +53,28 @@ export default function GhlBookModal({
 
       {open && (
         <div className="fixed inset-0 z-[100] bg-black/60 flex items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto" onClick={() => setOpen(false)}>
-          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-xl my-4" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[94vh] overflow-y-auto overscroll-contain my-2 sm:my-4"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close"
-              className="absolute -top-3 -right-3 z-10 w-9 h-9 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-gray-900"
+              className="sticky top-2 float-right mr-2 z-10 w-9 h-9 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-gray-900"
             >
               <X className="w-5 h-5" />
             </button>
             <iframe
               src={FORM_SRC}
               title="Leadership Consulting Request Form"
-              className="w-full rounded-2xl"
-              style={{ height: '80vh', border: 'none' }}
+              className="w-full rounded-2xl block"
+              style={{ width: '100%', minHeight: '60vh', border: 'none' }}
+              scrolling="no"
               id={`inline-${FORM_ID}`}
+              data-form-id={FORM_ID}
+              data-layout-iframe-id={`inline-${FORM_ID}`}
+              data-form-name="Leadership Consulting Request Form"
             />
           </div>
         </div>
