@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     url: 'https://krystalore.com/military',
     siteName: 'Krystalore Crews',
     type: 'website',
-    images: [{ url: 'https://66x17tzw9x.ufs.sh/f/WajS70ZPD48mH4cqkxRuYCwSLZs97vAgI4WO12VQxXUcNf68', width: 1600, height: 1200, alt: 'Mission-Ready Leadership training' }],
+    images: [{ url: 'https://66x17tzw9x.ufs.sh/f/WajS70ZPD48mAhrwZJd5aPvgMGewoIxNZQ3ibrEUDjqS6LcO', width: 2000, height: 1500, alt: 'Mission-Ready Leadership training' }],
   },
 }
 

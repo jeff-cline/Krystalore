@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 
 const IMG = 'https://66x17tzw9x.ufs.sh/f'
-const HERO = `${IMG}/WajS70ZPD48mH4cqkxRuYCwSLZs97vAgI4WO12VQxXUcNf68`
+const HERO = `${IMG}/WajS70ZPD48mAhrwZJd5aPvgMGewoIxNZQ3ibrEUDjqS6LcO`
 const SHE_SERVED = `${IMG}/WajS70ZPD48mfXpLgkWG8hTPIm5zZj0XcladFr1kUsWiRqCe`
 const GALLERY = [
   'WajS70ZPD48mTs3D4zSYidyLHsjD7NEmqZovMrPhn34aQ0tb',
@@ -173,7 +173,6 @@ export default function MilitaryPage() {
         <section className="bg-[#0D9488] text-white py-12 md:py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-2xl md:text-3xl font-black leading-snug">“I develop mission-ready leaders by strengthening the human behind the uniform.”</p>
-            <p className="text-white/80 mt-4 font-semibold">That’s your unique advantage.</p>
           </div>
         </section>
 
