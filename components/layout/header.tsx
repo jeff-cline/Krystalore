@@ -38,6 +38,7 @@ const coachingLinks = [
   { href: '/business-bootcamp', label: 'Business Coaching' },
   { href: '/wellness', label: 'Corporate Wellness' },
   { href: '/leadership-training', label: 'Leadership Training' },
+  { href: '/military', label: 'Military Leadership' },
   { href: '/firechallenge', label: 'FIRE Challenge' },
   { href: '/health-mastery', label: 'Health Mastery' },
   { href: '/fitness', label: 'Fitness Coaching' },
