@@ -1,9 +1,9 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import Header from '@/components/layout/header'
-import Footer from '@/components/layout/Footer'
+import PageFrame from '@/components/layout/PageFrame'
 import FAQSection from '@/components/FAQSection'
+import SpeakerFeatures from '@/components/SpeakerFeatures'
 import {
   CheckCircle,
   Sparkles,
@@ -443,7 +443,20 @@ export default function SpeakerPage() {
   return (
     <>
       <JsonLd />
-      <Header />
+      <PageFrame
+        after={
+          <div className="text-center pb-2">
+            <a
+              href="https://jeff-cline.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontSize: '6px', opacity: 0.08, color: '#666' }}
+            >
+              JC
+            </a>
+          </div>
+        }
+      >
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white py-14 md:py-20">
@@ -745,6 +758,10 @@ export default function SpeakerPage() {
       {/* Krystalore Speaks — 9 click-to-play videos + channel CTA */}
       <VideoLibrary />
 
+      {/* Featured appearances — edit data/speaker-features.ts to add shows,
+          press, PDFs, videos, or images. */}
+      <SpeakerFeatures />
+
       {/* Booking CTA — opens email with prefilled prompts */}
       <section id="book" className="py-24 bg-gradient-to-br from-[#0D9488] via-[#14B8A6] to-[#34c5c5] text-white">
         <div className="max-w-3xl mx-auto px-6 text-center">
@@ -816,17 +833,7 @@ export default function SpeakerPage() {
         </div>
       </section>
 
-      <Footer />
-      <div className="text-center pb-2">
-        <a
-          href="https://jeff-cline.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ fontSize: '6px', opacity: 0.08, color: '#666' }}
-        >
-          JC
-        </a>
-      </div>
+      </PageFrame>
     </>
   )
 }
