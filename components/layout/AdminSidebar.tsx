@@ -16,7 +16,8 @@ import {
   Database,
   Plug,
   UserPlus,
-  Images
+  Images,
+  Mic,
 } from 'lucide-react'
 
 export default function AdminSidebar() {
@@ -29,6 +30,7 @@ export default function AdminSidebar() {
     { href: '/admin/reports', icon: BarChart3, label: 'Reports' },
     { href: '/admin/dynamic-dates', icon: Calendar, label: 'Dynamic Dates' },
     { href: '/admin/content', icon: FileText, label: 'Content' },
+    { href: '/admin/speaker-page', icon: Mic, label: 'Speaker Page' },
     { href: '/admin/feature-images', icon: Images, label: 'Feature Images' },
     { href: '/admin/videos', icon: Video, label: 'Video Management' },
     { href: '/admin/permissions', icon: Shield, label: 'Permissions' },
