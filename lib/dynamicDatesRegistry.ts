@@ -23,7 +23,7 @@ export const DYNAMIC_DATE_REGISTRY: DynamicDate[] = [
     pageUrl: '/pr-retreat',
     title: 'Puerto Rico Retreat',
     description: 'A Caribbean reset for women ready to revive, reconnect, and rise.',
-    date: 'March 28–April 3, 2027',
+    date: 'November 14–20, 2026',
     heroImage: '/images/retreat/retreat-group-03.jpg',
     cta: { ...off },
   },
