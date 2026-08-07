@@ -37,25 +37,27 @@ import type { Metadata } from 'next'
 
 /* ─── Carousel Images ─── */
 const carouselImages = [
-  { src: '/images/retreat/retreat-02.jpg', alt: 'Golden sunset over tropical landscape from the hilltop retreat in Ceiba Puerto Rico', caption: 'Breathtaking Caribbean Sunsets' },
-  { src: '/images/retreat/retreat-06.jpg', alt: 'Open-air covered terrace with infinity pool overlooking ocean and rainforest', caption: 'Open-Air Relaxation Terrace' },
-  { src: '/images/retreat/retreat-07.jpg', alt: 'Covered outdoor dining area with panoramic ocean and jungle views seating 14', caption: 'Al Fresco Dining with Panoramic Views' },
-  { src: '/images/retreat/retreat-08.jpg', alt: 'Bright casita bedroom with ocean views through floor-to-ceiling glass doors', caption: 'Wake Up to Paradise Every Morning' },
-  { src: '/images/retreat/retreat-04.jpg', alt: 'Minimalist guest casita bedroom with queen bed and macramé decor', caption: 'Elegant Private Casitas' },
-  { src: '/images/retreat/retreat-09.jpg', alt: 'Open-air kitchen and dining area with ocean views and lush plants', caption: 'Farm-to-Table Kitchen Experience' },
-  { src: '/images/retreat/retreat-10.jpg', alt: 'Hillside walkway with bistro seating overlooking tropical vegetation and coast', caption: 'Quiet Moments with Island Views' },
-  { src: '/images/retreat/retreat-05.jpg', alt: 'Modern en-suite bathroom with rain shower and natural touches', caption: 'Spa-Inspired Private Bathrooms' },
+  { src: '/images/retreat/villa-azure/swing-ocean.jpg', alt: 'Hanging porch swing on a private balcony overlooking the ocean at Villa Azure in Ocean Park, San Juan, Puerto Rico', caption: 'Your Swing Over the Ocean' },
+  { src: '/images/retreat/villa-azure/ocean-palms.jpg', alt: 'Palm-lined Ocean Park beachfront just steps from the villa in San Juan, Puerto Rico', caption: 'Steps From the Ocean' },
+  { src: '/images/retreat/villa-azure/pool.jpg', alt: 'Private heated pool with lounge chairs in the courtyard of the beachfront villa', caption: 'Private Heated Pool' },
+  { src: '/images/retreat/villa-azure/terrace-lounge.jpg', alt: 'Shaded oceanfront terrace lounge with deep blue seating and umbrella', caption: 'Oceanfront Terrace Lounge' },
+  { src: '/images/retreat/villa-azure/dining-ocean.jpg', alt: 'Bright dining room and bar seating with panoramic ocean views', caption: 'Dine With the Ocean in View' },
+  { src: '/images/retreat/villa-azure/bedroom-ocean.jpg', alt: 'Beachfront suite with a window seat framing the Atlantic in San Juan', caption: 'Wake Up to the Water' },
+  { src: '/images/retreat/villa-azure/lawn-ocean.jpg', alt: 'Landscaped lawn terrace looking out over the ocean at Villa Azure', caption: 'Ocean-View Lawn Terrace' },
+  { src: '/images/retreat/villa-azure/living-room.jpg', alt: 'Open-plan living room with designer interiors and natural light at Villa Azure', caption: 'Designer Living Spaces' },
+  { src: '/images/retreat/villa-azure/egg-chairs.jpg', alt: 'Tranquil interior courtyard with hanging egg chairs and a love seat swing', caption: 'Quiet Corners to Land In' },
+  { src: '/images/retreat/villa-azure/kitchen.jpg', alt: 'Fully equipped chef kitchen with ocean-blue tile backsplash', caption: 'Full Chef&rsquo;s Kitchen' },
 ]
 
 /* ─── 7-Day Itinerary ─── */
 const itinerary = [
-  { day: 'Day 1', title: 'Arrival & Grounding', icon: Sunrise, desc: 'Arrive at this stunning oceanview estate in the El Yunque Rainforest zone of Puerto Rico. Settle into your private casita, meet your fellow retreat sisters over a welcome dinner prepared by a private chef, and set your intentions for the week ahead.' },
-  { day: 'Day 2', title: 'Mind Reset & Movement', icon: Dumbbell, desc: 'Morning fitness session by the infinity pool as the sun rises over the Virgin Islands. Guided breakthrough coaching session on releasing what no longer serves you. Afternoon spa treatment and journaling time in your private casita.' },
-  { day: 'Day 3', title: 'Adventure & Discovery', icon: Mountain, desc: 'Tropical rainforest excursion through El Yunque — waterfalls, nature trails, and reconnecting with the wild, adventurous part of yourself. Evening bonfire with soul-aligned conversation under the stars.' },
-  { day: 'Day 4', title: 'Deep Healing & Clarity', icon: Heart, desc: 'Morning breathwork and meditation in the open-air temple. Deep-dive coaching session on mapping your next bold move in life, love, or business. Butler-served lunch overlooking the Caribbean, followed by pool time and sisterhood.' },
-  { day: 'Day 5', title: 'Strength & Strategy', icon: Crown, desc: 'Energizing group workout. Business and life strategy workshop — building the blueprint for your next chapter. Afternoon at a nearby beach or marina. Chef-prepared dinner with live music on the lounge patio.' },
-  { day: 'Day 6', title: 'Radiance & Renewal', icon: Sparkles, desc: 'Morning yoga by the pool. Glam session — dress up, photo shoot, feel unstoppable. Celebration dinner where every woman shares her breakthrough moment. Dance, laugh, cry together.' },
-  { day: 'Day 7', title: 'Integration & Departure', icon: Waves, desc: 'Sunrise meditation. Closing ceremony with your retreat sisters. Depart transformed — clearer, stronger, more magnetic than ever. You return home not as someone different, but as someone who finally owns all that she is.' },
+  { day: 'Day 1', title: 'Arrival & Grounding', icon: Sunrise, desc: 'Land at SJU and be at the villa in 10 minutes. Settle into your suite at Villa Azure — beachfront in Ocean Park, steps from the water. Meet your retreat sisters over a welcome dinner prepared by a private chef, and set your intentions for the week ahead.' },
+  { day: 'Day 2', title: 'Mind Reset & Movement', icon: Dumbbell, desc: 'Sunrise beach walk, then a morning fitness session by the private heated pool. Guided breakthrough coaching on releasing what no longer serves you. Afternoon spa treatment and journaling time on the oceanfront terrace.' },
+  { day: 'Day 3', title: 'Adventure & Discovery', icon: Mountain, desc: 'Island adventure day — ocean time on the beach out front, and an excursion into Old San Juan and the coastline beyond. Reconnect with the wild, adventurous part of yourself. Evening gathering with soul-aligned conversation under the stars.' },
+  { day: 'Day 4', title: 'Deep Healing & Clarity', icon: Heart, desc: 'Morning breathwork and meditation on the ocean-facing terrace. Deep-dive coaching session on mapping your next bold move in life, love, or business. Lunch overlooking the Atlantic, followed by pool time and sisterhood.' },
+  { day: 'Day 5', title: 'Strength & Strategy', icon: Crown, desc: 'Energizing group workout on the sand. Business and life strategy workshop — building the blueprint for your next chapter. Afternoon free on Ocean Park beach. Chef-prepared dinner on the terrace as the sun goes down.' },
+  { day: 'Day 6', title: 'Radiance & Renewal', icon: Sparkles, desc: 'Morning yoga by the pool. Glam session — dress up, beachfront photo shoot, feel unstoppable. Celebration dinner where every woman shares her breakthrough moment. Dance, laugh, cry together.' },
+  { day: 'Day 7', title: 'Integration & Departure', icon: Waves, desc: 'Sunrise meditation on the beach. Closing ceremony with your retreat sisters, then a 10-minute ride back to SJU. Depart transformed — clearer, stronger, more magnetic than ever. You return home not as someone different, but as someone who finally owns all that she is.' },
 ]
 
 export default function PuertoRicoRetreatPage() {
@@ -172,10 +174,10 @@ export default function PuertoRicoRetreatPage() {
           <div className="text-center mb-12">
             <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Your Private Paradise</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ocean View Rainforest Retreat Estate
+              Villa Azure — Beachfront Estate
             </h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-              A 12-casita luxury property nestled in Puerto Rico&apos;s El Yunque Rainforest zone, with panoramic views of the Caribbean Sea and the US &amp; Spanish Virgin Islands
+              A 4,000 sq ft designer villa in Ocean Park, San Juan — beachfront, steps to the ocean, and just 10 minutes from SJU airport
             </p>
           </div>
 
@@ -237,9 +239,9 @@ export default function PuertoRicoRetreatPage() {
           {/* Property Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
             {[
-              { icon: Home, label: '12 Private Casitas', sub: 'Each with en-suite bath' },
+              { icon: Home, label: '7 Designer Suites', sub: '9 beds · sleeps large groups' },
               { icon: Users, label: '16+ Guests', sub: 'Intimate group setting' },
-              { icon: Waves, label: 'Infinity Pool', sub: 'Open 24 hours' },
+              { icon: Waves, label: 'Private Heated Pool', sub: 'Plus direct beach access' },
               { icon: Star, label: '4.87 Stars', sub: 'From 38 verified reviews' },
             ].map((item, i) => (
               <div key={i} className="text-center p-4">
@@ -258,30 +260,33 @@ export default function PuertoRicoRetreatPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">
-                <MapPin className="w-4 h-4 inline mr-1" /> Ceiba, Puerto Rico
+                <MapPin className="w-4 h-4 inline mr-1" /> Ocean Park, San Juan, Puerto Rico
               </p>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Where the Rainforest Meets the Sea
+                Beachfront. Just Steps to the Ocean.
               </h2>
               <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  Less than 10 minutes off the highway and 45 minutes from San Juan International Airport, this private estate sits in the El Yunque Rainforest zone — the only tropical rainforest in the US National Forest System.
+                  Villa Azure sits in the heart of Ocean Park — <strong>beachfront, with direct beach access</strong>, and only <strong>10 minutes from SJU airport</strong>. You land, you drop your bags, and you are already there. No three-hour transfer eating your first day.
                 </p>
                 <p>
-                  Watch the sun rise over the US and Spanish Virgin Islands from your private infinity pool. Fall asleep to the song of the coqui. Wake up with the roosters. Enjoy farm-fresh eggs, seasonal fruit from the property, and herbs grown in the kitchen garden.
+                  Wake up to <strong>breathtaking sunrises over the Atlantic</strong> and end each day with sunsets from the terrace. Take your coffee to the porch swing overlooking the water. The ocean is not a view you drive to here — it is <strong>steps from your door</strong>.
                 </p>
                 <p>
-                  Each casita features its own private indoor and outdoor space, queen-size bed, en-suite bathroom, ceiling fan, and a small patio. The main property includes a chef&apos;s kitchen, oceanview dining terrace, a pool bar and live music lounge, and a meditation temple.
+                  4,000 square feet of designer suites, a private heated pool, a full chef&apos;s kitchen, and generous indoor-outdoor living. Restaurants and cafés are within walking distance, and the beach out front is home to a well-known kite surfing school.
+                </p>
+                <p className="text-gray-900 font-semibold">
+                  Daily movement, real adventures, and memories to last a lifetime.
                 </p>
               </div>
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {[
-                  { icon: Bed, text: '12 Bedrooms' },
-                  { icon: Bath, text: '14 Bathrooms' },
-                  { icon: Waves, text: 'Infinity Pool' },
+                  { icon: Bed, text: '7 Bedrooms · 9 Beds' },
+                  { icon: Waves, text: 'Direct Beach Access' },
+                  { icon: Bath, text: 'Private Heated Pool' },
                   { icon: Utensils, text: 'Chef\'s Kitchen' },
-                  { icon: Wind, text: 'Garden Showers' },
-                  { icon: Coffee, text: 'Farm Fresh Food' },
+                  { icon: Home, text: '4,000 Sq Ft of Living Space' },
+                  { icon: MapPin, text: '10 Min from SJU Airport' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-gray-700">
                     <item.icon className="w-5 h-5 text-teal flex-shrink-0" />
@@ -293,8 +298,8 @@ export default function PuertoRicoRetreatPage() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/images/retreat/retreat-06.jpg"
-                  alt="Open-air relaxation terrace with infinity pool overlooking the ocean at the Puerto Rico women's retreat"
+                  src="/images/retreat/villa-azure/swing-ocean.jpg"
+                  alt="Porch swing overlooking the ocean at Villa Azure, the beachfront retreat villa in Ocean Park, San Juan"
                   width={600}
                   height={450}
                   className="w-full h-auto"
@@ -302,8 +307,8 @@ export default function PuertoRicoRetreatPage() {
               </div>
               <div className="absolute -bottom-6 -left-6 rounded-xl overflow-hidden shadow-lg w-48 h-48 border-4 border-white">
                 <Image
-                  src="/images/retreat/retreat-09.jpg"
-                  alt="Open-air kitchen at the Puerto Rico retreat property"
+                  src="/images/retreat/villa-azure/pool.jpg"
+                  alt="Private heated pool at the beachfront retreat villa in San Juan, Puerto Rico"
                   fill
                   className="object-cover"
                 />
@@ -328,11 +333,11 @@ export default function PuertoRicoRetreatPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { icon: Sparkles, title: 'Transformational Coaching', desc: 'Daily guided sessions to spark clarity, ignite self-reflection, and map out your next bold move in life, love, business, or wellness.' },
-              { icon: Home, title: 'Luxury Accommodations', desc: 'Private casitas with queen beds, en-suite baths, and stunning ocean views. Comfort and elegance designed to help you fully unwind.' },
+              { icon: Home, title: 'Luxury Accommodations', desc: 'Designer suites with king and queen beds and stunning ocean views, in a beachfront villa steps from the water. Comfort and elegance designed to help you fully unwind.' },
               { icon: Utensils, title: 'Private Chef & Nourishing Cuisine', desc: 'Delicious, healthy meals and refreshing beverages — all thoughtfully prepared to fuel your body and energize your spirit.' },
               { icon: Sunrise, title: 'Breathtaking Mornings', desc: 'Wake up to Caribbean sunrises that remind you daily how beautiful life can be when you put yourself first.' },
               { icon: Dumbbell, title: 'Daily Movement', desc: 'Energizing fitness and stretching sessions to awaken your body, clear your mind, and set the tone for powerful breakthroughs.' },
-              { icon: TreePine, title: 'Rainforest Adventure', desc: 'Step into your bold, adventurous self with an unforgettable El Yunque tropical rainforest excursion.' },
+              { icon: TreePine, title: 'Island Adventure', desc: 'Step into your bold, adventurous self — ocean days on Ocean Park beach and an unforgettable excursion through Old San Juan and the coast.' },
               { icon: Crown, title: 'Butler-Level Service', desc: 'Be treated like the queen you are. Every detail is handled so you can fully relax, receive, and focus on YOU.' },
               { icon: Users, title: 'Soul-Aligned Sisterhood', desc: 'Leave with lifelong friendships with women who see you, support you, and are rising right alongside you.' },
             ].map((item, i) => (
@@ -460,7 +465,7 @@ export default function PuertoRicoRetreatPage() {
       {/* ═══════════════ BOOK A CALL CTA ═══════════════ */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <Image
-          src="/images/retreat/retreat-02.jpg"
+          src="/images/retreat/villa-azure/ocean-palms.jpg"
           alt="Caribbean sunset from the women's retreat in Puerto Rico"
           fill
           className="object-cover"
@@ -534,11 +539,11 @@ export default function PuertoRicoRetreatPage() {
             {[
               { q: 'What is a women\'s wellness retreat?', a: 'A women\'s wellness retreat is an immersive, multi-day experience designed specifically for women to step away from daily responsibilities and focus on personal growth, physical health, mental clarity, and emotional renewal. Our Revive & Thrive retreat combines luxury accommodations, transformational coaching, fitness, adventure, and sisterhood in a stunning Caribbean setting.' },
               { q: 'Who is this retreat for?', a: 'This retreat is designed for high-achieving women — entrepreneurs, executives, business owners, and leaders — who give everything to everyone else and are ready to invest in themselves. Whether you\'re navigating burnout, a life transition, or simply craving a reset, this experience meets you where you are.' },
-              { q: 'Where is the retreat located?', a: 'The retreat takes place at a private 12-casita oceanview estate in Ceiba, Puerto Rico, nestled in the El Yunque Rainforest zone. The property features an infinity pool, chef\'s kitchen, meditation temple, and panoramic views of the Caribbean Sea and Virgin Islands. It\'s 45 minutes from San Juan International Airport (SJU).' },
-              { q: 'What\'s included in the retreat?', a: 'Everything is all-inclusive once you arrive: luxury private casita accommodations, all meals prepared by a private chef, daily coaching sessions, fitness and yoga classes, spa treatments, a rainforest excursion, butler service, and daily surprises. Flights are not included.' },
+              { q: 'Where is the retreat located?', a: 'The retreat takes place at Villa Azure, a 4,000 sq ft beachfront villa in Ocean Park, San Juan, Puerto Rico. It sits directly on one of San Juan\'s most beautiful stretches of coastline — steps from the ocean, with direct beach access, a private heated pool, a full chef\'s kitchen, and 7 designer suites. It\'s only 10 minutes from San Juan International Airport (SJU), and restaurants and cafés are within walking distance.' },
+              { q: 'What\'s included in the retreat?', a: 'Everything is all-inclusive once you arrive: your suite in the beachfront villa, all meals prepared by a private chef, daily movement and coaching sessions, spa treatments, island adventures and excursions, and daily surprises. Flights are not included.' },
               { q: 'Do I need to be extremely fit to attend?', a: 'Not at all. Our daily movement sessions are designed for all fitness levels. Whether you\'re a marathon runner or haven\'t worked out in months, everything is adaptable. The goal is to reconnect with your body, not compete.' },
               { q: 'Is this a business retreat or a wellness retreat?', a: 'It\'s both. Our Revive & Thrive experience weaves together wellness, personal development, and strategic life/business coaching. You\'ll gain clarity not just about your health but about your next bold move — whether that\'s in your career, relationships, or personal goals.' },
-              { q: 'What airport should I fly into?', a: 'Fly into San Juan Luis Muñoz Marín International Airport (SJU). The retreat property is approximately 45 minutes from the airport. Transportation details and recommendations will be provided after booking.' },
+              { q: 'What airport should I fly into?', a: 'Fly into San Juan Luis Muñoz Marín International Airport (SJU). The villa is only 10 minutes from the airport — one of the shortest transfers you will ever have to a beachfront retreat. Transportation details and recommendations will be provided after booking.' },
               { q: 'Are payment plans available?', a: 'Yes. We offer flexible payment plans so you can secure your spot and pay over time. We also have limited scholarship spots available for each retreat. Contact us through the booking form to discuss options.' },
               { q: 'Can I book a private retreat for my group?', a: 'Absolutely. We offer private retreat experiences for friend groups, families, corporate teams, and organizations. We also offer co-ed retreats focused on book writing and business planning. Contact us to design your custom experience.' },
               { q: 'What makes this different from other women\'s retreats?', a: 'This isn\'t a vacation with a couple of workshops tacked on. Every single day is intentionally designed with coaching, movement, adventure, and luxury service. You\'ll be treated like royalty while doing deep, transformational inner work. Our retreats consistently produce breakthroughs that women carry with them for years.' },
@@ -598,16 +603,16 @@ export default function PuertoRicoRetreatPage() {
             '@context': 'https://schema.org',
             '@type': 'Event',
             name: 'Revive & Thrive Women\'s Wellness Retreat',
-            description: 'A 7-day luxury wellness retreat for high-achieving women in Puerto Rico. Includes transformational coaching, fitness, adventure, spa treatments, and private chef cuisine at a stunning 12-casita oceanview estate in the El Yunque Rainforest.',
+            description: 'A 7-day luxury wellness retreat for high-achieving women in Puerto Rico. Includes transformational coaching, daily movement, island adventures, spa treatments, and private chef cuisine at Villa Azure, a beachfront villa in Ocean Park, San Juan — 10 minutes from SJU airport.',
             url: 'https://krystalore.com/pr-retreat',
             eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
             eventStatus: 'https://schema.org/EventScheduled',
             location: {
               '@type': 'Place',
-              name: 'Ocean View Rainforest Retreat Estate',
+              name: 'Villa Azure — Beachfront Estate',
               address: {
                 '@type': 'PostalAddress',
-                addressLocality: 'Ceiba',
+                addressLocality: 'San Juan',
                 addressRegion: 'PR',
                 addressCountry: 'US',
               },
@@ -637,8 +642,8 @@ export default function PuertoRicoRetreatPage() {
             '@type': 'FAQPage',
             mainEntity: [
               { '@type': 'Question', name: 'What is a women\'s wellness retreat?', acceptedAnswer: { '@type': 'Answer', text: 'A women\'s wellness retreat is an immersive, multi-day experience designed specifically for women to step away from daily responsibilities and focus on personal growth, physical health, mental clarity, and emotional renewal.' } },
-              { '@type': 'Question', name: 'Where is the Revive & Thrive retreat located?', acceptedAnswer: { '@type': 'Answer', text: 'The retreat takes place at a private 12-casita oceanview estate in Ceiba, Puerto Rico, in the El Yunque Rainforest zone, 45 minutes from San Juan International Airport.' } },
-              { '@type': 'Question', name: 'What\'s included in the retreat?', acceptedAnswer: { '@type': 'Answer', text: 'Everything is all-inclusive: luxury accommodations, private chef meals, daily coaching, fitness, spa treatments, rainforest excursion, butler service. Flights not included.' } },
+              { '@type': 'Question', name: 'Where is the Revive & Thrive retreat located?', acceptedAnswer: { '@type': 'Answer', text: 'The retreat takes place at Villa Azure, a beachfront villa in Ocean Park, San Juan, Puerto Rico — steps from the ocean and only 10 minutes from San Juan International Airport (SJU).' } },
+              { '@type': 'Question', name: 'What\'s included in the retreat?', acceptedAnswer: { '@type': 'Answer', text: 'Everything is all-inclusive: beachfront villa accommodations, private chef meals, daily movement and coaching, spa treatments, and island adventures. Flights not included.' } },
               { '@type': 'Question', name: 'Is this a business retreat or wellness retreat?', acceptedAnswer: { '@type': 'Answer', text: 'It\'s both. The Revive & Thrive experience combines wellness, personal development, and strategic life/business coaching for high-achieving women.' } },
               { '@type': 'Question', name: 'Are payment plans available?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Flexible payment plans and limited scholarship opportunities are available for each retreat.' } },
             ],
