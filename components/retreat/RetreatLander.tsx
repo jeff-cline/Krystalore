@@ -4,6 +4,8 @@ import { ArrowRight, Calendar, Check, Heart, Mail, MapPin, Sparkles, Users } fro
 import Header from '@/components/layout/header'
 import RetreatHeroMontage from '@/components/retreat/RetreatHeroMontage'
 import RetreatInquiryModal from '@/components/retreat/RetreatInquiryModal'
+import RetreatTestimonialScroller from '@/components/retreat/RetreatTestimonialScroller'
+import { retreatTestimonials } from '@/data/retreat-testimonials'
 import Footer from '@/components/layout/Footer'
 
 export const WAITLIST_URL = 'https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout'
@@ -209,6 +211,25 @@ export function RetreatHubPage() {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── TESTIMONIALS — SCROLLING VIDEO WALL ── */}
+        <section className="py-16 md:py-24 bg-[#f2f8fb]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <p className="text-[#2a7fa0] font-bold tracking-[0.3em] uppercase text-sm mb-3">Testimonials</p>
+              <h2
+                className="text-3xl md:text-4xl font-black mb-4"
+                style={{ textShadow: '0 0 2px rgba(179,211,18,0.55), 0 0 14px rgba(179,211,18,0.45), 0 0 32px rgba(179,211,18,0.28)' }}
+              >
+                Real Women. Real <span className="text-[#f3498c]">Transformations.</span>
+              </h2>
+              <p className="text-gray-500 text-lg">
+                In their own words &mdash; straight from past Revive &amp; Thrive retreats.
+              </p>
+            </div>
+            <RetreatTestimonialScroller videos={retreatTestimonials} />
           </div>
         </section>
 

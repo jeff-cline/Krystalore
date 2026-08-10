@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { DynamicHeader } from '@/components/DynamicDate'
 import RetreatInquiryModal from '@/components/retreat/RetreatInquiryModal'
 import RetreatTestimonialScroller from '@/components/retreat/RetreatTestimonialScroller'
+import { retreatTestimonials } from '@/data/retreat-testimonials'
 import {
   ChevronLeft,
   ChevronRight,
@@ -49,18 +50,6 @@ const carouselImages = [
   { src: '/images/retreat/villa-azure/living-room.jpg', alt: 'Open-plan living room with designer interiors and natural light at Villa Azure', caption: 'Designer Living Spaces' },
   { src: '/images/retreat/villa-azure/egg-chairs.jpg', alt: 'Tranquil interior courtyard with hanging egg chairs and a love seat swing', caption: 'Quiet Corners to Land In' },
   { src: '/images/retreat/villa-azure/kitchen.jpg', alt: 'Fully equipped chef kitchen with ocean-blue tile backsplash', caption: 'Full Chef&rsquo;s Kitchen' },
-]
-
-/* ─── Testimonial videos — Revive & Thrive Retreat playlist ─── */
-const testimonialVideos = [
-  { id: 'qZLf7-hx1Pc', who: 'Jen', title: 'Female Veteran & Military Spouse Testimonial' },
-  { id: 'VmEmV0juxGY', who: 'Sarah', title: 'Female Veteran Sponsor Recipient — Revive & Thrive, May 2023' },
-  { id: 'jHE6rGalyVM', who: 'Sondra', title: 'Female Veteran Sponsor Recipient — Revive & Thrive, May 2023' },
-  { id: 'bfKA7jp0JGQ', title: 'Revive & Thrive Retreat Testimonial' },
-  { id: 'ebBQhmerkvo', title: 'Revive & Thrive Retreat Testimonial — thanks Got Our Troops Foundation!' },
-  { id: '9qiQCLprldY', title: "Revive & Thrive All-Inclusive Women's Retreat Recap — Costa Rica, Aug 2025" },
-  { id: 'QqE5UUqF0Rk', title: 'Costa Rica Revive & Thrive Retreat Meet & Greet — Aug 2025' },
-  { id: 'hWOiMG10MoQ', title: 'Revive & Thrive Retreats with Crews Beyond Limits' },
 ]
 
 /* ─── 7-Day Itinerary ─── */
@@ -391,7 +380,7 @@ export default function PuertoRicoRetreatPage() {
               In their own words &mdash; straight from past Revive &amp; Thrive retreats.
             </p>
           </div>
-          <RetreatTestimonialScroller videos={testimonialVideos} />
+          <RetreatTestimonialScroller videos={retreatTestimonials} />
         </div>
       </section>
 

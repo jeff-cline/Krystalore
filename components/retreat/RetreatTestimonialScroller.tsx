@@ -3,12 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
 
-export type VideoTestimonial = {
-  id: string
-  title: string
-  /** Person's name when the video names them */
-  who?: string
-}
+import type { VideoTestimonial } from '@/data/retreat-testimonials'
 
 /**
  * Four-across scrolling wall of retreat testimonial videos.
