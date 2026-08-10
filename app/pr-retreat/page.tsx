@@ -6,6 +6,8 @@ import Footer from '@/components/layout/Footer'
 import Image from 'next/image'
 import Link from 'next/link'
 import { DynamicHeader } from '@/components/DynamicDate'
+import RetreatInquiryModal from '@/components/retreat/RetreatInquiryModal'
+import RetreatTestimonialScroller from '@/components/retreat/RetreatTestimonialScroller'
 import {
   ChevronLeft,
   ChevronRight,
@@ -49,6 +51,18 @@ const carouselImages = [
   { src: '/images/retreat/villa-azure/kitchen.jpg', alt: 'Fully equipped chef kitchen with ocean-blue tile backsplash', caption: 'Full Chef&rsquo;s Kitchen' },
 ]
 
+/* ─── Testimonial videos — Revive & Thrive Retreat playlist ─── */
+const testimonialVideos = [
+  { id: 'qZLf7-hx1Pc', who: 'Jen', title: 'Female Veteran & Military Spouse Testimonial' },
+  { id: 'VmEmV0juxGY', who: 'Sarah', title: 'Female Veteran Sponsor Recipient — Revive & Thrive, May 2023' },
+  { id: 'jHE6rGalyVM', who: 'Sondra', title: 'Female Veteran Sponsor Recipient — Revive & Thrive, May 2023' },
+  { id: 'bfKA7jp0JGQ', title: 'Revive & Thrive Retreat Testimonial' },
+  { id: 'ebBQhmerkvo', title: 'Revive & Thrive Retreat Testimonial — thanks Got Our Troops Foundation!' },
+  { id: '9qiQCLprldY', title: "Revive & Thrive All-Inclusive Women's Retreat Recap — Costa Rica, Aug 2025" },
+  { id: 'QqE5UUqF0Rk', title: 'Costa Rica Revive & Thrive Retreat Meet & Greet — Aug 2025' },
+  { id: 'hWOiMG10MoQ', title: 'Revive & Thrive Retreats with Crews Beyond Limits' },
+]
+
 /* ─── 7-Day Itinerary ─── */
 const itinerary = [
   { day: 'Day 1', title: 'Arrival & Grounding', icon: Sunrise, desc: 'Land at SJU and be at the villa in 10 minutes. Settle into your suite at Villa Azure — beachfront in Ocean Park, steps from the water. Meet your retreat sisters over a welcome dinner prepared by a private chef, and set your intentions for the week ahead.' },
@@ -90,19 +104,19 @@ export default function PuertoRicoRetreatPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
-            className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 hover:shadow-teal/40 transition-all duration-300 transform hover:scale-105"
+            className="inline-flex items-center justify-center gap-2 bg-[#41a7c9] hover:bg-[#2a7fa0] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-[#41a7c9]/30 hover:shadow-[#41a7c9]/40 transition-all duration-300 transform hover:scale-105"
           >
             Book Now <ArrowRight className="w-5 h-5" />
           </a>
           <a
             href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist"
-            className="inline-flex items-center justify-center gap-2 border-2 border-[#0D9488] text-[#0D9488] font-semibold text-lg px-10 py-4 rounded-full hover:bg-[#0D9488]/5 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 border-2 border-[#2a7fa0] text-[#2a7fa0] font-semibold text-lg px-10 py-4 rounded-full hover:bg-[#2a7fa0]/5 transition-all duration-300"
           >
             Join Waitlist
           </a>
           <a
             href="https://krystalore.com/rise-and-thrive"
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
           >
             VIP Bundle Option <ArrowRight className="w-5 h-5" />
           </a>
@@ -124,7 +138,7 @@ export default function PuertoRicoRetreatPage() {
               />
             </div>
             <div className="text-center md:text-left">
-              <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Puerto Rico Retreat Options</p>
+              <p className="text-[#2a7fa0] font-semibold tracking-widest uppercase text-sm mb-3">Puerto Rico Retreat Options</p>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Puerto Rico Revive & Thrive Retreat</h2>
               <p className="text-gray-500 text-lg">
                 Reserve the Puerto Rico retreat, join the waitlist for future events, or book a private retreat experience.
@@ -133,31 +147,36 @@ export default function PuertoRicoRetreatPage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
-              <p className="text-teal font-bold uppercase tracking-widest text-xs mb-2">Featured Retreat</p>
+              <p className="text-[#2a7fa0] font-bold uppercase tracking-widest text-xs mb-2">Featured Retreat</p>
               <h3 className="text-2xl font-bold mb-3">Puerto Rico Retreat</h3>
               <p className="text-gray-600 mb-5">A Caribbean reset for women ready to revive, reconnect, and rise.</p>
-              <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
-                Book Now <ArrowRight className="w-4 h-4" />
-              </a>
+              <div className="flex flex-col gap-3 items-start">
+                <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#41a7c9] hover:bg-[#2a7fa0] text-white font-bold px-6 py-3 rounded-full transition-colors">
+                  Book Now <ArrowRight className="w-4 h-4" />
+                </a>
+                <a href="https://krystalore.com/rise-and-thrive" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] text-white font-bold px-6 py-3 rounded-full hover:scale-105 transition-transform">
+                  VIP Bundle Option <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
-              <p className="text-primary font-bold uppercase tracking-widest text-xs mb-2">Next Experience</p>
+              <p className="text-[#f3498c] font-bold uppercase tracking-widest text-xs mb-2">Next Experience</p>
               <h3 className="text-2xl font-bold mb-3">Retreat Waitlist</h3>
               <p className="text-gray-600 mb-5">Get first notice for future retreat dates, rooms, and updates.</p>
               <div className="flex flex-col gap-3 items-start">
-                <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold px-6 py-3 rounded-full transition-colors">
+                <a href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#41a7c9] hover:bg-[#2a7fa0] text-white font-bold px-6 py-3 rounded-full transition-colors">
                   Book Now <ArrowRight className="w-4 h-4" />
                 </a>
-                <a href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-600 text-white font-bold px-6 py-3 rounded-full transition-colors">
+                <a href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] text-white font-bold px-6 py-3 rounded-full transition-colors">
                   Join the Waitlist <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
-              <p className="text-teal font-bold uppercase tracking-widest text-xs mb-2">Private Groups</p>
+              <p className="text-[#2a7fa0] font-bold uppercase tracking-widest text-xs mb-2">Private Groups</p>
               <h3 className="text-2xl font-bold mb-3">Private Retreat Planning</h3>
               <p className="text-gray-600 mb-5">Bring your team, circle, or community together for a custom Beyond Limits retreat.</p>
-              <Link href="https://www.krystalorecrews.com/costa-rica-retreat-private-request-page" className="inline-flex items-center gap-2 border-2 border-teal text-teal font-bold px-6 py-3 rounded-full hover:bg-teal/5 transition-colors">
+              <Link href="https://www.krystalorecrews.com/costa-rica-retreat-private-request-page" className="inline-flex items-center gap-2 border-2 border-[#41a7c9] text-[#2a7fa0] font-bold px-6 py-3 rounded-full hover:bg-[#41a7c9]/5 transition-colors">
                 Book Private Retreat <Phone className="w-4 h-4" />
               </Link>
             </div>
@@ -169,7 +188,7 @@ export default function PuertoRicoRetreatPage() {
       <section className="py-20 md:py-28 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            You Take Care of <span className="text-teal">Everyone.</span> When Was the Last Time Someone Took Care of <span className="text-primary">You?</span>
+            You Take Care of <span className="text-[#2a7fa0]">Everyone.</span> When Was the Last Time Someone Took Care of <span className="text-[#f3498c]">You?</span>
           </h2>
           <div className="space-y-6 text-lg md:text-xl text-gray-600 leading-relaxed">
             <p>
@@ -189,7 +208,7 @@ export default function PuertoRicoRetreatPage() {
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Your Private Paradise</p>
+            <p className="text-[#2a7fa0] font-semibold tracking-widest uppercase text-sm mb-3">Your Private Paradise</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Villa Azure — Beachfront Estate
             </h2>
@@ -253,83 +272,76 @@ export default function PuertoRicoRetreatPage() {
             </div>
           </div>
 
-          {/* Property Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
-            {[
-              { icon: Home, label: '7 Designer Suites', sub: '9 beds · sleeps large groups' },
-              { icon: Users, label: '16+ Guests', sub: 'Intimate group setting' },
-              { icon: Waves, label: 'Private Heated Pool', sub: 'Plus direct beach access' },
-              { icon: Star, label: '4.87 Stars', sub: 'From 38 verified reviews' },
-            ].map((item, i) => (
-              <div key={i} className="text-center p-4">
-                <item.icon className="w-8 h-8 text-teal mx-auto mb-2" />
-                <p className="font-bold text-gray-900">{item.label}</p>
-                <p className="text-sm text-gray-500">{item.sub}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* ═══════════════ THE LOCATION — PROPERTY DETAILS ═══════════════ */}
-      <section className="py-20 md:py-28 bg-gray-50">
+      {/* ═══════════════ WORK WITH KRYSTALORE ═══════════════ */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-[#17495c] via-[#2a7fa0] to-[#41a7c9] text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">
-                <MapPin className="w-4 h-4 inline mr-1" /> Ocean Park, San Juan, Puerto Rico
+          <div className="text-center mb-12">
+            <p className="text-[#b3d312] font-bold tracking-[0.3em] uppercase text-sm mb-3">Featured</p>
+            <h2 className="text-4xl md:text-5xl font-black mb-4">
+              Work with <span className="italic font-serif text-[#f3498c]">Krystalore</span>
+            </h2>
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+              Come to a retreat that&rsquo;s already handled &mdash; or build your own with her beside you.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
+              <p className="text-[#f3498c] font-black tracking-[0.2em] uppercase text-xs mb-3">Done For You</p>
+              <h3 className="text-3xl font-black mb-3">Just show up.</h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Krystalore and her team handle the entire retreat &mdash; villa, chef, itinerary,
+                transport, programming. You arrive, and everything is already taken care of.
               </p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Beachfront. Just Steps to the Ocean.
-              </h2>
-              <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
-                <p>
-                  Villa Azure sits in the heart of Ocean Park — <strong>beachfront, with direct beach access</strong>, and only <strong>10 minutes from SJU airport</strong>. You land, you drop your bags, and you are already there. No three-hour transfer eating your first day.
-                </p>
-                <p>
-                  Wake up to <strong>breathtaking sunrises over the Atlantic</strong> and end each day with sunsets from the terrace. Take your coffee to the porch swing overlooking the water. The ocean is not a view you drive to here — it is <strong>steps from your door</strong>.
-                </p>
-                <p>
-                  4,000 square feet of designer suites, a private heated pool, a full chef&apos;s kitchen, and generous indoor-outdoor living. Restaurants and cafés are within walking distance, and the beach out front is home to a well-known kite surfing school.
-                </p>
-                <p className="text-gray-900 font-semibold">
-                  Daily movement, real adventures, and memories to last a lifetime.
-                </p>
-              </div>
-              <div className="mt-8 grid grid-cols-2 gap-4">
+              <ul className="space-y-3 mb-8 flex-1">
                 {[
-                  { icon: Bed, text: '7 Bedrooms · 9 Beds' },
-                  { icon: Waves, text: 'Direct Beach Access' },
-                  { icon: Bath, text: 'Private Heated Pool' },
-                  { icon: Utensils, text: 'Chef\'s Kitchen' },
-                  { icon: Home, text: '4,000 Sq Ft of Living Space' },
-                  { icon: MapPin, text: '10 Min from SJU Airport' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-gray-700">
-                    <item.icon className="w-5 h-5 text-teal flex-shrink-0" />
-                    <span>{item.text}</span>
-                  </div>
+                  'Zero planning — venue, meals and logistics are handled end to end',
+                  'A proven day-by-day itinerary of coaching, movement and adventure',
+                  'Private chef, ground transport and on-site host included',
+                  'Instant community — you arrive solo and leave with a circle',
+                  'Fixed, all-inclusive pricing with payment plans available',
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">{b}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
+              <p className="text-sm font-bold text-gray-500 mb-5">
+                Best for: individuals and small groups who want the experience without the workload.
+              </p>
+              <RetreatInquiryModal triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] text-white font-black px-7 py-4 rounded-full hover:scale-[1.03] transition-transform shadow-lg" />
             </div>
-            <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-xl">
-                <Image
-                  src="/images/retreat/villa-azure/swing-ocean.jpg"
-                  alt="Porch swing overlooking the ocean at Villa Azure, the beachfront retreat villa in Ocean Park, San Juan"
-                  width={600}
-                  height={450}
-                  className="w-full h-auto"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-6 rounded-xl overflow-hidden shadow-lg w-48 h-48 border-4 border-white">
-                <Image
-                  src="/images/retreat/villa-azure/pool.jpg"
-                  alt="Private heated pool at the beachfront retreat villa in San Juan, Puerto Rico"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+
+            <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
+              <p className="text-[#2a7fa0] font-black tracking-[0.2em] uppercase text-xs mb-3">Done With You</p>
+              <h3 className="text-3xl font-black mb-3">Build your own.</h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Host your own retreat with Krystalore guiding the build &mdash; her venues, vendors
+                and playbook, your brand and your people.
+              </p>
+              <ul className="space-y-3 mb-8 flex-1">
+                {[
+                  'Her vetted venues and vendor list — skip the expensive trial and error',
+                  'Pricing, budgeting and profitability mapped before you commit',
+                  'Itinerary and programming designed around your audience',
+                  'Filling-the-room strategy: promotion, offers and enrollment',
+                  'Co-host or speaker support on site if you want backup',
+                  'You keep the relationships, the revenue and the brand',
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm font-bold text-gray-500 mb-5">
+                Best for: coaches, leaders and organizations running a retreat of their own.
+              </p>
+              <RetreatInquiryModal triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-[#2a7fa0] hover:bg-[#17495c] text-white font-black px-7 py-4 rounded-full transition-colors shadow-lg" />
             </div>
           </div>
         </div>
@@ -340,7 +352,7 @@ export default function PuertoRicoRetreatPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              When I Say <span className="text-primary">Treated Like a Queen</span>, This Is What I Mean
+              When I Say <span className="text-[#f3498c]">Treated Like a Queen</span>, This Is What I Mean
             </h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">
               7 action-packed days. One life-changing transformation. Don&apos;t lift a finger.
@@ -358,8 +370,8 @@ export default function PuertoRicoRetreatPage() {
               { icon: Crown, title: 'Butler-Level Service', desc: 'Be treated like the queen you are. Every detail is handled so you can fully relax, receive, and focus on YOU.' },
               { icon: Users, title: 'Soul-Aligned Sisterhood', desc: 'Leave with lifelong friendships with women who see you, support you, and are rising right alongside you.' },
             ].map((item, i) => (
-              <div key={i} className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg hover:shadow-teal/5 transition-all duration-300 border border-gray-100 hover:border-teal/20">
-                <item.icon className="w-10 h-10 text-teal mb-4" />
+              <div key={i} className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg hover:shadow-[#41a7c9]/5 transition-all duration-300 border border-gray-100 hover:border-[#41a7c9]/20">
+                <item.icon className="w-10 h-10 text-[#2a7fa0] mb-4" />
                 <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
               </div>
@@ -368,26 +380,18 @@ export default function PuertoRicoRetreatPage() {
         </div>
       </section>
 
-      {/* ═══════════════ RETREAT PHOTOS — GROUP SHOTS ═══════════════ */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ═══════════════ TESTIMONIALS — SCROLLING VIDEO WALL ═══════════════ */}
+      <section className="py-16 md:py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Real Women. Real <span className="text-teal">Transformations.</span>
+              Real Women. Real <span className="text-[#f3498c]">Transformations.</span>
             </h2>
-            <p className="text-gray-500 text-lg">Past retreat experiences that changed lives</p>
+            <p className="text-gray-500 text-lg">
+              In their own words &mdash; straight from past Revive &amp; Thrive retreats.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/retreat/retreat-group-01.jpg" alt="Women in matching retreat shirts posing on tropical beach" width={400} height={300} className="w-full h-64 object-cover" />
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/retreat/retreat-group-03.jpg" alt="Retreat women celebrating at sunset with ocean views" width={400} height={300} className="w-full h-64 object-cover" />
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg">
-              <Image src="/images/retreat/retreat-group-02.jpg" alt="Women running together during retreat fitness activity" width={400} height={300} className="w-full h-64 object-cover" />
-            </div>
-          </div>
+          <RetreatTestimonialScroller videos={testimonialVideos} />
         </div>
       </section>
 
@@ -395,7 +399,7 @@ export default function PuertoRicoRetreatPage() {
       <section className="py-20 md:py-28 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Your Week of Transformation</p>
+            <p className="text-[#f3498c] font-semibold tracking-widest uppercase text-sm mb-3">Your Week of Transformation</p>
             <h2 className="text-3xl md:text-4xl font-bold">
               7 Days That Will Change Everything
             </h2>
@@ -404,11 +408,11 @@ export default function PuertoRicoRetreatPage() {
           <div className="space-y-8">
             {itinerary.map((day, i) => (
               <div key={i} className="flex gap-6 items-start group">
-                <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-teal/10 to-primary/10 flex items-center justify-center group-hover:from-teal/20 group-hover:to-primary/20 transition-all duration-300">
-                  <day.icon className="w-7 h-7 text-teal" />
+                <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-[#41a7c9]/10 to-[#f3498c]/10 flex items-center justify-center group-hover:from-[#41a7c9]/20 group-hover:to-[#f3498c]/20 transition-all duration-300">
+                  <day.icon className="w-7 h-7 text-[#2a7fa0]" />
                 </div>
                 <div>
-                  <p className="text-teal font-semibold text-sm tracking-wide uppercase">{day.day}</p>
+                  <p className="text-[#2a7fa0] font-semibold text-sm tracking-wide uppercase">{day.day}</p>
                   <h3 className="text-xl font-bold mb-2">{day.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{day.desc}</p>
                 </div>
@@ -419,7 +423,7 @@ export default function PuertoRicoRetreatPage() {
       </section>
 
       {/* ═══════════════ WHAT YOU'LL LEAVE WITH ═══════════════ */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-teal-50 via-white to-primary/5">
+      <section className="py-20 md:py-28 bg-gradient-to-br from-[#41a7c9]/10 via-white to-[#f3498c]/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-12">
             What You&apos;ll Walk Away With
@@ -434,7 +438,7 @@ export default function PuertoRicoRetreatPage() {
               'The feeling of being fully seen, fully supported, and fully alive',
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3 bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-                <Check className="w-6 h-6 text-teal flex-shrink-0 mt-0.5" />
+                <Check className="w-6 h-6 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
                 <p className="text-gray-700 text-lg">{item}</p>
               </div>
             ))}
@@ -458,7 +462,7 @@ export default function PuertoRicoRetreatPage() {
               </div>
             </div>
             <div>
-              <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">About Your Host</p>
+              <p className="text-[#2a7fa0] font-semibold tracking-widest uppercase text-sm mb-3">About Your Host</p>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Krystalore Crews</h2>
               <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
                 <p>
@@ -502,13 +506,13 @@ export default function PuertoRicoRetreatPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="https://www.krystalorecrews.com/costa-rica-retreat-private-request-page"
-              className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 bg-[#41a7c9] hover:bg-[#2a7fa0] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
             >
               <Phone className="w-5 h-5" /> Book Private Retreat
             </Link>
             <a
               href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
-              className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-600 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 bg-[#41a7c9] hover:bg-[#2a7fa0] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
             >
               <Calendar className="w-5 h-5" /> Book Now
             </a>
@@ -519,7 +523,7 @@ export default function PuertoRicoRetreatPage() {
       {/* ═══════════════ SCHOLARSHIP SECTION ═══════════════ */}
       <section id="scholarship" className="py-20 md:py-28 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <GraduationCap className="w-12 h-12 text-primary mx-auto mb-6" />
+          <GraduationCap className="w-12 h-12 text-[#f3498c] mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Waitlist & Updates
           </h2>
@@ -532,13 +536,13 @@ export default function PuertoRicoRetreatPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
-              className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 bg-[#41a7c9] hover:bg-[#2a7fa0] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-[#41a7c9]/30 transition-all duration-300 transform hover:scale-105"
             >
               <Calendar className="w-5 h-5" /> Book Now
             </a>
             <a
               href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist"
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-primary/20 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] hover:from-[#d92d70] hover:to-[#c02461] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-[#f3498c]/20 transition-all duration-300 transform hover:scale-105"
             >
               <GraduationCap className="w-5 h-5" /> Join Waitlist
             </a>
@@ -580,7 +584,7 @@ export default function PuertoRicoRetreatPage() {
       </section>
 
       {/* ═══════════════ FINAL CTA ═══════════════ */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-teal-50 via-white to-primary/5">
+      <section className="py-20 md:py-28 bg-gradient-to-br from-[#41a7c9]/10 via-white to-[#f3498c]/5">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             You&apos;ve Earned This.
@@ -591,19 +595,19 @@ export default function PuertoRicoRetreatPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <a
               href="https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout"
-              className="inline-flex items-center justify-center gap-2 bg-[#34c5c5] hover:bg-[#37a6a6] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 bg-[#41a7c9] hover:bg-[#2a7fa0] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-[#41a7c9]/30 transition-all duration-300 transform hover:scale-105"
             >
               Book Now <ArrowRight className="w-5 h-5" />
             </a>
             <Link
               href="https://www.krystalorecrews.com/costa-rica-retreat-private-request-page"
-              className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-600 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-teal/30 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 bg-[#41a7c9] hover:bg-[#2a7fa0] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg shadow-[#41a7c9]/30 transition-all duration-300 transform hover:scale-105"
             >
               <Phone className="w-5 h-5" /> Book Private Retreat
             </Link>
             <a
               href="https://www.krystalorecrews.com/costa-rica-revival-retreat-waitlist"
-              className="inline-flex items-center justify-center gap-2 border-2 border-primary text-primary font-bold text-lg px-10 py-4 rounded-full hover:bg-primary/5 transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 border-2 border-[#f3498c] text-[#f3498c] font-bold text-lg px-10 py-4 rounded-full hover:bg-[#f3498c]/5 transition-all duration-300"
             >
               <GraduationCap className="w-5 h-5" /> Join Waitlist
             </a>
