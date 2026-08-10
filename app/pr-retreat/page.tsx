@@ -100,6 +100,12 @@ export default function PuertoRicoRetreatPage() {
           >
             Join Waitlist
           </a>
+          <a
+            href="https://krystalore.com/rise-and-thrive"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
+          >
+            VIP Bundle Option <ArrowRight className="w-5 h-5" />
+          </a>
         </div>
       </DynamicHeader>
 
@@ -107,12 +113,23 @@ export default function PuertoRicoRetreatPage() {
       {/* ═══════════════ UPCOMING & PRIVATE RETREATS ═══════════════ */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Puerto Rico Retreat Options</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Puerto Rico Revive & Thrive Retreat</h2>
-            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-              Reserve the Puerto Rico retreat, join the waitlist for future events, or book a private retreat experience.
-            </p>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-12">
+            <div className="mx-auto md:mx-0 w-full max-w-[32rem]">
+              <Image
+                src="/images/retreat/revive-and-thrive-retreats-logo.png"
+                alt="Revive & Thrive Retreats — Ignite your Spirit, Thrive in Life"
+                width={512}
+                height={512}
+                className="w-full h-auto"
+              />
+            </div>
+            <div className="text-center md:text-left">
+              <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">Puerto Rico Retreat Options</p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Puerto Rico Revive & Thrive Retreat</h2>
+              <p className="text-gray-500 text-lg">
+                Reserve the Puerto Rico retreat, join the waitlist for future events, or book a private retreat experience.
+              </p>
+            </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow">
@@ -313,69 +330,6 @@ export default function PuertoRicoRetreatPage() {
                   className="object-cover"
                 />
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ COMBINE THE VILLAS — LARGE GROUPS ═══════════════ */}
-      <section className="py-20 md:py-28 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl overflow-hidden shadow-lg">
-                <Image
-                  src="/images/retreat/villa-azure/pool-pergola.jpg"
-                  alt="Poolside dining pergola at the beachfront retreat villa in San Juan, Puerto Rico"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="rounded-2xl overflow-hidden shadow-lg mt-8">
-                <Image
-                  src="/images/retreat/villa-azure/lawn-ocean.jpg"
-                  alt="Ocean-view lawn terrace with space for large group gatherings"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            <div className="order-1 lg:order-2">
-              <p className="text-teal font-semibold tracking-widest uppercase text-sm mb-3">
-                <Users className="w-4 h-4 inline mr-1" /> Larger Groups &amp; Private Buyouts
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Need More Room? Combine Both Villas.
-              </h2>
-              <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
-                <p>
-                  Villa Azure connects with its neighboring property, <strong>Villa Paradiso</strong>, to create a <strong>16-bedroom beachfront estate</strong> — the same stretch of Ocean Park sand, the same 10-minute run from SJU, with room for everyone.
-                </p>
-                <p>
-                  It&apos;s built for weddings, corporate offsites, family reunions, and private retreats that have outgrown a single house.
-                </p>
-              </div>
-              <div className="mt-8 space-y-3">
-                {[
-                  '16 bedrooms across two adjoining villas',
-                  'Two private pools and multiple gathering spaces',
-                  'Beachfront in Ocean Park with direct beach access',
-                  'Ideal for weddings, corporate teams, and celebrations',
-                ].map((line, i) => (
-                  <div key={i} className="flex items-start gap-3 text-gray-700">
-                    <Check className="w-5 h-5 text-teal flex-shrink-0 mt-1" />
-                    <span>{line}</span>
-                  </div>
-                ))}
-              </div>
-              <Link
-                href="https://www.krystalorecrews.com/costa-rica-retreat-private-request-page"
-                className="mt-8 inline-flex items-center gap-2 bg-teal hover:bg-teal-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg shadow-teal/30 transition-all duration-300 transform hover:scale-105"
-              >
-                <Phone className="w-5 h-5" /> Book the Full Estate
-              </Link>
             </div>
           </div>
         </div>
@@ -608,7 +562,7 @@ export default function PuertoRicoRetreatPage() {
               { q: 'Is this a business retreat or a wellness retreat?', a: 'It\'s both. Our Revive & Thrive experience weaves together wellness, personal development, and strategic life/business coaching. You\'ll gain clarity not just about your health but about your next bold move — whether that\'s in your career, relationships, or personal goals.' },
               { q: 'What airport should I fly into?', a: 'Fly into San Juan Luis Muñoz Marín International Airport (SJU). The villa is only 10 minutes from the airport — one of the shortest transfers you will ever have to a beachfront retreat. Transportation details and recommendations will be provided after booking.' },
               { q: 'Are payment plans available?', a: 'Yes. We offer flexible payment plans so you can secure your spot and pay over time. We also have limited scholarship spots available for each retreat. Contact us through the booking form to discuss options.' },
-              { q: 'Can I book a private retreat for my group?', a: 'Absolutely. We offer private retreat experiences for friend groups, families, corporate teams, and organizations. Villa Azure can also be combined with the neighboring Villa Paradiso to create a 16-bedroom beachfront estate — ideal for weddings, corporate retreats, and large gatherings. We also offer co-ed retreats focused on book writing and business planning. Contact us to design your custom experience.' },
+              { q: 'Can I book a private retreat for my group?', a: 'Absolutely. We offer private retreat experiences for friend groups, families, corporate teams, and organizations. We also offer co-ed retreats focused on book writing and business planning. Contact us to design your custom experience.' },
               { q: 'What makes this different from other women\'s retreats?', a: 'This isn\'t a vacation with a couple of workshops tacked on. Every single day is intentionally designed with coaching, movement, adventure, and luxury service. You\'ll be treated like royalty while doing deep, transformational inner work. Our retreats consistently produce breakthroughs that women carry with them for years.' },
             ].map((item, i) => (
               <details key={i} className="group bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">

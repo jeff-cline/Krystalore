@@ -140,7 +140,7 @@ export function RetreatHubPage() {
                 <p className="text-[#2a7fa0] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4">
                   Revive &amp; Thrive Retreats
                 </p>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.02] mb-5 text-gray-900">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.02] mb-5 text-gray-900" style={{ textShadow: '0 0 2px rgba(179,211,18,0.55), 0 0 14px rgba(179,211,18,0.45), 0 0 32px rgba(179,211,18,0.28)' }}>
                   Retreat <span className="italic font-serif text-[#f3498c]">Yourself</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0">
@@ -158,7 +158,7 @@ export function RetreatHubPage() {
         {/* ── CHOOSE YOUR EXPERIENCE — retreat types ── */}
         <section className="bg-[#2a7fa0] text-white border-t border-white/10">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 text-center">
-            <h2 className="text-4xl md:text-5xl font-black mb-3">
+            <h2 className="text-4xl md:text-5xl font-black mb-3" style={{ textShadow: '0 0 2px rgba(179,211,18,0.55), 0 0 14px rgba(179,211,18,0.45), 0 0 32px rgba(179,211,18,0.28)' }}>
               Choose your <span className="italic font-serif text-[#f3498c]">experience.</span>
             </h2>
             <p className="text-lg md:text-xl text-white/80 mb-10">
@@ -191,7 +191,7 @@ export function RetreatHubPage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <p className="text-[#2a7fa0] font-bold tracking-[0.3em] uppercase text-sm mb-3">Signature Destinations</p>
-              <h2 className="text-3xl md:text-4xl font-black mb-4">Where do you want to revive and thrive?</h2>
+              <h2 className="text-3xl md:text-4xl font-black mb-4" style={{ textShadow: '0 0 2px rgba(179,211,18,0.55), 0 0 14px rgba(179,211,18,0.45), 0 0 32px rgba(179,211,18,0.28)' }}>Where do you want to revive and thrive?</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {retreatOptions.map((retreat) => (
@@ -217,7 +217,7 @@ export function RetreatHubPage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <p className="text-[#b3d312] font-bold tracking-[0.3em] uppercase text-sm mb-3">Featured</p>
-              <h2 className="text-4xl md:text-5xl font-black mb-4">
+              <h2 className="text-4xl md:text-5xl font-black mb-4" style={{ textShadow: '0 0 2px rgba(179,211,18,0.55), 0 0 14px rgba(179,211,18,0.45), 0 0 32px rgba(179,211,18,0.28)' }}>
                 Work with <span className="italic font-serif text-[#f3498c]">Krystalore</span>
               </h2>
               <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
