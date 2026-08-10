@@ -15,6 +15,7 @@ import {
   Play,
   ArrowRight,
   Mail,
+  FileText,
 } from 'lucide-react'
 import { useState } from 'react'
 import {
@@ -111,7 +112,7 @@ const roleChips = [
   'Nonprofit Founder',
   'Certified Coach',
   'Author',
-  '27x Marathon Finisher',
+  '28x Marathon Finisher',
   'Cancer Survivor',
 ]
 
@@ -129,7 +130,7 @@ const credentialDetails = [
   { title: 'Amazon Best-Selling Author', detail: 'Leadership, resilience & reinvention' },
   { title: 'Somatic Trauma-Informed Holistic Coach', detail: 'Psychological safety, EQ & whole-person wellness' },
   { title: 'Former NFL Cheerleader — Buffalo Bills', detail: 'Performance, presence & elite professionalism' },
-  { title: '27x Marathon & 50-Mile Ultra Finisher', detail: 'Cancer survivor & wheelchair-bound comeback — resilience lived, not just taught' },
+  { title: '28x Marathon & 50-Mile Ultra Finisher', detail: 'Cancer survivor & wheelchair-bound comeback — resilience lived, not just taught' },
 ]
 
 const whatSetsApart = [
@@ -487,6 +488,16 @@ export default function SpeakerPageView({ content }: { content: SpeakerContent }
                 Book Leadership Training
               </Link>
             </div>
+            <div className="mt-4">
+              <a
+                href="/pdf/Krystalore-Crews-Speaker-and-Emcee.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white text-[#0D9488] border-2 border-[#0D9488] rounded-full px-8 py-4 font-bold hover:bg-[#0D9488] hover:text-white transition-colors text-center shadow-lg"
+              >
+                <FileText className="w-5 h-5" /> Speaker One Sheet
+              </a>
+            </div>
           </div>
           <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
             <Image src="/images/go9/keynote.jpg" alt="Krystalore Crews — international speaker and corporate host" fill className="object-cover object-[50%_20%]" priority sizes="(max-width: 1024px) 100vw, 50vw" />
@@ -563,7 +574,7 @@ export default function SpeakerPageView({ content }: { content: SpeakerContent }
               </p>
               <p>
                 Amazon Best-Selling Author, former Buffalo Bills NFL Cheerleader, cancer survivor,
-                and 27-time marathon finisher and 50-mile ultra-endurance race finisher — including
+                and 28-time marathon finisher and 50-mile ultra-endurance race finisher — including
                 her comeback from being wheelchair-bound — Krystalore is the living proof behind
                 everything she teaches. Her resilience is not a metaphor. It is her story. And she
                 brings every mile of it to the stage.

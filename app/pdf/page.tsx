@@ -8,7 +8,7 @@ const bios = [
   { show: 'Uncomfortable Conversations', tag: 'Divorce, grief & loss → a hook into the Rise & Thrive Bundle. Compassionate Inquiry, NEXT, Freedom Formula.', file: 'Krystalore-Crews-Uncomfortable-Conversations.pdf', vip: true },
   { show: 'AMP Sports Talk', tag: 'Athlete mindset — NFL sideline to wheelchair to 50-mile ultra. Beyond Limits Bootcamp, high-performance coaching.', file: 'Krystalore-Crews-AMP-Sports-Talk.pdf' },
   { show: 'Thrive Health & Wellness', tag: 'Holistic health, “health is wealth,” the 34-minute mindset, and the Freedom Formula.', file: 'Krystalore-Crews-Thrive-Health-and-Wellness.pdf' },
-  { show: 'Speaker & Emcee', tag: '5M+ community members across her brand and managed social platforms, and 150+ live events a year. Signature speaking topics, credentials, featured-on logos, and raving reviews.', file: 'Krystalore-Crews-Speaker-and-Emcee.pdf', badge: 'One-Sheet' },
+  { show: 'Speaker One Sheet', tag: '5M+ community members across her brand and managed social platforms, and 150+ live events a year. Signature speaking topics, credentials, featured-on logos, and raving reviews.', file: 'Krystalore-Crews-Speaker-and-Emcee.pdf', badge: 'One-Sheet' },
   { show: 'Social Media Influencer & Trainer', tag: '5M+ reach across managed Facebook Pages, live on camera 3× a week, and lead of Doublewide Media. What she trains and what you can book her for.', file: 'Krystalore-Crews-Social-Media-Influencer-and-Trainer.pdf', badge: 'One-Sheet' },
 ]
 
@@ -21,7 +21,7 @@ export default function PdfBios() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-[#0D9488] font-bold uppercase tracking-[0.2em] text-xs mb-3">Thriving Women Network · Enlighten · Encourage · Empower</p>
             <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-3 leading-tight">Guest Bios — Krystalore Crews</h1>
-            <p className="text-lg text-gray-600 font-light">One-page, show-specific bios with provocative host talking points — plus her Speaker &amp; Emcee and Social Media one-sheets. Click any card to view or download.</p>
+            <p className="text-lg text-gray-600 font-light">One-page, show-specific bios with provocative host talking points — plus her Speaker One Sheet and Social Media one-sheets. Click any card to view or download.</p>
           </div>
         </section>
 
