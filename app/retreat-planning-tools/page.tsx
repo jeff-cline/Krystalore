@@ -66,7 +66,7 @@ export default function RetreatPlanningToolsPage() {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Built by an Expert Retreat Planner</h2>
               <p className="text-gray-600 leading-relaxed mb-4">After 22 years in the military, a battle with cancer, autoimmune diagnosis, betrayal, multiple reinventions, and more life transitions than most people face in a lifetime, Krystalore learned this: your next mission begins the moment you decide you&apos;re worth fighting for.</p>
-              <p className="text-gray-600 leading-relaxed mb-4">As an Emotional Intelligence Coach & Trainer, Somatic Healer, Personal Trainer, Former NFL Cheerleader, 27x Marathoner, International Retreat Leader and Speaker, and Best Selling Author — she turns chaos into clarity.</p>
+              <p className="text-gray-600 leading-relaxed mb-4">As an Emotional Intelligence Coach & Trainer, Somatic Healer, Personal Trainer, Former NFL Cheerleader, 28x Marathoner, International Retreat Leader and Speaker, and Best Selling Author — she turns chaos into clarity.</p>
               <p className="text-gray-600 leading-relaxed font-semibold">When life feels overwhelming, she sees the pathway forward — fast. These tools are born from that experience.</p>
             </div>
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">

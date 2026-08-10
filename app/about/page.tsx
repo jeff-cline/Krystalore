@@ -17,7 +17,7 @@ function AboutJsonLd() {
     '@type': 'Person',
     name: 'Krystalore Crews',
     jobTitle: 'CEO & Executive Coach',
-    description: '22-year USAF Veteran, former NFL Cheerleader, 27-time Marathoner, 50-mile Ultramarathoner, autoimmune warrior, CEO of Crews Beyond Limits Consulting.',
+    description: '22-year USAF Veteran, former NFL Cheerleader, 28-time Marathoner, 50-mile Ultramarathoner, autoimmune warrior, CEO of Crews Beyond Limits Consulting.',
     url: 'https://krystalore.com/about',
     email: 'krystalore@thecrewscoach.com',
     telephone: '+1-716-390-6727',
@@ -28,7 +28,7 @@ function AboutJsonLd() {
     },
     knowsAbout: ['Executive Coaching', 'Leadership Development', 'Somatic Coaching', 'Emotional Intelligence', 'Fitness Training', 'Public Speaking', 'Wellness', 'Temperament Consulting'],
     alumniOf: { '@type': 'Organization', name: 'United States Air Force' },
-    award: ['22-Year USAF Veteran', '27-Time Marathoner', '50-Mile Ultramarathoner', 'Former NFL Cheerleader'],
+    award: ['22-Year USAF Veteran', '28-Time Marathoner', '50-Mile Ultramarathoner', 'Former NFL Cheerleader'],
     sameAs: [
       'https://www.facebook.com/krystalore/',
       'https://www.instagram.com/thecrewscoach/',
@@ -107,7 +107,7 @@ export default function AboutPage() {
                   <Compass className="w-4 h-4" /> My Story
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                  From Wheelchair to <span className="text-[#0D9488]">27 Marathons</span>
+                  From Wheelchair to <span className="text-[#0D9488]">28 Marathons</span>
                 </h2>
                 <div className="space-y-4 text-gray-600 leading-relaxed">
                   <p>
@@ -120,7 +120,7 @@ export default function AboutPage() {
                     In 2017, I hired a coach who specialized in transitioning Veterans. She challenged and empowered me to find my true passion. On <strong className="text-gray-900">November 1, 2017</strong>, I made the decision to start my own coaching business.
                   </p>
                   <p>
-                    I am no stranger to the effects of stress and adversity on the mind, body, and spirit. In <strong className="text-gray-900">2005, I was confined to a wheelchair</strong>. I went from being unable to walk to running <strong className="text-gray-900">27 marathons and a 50-mile ultramarathon</strong> &mdash; without the aid of medication.
+                    I am no stranger to the effects of stress and adversity on the mind, body, and spirit. In <strong className="text-gray-900">2005, I was confined to a wheelchair</strong>. I went from being unable to walk to running <strong className="text-gray-900">28 marathons and a 50-mile ultramarathon</strong> &mdash; without the aid of medication.
                   </p>
                   <p>
                     I have survived <strong className="text-gray-900">autoimmune challenges</strong> and the devastating impact of <strong className="text-gray-900">betrayal</strong> &mdash; experiences that forged my understanding of resilience at the deepest level. Not resilience as a buzzword, but as lived experience: the mental fortitude to keep going, the strength to pivot, the courage to rebuild your identity from the ground up, and the fire to move beyond every limit and bust through every barrier placed in front of you.
@@ -140,7 +140,7 @@ export default function AboutPage() {
                   {[
                     { icon: Shield, title: '22-Year USAF Veteran', color: '#0D9488' },
                     { icon: Star, title: 'Former NFL Cheerleader', color: '#E8A849' },
-                    { icon: Dumbbell, title: '27-Time Marathoner', color: '#F97316' },
+                    { icon: Dumbbell, title: '28-Time Marathoner', color: '#F97316' },
                     { icon: Flame, title: '50-Mile Ultramarathoner', color: '#E91E63' },
                     { icon: Heart, title: 'Autoimmune Warrior', color: '#7C3AED' },
                     { icon: Award, title: 'CEO, Crews Beyond Limits', color: '#0D9488' },

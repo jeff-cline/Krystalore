@@ -438,7 +438,7 @@ export default function TennesseeRetreatPage() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Krystalore Crews</h2>
               <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  22-year USAF Veteran. Former NFL Cheerleader. 26-time Marathoner. Cancer survivor. CEO of Crews Beyond Limits Consulting.
+                  22-year USAF Veteran. Former NFL Cheerleader. 28-time Marathoner. Cancer survivor. CEO of Crews Beyond Limits Consulting.
                 </p>
                 <p>
                   Krystalore knows what it means to carry the weight of the world on your shoulders — and she knows what it takes to put it down long enough to remember who you are underneath it all.

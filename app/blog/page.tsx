@@ -42,7 +42,7 @@ export default function BlogPage() {
     },
     {
       title: 'Marathon Mindset: Applying Endurance Principles to Business',
-      excerpt: 'What 26 marathons taught me about persistence, planning, and achieving long-term goals.',
+      excerpt: 'What 28 marathons taught me about persistence, planning, and achieving long-term goals.',
       category: 'Mindset',
       slug: 'marathon-mindset-business-endurance',
       readTime: '10 min read',

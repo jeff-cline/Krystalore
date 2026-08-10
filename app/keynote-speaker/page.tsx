@@ -47,7 +47,7 @@ export default function KeynoteSpeakerPage() {
     },
     {
       title: 'Proven Results',
-      description: '22 years of Air Force leadership, 26 marathons, cancer survivor, and successful business owner.',
+      description: '22 years of Air Force leadership, 28 marathons, cancer survivor, and successful business owner.',
       icon: '🏆'
     },
     {
@@ -178,7 +178,7 @@ export default function KeynoteSpeakerPage() {
                   Krystalore's presentations aren't just motivational talks - they're transformational experiences based on real-world results and authentic transformation.
                 </p>
                 <p>
-                  As a 22-year Air Force veteran, former NFL cheerleader, cancer survivor, and 26-time marathoner, Krystalore brings unparalleled credibility to every stage.
+                  As a 22-year Air Force veteran, former NFL cheerleader, cancer survivor, and 28-time marathoner, Krystalore brings unparalleled credibility to every stage.
                 </p>
                 <p>
                   Her journey from wheelchair to elite athlete demonstrates that the impossible is possible when you apply the right strategies, mindset, and support systems.

@@ -87,7 +87,7 @@ export default function MondayMotivationPage() {
                 Monday Motivation LIVE is Krystalore Crews&apos; weekly show designed to set your entire week on fire. Every Monday morning, Krystalore goes live on YouTube to deliver high-energy mindset strategies, personal development frameworks, and the kind of real talk that actually moves the needle.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
-                This isn&apos;t generic &quot;you can do it&quot; content. It&apos;s battle-tested strategies from someone who went from a wheelchair to 26 marathons, who built a business empire as a military spouse, and who coaches executives and entrepreneurs to breakthrough performance every single day.
+                This isn&apos;t generic &quot;you can do it&quot; content. It&apos;s battle-tested strategies from someone who went from a wheelchair to 28 marathons, who built a business empire as a military spouse, and who coaches executives and entrepreneurs to breakthrough performance every single day.
               </p>
               <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">What Does All In Look Like?</h3>
               <p className="text-gray-600 leading-relaxed">

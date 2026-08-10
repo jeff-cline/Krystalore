@@ -22,7 +22,7 @@ const podcasts: Record<string, {
     description: 'The Krystal Clear Life podcast is where Krystalore Crews brings raw, real, and bold conversations about leadership, resilience, relationships, health, and living beyond your limits. Featuring interviews with veterans, entrepreneurs, athletes, and everyday heroes who refuse to settle.',
     episodes: [
       { title: 'The 34-Minute Protocol That Changed Everything', desc: 'Krystalore shares the origin story behind the 34-minute daily performance protocol and how it transformed her recovery.', duration: '42 min' },
-      { title: 'From Wheelchair to Marathon Finish Line', desc: 'The raw story of overcoming cancer, being wheelchair-bound, and running 26 marathons.', duration: '38 min' },
+      { title: 'From Wheelchair to Marathon Finish Line', desc: 'The raw story of overcoming cancer, being wheelchair-bound, and running 28 marathons.', duration: '38 min' },
       { title: 'Leadership Lessons from 22 Years in the Air Force', desc: 'Military leadership principles that translate to business, relationships, and life.', duration: '45 min' },
       { title: 'Why Your Relationship Needs a Remodel', desc: 'Breaking down unhealthy patterns and rebuilding connections with intention.', duration: '35 min' },
       { title: 'Bombshell Bootcamp: Fitness as a Leadership Tool', desc: 'How physical training builds the mental toughness leaders need.', duration: '40 min' },

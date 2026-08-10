@@ -39,7 +39,7 @@ export default function TeamPage() {
               <p className="text-xl text-teal-600 mb-6">Founder & Lead Coach</p>
               <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
                 <p>
-                  22-year U.S. Air Force veteran, former NFL cheerleader, cancer survivor, and 26-time marathoner. Krystalore transformed her life from wheelchair to elite athlete, proving that limitations are just starting points for extraordinary achievement.
+                  22-year U.S. Air Force veteran, former NFL cheerleader, cancer survivor, and 28-time marathoner. Krystalore transformed her life from wheelchair to elite athlete, proving that limitations are just starting points for extraordinary achievement.
                 </p>
                 <p>
                   As the founder of Crews Beyond Limits, she brings military precision, athletic discipline, and entrepreneurial innovation to help high-achievers break through barriers and reach new levels of success.

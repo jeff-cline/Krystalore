@@ -39,7 +39,7 @@ export default function FitnessPage() {
                   But I refused to accept limitations. Through systematic training, unwavering commitment, and the right support system, I not only recovered—I thrived.
                 </p>
                 <p>
-                  I went on to complete 26 marathons, become an NFL cheerleader, and prove that our biggest obstacles can become our greatest strengths.
+                  I went on to complete 28 marathons, become an NFL cheerleader, and prove that our biggest obstacles can become our greatest strengths.
                 </p>
                 <p className="font-semibold text-[#0D9488]">
                   That&apos;s the same transformation I want to help you achieve—whatever your starting point.

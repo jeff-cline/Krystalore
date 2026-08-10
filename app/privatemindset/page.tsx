@@ -194,7 +194,7 @@ const faqs = [
   },
   {
     q: 'How is Krystalore trained in Compassionate Inquiry?',
-    a: 'Krystalore completed the 240-hour, year-long Compassionate Inquiry training founded by Dr. Gabor Maté. She integrates it with somatic coaching, executive coaching, and her lived experience as a 22-year USAF Veteran, NFL cheerleader, 26-time marathoner, and cancer survivor. She also continues her education through advanced CI training and supervision.',
+    a: 'Krystalore completed the 240-hour, year-long Compassionate Inquiry training founded by Dr. Gabor Maté. She integrates it with somatic coaching, executive coaching, and her lived experience as a 22-year USAF Veteran, NFL cheerleader, 28-time marathoner, and cancer survivor. She also continues her education through advanced CI training and supervision.',
   },
   {
     q: 'What happens in the free consultation?',
@@ -549,7 +549,7 @@ export default function PrivateMindsetPage() {
               </h2>
               <div className="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg">
                 <p>
-                  22-year USAF Veteran. Former NFL cheerleader. 26-time marathoner. Cancer survivor. CEO of Crews Beyond Limits Consulting. Trained in Compassionate Inquiry through the 240-hour program founded by Dr. Gabor Maté.
+                  22-year USAF Veteran. Former NFL cheerleader. 28-time marathoner. Cancer survivor. CEO of Crews Beyond Limits Consulting. Trained in Compassionate Inquiry through the 240-hour program founded by Dr. Gabor Maté.
                 </p>
                 <p>
                   Compassionate Inquiry somatic coaching is the work Krystalore does behind closed doors with executives, founders, athletes, and women in identity transition. It is not the bootcamp side of her practice and it is not the retreat side. It is the room.

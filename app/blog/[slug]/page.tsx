@@ -137,7 +137,7 @@ export default function BlogPostPage() {
         <div className="bg-gray-50 rounded-xl p-8 mb-12">
           <h3 className="text-xl font-bold text-gray-900 mb-4">About the Author</h3>
           <p className="text-gray-600 leading-relaxed">
-            Krystalore Crews is a 22-year Air Force veteran, cancer survivor, and 26-time marathoner who transformed her life from a wheelchair to becoming an elite athlete. She now helps executives and entrepreneurs crews beyond their limits through coaching, speaking, and transformational programs.
+            Krystalore Crews is a 22-year Air Force veteran, cancer survivor, and 28-time marathoner who transformed her life from a wheelchair to becoming an elite athlete. She now helps executives and entrepreneurs crews beyond their limits through coaching, speaking, and transformational programs.
           </p>
           <Link 
             href="/about" 

@@ -446,7 +446,7 @@ export default function ServicesPage() {
                 'Amazon Best-Selling Author (3 books)',
                 'Certified Emotional Intelligence Coach & Trainer',
                 'Certified Somatic Healer',
-                '27x Marathon finisher',
+                '28x Marathon finisher',
                 'Former NFL Cheerleader',
                 'Cancer survivor & resilience expert',
                 'International Retreat Leader',

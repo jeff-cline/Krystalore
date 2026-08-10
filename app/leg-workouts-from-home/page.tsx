@@ -88,8 +88,8 @@ export default function LegWorkoutsFromHomePage() {
               <Image src="/images/scraped/krystalore-bio-fitness.jpg" alt="Krystalore Crews fitness coach" fill className="object-cover object-top" />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">From Wheelchair to 27 Marathons</h2>
-              <p className="text-gray-600 leading-relaxed mb-4">Krystalore knows what it means to rebuild your body from scratch. After an injury that put her in a wheelchair, she didn&apos;t just recover — she became an elite athlete, completing 27 marathons and becoming an NFL cheerleader.</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">From Wheelchair to 28 Marathons</h2>
+              <p className="text-gray-600 leading-relaxed mb-4">Krystalore knows what it means to rebuild your body from scratch. After an injury that put her in a wheelchair, she didn&apos;t just recover — she became an elite athlete, completing 28 marathons and becoming an NFL cheerleader.</p>
               <p className="text-gray-600 leading-relaxed mb-4">These leg workouts aren&apos;t just exercises. They&apos;re the foundation of the same training philosophy that carried her from immobility to the finish line, 27 times.</p>
               <p className="text-gray-600 leading-relaxed font-semibold text-[#34c5c5]">Your legs carry you everywhere. Make them strong.</p>
             </div>

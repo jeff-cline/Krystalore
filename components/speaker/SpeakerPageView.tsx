@@ -139,7 +139,7 @@ const whatSetsApart = [
   { icon: Shield, title: 'Thrives Under Pressure', desc: 'Military-trained composure meets performer-level presence. Technical issues, tough crowds, last-minute pivots — she handles all of it with calm authority.' },
   { icon: Compass, title: 'Challenges & Guides', desc: "She doesn't just inspire — she challenges. Every session stretches comfort zones while honoring psychological safety and each person's humanity." },
   { icon: Target, title: 'Mission-Driven Results', desc: 'Client goals are the mission. Krystalore customizes every experience to deliver the exact transformation — emotionally, culturally, or strategically — the client needs.' },
-  { icon: Mountain, title: 'Lived Resilience', desc: "Cancer survivor. Wheelchair-bound comeback. 27 marathons & a 50-mile finish. Her story isn't a backdrop — it's her credential. When she speaks about rising, the room knows she means it." },
+  { icon: Mountain, title: 'Lived Resilience', desc: "Cancer survivor. Wheelchair-bound comeback. 28 marathons & a 50-mile finish. Her story isn't a backdrop — it's her credential. When she speaks about rising, the room knows she means it." },
 ]
 
 const services = [
@@ -292,7 +292,7 @@ const faqs = [
   {
     question: 'What makes Krystalore different from other speakers?',
     answer:
-      "Krystalore doesn't just motivate — she transforms. With 22 years of military leadership, 27 marathons, a 50-mile ultra, cancer survival, NFL cheerleading experience, and a thriving coaching business, she brings real-world credibility that resonates deeply with audiences. Her sessions are interactive, somatically grounded, and actionable.",
+      "Krystalore doesn't just motivate — she transforms. With 22 years of military leadership, 28 marathons, a 50-mile ultra, cancer survival, NFL cheerleading experience, and a thriving coaching business, she brings real-world credibility that resonates deeply with audiences. Her sessions are interactive, somatically grounded, and actionable.",
   },
   {
     question: 'Can Krystalore customize her talk for our audience?',
@@ -481,6 +481,7 @@ export default function SpeakerPageView({ content }: { content: SpeakerContent }
                 </span>
               ))}
             </div>
+            <div className="inline-flex flex-col">
             <div className="flex flex-wrap gap-4">
               <a href="#book" className="bg-gradient-to-r from-[#0D9488] to-[#14B8A6] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">
                 Book to Speak / Emcee
@@ -489,7 +490,7 @@ export default function SpeakerPageView({ content }: { content: SpeakerContent }
                 Book Leadership Training
               </Link>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 flex justify-center">
               <a
                 href="/pdf/Krystalore-Crews-Speaker-and-Emcee.pdf"
                 target="_blank"
@@ -498,6 +499,7 @@ export default function SpeakerPageView({ content }: { content: SpeakerContent }
               >
                 <FileText className="w-5 h-5" /> Speaker One Sheet
               </a>
+            </div>
             </div>
           </div>
           <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
