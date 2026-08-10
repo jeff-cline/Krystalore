@@ -46,10 +46,14 @@ const carouselImages = [
   { src: '/images/retreat/villa-azure/terrace-lounge.jpg', alt: 'Shaded oceanfront terrace lounge with deep blue seating and umbrella', caption: 'Oceanfront Terrace Lounge' },
   { src: '/images/retreat/villa-azure/dining-ocean.jpg', alt: 'Bright dining room and bar seating with panoramic ocean views', caption: 'Dine With the Ocean in View' },
   { src: '/images/retreat/villa-azure/bedroom-ocean.jpg', alt: 'Beachfront suite with a window seat framing the Atlantic in San Juan', caption: 'Wake Up to the Water' },
+  { src: '/images/retreat/villa-azure/suite-king.jpg', alt: 'King suite with ocean-blue artwork, wood floors and a garden window at Villa Azure', caption: 'Designer King Suites' },
   { src: '/images/retreat/villa-azure/lawn-ocean.jpg', alt: 'Landscaped lawn terrace looking out over the ocean at Villa Azure', caption: 'Ocean-View Lawn Terrace' },
   { src: '/images/retreat/villa-azure/living-room.jpg', alt: 'Open-plan living room with designer interiors and natural light at Villa Azure', caption: 'Designer Living Spaces' },
+  { src: '/images/retreat/villa-azure/suite-twin-queen.jpg', alt: 'Twin queen suite with reclaimed-wood headboards and woven pendant lights', caption: 'Room for Every Guest' },
   { src: '/images/retreat/villa-azure/egg-chairs.jpg', alt: 'Tranquil interior courtyard with hanging egg chairs and a love seat swing', caption: 'Quiet Corners to Land In' },
+  { src: '/images/retreat/villa-azure/suite-double.jpg', alt: 'Double suite with a full-height upholstered headboard wall and soft natural light', caption: 'Rest and Reset' },
   { src: '/images/retreat/villa-azure/kitchen.jpg', alt: 'Fully equipped chef kitchen with ocean-blue tile backsplash', caption: 'Full Chef&rsquo;s Kitchen' },
+  { src: '/images/retreat/villa-azure/bathroom-marble.jpg', alt: 'Marble bathroom with a glass walk-in rain shower at the beachfront villa', caption: 'Spa-Inspired Bathrooms' },
 ]
 
 /* ─── 7-Day Itinerary ─── */
