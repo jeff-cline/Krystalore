@@ -2,6 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Calendar, Check, Heart, Mail, MapPin, Sparkles, Users } from 'lucide-react'
 import Header from '@/components/layout/header'
+import RetreatHeroMontage from '@/components/retreat/RetreatHeroMontage'
+import RetreatInquiryModal from '@/components/retreat/RetreatInquiryModal'
 import Footer from '@/components/layout/Footer'
 
 export const WAITLIST_URL = 'https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout'
@@ -90,38 +92,63 @@ export const RETREAT_TYPES = [
   'Couples',
 ]
 
+/* Every property photo across all three destinations, for the hero montage. */
+export const HERO_MONTAGE_IMAGES = [
+  '/images/retreat/villa-azure/swing-ocean.jpg',
+  '/images/retreat-destinations/cr-01.jpg',
+  '/images/retreat-destinations/tn-airbnb/tn-lake-01.png',
+  '/images/retreat/villa-azure/pool.jpg',
+  '/images/retreat-destinations/cr-02.jpg',
+  '/images/retreat-destinations/tn-airbnb/tn-lake-03.jpg',
+  '/images/retreat/villa-azure/ocean-palms.jpg',
+  '/images/retreat-destinations/cr-03.jpg',
+  '/images/retreat-destinations/tn-airbnb/tn-lake-05.jpg',
+  '/images/retreat/villa-azure/terrace-lounge.jpg',
+  '/images/retreat-destinations/cr-04.jpg',
+  '/images/retreat-destinations/tn-airbnb/tn-lake-07.jpg',
+  '/images/retreat/villa-azure/dining-ocean.jpg',
+  '/images/retreat-destinations/cr-05.jpg',
+  '/images/retreat-destinations/tn-airbnb/tn-lake-09.jpg',
+  '/images/retreat/villa-azure/lawn-ocean.jpg',
+  '/images/retreat-destinations/cr-06.jpg',
+  '/images/retreat-destinations/tn-04.png',
+]
+
 export function RetreatHubPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
       <main>
-        {/* ── HERO — logo left, headline right ── */}
-        <section className="bg-gradient-to-br from-[#123f3a] via-[#1b544c] to-[#22635a] text-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
-            <div className="grid md:grid-cols-[minmax(0,17rem)_1fr] gap-8 md:gap-12 items-center">
-              <div className="bg-white rounded-3xl p-5 shadow-2xl mx-auto md:mx-0 w-full max-w-[16rem]">
+        {/* ── HERO IMAGE — montage of every property, one frame per second ── */}
+        <RetreatHeroMontage images={HERO_MONTAGE_IMAGES} />
+
+        {/* ── LOGO + HEADLINE — on white ── */}
+        <section className="bg-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="mx-auto md:mx-0 w-full max-w-[32rem]">
                 <Image
                   src="/images/retreat/revive-and-thrive-retreats-logo.png"
                   alt="Revive & Thrive Retreats — Ignite your Spirit, Thrive in Life"
-                  width={256}
-                  height={256}
+                  width={512}
+                  height={512}
                   className="w-full h-auto"
                   priority
                 />
               </div>
               <div className="text-center md:text-left">
-                <p className="text-[#7fe3e3] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4">
+                <p className="text-[#0D9488] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4">
                   Revive &amp; Thrive Retreats
                 </p>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.02] mb-5">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.02] mb-5 text-gray-900">
                   Retreat <span className="italic font-serif text-[#E8A849]">Yourself</span>
                 </h1>
-                <p className="text-lg md:text-xl text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0">
+                <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0">
                   Transformational getaways for anyone ready to reset and rise. You do EVERYTHING for
                   EVERYONE ELSE. Now&hellip; it&rsquo;s YOUR turn.
                 </p>
                 <div className="flex justify-center md:justify-start">
-                  <RetreatCTAButtons onDark />
+                  <RetreatCTAButtons />
                 </div>
               </div>
             </div>
@@ -181,6 +208,84 @@ export function RetreatHubPage() {
                   </div>
                 </Link>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── WORK WITH KRYSTALORE ── */}
+        <section className="py-16 md:py-24 bg-gradient-to-br from-[#123f3a] via-[#1b544c] to-[#22635a] text-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <p className="text-[#7fe3e3] font-bold tracking-[0.3em] uppercase text-sm mb-3">Featured</p>
+              <h2 className="text-4xl md:text-5xl font-black mb-4">
+                Work with <span className="italic font-serif text-[#E8A849]">Krystalore</span>
+              </h2>
+              <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+                Come to a retreat that&rsquo;s already handled &mdash; or build your own with her beside you.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+              {/* DONE FOR YOU */}
+              <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
+                <p className="text-[#E8A849] font-black tracking-[0.2em] uppercase text-xs mb-3">Done For You</p>
+                <h3 className="text-3xl font-black mb-3">Just show up.</h3>
+                <p className="text-gray-600 leading-relaxed mb-6">
+                  Krystalore and her team handle the entire retreat &mdash; villa, chef, itinerary,
+                  transport, programming. You arrive, and everything is already taken care of.
+                </p>
+                <ul className="space-y-3 mb-8 flex-1">
+                  {[
+                    'Zero planning — venue, meals and logistics are handled end to end',
+                    'A proven day-by-day itinerary of coaching, movement and adventure',
+                    'Private chef, ground transport and on-site host included',
+                    'Instant community — you arrive solo and leave with a circle',
+                    'Fixed, all-inclusive pricing with payment plans available',
+                  ].map((b) => (
+                    <li key={b} className="flex items-start gap-3">
+                      <Check className="h-5 w-5 text-[#0D9488] flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm font-bold text-gray-500 mb-5">
+                  Best for: individuals and small groups who want the experience without the workload.
+                </p>
+                <RetreatInquiryModal
+                  triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-full hover:scale-[1.03] transition-transform shadow-lg"
+                />
+              </div>
+
+              {/* DONE WITH YOU */}
+              <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
+                <p className="text-[#0D9488] font-black tracking-[0.2em] uppercase text-xs mb-3">Done With You</p>
+                <h3 className="text-3xl font-black mb-3">Build your own.</h3>
+                <p className="text-gray-600 leading-relaxed mb-6">
+                  Host your own retreat with Krystalore guiding the build &mdash; her venues, vendors
+                  and playbook, your brand and your people.
+                </p>
+                <ul className="space-y-3 mb-8 flex-1">
+                  {[
+                    'Her vetted venues and vendor list — skip the expensive trial and error',
+                    'Pricing, budgeting and profitability mapped before you commit',
+                    'Itinerary and programming designed around your audience',
+                    'Filling-the-room strategy: promotion, offers and enrollment',
+                    'Co-host or speaker support on site if you want backup',
+                    'You keep the relationships, the revenue and the brand',
+                  ].map((b) => (
+                    <li key={b} className="flex items-start gap-3">
+                      <Check className="h-5 w-5 text-[#0D9488] flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm font-bold text-gray-500 mb-5">
+                  Best for: coaches, leaders and organizations running a retreat of their own.
+                </p>
+                <RetreatInquiryModal
+                  triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0b7d73] text-white font-black px-7 py-4 rounded-full transition-colors shadow-lg"
+                />
+              </div>
             </div>
           </div>
         </section>
