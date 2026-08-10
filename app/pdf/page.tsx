@@ -25,6 +25,59 @@ export default function PdfBios() {
           </div>
         </section>
 
+        {/* Puerto Rico Retreat — marketing flyers */}
+        <section className="pb-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-3 mb-4">
+              <h2 className="text-2xl font-black text-gray-900">Puerto Rico Retreat</h2>
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-[#f3498c]/15 text-[#d92d70] px-2 py-0.5 rounded-full">
+                Nov 14&ndash;20, 2026
+              </span>
+            </div>
+            <p className="text-gray-600 mb-5">
+              Send-ready marketing for the Revive &amp; Thrive retreat at Villa Azure, San Juan.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                {
+                  file: 'Krystalore-PR-Retreat-Flyer-1page.pdf',
+                  title: 'One-Page Flyer',
+                  tag: 'Front only — hero, dates, what\u2019s included and a QR code straight to the booking page.',
+                  badge: '1 Page',
+                },
+                {
+                  file: 'Krystalore-PR-Retreat-Flyer-2page.pdf',
+                  title: 'Two-Page Flyer',
+                  tag: 'Adds the full 7-day itinerary and every testimonial video — all links clickable.',
+                  badge: '2 Pages',
+                },
+              ].map((f) => (
+                <a
+                  key={f.file}
+                  href={`/pdf/${f.file}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 hover:shadow-md hover:border-[#41a7c9]/60 transition-all"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-[#41a7c9]/15 flex items-center justify-center flex-shrink-0">
+                    <FileText className="w-6 h-6 text-[#2a7fa0]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-black text-gray-900 text-lg leading-tight">{f.title}</h3>
+                      <span className="text-[10px] font-bold uppercase tracking-wider bg-[#41a7c9]/15 text-[#2a7fa0] px-2 py-0.5 rounded-full">{f.badge}</span>
+                    </div>
+                    <p className="text-sm text-gray-600 mt-1">{f.tag}</p>
+                    <span className="inline-flex items-center gap-1.5 text-[#2a7fa0] font-bold text-sm mt-2 group-hover:gap-2.5 transition-all">
+                      View PDF <Download className="w-4 h-4" />
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Featured: The Secret Weapon one-pager (links to the flyer; guest bios below untouched) */}
         <section className="pb-4">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
