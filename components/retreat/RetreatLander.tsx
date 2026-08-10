@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { ArrowRight, Calendar, Check, Heart, Mail, MapPin, Sparkles, Users } from 'lucide-react'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
-import { DynamicHeader } from '@/components/DynamicDate'
 
 export const WAITLIST_URL = 'https://www.krystalorecrews.com/revive-and-thrive-retreat-checkout'
 export const PRIVATE_RETREAT_URL = 'https://www.krystalorecrews.com/costa-rica-retreat-private-request-page'
@@ -33,11 +32,11 @@ export const retreatOptions: RetreatOption[] = [
   },
   {
     title: 'Puerto Rico Revive & Thrive Retreat',
-    location: 'Ceiba, Puerto Rico',
+    location: 'Puerto Rico',
     dates: '',
-    description: 'A Caribbean wellness and transformation retreat with ocean views, rainforest energy, coaching, movement, and sisterhood.',
+    description: 'A Caribbean wellness and transformation retreat — beachfront in Ocean Park, San Juan, with coaching, movement, and sisterhood steps from the ocean.',
     href: '/pr-retreat',
-    image: '/images/retreat/retreat-06.jpg',
+    image: '/images/retreat/villa-azure/swing-ocean.jpg',
     cta: 'Explore Puerto Rico',
   },
   {
@@ -57,42 +56,114 @@ export function buildEventMailto() {
   return `mailto:krystalore@thecrewscoach.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 }
 
-export function RetreatCTAButtons() {
+export function RetreatCTAButtons({ onDark = false }: { onDark?: boolean }) {
   return (
     <div className="flex flex-col sm:flex-row flex-wrap gap-4">
       <Link href="/waitlist" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-full hover:scale-105 transition-transform shadow-lg">
         Wait List & Updates <ArrowRight className="h-5 w-5" />
       </Link>
-      <a href={PRIVATE_RETREAT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border-2 border-[#0D9488] text-[#0D9488] font-black px-7 py-4 rounded-full hover:bg-[#0D9488]/5 transition-colors">
+      <a
+        href={PRIVATE_RETREAT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={
+          onDark
+            ? 'inline-flex items-center justify-center gap-2 border-2 border-white/70 text-white font-black px-7 py-4 rounded-full hover:bg-white hover:text-[#123f3a] transition-colors'
+            : 'inline-flex items-center justify-center gap-2 border-2 border-[#0D9488] text-[#0D9488] font-black px-7 py-4 rounded-full hover:bg-[#0D9488]/5 transition-colors'
+        }
+      >
         Book Private Retreat
       </a>
     </div>
   )
 }
 
+/* The eight ways a Revive & Thrive retreat gets used. */
+export const RETREAT_TYPES = [
+  'Wellness',
+  'Book Writing',
+  'Business Building',
+  'Private',
+  'Team Building',
+  'Corporate',
+  'Bridal Parties',
+  'Couples',
+]
+
 export function RetreatHubPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
       <main>
-        <DynamicHeader
-          slug="retreat"
-          eyebrow="Revive & Thrive Retreats"
-          fallbackTitle="Choose Your Next Beyond Limits Retreat Experience"
-          fallbackDescription="One main retreat home for every current and future option: Costa Rica, Puerto Rico, Tennessee, private retreats, waitlist updates, and event collaborations."
-          fallbackDate="Dates TBA"
-          fallbackImage="/images/retreat-destinations/cr-01.jpg"
-          alt="Costa Rica retreat property with tropical views"
-        >
-          <div className="flex justify-center">
-            <RetreatCTAButtons />
+        {/* ── HERO — logo left, headline right ── */}
+        <section className="bg-gradient-to-br from-[#123f3a] via-[#1b544c] to-[#22635a] text-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+            <div className="grid md:grid-cols-[minmax(0,17rem)_1fr] gap-8 md:gap-12 items-center">
+              <div className="bg-white rounded-3xl p-5 shadow-2xl mx-auto md:mx-0 w-full max-w-[16rem]">
+                <Image
+                  src="/images/retreat/revive-and-thrive-retreats-logo.png"
+                  alt="Revive & Thrive Retreats — Ignite your Spirit, Thrive in Life"
+                  width={256}
+                  height={256}
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-[#7fe3e3] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4">
+                  Revive &amp; Thrive Retreats
+                </p>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.02] mb-5">
+                  Retreat <span className="italic font-serif text-[#E8A849]">Yourself</span>
+                </h1>
+                <p className="text-lg md:text-xl text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0">
+                  Transformational getaways for anyone ready to reset and rise. You do EVERYTHING for
+                  EVERYONE ELSE. Now&hellip; it&rsquo;s YOUR turn.
+                </p>
+                <div className="flex justify-center md:justify-start">
+                  <RetreatCTAButtons onDark />
+                </div>
+              </div>
+            </div>
           </div>
-        </DynamicHeader>
+        </section>
 
+        {/* ── CHOOSE YOUR EXPERIENCE — retreat types ── */}
+        <section className="bg-[#1b544c] text-white border-t border-white/10">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 text-center">
+            <h2 className="text-4xl md:text-5xl font-black mb-3">
+              Choose your <span className="italic font-serif text-[#E8A849]">experience.</span>
+            </h2>
+            <p className="text-lg md:text-xl text-white/80 mb-10">
+              Coaching, movement, wellness &amp; sisterhood &mdash; in breathtaking places.
+            </p>
+
+            <div className="flex items-center gap-4 mb-8">
+              <span className="h-px flex-1 bg-white/25" />
+              <span className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-white/90 whitespace-nowrap">
+                Retreat Types
+              </span>
+              <span className="h-px flex-1 bg-white/25" />
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+              {RETREAT_TYPES.map((type) => (
+                <span
+                  key={type}
+                  className="rounded-full border border-white/35 px-5 py-2.5 md:px-7 md:py-3 text-base md:text-xl font-bold"
+                >
+                  {type}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── SIGNATURE DESTINATIONS ── */}
         <section className="py-16 md:py-24 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="text-[#0D9488] font-bold tracking-widest uppercase text-sm mb-3">All Retreat Options</p>
+              <p className="text-[#0D9488] font-bold tracking-[0.3em] uppercase text-sm mb-3">Signature Destinations</p>
               <h2 className="text-3xl md:text-4xl font-black mb-4">Where do you want to revive and thrive?</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
