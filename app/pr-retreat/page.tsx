@@ -56,8 +56,8 @@ const carouselImages = [
 const itinerary = [
   { day: 'Day 1', title: 'Arrival & Grounding', icon: Sunrise, desc: 'Land at SJU and be at the villa in 10 minutes. Settle into your suite at Villa Azure — beachfront in Ocean Park, steps from the water. Meet your retreat sisters over a welcome dinner prepared by a private chef, and set your intentions for the week ahead.' },
   { day: 'Day 2', title: 'Mind Reset & Movement', icon: Dumbbell, desc: 'Sunrise beach walk, then a morning fitness session by the private heated pool. Guided breakthrough coaching on releasing what no longer serves you. Afternoon spa treatment and journaling time on the oceanfront terrace.' },
-  { day: 'Day 3', title: 'Adventure & Discovery', icon: Mountain, desc: 'Island adventure day — ocean time on the beach out front, and an excursion into Old San Juan and the coastline beyond. Reconnect with the wild, adventurous part of yourself. Evening gathering with soul-aligned conversation under the stars.' },
-  { day: 'Day 4', title: 'Deep Healing & Clarity', icon: Heart, desc: 'Morning breathwork and meditation on the ocean-facing terrace. Deep-dive coaching session on mapping your next bold move in life, love, or business. Lunch overlooking the Atlantic, followed by pool time and sisterhood.' },
+  { day: 'Day 3', title: 'Adventure & Discovery', icon: Mountain, desc: 'Island adventure day — take an excursion to El Yunque National Rainforest, hike the trails and swim in the breathtaking waterfall. Reconnect with the wild, adventurous part of yourself. Evening gathering with soul-aligned conversation and a Caribbean sunset.' },
+  { day: 'Day 4', title: 'Deep Healing & Clarity', icon: Heart, desc: 'Morning mindfulness and movement on the ocean-facing terrace. Deep-dive coaching session on mapping your next bold move in life, love, or business. Lunch overlooking the Atlantic, followed by pool time and sisterhood.' },
   { day: 'Day 5', title: 'Strength & Strategy', icon: Crown, desc: 'Energizing group workout on the sand. Business and life strategy workshop — building the blueprint for your next chapter. Afternoon free on Ocean Park beach. Chef-prepared dinner on the terrace as the sun goes down.' },
   { day: 'Day 6', title: 'Radiance & Renewal', icon: Sparkles, desc: 'Morning yoga by the pool. Glam session — dress up, beachfront photo shoot, feel unstoppable. Celebration dinner where every woman shares her breakthrough moment. Dance, laugh, cry together.' },
   { day: 'Day 7', title: 'Integration & Departure', icon: Waves, desc: 'Sunrise meditation on the beach. Closing ceremony with your retreat sisters, then a 10-minute ride back to SJU. Depart transformed — clearer, stronger, more magnetic than ever. You return home not as someone different, but as someone who finally owns all that she is.' },
@@ -264,78 +264,6 @@ export default function PuertoRicoRetreatPage() {
         </div>
       </section>
 
-      {/* ═══════════════ WORK WITH KRYSTALORE ═══════════════ */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#17495c] via-[#2a7fa0] to-[#41a7c9] text-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-[#b3d312] font-bold tracking-[0.3em] uppercase text-sm mb-3">Featured</p>
-            <h2 className="text-4xl md:text-5xl font-black mb-4">
-              Work with <span className="italic font-serif text-[#f3498c]">Krystalore</span>
-            </h2>
-            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-              Come to a retreat that&rsquo;s already handled &mdash; or build your own with her beside you.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
-              <p className="text-[#f3498c] font-black tracking-[0.2em] uppercase text-xs mb-3">Done For You</p>
-              <h3 className="text-3xl font-black mb-3">Just show up.</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Krystalore and her team handle the entire retreat &mdash; villa, chef, itinerary,
-                transport, programming. You arrive, and everything is already taken care of.
-              </p>
-              <ul className="space-y-3 mb-8 flex-1">
-                {[
-                  'Zero planning — venue, meals and logistics are handled end to end',
-                  'A proven day-by-day itinerary of coaching, movement and adventure',
-                  'Private chef, ground transport and on-site host included',
-                  'Instant community — you arrive solo and leave with a circle',
-                  'Fixed, all-inclusive pricing with payment plans available',
-                ].map((b) => (
-                  <li key={b} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-sm font-bold text-gray-500 mb-5">
-                Best for: individuals and small groups who want the experience without the workload.
-              </p>
-              <RetreatInquiryModal triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] text-white font-black px-7 py-4 rounded-full hover:scale-[1.03] transition-transform shadow-lg" />
-            </div>
-
-            <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
-              <p className="text-[#2a7fa0] font-black tracking-[0.2em] uppercase text-xs mb-3">Done With You</p>
-              <h3 className="text-3xl font-black mb-3">Build your own.</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Host your own retreat with Krystalore guiding the build &mdash; her venues, vendors
-                and playbook, your brand and your people.
-              </p>
-              <ul className="space-y-3 mb-8 flex-1">
-                {[
-                  'Her vetted venues and vendor list — skip the expensive trial and error',
-                  'Pricing, budgeting and profitability mapped before you commit',
-                  'Itinerary and programming designed around your audience',
-                  'Filling-the-room strategy: promotion, offers and enrollment',
-                  'Co-host or speaker support on site if you want backup',
-                  'You keep the relationships, the revenue and the brand',
-                ].map((b) => (
-                  <li key={b} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-sm font-bold text-gray-500 mb-5">
-                Best for: coaches, leaders and organizations running a retreat of their own.
-              </p>
-              <RetreatInquiryModal triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-[#2a7fa0] hover:bg-[#17495c] text-white font-black px-7 py-4 rounded-full transition-colors shadow-lg" />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ═══════════════ WHAT'S INCLUDED ═══════════════ */}
       <section className="py-20 md:py-28 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -355,7 +283,7 @@ export default function PuertoRicoRetreatPage() {
               { icon: Utensils, title: 'Private Chef & Nourishing Cuisine', desc: 'Delicious, healthy meals and refreshing beverages — all thoughtfully prepared to fuel your body and energize your spirit.' },
               { icon: Sunrise, title: 'Breathtaking Mornings', desc: 'Wake up to Caribbean sunrises that remind you daily how beautiful life can be when you put yourself first.' },
               { icon: Dumbbell, title: 'Daily Movement', desc: 'Energizing fitness and stretching sessions to awaken your body, clear your mind, and set the tone for powerful breakthroughs.' },
-              { icon: TreePine, title: 'Island Adventure', desc: 'Step into your bold, adventurous self — ocean days on Ocean Park beach and an unforgettable excursion through Old San Juan and the coast.' },
+              { icon: TreePine, title: 'Island Adventure', desc: 'Step into your bold, adventurous self — ocean days on Ocean Park beach and an unforgettable excursion through El Yunque Rainforest, with breathtaking views and waterfall adventures.' },
               { icon: Crown, title: 'Butler-Level Service', desc: 'Be treated like the queen you are. Every detail is handled so you can fully relax, receive, and focus on YOU.' },
               { icon: Users, title: 'Soul-Aligned Sisterhood', desc: 'Leave with lifelong friendships with women who see you, support you, and are rising right alongside you.' },
             ].map((item, i) => (
@@ -412,9 +340,18 @@ export default function PuertoRicoRetreatPage() {
       </section>
 
       {/* ═══════════════ WHAT YOU'LL LEAVE WITH ═══════════════ */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-[#41a7c9]/10 via-white to-[#f3498c]/5">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        <Image
+          src="/images/retreat/retreat-group-01.jpg"
+          alt=""
+          fill
+          aria-hidden="true"
+          className="object-cover"
+        />
+        {/* keeps the cards and heading readable over the photo */}
+        <div className="absolute inset-0 bg-[#17495c]/75" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white">
             What You&apos;ll Walk Away With
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
@@ -426,7 +363,7 @@ export default function PuertoRicoRetreatPage() {
               'A strategic blueprint for your next chapter — in life and business',
               'The feeling of being fully seen, fully supported, and fully alive',
             ].map((item, i) => (
-              <div key={i} className="flex items-start gap-3 bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+              <div key={i} className="flex items-start gap-3 bg-white/95 backdrop-blur rounded-xl p-5 shadow-lg border border-white/40">
                 <Check className="w-6 h-6 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
                 <p className="text-gray-700 text-lg">{item}</p>
               </div>
@@ -602,6 +539,78 @@ export default function PuertoRicoRetreatPage() {
             </a>
           </div>
           <p className="text-gray-400 text-sm">All-inclusive when you arrive. Flights not included. Payment plans available.</p>
+        </div>
+      </section>
+
+      {/* ═══════════════ WORK WITH KRYSTALORE ═══════════════ */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-[#17495c] via-[#2a7fa0] to-[#41a7c9] text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-[#b3d312] font-bold tracking-[0.3em] uppercase text-sm mb-3">Featured</p>
+            <h2 className="text-4xl md:text-5xl font-black mb-4">
+              Work with <span className="italic font-serif text-[#f3498c]">Krystalore</span>
+            </h2>
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+              Come to a retreat that&rsquo;s already handled &mdash; or build your own with her beside you.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
+              <p className="text-[#f3498c] font-black tracking-[0.2em] uppercase text-xs mb-3">Done For You</p>
+              <h3 className="text-3xl font-black mb-3">Just show up.</h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Krystalore and her team handle the entire retreat &mdash; villa, chef, itinerary,
+                transport, programming. You arrive, and everything is already taken care of.
+              </p>
+              <ul className="space-y-3 mb-8 flex-1">
+                {[
+                  'Zero planning — venue, meals and logistics are handled end to end',
+                  'A proven day-by-day itinerary of coaching, movement and adventure',
+                  'Private chef, ground transport and on-site host included',
+                  'Instant community — you arrive solo and leave with a circle',
+                  'Fixed, all-inclusive pricing with payment plans available',
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm font-bold text-gray-500 mb-5">
+                Best for: individuals and small groups who want the experience without the workload.
+              </p>
+              <RetreatInquiryModal triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] text-white font-black px-7 py-4 rounded-full hover:scale-[1.03] transition-transform shadow-lg" />
+            </div>
+
+            <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
+              <p className="text-[#2a7fa0] font-black tracking-[0.2em] uppercase text-xs mb-3">Done With You</p>
+              <h3 className="text-3xl font-black mb-3">Build your own.</h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Host your own retreat with Krystalore guiding the build &mdash; her venues, vendors
+                and playbook, your brand and your people.
+              </p>
+              <ul className="space-y-3 mb-8 flex-1">
+                {[
+                  'Her vetted venues and vendor list — skip the expensive trial and error',
+                  'Pricing, budgeting and profitability mapped before you commit',
+                  'Itinerary and programming designed around your audience',
+                  'Filling-the-room strategy: promotion, offers and enrollment',
+                  'Co-host or speaker support on site if you want backup',
+                  'You keep the relationships, the revenue and the brand',
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm font-bold text-gray-500 mb-5">
+                Best for: coaches, leaders and organizations running a retreat of their own.
+              </p>
+              <RetreatInquiryModal triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-[#2a7fa0] hover:bg-[#17495c] text-white font-black px-7 py-4 rounded-full transition-colors shadow-lg" />
+            </div>
+          </div>
         </div>
       </section>
 
