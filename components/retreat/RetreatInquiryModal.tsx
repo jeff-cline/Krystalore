@@ -25,7 +25,7 @@ const empty = {
 const label = 'block text-xs font-bold uppercase tracking-wide text-gray-500 mb-1'
 const field =
   'w-full border border-gray-300 rounded-xl px-4 py-3 text-[15px] text-gray-900 placeholder-gray-400 ' +
-  'focus:ring-2 focus:ring-[#0D9488] focus:border-[#0D9488] outline-none transition-shadow bg-white'
+  'focus:ring-2 focus:ring-[#41a7c9] focus:border-[#41a7c9] outline-none transition-shadow bg-white'
 
 export default function RetreatInquiryModal({
   triggerClassName = '',
@@ -96,7 +96,7 @@ export default function RetreatInquiryModal({
             onClick={(e) => e.stopPropagation()}
           >
             {/* header */}
-            <div className="bg-gradient-to-br from-[#123f3a] via-[#1b544c] to-[#22635a] text-white px-6 md:px-8 py-6 relative">
+            <div className="bg-gradient-to-br from-[#17495c] via-[#2a7fa0] to-[#41a7c9] text-white px-6 md:px-8 py-6 relative">
               <button
                 onClick={close}
                 aria-label="Close"
@@ -104,9 +104,9 @@ export default function RetreatInquiryModal({
               >
                 <X className="h-5 w-5" />
               </button>
-              <p className="text-[#7fe3e3] font-bold tracking-[0.2em] uppercase text-xs mb-2">Revive &amp; Thrive Retreats</p>
+              <p className="text-[#b3d312] font-bold tracking-[0.2em] uppercase text-xs mb-2">Revive &amp; Thrive Retreats</p>
               <h2 className="text-2xl md:text-3xl font-black leading-tight">
-                Tell us about your <span className="italic font-serif text-[#E8A849]">retreat.</span>
+                Tell us about your <span className="italic font-serif text-[#f3498c]">retreat.</span>
               </h2>
               <p className="text-white/80 mt-2 text-sm md:text-base">
                 Share a few details and Krystalore will personally follow up.
@@ -115,8 +115,8 @@ export default function RetreatInquiryModal({
 
             {done ? (
               <div className="px-6 md:px-10 py-14 text-center">
-                <div className="mx-auto w-16 h-16 rounded-full bg-[#0D9488]/10 flex items-center justify-center mb-5">
-                  <Check className="h-8 w-8 text-[#0D9488]" />
+                <div className="mx-auto w-16 h-16 rounded-full bg-[#41a7c9]/10 flex items-center justify-center mb-5">
+                  <Check className="h-8 w-8 text-[#2a7fa0]" />
                 </div>
                 <h3 className="text-2xl font-black mb-3">Thank you — it&rsquo;s on its way.</h3>
                 <p className="text-gray-600 max-w-md mx-auto mb-8">
@@ -125,7 +125,7 @@ export default function RetreatInquiryModal({
                 </p>
                 <button
                   onClick={close}
-                  className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0b7d73] text-white font-black px-8 py-3 rounded-full transition-colors"
+                  className="inline-flex items-center gap-2 bg-[#2a7fa0] hover:bg-[#17495c] text-white font-black px-8 py-3 rounded-full transition-colors"
                 >
                   Close
                 </button>
@@ -197,7 +197,7 @@ export default function RetreatInquiryModal({
                   <button
                     type="submit"
                     disabled={sending}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] disabled:opacity-60 text-white font-black px-8 py-4 rounded-full hover:scale-[1.03] transition-transform shadow-lg"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] disabled:opacity-60 text-white font-black px-8 py-4 rounded-full hover:scale-[1.03] transition-transform shadow-lg"
                   >
                     {sending ? <Loader2 className="h-5 w-5 animate-spin" /> : null}
                     {sending ? 'Sending…' : 'Send My Request'}

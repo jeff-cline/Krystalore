@@ -18,7 +18,7 @@ export default function RetreatHeroMontage({ images }: { images: string[] }) {
   }, [images.length])
 
   return (
-    <div className="relative w-full h-[38vh] min-h-[260px] md:h-[52vh] md:min-h-[420px] overflow-hidden bg-[#123f3a]">
+    <div className="relative w-full h-[38vh] min-h-[260px] md:h-[52vh] md:min-h-[420px] overflow-hidden bg-[#17495c]">
       {images.map((src, n) => (
         <Image
           key={src}

@@ -61,7 +61,7 @@ export function buildEventMailto() {
 export function RetreatCTAButtons({ onDark = false }: { onDark?: boolean }) {
   return (
     <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-      <Link href="/waitlist" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-full hover:scale-105 transition-transform shadow-lg">
+      <Link href="/waitlist" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] text-white font-black px-7 py-4 rounded-full hover:scale-105 transition-transform shadow-lg">
         Wait List & Updates <ArrowRight className="h-5 w-5" />
       </Link>
       <a
@@ -70,8 +70,8 @@ export function RetreatCTAButtons({ onDark = false }: { onDark?: boolean }) {
         rel="noopener noreferrer"
         className={
           onDark
-            ? 'inline-flex items-center justify-center gap-2 border-2 border-white/70 text-white font-black px-7 py-4 rounded-full hover:bg-white hover:text-[#123f3a] transition-colors'
-            : 'inline-flex items-center justify-center gap-2 border-2 border-[#0D9488] text-[#0D9488] font-black px-7 py-4 rounded-full hover:bg-[#0D9488]/5 transition-colors'
+            ? 'inline-flex items-center justify-center gap-2 border-2 border-white/70 text-white font-black px-7 py-4 rounded-full hover:bg-white hover:text-[#17495c] transition-colors'
+            : 'inline-flex items-center justify-center gap-2 border-2 border-[#2a7fa0] text-[#2a7fa0] font-black px-7 py-4 rounded-full hover:bg-[#41a7c9]/5 transition-colors'
         }
       >
         Book Private Retreat
@@ -137,11 +137,11 @@ export function RetreatHubPage() {
                 />
               </div>
               <div className="text-center md:text-left">
-                <p className="text-[#0D9488] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4">
+                <p className="text-[#2a7fa0] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4">
                   Revive &amp; Thrive Retreats
                 </p>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.02] mb-5 text-gray-900">
-                  Retreat <span className="italic font-serif text-[#E8A849]">Yourself</span>
+                  Retreat <span className="italic font-serif text-[#f3498c]">Yourself</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0">
                   Transformational getaways for anyone ready to reset and rise. You do EVERYTHING for
@@ -156,10 +156,10 @@ export function RetreatHubPage() {
         </section>
 
         {/* ── CHOOSE YOUR EXPERIENCE — retreat types ── */}
-        <section className="bg-[#1b544c] text-white border-t border-white/10">
+        <section className="bg-[#2a7fa0] text-white border-t border-white/10">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 text-center">
             <h2 className="text-4xl md:text-5xl font-black mb-3">
-              Choose your <span className="italic font-serif text-[#E8A849]">experience.</span>
+              Choose your <span className="italic font-serif text-[#f3498c]">experience.</span>
             </h2>
             <p className="text-lg md:text-xl text-white/80 mb-10">
               Coaching, movement, wellness &amp; sisterhood &mdash; in breathtaking places.
@@ -190,7 +190,7 @@ export function RetreatHubPage() {
         <section className="py-16 md:py-24 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="text-[#0D9488] font-bold tracking-[0.3em] uppercase text-sm mb-3">Signature Destinations</p>
+              <p className="text-[#2a7fa0] font-bold tracking-[0.3em] uppercase text-sm mb-3">Signature Destinations</p>
               <h2 className="text-3xl md:text-4xl font-black mb-4">Where do you want to revive and thrive?</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
@@ -198,13 +198,13 @@ export function RetreatHubPage() {
                 <Link key={retreat.href} href={retreat.href} className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all">
                   <div className="relative aspect-[16/11] overflow-hidden">
                     <Image src={retreat.image} alt={retreat.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
-                    {retreat.badge && <span className="absolute top-4 left-4 bg-[#E8A849] text-white text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full">{retreat.badge}</span>}
+                    {retreat.badge && <span className="absolute top-4 left-4 bg-[#f3498c] text-white text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full">{retreat.badge}</span>}
                   </div>
                   <div className="p-6">
-                    <p className="text-sm text-[#0D9488] font-bold mb-2"><MapPin className="inline h-4 w-4 mr-1" />{retreat.location}</p>
+                    <p className="text-sm text-[#2a7fa0] font-bold mb-2"><MapPin className="inline h-4 w-4 mr-1" />{retreat.location}</p>
                     <h3 className="text-2xl font-black mb-2">{retreat.title}</h3>
                     <p className="text-gray-600 leading-relaxed mb-5">{retreat.description}</p>
-                    <span className="inline-flex items-center gap-2 text-[#0D9488] font-black">{retreat.cta ?? 'Learn More'} <ArrowRight className="h-4 w-4" /></span>
+                    <span className="inline-flex items-center gap-2 text-[#2a7fa0] font-black">{retreat.cta ?? 'Learn More'} <ArrowRight className="h-4 w-4" /></span>
                   </div>
                 </Link>
               ))}
@@ -213,12 +213,12 @@ export function RetreatHubPage() {
         </section>
 
         {/* ── WORK WITH KRYSTALORE ── */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-[#123f3a] via-[#1b544c] to-[#22635a] text-white">
+        <section className="py-16 md:py-24 bg-gradient-to-br from-[#17495c] via-[#2a7fa0] to-[#41a7c9] text-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="text-[#7fe3e3] font-bold tracking-[0.3em] uppercase text-sm mb-3">Featured</p>
+              <p className="text-[#b3d312] font-bold tracking-[0.3em] uppercase text-sm mb-3">Featured</p>
               <h2 className="text-4xl md:text-5xl font-black mb-4">
-                Work with <span className="italic font-serif text-[#E8A849]">Krystalore</span>
+                Work with <span className="italic font-serif text-[#f3498c]">Krystalore</span>
               </h2>
               <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
                 Come to a retreat that&rsquo;s already handled &mdash; or build your own with her beside you.
@@ -228,7 +228,7 @@ export function RetreatHubPage() {
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
               {/* DONE FOR YOU */}
               <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
-                <p className="text-[#E8A849] font-black tracking-[0.2em] uppercase text-xs mb-3">Done For You</p>
+                <p className="text-[#f3498c] font-black tracking-[0.2em] uppercase text-xs mb-3">Done For You</p>
                 <h3 className="text-3xl font-black mb-3">Just show up.</h3>
                 <p className="text-gray-600 leading-relaxed mb-6">
                   Krystalore and her team handle the entire retreat &mdash; villa, chef, itinerary,
@@ -243,7 +243,7 @@ export function RetreatHubPage() {
                     'Fixed, all-inclusive pricing with payment plans available',
                   ].map((b) => (
                     <li key={b} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-[#0D9488] flex-shrink-0 mt-0.5" />
+                      <Check className="h-5 w-5 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700">{b}</span>
                     </li>
                   ))}
@@ -252,13 +252,13 @@ export function RetreatHubPage() {
                   Best for: individuals and small groups who want the experience without the workload.
                 </p>
                 <RetreatInquiryModal
-                  triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-full hover:scale-[1.03] transition-transform shadow-lg"
+                  triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] text-white font-black px-7 py-4 rounded-full hover:scale-[1.03] transition-transform shadow-lg"
                 />
               </div>
 
               {/* DONE WITH YOU */}
               <div className="bg-white text-gray-900 rounded-3xl p-8 md:p-10 shadow-xl flex flex-col">
-                <p className="text-[#0D9488] font-black tracking-[0.2em] uppercase text-xs mb-3">Done With You</p>
+                <p className="text-[#2a7fa0] font-black tracking-[0.2em] uppercase text-xs mb-3">Done With You</p>
                 <h3 className="text-3xl font-black mb-3">Build your own.</h3>
                 <p className="text-gray-600 leading-relaxed mb-6">
                   Host your own retreat with Krystalore guiding the build &mdash; her venues, vendors
@@ -274,7 +274,7 @@ export function RetreatHubPage() {
                     'You keep the relationships, the revenue and the brand',
                   ].map((b) => (
                     <li key={b} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-[#0D9488] flex-shrink-0 mt-0.5" />
+                      <Check className="h-5 w-5 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700">{b}</span>
                     </li>
                   ))}
@@ -283,7 +283,7 @@ export function RetreatHubPage() {
                   Best for: coaches, leaders and organizations running a retreat of their own.
                 </p>
                 <RetreatInquiryModal
-                  triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0b7d73] text-white font-black px-7 py-4 rounded-full transition-colors shadow-lg"
+                  triggerClassName="w-full inline-flex items-center justify-center gap-2 bg-[#2a7fa0] hover:bg-[#17495c] text-white font-black px-7 py-4 rounded-full transition-colors shadow-lg"
                 />
               </div>
             </div>
@@ -293,22 +293,22 @@ export function RetreatHubPage() {
         <section className="py-16 md:py-24 bg-[#F4F1EC]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
             <a href={PRIVATE_RETREAT_URL} target="_blank" rel="noopener noreferrer" className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-shadow">
-              <Users className="h-10 w-10 text-[#0D9488] mb-4" />
+              <Users className="h-10 w-10 text-[#2a7fa0] mb-4" />
               <h3 className="text-2xl font-black mb-3">Book Private Retreat</h3>
               <p className="text-gray-600 mb-5">Create a custom retreat for your team, organization, circle, or private group.</p>
-              <span className="font-black text-[#0D9488] inline-flex items-center gap-2">Request Details <ArrowRight className="h-4 w-4" /></span>
+              <span className="font-black text-[#2a7fa0] inline-flex items-center gap-2">Request Details <ArrowRight className="h-4 w-4" /></span>
             </a>
             <Link href="/waitlist" className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-shadow">
-              <Heart className="h-10 w-10 text-[#E8A849] mb-4" />
+              <Heart className="h-10 w-10 text-[#f3498c] mb-4" />
               <h3 className="text-2xl font-black mb-3">Waitlist</h3>
               <p className="text-gray-600 mb-5">Get updates for open rooms, future dates, checkout windows, and upcoming retreat announcements.</p>
-              <span className="font-black text-[#0D9488] inline-flex items-center gap-2">Join Updates <ArrowRight className="h-4 w-4" /></span>
+              <span className="font-black text-[#2a7fa0] inline-flex items-center gap-2">Join Updates <ArrowRight className="h-4 w-4" /></span>
             </Link>
             <a href={buildEventMailto()} className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-shadow">
-              <Mail className="h-10 w-10 text-[#0D9488] mb-4" />
+              <Mail className="h-10 w-10 text-[#2a7fa0] mb-4" />
               <h3 className="text-2xl font-black mb-3">Book Krystalore to Speak or Collab</h3>
               <p className="text-gray-600 mb-5">Invite Krystalore to your retreat, event, or collaboration opportunity.</p>
-              <span className="font-black text-[#0D9488] inline-flex items-center gap-2">Send Email Request <ArrowRight className="h-4 w-4" /></span>
+              <span className="font-black text-[#2a7fa0] inline-flex items-center gap-2">Send Email Request <ArrowRight className="h-4 w-4" /></span>
             </a>
           </div>
         </section>
@@ -336,24 +336,24 @@ export function RetreatLander({ eyebrow, title, dates, location, description, he
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
       <main>
-        <section className="relative bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white pt-12 md:pt-20 pb-16 md:pb-24 overflow-hidden">
+        <section className="relative bg-gradient-to-b from-[#41a7c9]/10 via-[#F6F8FA] to-white pt-12 md:pt-20 pb-16 md:pb-24 overflow-hidden">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 bg-[#34c5c5]/15 text-[#0D9488] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
+                <div className="inline-flex items-center gap-2 bg-[#41a7c9]/15 text-[#2a7fa0] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-5">
                   <Sparkles className="h-3.5 w-3.5" /> {eyebrow}
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-5 leading-[1.05]">{title}</h1>
                 <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-4">{description}</p>
                 <div className="flex flex-col sm:flex-row gap-3 text-gray-700 font-bold mb-8">
-                  <span><Calendar className="inline h-5 w-5 text-[#0D9488] mr-2" />{dates}</span>
-                  <span><MapPin className="inline h-5 w-5 text-[#0D9488] mr-2" />{location}</span>
+                  <span><Calendar className="inline h-5 w-5 text-[#2a7fa0] mr-2" />{dates}</span>
+                  <span><MapPin className="inline h-5 w-5 text-[#2a7fa0] mr-2" />{location}</span>
                 </div>
                 <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-                  <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-black px-7 py-4 rounded-full hover:scale-105 transition-transform shadow-lg">
+                  <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f3498c] to-[#d92d70] text-white font-black px-7 py-4 rounded-full hover:scale-105 transition-transform shadow-lg">
                     {checkoutLabel} <ArrowRight className="h-5 w-5" />
                   </a>
-                  <a href={WAITLIST_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border-2 border-[#0D9488] text-[#0D9488] font-black px-7 py-4 rounded-full hover:bg-[#0D9488]/5 transition-colors">
+                  <a href={WAITLIST_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border-2 border-[#2a7fa0] text-[#2a7fa0] font-black px-7 py-4 rounded-full hover:bg-[#41a7c9]/5 transition-colors">
                     Wait List & Updates
                   </a>
                   <a href={PRIVATE_RETREAT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-800 font-black px-7 py-4 rounded-full hover:bg-gray-50 transition-colors">
@@ -378,12 +378,12 @@ export function RetreatLander({ eyebrow, title, dates, location, description, he
               ))}
             </div>
             <div className="bg-[#F4F1EC] rounded-3xl p-8 md:p-12">
-              <p className="text-[#0D9488] font-bold uppercase tracking-widest text-sm mb-3">What to Expect</p>
+              <p className="text-[#2a7fa0] font-bold uppercase tracking-widest text-sm mb-3">What to Expect</p>
               <h2 className="text-3xl md:text-4xl font-black mb-8">A retreat designed for clarity, confidence, and community.</h2>
               <div className="grid md:grid-cols-2 gap-5">
                 {highlights.map((item) => (
                   <div key={item} className="flex gap-3 bg-white rounded-2xl p-5 shadow-sm">
-                    <Check className="h-6 w-6 text-[#0D9488] flex-shrink-0 mt-0.5" />
+                    <Check className="h-6 w-6 text-[#2a7fa0] flex-shrink-0 mt-0.5" />
                     <p className="text-gray-700 font-medium">{item}</p>
                   </div>
                 ))}
@@ -392,7 +392,7 @@ export function RetreatLander({ eyebrow, title, dates, location, description, he
           </div>
         </section>
 
-        <section className="py-16 md:py-24 bg-gradient-to-br from-[#E8A849] to-[#e07800] text-white">
+        <section className="py-16 md:py-24 bg-gradient-to-br from-[#f3498c] to-[#d92d70] text-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-black mb-5">Ready for updates or a private retreat?</h2>
             <p className="text-lg md:text-xl text-white/90 mb-8">Join the waitlist for retreat updates, or request a private retreat experience built around your group.</p>
