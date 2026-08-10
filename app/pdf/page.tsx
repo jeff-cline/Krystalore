@@ -8,7 +8,7 @@ const bios = [
   { show: 'Uncomfortable Conversations', tag: 'Divorce, grief & loss → a hook into the Rise & Thrive Bundle. Compassionate Inquiry, NEXT, Freedom Formula.', file: 'Krystalore-Crews-Uncomfortable-Conversations.pdf', vip: true },
   { show: 'AMP Sports Talk', tag: 'Athlete mindset — NFL sideline to wheelchair to 50-mile ultra. Beyond Limits Bootcamp, high-performance coaching.', file: 'Krystalore-Crews-AMP-Sports-Talk.pdf' },
   { show: 'Thrive Health & Wellness', tag: 'Holistic health, “health is wealth,” the 34-minute mindset, and the Freedom Formula.', file: 'Krystalore-Crews-Thrive-Health-and-Wellness.pdf' },
-  { show: 'Speaker & Emcee', tag: 'The full booking one-sheet — signature speaking topics across leadership, emotional intelligence, health, and fitness, plus credentials, featured-on logos, and raving reviews.', file: 'Krystalore-Crews-Speaker-and-Emcee.pdf', badge: 'One-Sheet' },
+  { show: 'Speaker & Emcee', tag: '5M+ community members across her brand and managed social platforms, and 150+ live events a year. Signature speaking topics, credentials, featured-on logos, and raving reviews.', file: 'Krystalore-Crews-Speaker-and-Emcee.pdf', badge: 'One-Sheet' },
   { show: 'Social Media Influencer & Trainer', tag: '5M+ reach across managed Facebook Pages, live on camera 3× a week, and lead of Doublewide Media. What she trains and what you can book her for.', file: 'Krystalore-Crews-Social-Media-Influencer-and-Trainer.pdf', badge: 'One-Sheet' },
 ]
 
