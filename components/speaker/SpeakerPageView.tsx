@@ -113,6 +113,7 @@ const roleChips = [
   'Certified Coach',
   'Author',
   '28x Marathon Finisher',
+  '50-Mile Ultra Finisher',
   'Cancer Survivor',
 ]
 
