@@ -33,7 +33,7 @@ export default function PdfBios() {
               {[
                 { file: 'retreat-postcard-5x7-PRINT.pdf', pages: '2 Pages · 5×7 · print' },
                 { file: 'retreat-postcard-5x7-VIDEO.pdf', pages: '2 Pages · 5×7 · tappable video links' },
-                { file: 'retreat-postcard-5x7.pdf', pages: '2 Pages · 5×7' },
+                { file: 'bootcamp-postcard/Krystalore-Bootcamp-Postcard.pdf', pages: '2 Pages · 6×4 · print' },
                 { file: 'krystalore-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11' },
                 { file: 'her-next-mission-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11' },
               ].map((f) => (
@@ -48,7 +48,7 @@ export default function PdfBios() {
                     <FileText className="w-6 h-6 text-[#2a7fa0]" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-black text-gray-900 text-base leading-tight break-all">{f.file}</h3>
+                    <h3 className="font-black text-gray-900 text-base leading-tight break-all">{f.file.split('/').pop()}</h3>
                     <p className="text-sm text-gray-500 mt-1">{f.pages}</p>
                     <span className="inline-flex items-center gap-1.5 text-[#2a7fa0] font-bold text-sm mt-2 group-hover:gap-2.5 transition-all">
                       View PDF <Download className="w-4 h-4" />
