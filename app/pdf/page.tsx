@@ -31,6 +31,8 @@ export default function PdfBios() {
             <h2 className="text-2xl font-black text-gray-900 mb-4">Flyers &amp; Postcards</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
+                { file: 'retreat-postcard-5x7-PRINT.pdf', pages: '2 Pages · 5×7 · print' },
+                { file: 'retreat-postcard-5x7-VIDEO.pdf', pages: '2 Pages · 5×7 · tappable video links' },
                 { file: 'retreat-postcard-5x7.pdf', pages: '2 Pages · 5×7' },
                 { file: 'krystalore-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11' },
                 { file: 'her-next-mission-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11' },
