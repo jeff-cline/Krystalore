@@ -25,6 +25,39 @@ export default function PdfBios() {
           </div>
         </section>
 
+        {/* Flyers & postcards — labelled by file name */}
+        <section className="pb-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-black text-gray-900 mb-4">Flyers &amp; Postcards</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                { file: 'retreat-postcard-5x7.pdf', pages: '2 Pages · 5×7' },
+                { file: 'krystalore-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11' },
+                { file: 'her-next-mission-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11' },
+              ].map((f) => (
+                <a
+                  key={f.file}
+                  href={`/pdf/${f.file}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 hover:shadow-md hover:border-[#41a7c9]/60 transition-all"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-[#41a7c9]/15 flex items-center justify-center flex-shrink-0">
+                    <FileText className="w-6 h-6 text-[#2a7fa0]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-black text-gray-900 text-base leading-tight break-all">{f.file}</h3>
+                    <p className="text-sm text-gray-500 mt-1">{f.pages}</p>
+                    <span className="inline-flex items-center gap-1.5 text-[#2a7fa0] font-bold text-sm mt-2 group-hover:gap-2.5 transition-all">
+                      View PDF <Download className="w-4 h-4" />
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Puerto Rico Retreat — marketing flyers */}
         <section className="pb-8">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
