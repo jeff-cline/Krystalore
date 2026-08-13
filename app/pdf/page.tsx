@@ -34,6 +34,8 @@ export default function PdfBios() {
                 { file: 'retreat-postcard-5x7-PRINT.pdf', pages: '2 Pages · 5×7 · print' },
                 { file: 'retreat-postcard-5x7-VIDEO.pdf', pages: '2 Pages · 5×7 · tappable video links' },
                 { file: 'retreat-postcard-5x7-4up-front-back.pdf', pages: '2 Pages · 4-up on 8.5×11 · front & back' },
+                { file: 'retreat-postcard-5x7-PRINT-4up-front-back.pdf', pages: '2 Pages · 4-up on 8.5×11 · front & back' },
+                { file: 'retreat-postcard-5x7-VIDEO-4up-front-back.pdf', pages: '2 Pages · 4-up on 8.5×11 · front & back · video links' },
                 { file: 'bootcamp-postcard/Krystalore-Bootcamp-Postcard.pdf', pages: '2 Pages · 6×4 · print' },
                 { file: 'Krystalore-Bootcamp-Flyer-8.5x11.pdf', pages: '2 Pages · 8.5×11 · front & back' },
                 { file: 'Krystalore-Bootcamp-Flyer-4up-front-back.pdf', pages: '2 Pages · 4-up on 8.5×11 · front & back' },
