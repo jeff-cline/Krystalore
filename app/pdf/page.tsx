@@ -35,7 +35,8 @@ export default function PdfBios() {
                 { file: 'retreat-postcard-5x7-VIDEO.pdf', pages: '2 Pages · 5×7 · tappable video links' },
                 { file: 'bootcamp-postcard/Krystalore-Bootcamp-Postcard.pdf', pages: '2 Pages · 6×4 · print' },
                 { file: 'Krystalore-Books-Flyer-8.5x11.pdf', pages: '1 Page · 8.5×11 · book show stand' },
-                { file: 'krystalore-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11' },
+                { file: 'krystalore-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11 · print' },
+                { file: 'krystalore-flyer-4up.pdf', pages: '1 Page · 4-up on 8.5×11' },
                 { file: 'her-next-mission-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11' },
               ].map((f) => (
                 <a
