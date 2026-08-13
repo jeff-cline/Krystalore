@@ -42,6 +42,8 @@ export default function PdfBios() {
                 { file: 'Krystalore-Bootcamp-Flyer-4up-FULLBLEED.pdf', pages: '2 Pages · 4-up · full bleed black' },
                 { file: 'Krystalore-Bootcamp-Flyer-4up-FULLBLEED-CUTLINES.pdf', pages: '2 Pages · 4-up full bleed black · cut guides' },
                 { file: 'Krystalore-Bootcamp-Flyer-8.5x11-ONEPAGE.pdf', pages: '1 Page · 8.5×11 · everything on one side' },
+                { file: 'Krystalore-Bootcamp-Flyer-4up-ONEPAGE.pdf', pages: '1 Page · 4-up on 8.5×11' },
+                { file: 'Krystalore-Bootcamp-Flyer-4up-ONEPAGE-CUTLINES.pdf', pages: '1 Page · 4-up with cut guides' },
                 { file: 'BeyondLimitsBootcamp-Flyer-8.5x11-ONEPAGE.pdf', pages: '1 Page · 8.5×11 · beyondlimitsbootcamp.com' },
                 { file: 'BeyondLimitsBootcamp-Flyer-4up.pdf', pages: '1 Page · 4-up on 8.5×11' },
                 { file: 'BeyondLimitsBootcamp-Flyer-4up-CUTLINES.pdf', pages: '1 Page · 4-up with cut guides' },
