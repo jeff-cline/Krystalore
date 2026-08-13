@@ -37,6 +37,7 @@ export default function PdfBios() {
                 { file: 'bootcamp-postcard/Krystalore-Bootcamp-Postcard.pdf', pages: '2 Pages · 6×4 · print' },
                 { file: 'Krystalore-Bootcamp-Flyer-8.5x11.pdf', pages: '2 Pages · 8.5×11 · front & back' },
                 { file: 'Krystalore-Bootcamp-Flyer-4up-front-back.pdf', pages: '2 Pages · 4-up on 8.5×11 · front & back' },
+                { file: 'Krystalore-Bootcamp-Flyer-4up-CUTLINES.pdf', pages: '2 Pages · 4-up with cut guides · copy & cut at home' },
                 { file: 'Krystalore-Books-Flyer-8.5x11.pdf', pages: '1 Page · 8.5×11 · book show stand' },
                 { file: 'krystalore-flyer-8.5x11.pdf', pages: '1 Page · 8.5×11 · print' },
                 { file: 'krystalore-flyer-4up.pdf', pages: '1 Page · 4-up on 8.5×11' },
