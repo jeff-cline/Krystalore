@@ -99,6 +99,18 @@ export default function PdfBios() {
                   badge: '1 Page',
                 },
                 {
+                  file: 'Krystalore-PR-Retreat-Flyer-4up.pdf',
+                  title: 'One-Page Flyer — 4-up',
+                  tag: 'Four copies of the one-pager on a single 8.5×11 sheet. For a commercial printer — no guides.',
+                  badge: '4-up',
+                },
+                {
+                  file: 'Krystalore-PR-Retreat-Flyer-4up-CUTLINES.pdf',
+                  title: 'One-Page Flyer — 4-up with Cut Guides',
+                  tag: 'Same sheet with hairline dashed guides in the gutters — print on a copier and cut by hand.',
+                  badge: '4-up',
+                },
+                {
                   file: 'Krystalore-PR-Retreat-Flyer-2page.pdf',
                   title: 'Two-Page Flyer',
                   tag: 'Adds the full 7-day itinerary and every testimonial video — all links clickable.',
