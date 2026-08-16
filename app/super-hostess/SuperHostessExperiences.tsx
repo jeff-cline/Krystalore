@@ -21,7 +21,7 @@ export default function SuperHostessExperiences() {
               {g.items.map((exp) => (
                 <div key={exp.title} className="group flex flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={exp.image} alt={exp.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(max-width:768px) 100vw, 33vw" />
+                    <Image src={exp.image} alt={exp.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(max-width:768px) 100vw, 33vw" style={exp.focus ? { objectPosition: exp.focus } : undefined} />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
                     {/* H2 per the brief — the experience name is the heading */}

@@ -50,6 +50,7 @@ const eventsLinks = [
   { href: '/bombshell', label: 'Bombshell' },
   { href: '/retreats', label: 'Retreats' },
   { href: '/vision-board', label: 'Vision Board' },
+  { href: '/super-hostess', label: 'Super Hostess' },
   { href: '/masterclass', label: 'Masterclass' },
   { href: '/speaker', label: 'Speaking' },
 ]

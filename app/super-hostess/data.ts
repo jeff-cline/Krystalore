@@ -2,7 +2,9 @@
 // villa, or Airbnb. Each experience is individually bookable. Images feature Krystalore
 // as the host; swap freely — they're just paths.
 
-export type Experience = { title: string; blurb: string; image: string }
+// `focus` sets the CSS object-position for the card image — use it when a photo's
+// subject sits away from centre and the 4:3 crop would cut them off.
+export type Experience = { title: string; blurb: string; image: string; focus?: string }
 export type Group = { key: string; label: string; eyebrow: string; items: Experience[] }
 
 export const GROUPS: Group[] = [
@@ -15,7 +17,8 @@ export const GROUPS: Group[] = [
         blurb: 'From welcome to farewell, Krystalore runs the room. As your on-site host and emcee she sets the tone, keeps the energy high, and choreographs every moment so your guests feel seen and completely taken care of — while you get to enjoy your own event.' },
       { title: 'Beach Picnic', image: '/images/corporate-retreat/colibri-resort.jpg',
         blurb: 'A curated beachfront picnic — linens, local flavors, and a slow-down-and-savor pace set to the sound of the waves. Perfect as a welcome gathering, a celebration, or simply a beautiful reason to bring your people to the sea.' },
-      { title: 'Fitness — Training & Group Exercise', image: '/images/go9/fitness-outdoor.jpg',
+      // Portrait shot (EXIF-rotated) in a landscape card, so a centred crop cuts her head off.
+      { title: 'Fitness — Training & Group Exercise', image: '/images/go9/fitness-outdoor.jpg', focus: '50% 0%',
         blurb: 'High-energy, all-levels training led by a 28-time marathoner and certified coach. Whether it is a sunrise group workout or a private session, every class is scaled to your crowd so everyone leaves stronger, sweatier, and smiling.' },
       { title: 'Stretch & Meditation', image: '/images/go9/meditation.webp',
         blurb: 'A guided stretch and meditation session to reset the nervous system — mobility, breathwork, and stillness. Offered for the whole group or one-on-one, it is the exhale your itinerary has been missing.' },
@@ -48,7 +51,7 @@ export const GROUPS: Group[] = [
         blurb: 'Map the next 90 days and the next three years on one wall — priorities, dependencies, and the critical path. Everyone leaves knowing exactly what matters and who owns it.' },
       { title: 'Goal Setting', image: '/images/go9/speaking-event.jpg',
         blurb: 'Turn vague ambition into a concrete, accountable plan — outcomes, milestones, and the metrics that prove progress. Run it for individuals or the whole team.' },
-      { title: 'Vision Board Workshop', image: '/images/vision-board/vision-board-hero.png',
+      { title: 'Vision Board Workshop', image: '/images/super-hostess/vision-board-workshop.jpg',
         blurb: 'A guided vision board experience that gets your team or guests clear on what they are building — creative, reflective, and surprisingly strategic. They leave inspired and aligned.' },
     ],
   },
@@ -57,7 +60,7 @@ export const GROUPS: Group[] = [
     label: 'For Brides & Bridal Parties',
     eyebrow: 'For the bride & her crew',
     items: [
-      { title: 'Bridal Boot Camp', image: '/images/bombshell-bootcamp/bombshell-workout.png',
+      { title: 'Bridal Boot Camp', image: '/images/super-hostess/bridal-boot-camp.jpg',
         blurb: 'A themed, all-levels boot camp for the bride and her crew — sweat, laughs, and that pre-wedding glow, styled to match her colors and vibe. The most fun she will have getting ready.' },
       { title: 'HERO Fitness', image: '/images/go9/fitness.jpg',
         blurb: "Krystalore's signature HERO fitness — a bold, empowering workout that leaves the bridal party feeling strong, confident, and unstoppable. Bring the group; leave as warriors." },
