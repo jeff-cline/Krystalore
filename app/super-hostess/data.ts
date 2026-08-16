@@ -60,7 +60,8 @@ export const GROUPS: Group[] = [
     label: 'For Brides & Bridal Parties',
     eyebrow: 'For the bride & her crew',
     items: [
-      { title: 'Bridal Boot Camp', image: '/images/super-hostess/bridal-boot-camp.jpg',
+      // She's low in the frame doing push-ups, so anchor the crop to the bottom.
+      { title: 'Bridal Boot Camp', image: '/images/super-hostess/bridal-boot-camp.jpg', focus: '50% 100%',
         blurb: 'A themed, all-levels boot camp for the bride and her crew — sweat, laughs, and that pre-wedding glow, styled to match her colors and vibe. The most fun she will have getting ready.' },
       { title: 'HERO Fitness', image: '/images/go9/fitness.jpg',
         blurb: "Krystalore's signature HERO fitness — a bold, empowering workout that leaves the bridal party feeling strong, confident, and unstoppable. Bring the group; leave as warriors." },
