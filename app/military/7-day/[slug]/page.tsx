@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Users, Target, FileDown } from 'lucide-react'
-import { DAYS, DAY_RATE, DURATION, GROUP_RANGE } from '../../program-data'
+import Image from 'next/image'
+import { DAYS, DAY_RATE, DURATION, GROUP_RANGE, PRICING_NOTE } from '../../program-data'
 
 export function generateStaticParams() {
   return DAYS.map((d) => ({ slug: d.slug }))
@@ -44,22 +45,30 @@ export default async function DayPage({ params }: { params: Promise<{ slug: stri
       <main className="min-h-screen bg-white">
         {/* HERO */}
         <section className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white pt-12 pb-14 md:pt-16 md:pb-16">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <Link href="/military/7-day" className="mb-6 inline-flex items-center gap-2 text-sm font-bold text-[#0D9488] hover:underline">
               <ArrowLeft className="h-4 w-4" /> All seven days
             </Link>
+            <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+             <div>
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#0D9488] px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">
               Day {d.day} of 7 · Bookable on its own
             </div>
             <h1 className="mb-4 text-4xl font-black leading-[1.03] text-gray-900 md:text-5xl">{d.title}</h1>
             <p className="mb-5 text-xl font-bold text-[#e07800] md:text-2xl">{d.tagline}</p>
             <p className="text-lg leading-relaxed text-gray-700">{d.summary}</p>
+             </div>
+             {/* 4:3 frame on a 4:3 source, so nothing in the photo gets cropped */}
+             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl">
+               <Image src={d.image} alt={`${d.title} — Mission-Ready Leadership`} fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+             </div>
+            </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
               {[
                 { icon: Clock, label: 'Duration', value: DURATION },
                 { icon: Users, label: 'Group size', value: GROUP_RANGE },
-                { icon: Target, label: 'Investment', value: `$${DAY_RATE.toLocaleString()}` },
+                { icon: Target, label: 'Investment', value: `$${DAY_RATE.toLocaleString()}*` },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="rounded-2xl border border-gray-200 bg-white p-5">
                   <Icon className="h-5 w-5 text-[#0D9488]" />
@@ -68,6 +77,7 @@ export default async function DayPage({ params }: { params: Promise<{ slug: stri
                 </div>
               ))}
             </div>
+            <p className="mt-4 text-sm text-gray-500">* {PRICING_NOTE}</p>
           </div>
         </section>
 
@@ -137,7 +147,7 @@ export default async function DayPage({ params }: { params: Promise<{ slug: stri
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
             <h2 className="text-2xl font-black md:text-3xl">Book Day {d.day} — {d.title}</h2>
             <p className="mx-auto mt-3 max-w-xl text-white/85">
-              ${DAY_RATE.toLocaleString()} · {DURATION} · {GROUP_RANGE}. Book this day alone, or as part of the full system.
+              ${DAY_RATE.toLocaleString()}* · {DURATION} · {GROUP_RANGE}. Book this day alone, or as part of the full system.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-4">
               <Link href="/military#request" className="rounded-xl bg-white px-7 py-4 text-sm font-bold uppercase tracking-widest text-[#0D9488] transition hover:bg-gray-100">
@@ -152,6 +162,7 @@ export default async function DayPage({ params }: { params: Promise<{ slug: stri
                 Curriculum PDF <FileDown className="h-4 w-4" />
               </a>
             </div>
+            <p className="mx-auto mt-6 max-w-2xl text-xs leading-relaxed text-white/70">* {PRICING_NOTE}</p>
           </div>
         </section>
 

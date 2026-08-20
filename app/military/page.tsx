@@ -6,6 +6,7 @@ import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import StayConnected from '@/components/sections/StayConnected'
 import GhlBookModal from './GhlBookModal'
+import { DAYS, DAY_RATE, DURATION, GROUP_RANGE, PRICING_NOTE } from './program-data'
 import MilitaryRequestForm from './MilitaryRequestForm'
 import {
   Shield, Users, Target, HeartPulse, Award, Sparkles, ArrowRight, Mail,
@@ -336,79 +337,87 @@ export default function MilitaryPage() {
           </div>
         </section>
 
-        {/* THE OFFER — $2497 workshop */}
+        {/* WORKSHOPS */}
         <section id="offer" className="py-16 md:py-24 bg-white">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border-2 border-[#E8A849] shadow-xl ring-1 ring-[#E8A849]/30 p-8 md:p-10 text-center">
-              <span className="inline-block bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">The Workshop</span>
-              <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">Full-Day Mission-Ready Leadership Workshop</h2>
-              <p className="text-5xl font-black text-[#e07800] my-4">$2,497</p>
-              <p className="text-gray-700 mb-6 max-w-xl mx-auto">
-                A full-day immersive experience with a <span className="font-bold">customized curriculum</span> built to meet the specific needs of your group.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <GhlBookModal label="Book Now" variant="gold" />
-                <a href="/book" className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#0D9488] font-bold px-7 py-4 rounded-xl hover:bg-[#34c5c5] hover:text-white transition-colors">
-                  <CalendarCheck className="w-5 h-5" /> Book a Call
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* THE SEVEN-DAY SYSTEM + EXPRESS */}
-        <section className="py-16 md:py-24 bg-[#F6F8FA]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className={EYEBROW}>Go deeper</p>
-            <h2 className={`${HEADING} mb-4`}>Seven standalone days. One complete system.</h2>
+            <p className={EYEBROW}>Book by the session</p>
+            <h2 className={`${HEADING} mb-4`}>Workshops</h2>
             <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mb-10">
-              Each discipline is a full day your unit can book on its own — $2,497, 1 to 8 hours, 2 to 200 participants.
-              Run them in sequence and they compound into a complete leadership development program. Start wherever the
-              need is greatest.
+              Every workshop is interactive, built around your unit, and immediately applicable — never a day spent
+              watching slides. Start with an hour, take a full day, or run the complete seven-day system.
             </p>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
-              {expertise.map((e, i) => (
-                <Link
-                  key={e.slug}
-                  href={`/military/7-day/${e.slug}`}
-                  className="group flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 transition hover:border-[#34c5c5] hover:shadow-md"
-                >
-                  <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#0D9488] text-xs font-black text-white">
-                    {i + 1}
-                  </span>
-                  <span className="font-bold text-gray-900 text-[15px] leading-tight">{e.label}</span>
+            {/* the two express entry points */}
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              {[
+                {
+                  href: '/military/one-hour',
+                  img: '/images/military/classroom-white-jacket.jpg',
+                  badge: 'One Hour',
+                  title: 'Resilient Relationships: Communicate, Connect and Thrive',
+                  desc: 'Emotional intelligence and healthy communication under pressure, conflict, and change — triggers, active listening, boundaries, and constructive conversations.',
+                  meta: '1 hour · ' + GROUP_RANGE,
+                },
+                {
+                  href: '/military/one-day',
+                  img: '/images/military/briefing-stage.jpg',
+                  badge: 'One Day',
+                  title: 'Full-Day Mission-Ready Leadership Workshop',
+                  desc: 'A single immersive day assembled from the seven disciplines and scoped to your unit after a scoping call — not pulled off a shelf.',
+                  meta: DURATION + ' · ' + GROUP_RANGE,
+                },
+              ].map((w) => (
+                <Link key={w.href} href={w.href} className="group flex flex-col overflow-hidden rounded-3xl border-2 border-[#E8A849]/40 bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image src={w.img} alt={w.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(max-width:768px) 100vw, 50vw" />
+                    <span className="absolute top-4 left-4 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">{w.badge}</span>
+                  </div>
+                  <div className="p-7 flex flex-col flex-1">
+                    <h3 className="text-xl font-black text-gray-900 leading-tight">{w.title}</h3>
+                    <p className="text-sm text-gray-600 mt-3 flex-1 leading-relaxed">{w.desc}</p>
+                    <p className="text-sm font-bold text-[#0D9488] mt-4">{w.meta}</p>
+                    <span className="inline-flex items-center gap-1.5 text-[#0D9488] font-bold text-sm mt-3 uppercase tracking-widest group-hover:gap-3 transition-all">
+                      See details <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
                 </Link>
               ))}
-              <Link
-                href="/military/7-day"
-                className="group flex items-center justify-center gap-2 rounded-2xl bg-[#0D9488] p-4 text-white transition hover:bg-[#0b7c72]"
-              >
-                <span className="font-bold text-[15px]">See all seven</span>
-                <ArrowRight className="w-4 h-4 transition group-hover:translate-x-1" />
-              </Link>
             </div>
 
-            <div className="rounded-3xl border-2 border-[#E8A849]/50 bg-white p-8 md:p-10">
-              <span className="inline-block bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
-                Not ready for seven days?
-              </span>
-              <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-3">Start with an Express session.</h3>
-              <p className="text-gray-700 leading-relaxed mb-6 max-w-3xl">
-                Two introductions to the system, each standing entirely on its own — a customizable{' '}
-                <Link href="/military/express#full-day" className="font-bold text-[#0D9488] hover:underline">full-day workshop</Link>{' '}
-                built from the topics you choose, or the one-hour{' '}
-                <Link href="/military/express#resilient-relationships" className="font-bold text-[#0D9488] hover:underline">
-                  Resilient Relationships
-                </Link>{' '}
-                course on emotional intelligence, communication, and resilience.
+            {/* the seven standalone days */}
+            <div className="rounded-3xl border border-gray-200 bg-[#F6F8FA] p-8 md:p-10">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#0D9488] mb-2">Seven standalone days</p>
+              <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-3">The full Mission-Ready system</h3>
+              <p className="text-gray-700 leading-relaxed mb-7 max-w-3xl">
+                Each discipline is a complete workshop your unit can book on its own — ${DAY_RATE.toLocaleString()}*,
+                {' '}{DURATION}, {GROUP_RANGE}. Run them in sequence and they compound into a full leadership
+                development program.
               </p>
-              <Link
-                href="/military/express"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold px-7 py-4 rounded-xl hover:brightness-105 transition uppercase tracking-widest text-sm"
-              >
-                See both Express options <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {DAYS.map((d) => (
+                  <Link key={d.slug} href={`/military/7-day/${d.slug}`} className="group overflow-hidden rounded-2xl border border-gray-200 bg-white hover:border-[#34c5c5] hover:shadow-md transition">
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <Image src={d.image} alt={d.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(max-width:768px) 50vw, 25vw" />
+                    </div>
+                    <div className="p-4">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Day {d.day}</p>
+                      <h4 className="font-black text-gray-900 leading-tight text-[15px] mt-0.5">{d.title}</h4>
+                    </div>
+                  </Link>
+                ))}
+                <Link href="/military/7-day" className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-[#0D9488] p-6 text-center text-white hover:bg-[#0b7c72] transition">
+                  <span className="font-black">See all seven</span>
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+              <p className="text-sm text-gray-500 mt-6">* {PRICING_NOTE}</p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+              <GhlBookModal label="Book Now" variant="gold" />
+              <a href="/book" className="inline-flex items-center justify-center gap-2 border-2 border-[#34c5c5] text-[#0D9488] font-bold px-7 py-4 rounded-xl hover:bg-[#34c5c5] hover:text-white transition-colors">
+                <CalendarCheck className="w-5 h-5" /> Book a Call
+              </a>
             </div>
           </div>
         </section>

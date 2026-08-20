@@ -3,7 +3,8 @@ import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import { ArrowLeft, ArrowRight, FileDown, CheckCircle2, Layers, Clock, Users } from 'lucide-react'
-import { DAYS, DAY_RATE, DURATION, GROUP_RANGE } from '../program-data'
+import Image from 'next/image'
+import { DAYS, DAY_RATE, DURATION, GROUP_RANGE, PRICING_NOTE } from '../program-data'
 
 export const metadata: Metadata = {
   title: 'The Seven-Day Mission-Ready Leadership System | Krystalore Crews',
@@ -21,7 +22,7 @@ export default function SevenDayPage() {
       <main className="min-h-screen bg-white">
         {/* HERO */}
         <section className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white pt-12 pb-14 md:pt-16 md:pb-20">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <Link href="/military" className="mb-6 inline-flex items-center gap-2 text-sm font-bold text-[#0D9488] hover:underline">
               <ArrowLeft className="h-4 w-4" /> Back to Mission-Ready Leadership
             </Link>
@@ -31,17 +32,23 @@ export default function SevenDayPage() {
             <h1 className="mb-5 text-4xl font-black leading-[1.03] text-gray-900 md:text-5xl lg:text-6xl">
               The Seven-Day <span className="text-[#e07800]">Mission-Ready</span> System
             </h1>
-            <p className="max-w-3xl text-lg leading-relaxed text-gray-700">
-              Seven disciplines, seven days. Each one is a complete, self-contained workshop your unit can book on its
-              own — and run in sequence they compound into a full leadership development program. Start where the need
-              is greatest; there is no prerequisite.
-            </p>
+            <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+              <p className="text-lg leading-relaxed text-gray-700">
+                Seven disciplines, seven days. Each one is a complete, self-contained workshop your unit can book on its
+                own — and run in sequence they compound into a full leadership development program. Start where the need
+                is greatest; there is no prerequisite.
+              </p>
+              {/* 4:3 frame on a 4:3 source, so nothing in the photo gets cropped */}
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl">
+                <Image src="/images/military/classroom-white-jacket.jpg" alt="Krystalore Crews teaching a leadership session to a military audience" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+              </div>
+            </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
               {[
                 { icon: Clock, label: 'Duration', value: DURATION },
                 { icon: Users, label: 'Group size', value: GROUP_RANGE },
-                { icon: Layers, label: 'Investment', value: `$${DAY_RATE.toLocaleString()} per day` },
+                { icon: Layers, label: 'Investment', value: `$${DAY_RATE.toLocaleString()} per day*` },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="rounded-2xl border border-gray-200 bg-white p-5">
                   <Icon className="h-5 w-5 text-[#0D9488]" />
@@ -50,6 +57,8 @@ export default function SevenDayPage() {
                 </div>
               ))}
             </div>
+
+            <p className="mt-4 text-sm text-gray-500">* {PRICING_NOTE}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -94,8 +103,12 @@ export default function SevenDayPage() {
                   key={d.slug}
                   href={`/military/7-day/${d.slug}`}
                   id={d.slug}
-                  className="group flex flex-col rounded-3xl border border-gray-200 bg-white p-7 transition hover:-translate-y-1 hover:border-[#34c5c5] hover:shadow-xl"
+                  className="group flex flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white transition hover:-translate-y-1 hover:border-[#34c5c5] hover:shadow-xl"
                 >
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image src={d.image} alt={d.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(max-width:768px) 100vw, 50vw" />
+                  </div>
+                  <div className="flex flex-1 flex-col p-7">
                   <div className="flex items-center gap-3">
                     <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#0D9488] text-sm font-black text-white">
                       {d.day}
@@ -116,6 +129,7 @@ export default function SevenDayPage() {
                   <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-widest text-[#0D9488] transition-all group-hover:gap-3">
                     See the full day <ArrowRight className="h-4 w-4" />
                   </span>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -127,7 +141,7 @@ export default function SevenDayPage() {
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
             <h2 className="text-3xl font-black md:text-4xl">Book a day. Or book the system.</h2>
             <p className="mx-auto mt-4 max-w-2xl text-white/85">
-              Every day is ${DAY_RATE.toLocaleString()}, {DURATION}, {GROUP_RANGE}. Tell me where your unit is
+              Every day is ${DAY_RATE.toLocaleString()}*, {DURATION}, {GROUP_RANGE}. Tell me where your unit is
               struggling and I will tell you which day to start with — even if that is only one.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -138,6 +152,7 @@ export default function SevenDayPage() {
                 See the Express options
               </Link>
             </div>
+            <p className="mx-auto mt-6 max-w-2xl text-xs leading-relaxed text-white/70">* {PRICING_NOTE}</p>
           </div>
         </section>
       </main>

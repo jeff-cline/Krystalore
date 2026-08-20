@@ -8,6 +8,10 @@
 // so a unit picks days by need, not by budget line.
 
 export const DAY_RATE = 2497
+
+// Shown wherever a price appears, keyed off an asterisk on the figure itself.
+export const PRICING_NOTE =
+  'Day rate is $2,497. Whether it\'s one hour, four hours, six hours, or eight hours, travel and lodging and expenses are additional.'
 export const GROUP_RANGE = '2 to 200 participants'
 export const DURATION = '1 to 8 hours'
 
@@ -17,6 +21,7 @@ export type Day = {
   slug: string
   day: number
   keyword: string          // the term as it appears on /military
+  image: string            // 4:3 sources sit in 4:3 frames, so nobody gets cropped
   title: string
   tagline: string
   summary: string
@@ -30,6 +35,7 @@ export const DAYS: Day[] = [
   {
     slug: 'emotional-intelligence',
     day: 1,
+    image: '/images/military/classroom-white-jacket.jpg',
     keyword: 'Emotional Intelligence',
     title: 'Emotional Intelligence',
     tagline: 'Lead yourself before you lead anyone else.',
@@ -59,6 +65,7 @@ export const DAYS: Day[] = [
   {
     slug: 'resilience',
     day: 2,
+    image: '/images/military/field-team.jpg',
     keyword: 'Resilience',
     title: 'Resilience',
     tagline: 'Recover faster. Sustain longer. Break less.',
@@ -88,6 +95,7 @@ export const DAYS: Day[] = [
   {
     slug: 'communication',
     day: 3,
+    image: '/images/military/roundtable.jpg',
     keyword: 'Communication',
     title: 'Communication',
     tagline: 'The conversations most leaders avoid are the ones that decide everything.',
@@ -117,6 +125,7 @@ export const DAYS: Day[] = [
   {
     slug: 'whole-person-leadership',
     day: 4,
+    image: '/images/military/small-group.jpg',
     keyword: 'Whole-Person Leadership',
     title: 'Whole-Person Leadership',
     tagline: 'You cannot lead half a person. They bring all of it to work.',
@@ -146,6 +155,7 @@ export const DAYS: Day[] = [
   {
     slug: 'human-performance',
     day: 5,
+    image: '/images/military/discussion.jpg',
     keyword: 'Human Performance',
     title: 'Human Performance',
     tagline: 'Readiness is physiological before it is anything else.',
@@ -175,6 +185,7 @@ export const DAYS: Day[] = [
   {
     slug: 'team-development',
     day: 6,
+    image: '/images/military/workshop-tables.jpg',
     keyword: 'Team Development',
     title: 'Team Development',
     tagline: 'Trust is built on purpose, or not at all.',
@@ -204,6 +215,7 @@ export const DAYS: Day[] = [
   {
     slug: 'leadership-psychology',
     day: 7,
+    image: '/images/military/briefing-stage.jpg',
     keyword: 'Leadership Psychology',
     title: 'Leadership Psychology',
     tagline: 'Why people do what they do — and what that means for how you lead.',
@@ -238,6 +250,7 @@ export const DAYS: Day[] = [
 
 export type Express = {
   slug: string
+  image: string
   badge: string
   title: string
   subtitle: string
@@ -253,6 +266,7 @@ export type Express = {
 export const EXPRESS: Express[] = [
   {
     slug: 'full-day',
+    image: '/images/military/briefing-stage.jpg',
     badge: 'Express · Full Day',
     title: 'Full-Day Mission-Ready Leadership Workshop',
     subtitle: 'Pick your topics. One day. Immediately applicable.',
@@ -273,6 +287,7 @@ export const EXPRESS: Express[] = [
   },
   {
     slug: 'resilient-relationships',
+    image: '/images/military/classroom-white-jacket.jpg',
     badge: 'Express · One Hour',
     title: 'Resilient Relationships: Communicate, Connect and Thrive',
     subtitle: 'One hour. The four skills that hold relationships together under pressure.',
