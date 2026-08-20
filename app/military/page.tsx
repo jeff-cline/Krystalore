@@ -84,9 +84,16 @@ const notFor = [
   'Aren’t committed to improving communication or team culture',
 ]
 
+// Each area of expertise is a standalone day in the seven-day system, so the keyword
+// links straight to that day's page. Order follows the original page, not the curriculum.
 const expertise = [
-  'Emotional Intelligence', 'Human Performance', 'Resilience', 'Team Development',
-  'Communication', 'Leadership Psychology', 'Whole-Person Leadership',
+  { label: 'Emotional Intelligence', slug: 'emotional-intelligence' },
+  { label: 'Human Performance', slug: 'human-performance' },
+  { label: 'Resilience', slug: 'resilience' },
+  { label: 'Team Development', slug: 'team-development' },
+  { label: 'Communication', slug: 'communication' },
+  { label: 'Leadership Psychology', slug: 'leadership-psychology' },
+  { label: 'Whole-Person Leadership', slug: 'whole-person-leadership' },
 ]
 
 const otherOptions = [
@@ -278,12 +285,22 @@ export default function MilitaryPage() {
                 </p>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {expertise.map((e) => (
-                    <div key={e} className="flex items-center gap-2 text-gray-800">
+                    <Link
+                      key={e.slug}
+                      href={`/military/7-day/${e.slug}`}
+                      className="group flex items-center gap-2 text-gray-800 hover:text-[#0D9488]"
+                    >
                       <CheckCircle2 className="w-5 h-5 text-[#34c5c5] flex-shrink-0" />
-                      <span className="font-medium text-[15px]">{e}</span>
-                    </div>
+                      <span className="font-medium text-[15px] underline decoration-[#34c5c5]/40 underline-offset-4 group-hover:decoration-[#0D9488]">
+                        {e.label}
+                      </span>
+                    </Link>
                   ))}
                 </div>
+                <p className="text-sm text-gray-500 mt-4">
+                  Each one is a standalone day in the{' '}
+                  <Link href="/military/7-day" className="font-bold text-[#0D9488] hover:underline">seven-day Mission-Ready system</Link>.
+                </p>
                 <p className="text-gray-600 mt-6 italic">
                   My workshops are energetic, interactive, and immediately applicable — not another day spent watching slides.
                   Participants leave with practical tools they can implement the very next day.
@@ -335,6 +352,63 @@ export default function MilitaryPage() {
                   <CalendarCheck className="w-5 h-5" /> Book a Call
                 </a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* THE SEVEN-DAY SYSTEM + EXPRESS */}
+        <section className="py-16 md:py-24 bg-[#F6F8FA]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className={EYEBROW}>Go deeper</p>
+            <h2 className={`${HEADING} mb-4`}>Seven standalone days. One complete system.</h2>
+            <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mb-10">
+              Each discipline is a full day your unit can book on its own — $2,497, 1 to 8 hours, 2 to 200 participants.
+              Run them in sequence and they compound into a complete leadership development program. Start wherever the
+              need is greatest.
+            </p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
+              {expertise.map((e, i) => (
+                <Link
+                  key={e.slug}
+                  href={`/military/7-day/${e.slug}`}
+                  className="group flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 transition hover:border-[#34c5c5] hover:shadow-md"
+                >
+                  <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#0D9488] text-xs font-black text-white">
+                    {i + 1}
+                  </span>
+                  <span className="font-bold text-gray-900 text-[15px] leading-tight">{e.label}</span>
+                </Link>
+              ))}
+              <Link
+                href="/military/7-day"
+                className="group flex items-center justify-center gap-2 rounded-2xl bg-[#0D9488] p-4 text-white transition hover:bg-[#0b7c72]"
+              >
+                <span className="font-bold text-[15px]">See all seven</span>
+                <ArrowRight className="w-4 h-4 transition group-hover:translate-x-1" />
+              </Link>
+            </div>
+
+            <div className="rounded-3xl border-2 border-[#E8A849]/50 bg-white p-8 md:p-10">
+              <span className="inline-block bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
+                Not ready for seven days?
+              </span>
+              <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-3">Start with an Express session.</h3>
+              <p className="text-gray-700 leading-relaxed mb-6 max-w-3xl">
+                Two introductions to the system, each standing entirely on its own — a customizable{' '}
+                <Link href="/military/express#full-day" className="font-bold text-[#0D9488] hover:underline">full-day workshop</Link>{' '}
+                built from the topics you choose, or the one-hour{' '}
+                <Link href="/military/express#resilient-relationships" className="font-bold text-[#0D9488] hover:underline">
+                  Resilient Relationships
+                </Link>{' '}
+                course on emotional intelligence, communication, and resilience.
+              </p>
+              <Link
+                href="/military/express"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white font-bold px-7 py-4 rounded-xl hover:brightness-105 transition uppercase tracking-widest text-sm"
+              >
+                See both Express options <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>
