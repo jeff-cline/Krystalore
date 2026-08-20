@@ -80,6 +80,54 @@ export default function PdfBios() {
           </div>
         </section>
 
+        {/* In-kind offers — joint activations offered at no cost */}
+        <section className="pb-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-3 mb-4">
+              <h2 className="text-2xl font-black text-gray-900">In-Kind Offers</h2>
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-[#E8A849]/20 text-[#b45309] px-2 py-0.5 rounded-full">
+                No cost to qualifying events
+              </span>
+            </div>
+            <p className="text-gray-600 mb-5">
+              Joint activations offered in kind with partner brands, for events in the nonprofit, veteran, and
+              women&rsquo;s space.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                {
+                  file: 'Krystalore-HerNextMission-3D-PhotoBooth-InKind.pdf',
+                  title: '3D Photo Booth Experience',
+                  tag: 'Krystalore Crews \u00d7 Her Next Mission \u2014 a hosted 3D photo booth activation, $4,500 in-kind value per experience.',
+                  badge: '1 Page',
+                },
+              ].map((f) => (
+                <a
+                  key={f.file}
+                  href={`/pdf/${f.file}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 hover:shadow-md hover:border-[#E8A849]/60 transition-all"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-[#E8A849]/15 flex items-center justify-center flex-shrink-0">
+                    <FileText className="w-6 h-6 text-[#b45309]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-black text-gray-900 text-lg leading-tight">{f.title}</h3>
+                      <span className="text-[10px] font-bold uppercase tracking-wider bg-[#E8A849]/20 text-[#b45309] px-2 py-0.5 rounded-full">{f.badge}</span>
+                    </div>
+                    <p className="text-sm text-gray-600 mt-1">{f.tag}</p>
+                    <span className="inline-flex items-center gap-1.5 text-[#b45309] font-bold text-sm mt-2 group-hover:gap-2.5 transition-all">
+                      View PDF <Download className="w-4 h-4" />
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Puerto Rico Retreat — marketing flyers */}
         <section className="pb-8">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
