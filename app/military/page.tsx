@@ -422,6 +422,72 @@ export default function MilitaryPage() {
           </div>
         </section>
 
+        {/* FEATURED — FOUR LENSES */}
+        <section id="four-lenses" className="py-16 md:py-24 bg-gradient-to-br from-[#34c5c5]/10 via-white to-[#E8A849]/10">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="rounded-3xl border-2 border-[#34c5c5]/40 bg-white shadow-xl overflow-hidden">
+              <div className="grid lg:grid-cols-2 gap-0 items-center">
+                {/* square frame on a square graphic, so none of the wheel is cropped */}
+                <div className="relative aspect-square bg-[#F6F8FA] p-6 md:p-8">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src="/images/military/four-lenses.jpg"
+                      alt="Four Lenses temperament wheel — the four colour personality types"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </div>
+                </div>
+
+                <div className="p-8 md:p-10 lg:p-12">
+                  <span className="inline-block bg-gradient-to-r from-[#E8A849] to-[#e07800] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
+                    Featured Workshop &middot; Half Day
+                  </span>
+                  <h2 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight mb-4">
+                    Four Lenses Temperament &amp; Personality Workshop
+                  </h2>
+                  <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                    Enhance self-awareness and improve conflict management and communication within your team through
+                    our engaging 3 or 6 hour workshop. Ideal for groups of 20&ndash;100 per session. The workshop
+                    includes a guided personality assessment for each participant, paired with memorable team-building
+                    exercises.
+                  </p>
+
+                  <div className="grid sm:grid-cols-3 gap-3 mb-7">
+                    {[
+                      { label: 'Duration', value: '3 or 6 hours' },
+                      { label: 'Group size', value: '20\u2013100 per session' },
+                      { label: 'Includes', value: 'Guided assessment' },
+                    ].map((f) => (
+                      <div key={f.label} className="rounded-2xl border border-gray-200 bg-[#F6F8FA] p-4">
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">{f.label}</p>
+                        <p className="font-black text-gray-900 mt-1 leading-tight">{f.value}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <a
+                    href={mailto(
+                      'MILITARY \u2014 FOUR LENSES WORKSHOP REQUEST',
+                      'We\u2019d like to request the Four Lenses Temperament & Personality Workshop.'
+                    )}
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#34c5c5] text-white font-bold px-7 py-4 rounded-xl hover:brightness-105 transition uppercase tracking-widest text-sm"
+                  >
+                    <Mail className="w-5 h-5" /> Email to Request
+                  </a>
+                  <p className="text-sm text-gray-500 mt-3">
+                    Or write directly to{' '}
+                    <a href="mailto:krystalore@thecrewscoach.com" className="font-bold text-[#0D9488] hover:underline">
+                      krystalore@thecrewscoach.com
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* OTHER OPTIONS */}
         <section className="py-16 md:py-24 bg-[#F4F1EC]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
