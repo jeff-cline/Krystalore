@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/Footer'
 import {
@@ -455,6 +456,47 @@ export default function RiseAndThrive() {
             <p className="text-lg text-gray-600 font-light mt-3">Tap any story to watch — right here, without leaving the page.</p>
           </div>
           <VideoTestimonials />
+        </section>
+
+        {/* NEED HELP QUICK — short immersive packages -> /reclaim */}
+        <section className="py-16 md:py-24 bg-gradient-to-br from-[#0D9488] to-[#34c5c5] text-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="rounded-3xl bg-white/[0.10] border border-white/20 p-8 md:p-12 backdrop-blur-sm">
+              <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 items-center">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#d7fffb] mb-3">
+                    Need help quick?
+                  </p>
+                  <h2 className="text-3xl md:text-4xl font-black leading-tight mb-4">
+                    See the short immersive packages.
+                  </h2>
+                  <p className="text-lg text-white/85 leading-relaxed mb-6">
+                    Not ready for the full academy &mdash; or need something faster? <span className="font-bold text-white">RISE:
+                    Reclaim Your Capacity</span> is a six-week reset for women navigating life, leadership, business,
+                    and seasons of change. From overwhelm to agency, at the speed of your capacity.
+                  </p>
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#d7fffb] mb-7">
+                    Clarity before capacity. Capacity before complexity.
+                  </p>
+                  <Link
+                    href="/reclaim"
+                    className="inline-flex items-center gap-2 bg-white text-[#0D9488] font-bold px-8 py-4 rounded-2xl hover:bg-gray-100 transition uppercase tracking-widest text-sm"
+                  >
+                    See the 6-Week RISE Program <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/images/reclaim/rise-poster.png"
+                    alt="RISE — Reclaim Your Capacity"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* THE OFFER */}
