@@ -68,7 +68,7 @@ export default function Footer() {
 
           {/* Next Level Business */}
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider mb-4"><span className="bg-[#F97316] text-white px-3 py-1 rounded-md">Next Level Business</span></h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wider mb-4"><Link href="/business" className="inline-block bg-[#F97316] hover:bg-[#ea6a0c] text-white px-3 py-1 rounded-md transition-colors">Next Level Business</Link></h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="/business-smart-start" className="text-gray-400 hover:text-[#F97316] transition-colors">For Business</Link></li>
               <li><Link href="/co-branded-container" className="text-gray-400 hover:text-[#F97316] transition-colors">For Associations</Link></li>
