@@ -225,7 +225,7 @@ export default function QuizzesPage() {
         {/* Hero Image — the banner carries its own lettering, so the box matches its
             2:1 shape and the whole image always shows, uncropped. */}
         <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl mb-8">
-          <Image src="/images/quizzes-hero.jpg" alt="Discover What's Next: Assess. Reflect. Align. Grow. Krystalore Crews celebrating at sunset above the sea" fill className="object-contain" sizes="(max-width: 1280px) 100vw, 1216px" priority />
+          <Image src="/images/quizzes-hero-bright.jpg" alt="Discover What's Next: Assess. Reflect. Align. Grow. Krystalore Crews celebrating at sunset above the sea" fill className="object-contain" sizes="(max-width: 1280px) 100vw, 1216px" priority />
         </div>
 
         {/* Header */}
