@@ -80,6 +80,7 @@ const sitemapData: SitemapCategory[] = [
       { path: '/six-week-shred', title: 'Six Week Shred' },
       { path: '/bootcamp', title: 'Bootcamp' },
       { path: '/group-fitness', title: 'Group Fitness' },
+      { path: '/rungroup', title: "The Runner's Wall (Running Group)" },
       { path: '/coworking', title: 'Coworking' },
       { path: '/alignment', title: 'Alignment' },
       { path: '/engage', title: 'Engage' }
@@ -126,6 +127,7 @@ const sitemapData: SitemapCategory[] = [
       { path: '/blog/[slug]', title: 'Blog Post', isDynamic: true },
       { path: '/books', title: 'Books' },
       { path: '/planner', title: 'Planner' },
+      { path: '/habittracker', title: 'Free 30-Day Habit Tracker' },
       { path: '/podcasts', title: 'Podcasts' },
       { path: '/podcasts/[slug]', title: 'Podcast Episode', isDynamic: true },
       { path: '/videos', title: 'Videos' },

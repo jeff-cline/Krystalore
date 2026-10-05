@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/relationship-coaching', '/womens-coaching', '/veteran-coaching',
     '/business-bootcamp', '/business-smart-start', '/bombshell-bootcamp',
     '/million-dollar-body', '/six-week-shred', '/bootcamp',
-    '/group-fitness', '/coworking', '/alignment', '/engage',
+    '/group-fitness', '/rungroup', '/habittracker', '/coworking', '/alignment', '/engage',
 
     // Retreats
     '/retreat', '/revival-retreat', '/corporate-retreat-planning',

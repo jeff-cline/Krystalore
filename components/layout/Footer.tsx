@@ -110,6 +110,17 @@ export default function Footer() {
             <a href="https://jeff-cline.com" target="_blank" rel="noopener noreferrer" style={{fontSize:'6px',opacity:0.08,color:'inherit',textDecoration:'none',lineHeight:1}}>JC</a>
           </div>
         </div>
+
+        {/* Small light-gray page links at the very bottom: every page the blog links to */}
+        <nav aria-label="More pages" className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] text-gray-500">
+          <Link href="/rungroup" className="hover:text-gray-300 transition-colors">The Runner&apos;s Wall</Link>
+          <Link href="/group-fitness" className="hover:text-gray-300 transition-colors">Group Fitness</Link>
+          <Link href="/million-dollar-body" className="hover:text-gray-300 transition-colors">Million Dollar Body Academy</Link>
+          <Link href="/revival-retreat" className="hover:text-gray-300 transition-colors">Revive &amp; Thrive Retreat</Link>
+          <Link href="/planner" className="hover:text-gray-300 transition-colors">Krystal Clear Life Planner</Link>
+          <Link href="/habittracker" className="hover:text-gray-300 transition-colors">30-Day Habit Tracker</Link>
+          <a href="https://news.krystalore.com" className="hover:text-gray-300 transition-colors">Blog</a>
+        </nav>
       </div>
     </footer>
   )
