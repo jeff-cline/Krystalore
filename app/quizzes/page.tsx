@@ -224,7 +224,7 @@ export default function QuizzesPage() {
 
         {/* Hero Image */}
         <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl mb-8">
-          <Image src="/images/go9/hero.jpg" alt="Krystalore Crews empowerment and self-discovery assessments" fill className="object-cover" sizes="100vw" />
+          <Image src="/images/go9/hero.jpg" alt="Krystalore Crews empowerment and self-discovery assessments" fill className="object-cover object-[50%_12%]" sizes="100vw" />
         </div>
 
         {/* Header */}

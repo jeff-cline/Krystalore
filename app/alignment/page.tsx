@@ -428,7 +428,7 @@ export default function AlignmentQuiz() {
 
           {/* Hero Image */}
           <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl">
-            <Image src="/images/go9/meditation.webp" alt="Life alignment and mindfulness retreat setting" fill className="object-cover" sizes="100vw" />
+            <Image src="/images/go9/group-sunset.jpg" alt="Krystalore Crews retreat group celebrating at sunset" fill className="object-cover object-[50%_35%]" sizes="100vw" />
           </div>
 
           {/* Header */}
