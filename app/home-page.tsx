@@ -36,6 +36,16 @@ function CTABanner({ variant = 'teal' }: { variant?: 'teal' | 'orange' | 'dark' 
   )
 }
 
+// Homepage hero photo. Trying the sunset photo (Oct 2026); to switch back to the
+// previous one, set HERO = HERO_PREVIOUS.
+const HERO_PREVIOUS = { src: '/images/go9/hero.jpg', alt: 'Beyond Limits - Krystalore Crews', position: '60% 20%' }
+const HERO_KRYSTALORE = {
+  src: '/images/krystalore.jpg',
+  alt: 'Krystalore Crews with arms wide open, celebrating at sunset above the bay',
+  position: '73% 25%', // keeps her face in frame when narrow screens crop the sides
+}
+const HERO = HERO_KRYSTALORE
+
 export default function HomePage() {
   const services = [
     { label: 'Fitness', href: '/fitness' },
@@ -249,11 +259,11 @@ export default function HomePage() {
       {/* Hero Section — Tony Robbins style: face top-right, text bottom-left */}
       <section className="relative overflow-hidden min-h-[85vh] lg:min-h-[90vh] flex items-end">
         <Image
-          src="/images/go9/hero.jpg"
-          alt="Beyond Limits - Krystalore Crews"
+          src={HERO.src}
+          alt={HERO.alt}
           fill
           className="object-cover"
-          style={{ objectPosition: '60% 20%' }}
+          style={{ objectPosition: HERO.position }}
           priority
           sizes="100vw"
         />
