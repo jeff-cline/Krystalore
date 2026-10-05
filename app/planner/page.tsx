@@ -33,28 +33,35 @@ export default function PlannerPage() {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Hero Section */}
-      <section className="py-20 lg:py-32 bg-gradient-to-br from-teal-600 to-teal-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Krystal Clear Life Planner
-          </h1>
-          <p className="text-xl sm:text-2xl text-teal-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-            The strategic planning system that turns your biggest goals into your greatest achievements.
-          </p>
-          <Link
-            href="/book"
-            className="inline-block bg-[#34c5c5] hover:bg-[#37a6a6] text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200"
-          >
-            Get Your Planner
-          </Link>
+      {/* Hero — photo on the left half (square, shown whole), text on the right half */}
+      <section className="py-12 lg:py-20 bg-gradient-to-br from-teal-600 to-teal-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <div className="relative aspect-square w-full overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10">
+            <Image
+              src="/images/go9/planner.jpg"
+              alt="Krystalore Crews holding the Krystal Clear Life Planner"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+            />
+          </div>
+          <div className="text-center md:text-left">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              Krystal Clear Life Planner
+            </h1>
+            <p className="text-xl sm:text-2xl text-teal-100 mb-8 leading-relaxed">
+              The strategic planning system that turns your biggest goals into your greatest achievements.
+            </p>
+            <Link
+              href="/book"
+              className="inline-block bg-[#34c5c5] hover:bg-[#37a6a6] text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200"
+            >
+              Get Your Planner
+            </Link>
+          </div>
         </div>
       </section>
-
-      {/* Hero Image */}
-      <div className="relative h-64 md:h-80 w-full overflow-hidden">
-        <Image src="/images/go9/planner.jpg" alt="Krystal Clear Life Planner book and planning system" fill className="object-cover" sizes="100vw" />
-      </div>
 
       {/* What's Included */}
       <section className="py-16 lg:py-24">
