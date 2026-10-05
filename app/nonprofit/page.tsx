@@ -5,7 +5,7 @@ import MainLayout from '@/components/layout/MainLayout'
 import { ArrowRight, Heart, Shield, Users, Globe, HandHeart } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Nonprofit Initiatives | Krystalore Crews',
+  title: 'Nonprofit Initiatives',
   description: 'Supporting veterans, female business owners, and Roatan community nonprofits through service, coaching, and impact programs.',
 }
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Thriving Women Network — Guest Bios | Krystalore Crews',
+  title: 'Thriving Women Network — Guest Bios',
   description: 'Downloadable one-page guest bios for Krystalore Crews across the Thriving Women Network shows.',
   robots: { index: false, follow: false },
 }

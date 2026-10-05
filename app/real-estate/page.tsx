@@ -4,7 +4,7 @@ import MainLayout from '@/components/layout/MainLayout'
 import { ArrowRight, Globe, Building2, TrendingUp, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Real Estate & Investment Opportunities | Krystalore Crews',
+  title: 'Real Estate & Investment Opportunities',
   description: 'Global real estate opportunities and investment partnerships. Explore properties and ventures in the Caribbean, US, and beyond.',
 }
 

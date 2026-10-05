@@ -11,7 +11,7 @@ const OG_IMAGE = 'https://krystalore.com/og/mermaids.jpg'
 const PDF = '/mermaid-experiences.pdf'
 
 export const metadata: Metadata = {
-  title: 'Mermaid Experiences — the one-page menu | Krystalore Crews',
+  title: 'Mermaid Experiences — the one-page menu',
   description:
     'The printable one-page menu of every mermaid and tropical experience hosted by Krystalore Crews — photo shoots, makeup, training, parties, and more.',
   openGraph: {

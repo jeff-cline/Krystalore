@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { DAYS, DAY_RATE, DURATION, GROUP_RANGE, PRICING_NOTE } from '../program-data'
 
 export const metadata: Metadata = {
-  title: 'The Seven-Day Mission-Ready Leadership System | Krystalore Crews',
+  title: 'The Seven-Day Mission-Ready Leadership System',
   description:
     'Seven standalone leadership days — emotional intelligence, resilience, communication, whole-person leadership, human performance, team development, and leadership psychology. Book one or book the system.',
   alternates: { canonical: '/military/7-day' },

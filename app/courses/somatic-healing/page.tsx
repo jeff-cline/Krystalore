@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Heart, Check, ArrowLeft, Wind, Flame, Star, Users } from 'lucide-react'
 
 export const metadata = {
-  title: 'Somatic Healing & Embodiment — Krystalore Crews',
+  title: 'Somatic Healing & Embodiment',
   description: 'Release stored trauma through somatic practices. Reconnect body and mind through breathwork, movement, and guided healing with Krystalore Crews.',
 }
 

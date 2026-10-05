@@ -5,7 +5,7 @@ import MainLayout from '@/components/layout/MainLayout'
 import { ArrowRight, CheckCircle, Building2, Brain, Dumbbell, Users, Shield, Heart, Megaphone, Palette } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Corporate Wellness & Leadership | Krystalore Crews',
+  title: 'Corporate Wellness & Leadership',
   description: 'Elevate your team\'s performance, resilience, and well-being with customized corporate wellness programs and leadership development by Krystalore Crews.',
 }
 

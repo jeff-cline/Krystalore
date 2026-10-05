@@ -16,9 +16,8 @@ export const metadata: Metadata = {
   description: 'Creating experiences that energize people, elevate culture, and make teams feel seen — then challenge them to rise. International speaker, corporate host, retreat leader, and wellness consultant.',
   keywords: 'Krystalore Crews, keynote speaker, corporate host, corporate wellness, retreat leader, leadership training, emotional intelligence, veteran speaker, women\'s empowerment, somatic coaching, resilience speaker',
   metadataBase: new URL('https://krystalore.com'),
-  alternates: {
-    canonical: '/',
-  },
+  // No site-wide canonical: inherited, it told Google every page was the home page.
+  // Pages set their own; a page without one is its own canonical by default.
   openGraph: {
     title: 'Krystalore Crews — International Speaker, Corporate Host & Wellness Consultant',
     description: 'Creating experiences that energize people, elevate culture, and make teams feel seen — then challenge them to rise.',
@@ -113,7 +112,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="canonical" href="https://krystalore.com" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <link rel="icon" href="/favicon-192x192.png" type="image/png" sizes="192x192" />
         <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Veteran Transition Readiness Quiz | Krystalore Crews',
+  title: 'Veteran Transition Readiness Quiz',
   description: 'Assess your readiness for the military-to-civilian transition across career, identity, wellness, family, and community. Free veteran transition quiz by Krystalore Crews.',
   keywords: ['veteran transition quiz', 'military transition readiness', 'veteran career readiness', 'military to civilian assessment', 'veteran coaching quiz'],
   openGraph: {

@@ -9,7 +9,7 @@ import { EXPRESS, DAYS, GROUP_RANGE } from '../program-data'
 const P = EXPRESS.find((e) => e.slug === 'resilient-relationships')!
 
 export const metadata: Metadata = {
-  title: 'Resilient Relationships: Communicate, Connect and Thrive — One-Hour Workshop | Krystalore Crews',
+  title: 'Resilient Relationships: Communicate, Connect and Thrive — One-Hour Workshop',
   description:
     'A one-hour course on how emotional intelligence and healthy communication strengthen relationships during pressure, conflict, and change — triggers, active listening, boundaries, and constructive conversations.',
   alternates: { canonical: '/military/one-hour' },

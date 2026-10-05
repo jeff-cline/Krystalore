@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Corporate Leadership Training | Emotional Intelligence & Team Building Workshops | Krystalore Crews',
+  title: 'Corporate Leadership Training | Emotional Intelligence & Team Building Workshops',
   description: 'Transform your organization with corporate leadership training, emotional intelligence workshops, team building sessions, and executive coaching by Krystalore Crews. Live and virtual options from 1 to 40 hours.',
   keywords: ['corporate leadership training', 'leadership training', 'corporate workshops', 'emotional intelligence training', 'team building workshops', 'executive coaching', 'leadership development', 'Four Lenses personality workshop', 'corporate wellness', 'compassionate inquiry coaching', 'Krystalore Crews', 'Crews Beyond Limits'],
   openGraph: {

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Free Retreat Planning Tools & Checklists | Krystalore Crews',
+  title: 'Free Retreat Planning Tools & Checklists',
   description: 'Download free corporate retreat planning tools, checklists, templates, and guides. Plan your next team retreat with expert resources from Krystalore Crews.',
   keywords: ['retreat planning tools', 'retreat planning checklist', 'corporate retreat template', 'retreat planning guide', 'team retreat checklist', 'retreat budget template', 'free retreat resources'],
   openGraph: {

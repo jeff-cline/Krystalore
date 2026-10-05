@@ -9,7 +9,7 @@ import { LetterButton } from './LetterModal'
 const CHECKOUT = 'https://link.elite360.io/payment-link/6aa6a3ea32f95ae35594a57d'
 
 export const metadata: Metadata = {
-  title: 'RISE: Reclaim Your Capacity — From Overwhelm to Agency | Krystalore Crews',
+  title: 'RISE: Reclaim Your Capacity — From Overwhelm to Agency',
   description:
     'A six-week reset for women navigating life, leadership, business, and seasons of change. Clarity before capacity. Capacity before complexity. Reclaim your capacity in this season of change.',
   alternates: { canonical: '/reclaim' },

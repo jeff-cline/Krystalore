@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Users, Zap, FileDown } from
 import { EXPRESS, DAYS, DURATION, GROUP_RANGE } from '../program-data'
 
 export const metadata: Metadata = {
-  title: 'Express Leadership Workshops — One-Day & One-Hour | Krystalore Crews',
+  title: 'Express Leadership Workshops — One-Day & One-Hour',
   description:
     'Two express introductions to the seven-day Mission-Ready Leadership system: a customizable full-day workshop, and the one-hour Resilient Relationships course on emotional intelligence, communication and resilience.',
   alternates: { canonical: '/military/express' },

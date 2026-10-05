@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Private Mindset & Business Coaching — Krystalore Crews',
+  title: 'Private Mindset & Business Coaching',
   description:
     'One-on-one private mindset and business coaching with Krystalore Crews. Capitalize on your strengths, remove roadblocks, build the habits and frameworks that hold the level you are stepping into. Free consultation.',
   openGraph: {

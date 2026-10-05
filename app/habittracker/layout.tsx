@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Free 30-Day Habit Tracker — Krystalore Crews',
+  title: 'Free 30-Day Habit Tracker',
   description:
     'Design your dream day, reduce overwhelm, and feel accomplished. Grab Krystalore Crews\' free 30-day habit tracker — one page, five minutes a day, real momentum.',
   openGraph: {

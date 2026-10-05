@@ -6,7 +6,7 @@ import Footer from '@/components/layout/Footer'
 import { ArrowRight, Building2, Users, Rocket, HeartHandshake, Landmark, Gauge, Check } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Next Level Business — Your Secret Weapon | Krystalore Crews',
+  title: 'Next Level Business — Your Secret Weapon',
   description:
     'Krystalore Crews is the secret weapon behind operators who scale without burning down what they built. Pathways for business, associations, startups, communities, family offices, and Scale & Care.',
   alternates: { canonical: '/business' },

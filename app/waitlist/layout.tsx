@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'Retreat Waitlist | Krystalore Crews',
+  title: 'Retreat Waitlist',
   description: 'Join the waitlist for Krystalore Crews Revive & Thrive retreats. 7 days of rejuvenation in majestic Costa Rica or Puerto Rico — coaching, movement, and sisterhood. Request your spot and get updates on open rooms and future dates.',
   alternates: { canonical: '/waitlist' },
   openGraph: {

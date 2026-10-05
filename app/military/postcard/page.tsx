@@ -6,7 +6,7 @@ import { ArrowLeft, FileText } from 'lucide-react'
 import MarketingKit from '../MarketingKit'
 
 export const metadata: Metadata = {
-  title: 'Mission-Ready Leadership — Marketing Kit | Krystalore Crews',
+  title: 'Mission-Ready Leadership — Marketing Kit',
   description: 'Download print-ready Mission-Ready Leadership postcards (4×5) and flyers (8.5×11) — multiple designs, bleed + crop marks, QR to krystalore.com/military.',
   alternates: { canonical: '/military/postcard' },
   robots: { index: false, follow: true },

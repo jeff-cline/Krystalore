@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Users, Check, ArrowLeft, Target, Heart, Star, Brain } from 'lucide-react'
 
 export const metadata = {
-  title: 'Identity & Transition Coaching — Krystalore Crews',
+  title: 'Identity & Transition Coaching',
   description: 'Navigate identity transitions and career changes with confidence. For veterans, career changers, and anyone in reinvention. Coaching by Krystalore Crews.',
 }
 

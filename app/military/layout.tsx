@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Mission-Ready Leadership — Military Leadership Training | Krystalore Crews',
+  title: 'Mission-Ready Leadership — Military Leadership Training',
   description:
     'An immersive one-day leadership workshop for military units. Communication, emotional intelligence, resilience & human performance — led by a 22-year USAF Senior NCO. Leadership starts with you.',
   alternates: { canonical: '/military' },

@@ -9,7 +9,7 @@ import { EXPRESS, DAYS, DURATION, GROUP_RANGE } from '../program-data'
 const P = EXPRESS.find((e) => e.slug === 'full-day')!
 
 export const metadata: Metadata = {
-  title: 'Full-Day Mission-Ready Leadership Workshop | Krystalore Crews',
+  title: 'Full-Day Mission-Ready Leadership Workshop',
   description:
     'A single immersive day built from the seven-day Mission-Ready curriculum and scoped to your unit — emotional intelligence, resilience, communication, whole-person leadership, human performance, team development, and leadership psychology.',
   alternates: { canonical: '/military/one-day' },

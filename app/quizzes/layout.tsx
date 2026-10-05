@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Self-Assessment Quizzes | Krystalore Crews',
+  title: 'Self-Assessment Quizzes',
   description: 'Take free self-assessment quizzes on emotional intelligence, anxiety, depression, breathwork, leadership, business scaling, company culture, and more. Discover your strengths and growth areas.',
   keywords: 'self-assessment quiz, emotional intelligence quiz, anxiety assessment, leadership quiz, business quiz, company culture quiz, breathwork assessment, personality quiz, relationship quiz',
   openGraph: {

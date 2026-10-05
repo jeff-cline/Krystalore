@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'The Freedom Formula | Krystalore Crews',
+  title: 'The Freedom Formula',
   description: 'The 5 C\'s framework for energy, confidence, and sustainable success.',
 }
 

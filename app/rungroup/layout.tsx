@@ -1,13 +1,15 @@
 import { Metadata } from 'next'
 
-const title = "The Runner's Wall | Virtual Running Group & Race Coaching | Krystalore Crews"
+// The root template appends " | Krystalore Crews" to the page title; social cards carry the full name.
+const pageTitle = "The Runner's Wall | Virtual Running Group & Race Coaching"
+const title = `${pageTitle} | Krystalore Crews`
 const description =
   'Train for your 5K, half or full marathon with Krystalore Crews. A 3 to 6 month virtual running program with a plan built for your schedule, nutrition tips, group accountability and VIP race-day celebrations. Walkers welcome.'
 const url = 'https://krystalore.com/rungroup'
 const image = 'https://krystalore.com/images/rungroup/runners-wall-og.jpg'
 
 export const metadata: Metadata = {
-  title,
+  title: pageTitle,
   description,
   keywords: [
     'running group', 'virtual running program', 'marathon coach', 'half marathon training', '5K training plan',

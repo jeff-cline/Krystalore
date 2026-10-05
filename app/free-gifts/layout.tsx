@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: '6 Free Gifts — Krystalore Crews',
+  title: '6 Free Gifts',
   description:
     'Six free gifts from Krystalore Crews: Bombshell Bootcamp, weekly coworking, a habit tracker, Just Breathe meditations, the next live masterclass, and the quiz library. One quick form unlocks them all.',
   openGraph: {

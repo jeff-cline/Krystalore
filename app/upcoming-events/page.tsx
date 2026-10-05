@@ -5,7 +5,7 @@ import MainLayout from '@/components/layout/MainLayout'
 import { ArrowRight, Calendar, MapPin, Video, Users } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Upcoming Events & Experiences | Krystalore Crews',
+  title: 'Upcoming Events & Experiences',
   description: 'In-person, live, and virtual events with Krystalore Crews. Retreats, workshops, bootcamps, speaking events, and more.',
 }
 
