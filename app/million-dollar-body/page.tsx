@@ -44,8 +44,11 @@ export default function MillionDollarBodyPage() {
         fallbackDescription="The premium fitness and mindset program designed to build a body and life that commands respect."
         fallbackDate="Enrolling now"
         fallbackImage="/images/go9/fitness.jpg"
+        layout="split"
+        imgAspect="aspect-square"
+        imgClassName="object-cover object-[50%_76%]"
         alt="Million Dollar Body">
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <a href="/book" className="bg-[#34c5c5] text-white rounded-full px-8 py-4 font-bold hover:scale-105 transition-transform text-center shadow-lg">Book a Breakthrough Call</a>
           <Link href="#content" className="border-2 border-[#0D9488] text-[#0D9488] rounded-full px-8 py-4 font-bold hover:bg-[#0D9488]/5 transition-colors text-center">Explore More</Link>
         </div>

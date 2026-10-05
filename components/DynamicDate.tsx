@@ -96,7 +96,7 @@ export function DynamicHeader({
   eyebrow?: string
   alt?: string
   imgClassName?: string // override the image fit/crop, e.g. 'object-cover object-top' or 'object-contain'
-  imgAspect?: string // override the stacked image box ratio, e.g. 'aspect-[16/9]' to show the full image uncropped
+  imgAspect?: string // fixed image box ratio, e.g. 'aspect-[16/9]' (stacked) or 'aspect-square' (split); omit to show the natural image
   fallbackCta?: CTA // default CTA button shown until an admin edits it in Dynamic Dates
   layout?: 'stacked' | 'split' // 'stacked' = image on top; 'split' = whole image beside the text
   children?: ReactNode
@@ -145,11 +145,18 @@ export function DynamicHeader({
       <section data-dynamic-header={slug} className="bg-gradient-to-b from-[#34c5c5]/10 via-[#F6F8FA] to-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            {/* Natural image — shown in its original format, no background box or crop */}
-            <div className="w-full overflow-hidden rounded-3xl shadow-xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img} alt={alt || title} className={`block h-auto w-full ${imgClassName || ''}`} />
-            </div>
+            {imgAspect ? (
+              // Opt-in fixed-ratio crop beside the text (e.g. 'aspect-square')
+              <div className={`relative w-full ${imgAspect} overflow-hidden rounded-3xl shadow-xl bg-[#F6F8FA]`}>
+                <Image src={img} alt={alt || title} fill priority className={imgClassName || 'object-cover'} sizes="(min-width: 1024px) 50vw, 100vw" />
+              </div>
+            ) : (
+              // Natural image — shown in its original format, no background box or crop
+              <div className="w-full overflow-hidden rounded-3xl shadow-xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={img} alt={alt || title} className={`block h-auto w-full ${imgClassName || ''}`} />
+              </div>
+            )}
             {textBlock('left')}
           </div>
         </div>
