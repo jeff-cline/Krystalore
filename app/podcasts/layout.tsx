@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getCmsMeta } from "@/lib/cms-meta";
 
 const defaults: Metadata = {
-  title: "Podcasts by Krystalore Crews — The Krystal Clear Life, Your Next Mission & Monday Motivation",
+  title: { absolute: "Podcasts by Krystalore Crews — The Krystal Clear Life, Your Next Mission & Monday Motivation" },
   description: "Listen to Krystalore Crews on The Krystal Clear Life Podcast, Your Next Mission (veteran transitions), and Monday Motivation LIVE. Clarity, confidence, and connection in every episode.",
   keywords: "krystalore crews podcast, krystal clear life podcast, your next mission podcast, monday motivation live, veteran podcast, leadership podcast, self help podcast, military spouse podcast, motivation podcast",
   openGraph: {
