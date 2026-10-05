@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Improve My Marriage Assessment | Free Marriage Health Quiz by Krystalore Crews',
+  title: { absolute: 'Improve My Marriage Assessment | Free Marriage Health Quiz by Krystalore Crews' },
   description: 'Evaluate key areas of your marriage health — communication, appreciation, intimacy, and more. Get personalized recommendations for growth.',
   keywords: ['improve my marriage', 'marriage quiz', 'marriage health assessment', 'marriage help', 'relationship assessment', 'Krystalore Crews'],
   openGraph: {

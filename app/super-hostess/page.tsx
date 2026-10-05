@@ -7,7 +7,7 @@ import { Sparkles, ArrowRight, Rocket, TrendingUp, FileDown } from 'lucide-react
 import SuperHostessExperiences from './SuperHostessExperiences'
 
 export const metadata: Metadata = {
-  title: 'The Super Hostess — Concierge Experiences by Krystalore Crews',
+  title: { absolute: 'The Super Hostess — Concierge Experiences by Krystalore Crews' },
   description: 'Turn-key concierge experiences for any retreat center, hotel, villa, or Airbnb — beach picnics, adventure tours, fitness, healing sessions, team workshops, and bridal experiences, hosted by Krystalore Crews.',
   openGraph: {
     title: 'The Super Hostess — Concierge Experiences by Krystalore Crews',

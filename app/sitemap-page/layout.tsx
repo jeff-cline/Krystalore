@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sitemap | Krystalore Crews - All Pages',
+  title: { absolute: 'Sitemap | Krystalore Crews - All Pages' },
   description: 'Complete sitemap of all pages on the Krystalore Crews platform.',
 }
 

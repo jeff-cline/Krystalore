@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Couples Retreats | Relationship Coaching with Krystalore Crews',
+  title: { absolute: 'Couples Retreats | Relationship Coaching with Krystalore Crews' },
   description: 'Transform your relationship at a couples retreat led by Krystalore Crews. Weekend getaways, 5-day deep dives, and VIP private retreats. Rebuild connection, communication, and confidence. Military couples welcome.',
   keywords: 'couples retreat, couples wellness retreat, marriage retreat, relationship coaching, couples workshop, couples getaway, relationship remodel, military couples retreat, Krystalore Crews, couples coaching retreat',
   openGraph: {

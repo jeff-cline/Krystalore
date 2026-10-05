@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Veteran Coaching by Krystalore Crews | Military Transition, Leadership & Military Spouse Coaching',
+  title: { absolute: 'Veteran Coaching by Krystalore Crews | Military Transition, Leadership & Military Spouse Coaching' },
   description: 'Expert veteran coaching from Krystalore Crews, military spouse and CEO of Crews Beyond Limits. Military-to-civilian transition support, veteran leadership coaching, military family resilience, and spouse empowerment. Free veteran transition quiz.',
   keywords: ['veteran coaching', 'military transition coaching', 'veteran leadership coaching', 'military spouse coaching', 'military to civilian transition', 'veteran career coaching', 'military family support', 'veteran wellness', 'military spouse empowerment', 'Krystalore Crews'],
   openGraph: {

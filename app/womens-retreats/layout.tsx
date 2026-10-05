@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Women's Retreats by Krystalore Crews | Empowerment, Wellness & Leadership Retreats for Women",
+  title: { absolute: "Women's Retreats by Krystalore Crews | Empowerment, Wellness & Leadership Retreats for Women" },
   description: "Join a transformational women's retreat with Krystalore Crews. Revive & Thrive experiences combining confidence building, fitness, sisterhood, wellness, and vision casting. Weekend and 5-day retreats available.",
   keywords: ["women's retreat", "women's empowerment retreat", "wellness retreat for women", "women's leadership retreat", "women's wellness retreat", "sisterhood retreat", "Revive and Thrive retreat", "Krystalore Crews retreat", "Crews Beyond Limits"],
   openGraph: {

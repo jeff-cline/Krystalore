@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Krystalore Crews',
+  title: { absolute: 'Krystalore Crews' },
   description: 'Executive Coaching • Wellness • Leadership • Retreats • Speaking • Fitness',
   alternates: { canonical: '/demo-2' },
   openGraph: {

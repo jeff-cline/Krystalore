@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Elevate Your Event with Krystalore Crews',
+  title: { absolute: 'Elevate Your Event with Krystalore Crews' },
   description: 'Inspire your audience with powerful stories of transformation, resilience, and breakthrough leadership.',
   alternates: { canonical: '/keynote-speaker' },
   openGraph: {

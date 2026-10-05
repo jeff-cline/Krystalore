@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Women's Confidence Assessment | Krystalore Crews - Crews Beyond Limits",
+  title: { absolute: "Women's Confidence Assessment | Krystalore Crews - Crews Beyond Limits" },
   description: "Evaluate your confidence, self-care, and empowerment across all areas of life. Free 10-question assessment with personalized results and recommendations.",
   keywords: ["women's confidence quiz", "confidence assessment for women", "empowerment quiz", "self-care assessment", "women's empowerment", "Krystalore Crews"],
   openGraph: {

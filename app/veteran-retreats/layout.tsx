@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Veteran Retreats | Military Wellness Retreats with Krystalore Crews',
+  title: { absolute: 'Veteran Retreats | Military Wellness Retreats with Krystalore Crews' },
   description: 'Transformative veteran retreats led by military spouse Krystalore Crews. Weekend recharge, 5-day mission reset, and VIP command experiences. Peer connection, mindset reset, career workshops, and family integration. Military discounts available.',
   keywords: ['veteran retreat', 'military retreat', 'veteran wellness retreat', 'military wellness retreat', 'veteran retreat program', 'military family retreat', 'veteran transition retreat', 'Krystalore Crews'],
   openGraph: {

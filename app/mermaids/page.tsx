@@ -9,7 +9,7 @@ import MermaidExperiences from './MermaidExperiences'
 const OG_IMAGE = 'https://krystalore.com/og/mermaids.jpg'
 
 export const metadata: Metadata = {
-  title: 'Mermaid Experiences — Tropical Concierge Hosting by Krystalore Crews',
+  title: { absolute: 'Mermaid Experiences — Tropical Concierge Hosting by Krystalore Crews' },
   description:
     'Mermaid photo shoots, makeup, training, and parties — plus beach picnics, adventure tours, healing sessions, team workshops, and bridal experiences. Turn-key tropical experiences hosted by Krystalore Crews.',
   // Shares of /mermaids carry the mermaid photo and read "Super Hostess".

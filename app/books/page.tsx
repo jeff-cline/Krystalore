@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { BookOpen, Headphones, Download, Users, Star, ExternalLink, Mic } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Books by Krystalore Crews | Leadership, Resilience & Personal Development',
+  title: { absolute: 'Books by Krystalore Crews | Leadership, Resilience & Personal Development' },
   description: 'Books by Krystalore Crews — Your Krystal Clear Life Planner, the Crews Beyond Limits Tactical Life Planner, The Road to Resilience, and more. Stories of strength, courage, and transformation.',
   keywords: 'Krystalore Crews books, Road to Resilience, Leave No MilSpouse Behind, Krystal Clear Life Planner, Tactical Life Planner, Is Manifesting Bullshit, leadership books, personal development books, courageous confidence',
   alternates: { canonical: '/books' },

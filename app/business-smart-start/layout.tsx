@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Business Smart Start | Mind, Body & Business Transformation | Krystalore Crews & Jeff Cline',
+  title: { absolute: 'Business Smart Start | Mind, Body & Business Transformation | Krystalore Crews & Jeff Cline' },
   description: 'A multi-discipline success package combining executive coaching, somatic healing, fitness, and proprietary technology to help entrepreneurs and executives scale their business while transforming mind, body, and soul.',
   openGraph: {
     title: 'Business Smart Start | Mind, Body & Business Transformation',

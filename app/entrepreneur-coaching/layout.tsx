@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Entrepreneur Coaching by Krystalore Crews | Business Coaching & Executive Coaching for Entrepreneurs',
+  title: { absolute: 'Entrepreneur Coaching by Krystalore Crews | Business Coaching & Executive Coaching for Entrepreneurs' },
   description: 'Scale your business with expert entrepreneur coaching from Krystalore Crews. Business growth training, mindset coaching, leadership development, and the proven 5 C\'s framework. Free business assessments and interactive tools.',
   keywords: ['entrepreneur coaching', 'business coaching', 'executive coaching for entrepreneurs', 'business growth coaching', 'entrepreneur mindset', 'leadership coaching', 'scale your business', 'business mentor', 'Krystalore Crews', 'Crews Beyond Limits'],
   openGraph: {
