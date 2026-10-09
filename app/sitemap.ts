@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/vision-board', '/monday-motivation', '/monday-morning-motivation-quotes',
 
     // Content
-    '/blog', '/books', '/planner', '/podcasts', '/videos', '/vault',
+    '/books', '/planner', '/podcasts', '/videos', '/vault',
     '/courses', '/courses/million-dollar-body',
 
     // Community & Events

@@ -14,6 +14,18 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Old /blog moved to news.krystalore.com (WordPress). Each old post 301s to its closest match there.
+      { source: '/blog/building-resilience-military-leadership', destination: 'https://news.krystalore.com/from-combat-to-c-suite-navigating-the-veteran-transition-to-executive-leadership/', statusCode: 301 },
+      { source: '/blog/thirty-four-minute-health-revolution', destination: 'https://news.krystalore.com/how-to-create-your-highest-version-in-just-34-minutes-a-day/', statusCode: 301 },
+      { source: '/blog/wheelchair-to-warrior-journey', destination: 'https://news.krystalore.com/category/resilience/', statusCode: 301 },
+      { source: '/blog/authentic-connections-leadership', destination: 'https://news.krystalore.com/category/connection/', statusCode: 301 },
+      { source: '/blog/marathon-mindset-business-endurance', destination: 'https://news.krystalore.com/consistency-vs-intensity-the-34-minute-mastery-secret/', statusCode: 301 },
+      { source: '/blog/science-high-performance-recovery', destination: 'https://news.krystalore.com/7-mistakes-youre-making-with-your-high-performance-recovery-and-how-to-shyft/', statusCode: 301 },
+      { source: '/blog/building-trust-virtual-teams', destination: 'https://news.krystalore.com/category/leadership/', statusCode: 301 },
+      { source: '/blog/overcoming-cancer-strength-adversity', destination: 'https://news.krystalore.com/category/resilience/', statusCode: 301 },
+      { source: '/blog/power-functional-fitness', destination: 'https://news.krystalore.com/category/fitness/', statusCode: 301 },
+      { source: '/blog', destination: 'https://news.krystalore.com/', statusCode: 301 },
+      { source: '/blog/:path*', destination: 'https://news.krystalore.com/', statusCode: 301 },
       // Existing redirects
       { source: '/rise-and-thrive-v2', destination: '/rise-and-thrive', permanent: true },
       { source: '/rise', destination: '/rise-and-thrive', permanent: true },

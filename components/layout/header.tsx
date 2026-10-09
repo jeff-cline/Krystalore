@@ -30,6 +30,7 @@ const retreatLinks = [
   { href: '/business-smart-start', label: 'Business Retreats' },
   { href: '/couples-retreats', label: 'Couples Retreats' },
   { href: '/veteran-retreats', label: 'Veterans Retreats' },
+  { href: '/super-hostess', label: 'Super Hostess' },
 ]
 
 const coachingLinks = [
